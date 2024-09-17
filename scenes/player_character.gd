@@ -11,10 +11,10 @@ const SAVE_PATH: String = "res://save.bin"
 
 
 @export var ACCELERATION : float = 1500
-@export var MAX_SPEED : float = 300
+@export var MAX_SPEED : float = 400
 @export var MAX_FALLING_SPEED : float = 800
 @export var JUMP_STRENGHT : float = 25
-@export var DASH_STRENGHT : float = 850
+@export var DASH_STRENGHT : float = 900
 @export var GROUND_FRICTION : float = 0.88
 @export var AIR_FRICTION : float = 0.992
 @export var SLIDE_FRICTION : float = 0.98
@@ -34,6 +34,7 @@ var air_switch_amount : int = 1
 func _ready() -> void:
 	spawn = position
 	save_game()
+	load_game()
 
 
 
