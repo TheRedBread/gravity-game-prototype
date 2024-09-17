@@ -1,0 +1,176 @@
+[gd_scene load_steps=3 format=3 uid="uid://clagahpl7cggx"]
+
+[ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://scenes/player_character.tscn" id="1_ok4dd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73amp"]
+size = Vector2(256, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_ok4dd")]
+position = Vector2(224, 328)
+
+[node name="StaticBody2D13" type="StaticBody2D" parent="."]
+position = Vector2(-1096, -616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D13"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D13"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(216, 376)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D14" type="StaticBody2D" parent="."]
+position = Vector2(-1848, -616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D14"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D14"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+position = Vector2(792, 696)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D6"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="."]
+position = Vector2(-2096, -616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D11"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D11"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(656, 168)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D4"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10, -48, 0.000183105, 12.7505, -10)
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="."]
+position = Vector2(-544, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D12"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D12"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="."]
+position = Vector2(872, 696)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D8"]
+position = Vector2(16, 0)
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+position = Vector2(-1336, -616)
+rotation = -3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D7"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="."]
+position = Vector2(792, 990)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D9"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D9"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(536, 304)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D3"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(208, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="."]
+position = Vector2(-280, 376)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="StaticBody2D10"]
+position = Vector2(-240, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D10/StaticBody2D3"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="StaticBody2D10"]
+position = Vector2(256, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10/StaticBody2D6"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D10/StaticBody2D6"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="StaticBody2D10"]
+position = Vector2(-24, -360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10/StaticBody2D9"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D10/StaticBody2D9"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="StaticBody2D10"]
+position = Vector2(232, -360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10/StaticBody2D8"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D10/StaticBody2D8"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D10"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(-1592, -616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+shape = SubResource("RectangleShape2D_73amp")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D5"]
+polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)

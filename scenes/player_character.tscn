@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnpisc0ppc6qp"]
+
+[ext_resource type="Script" path="res://scenes/player_character.gd" id="1_c2kd2"]
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+script = ExtResource("1_c2kd2")
+SLIDE_FRICTION = 0.975
+
+[node name="PlayerVisualPolygon" type="Polygon2D" parent="."]
+color = Color(0.427451, 1, 1, 1)
+polygon = PackedVector2Array(-16, 0, 16, 0, 16, -56, -16, -56)
+
+[node name="PlayerCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, 0, -12, -2, -14, -4, -16, -8, -16, -48, -14, -52, -12, -54, -8, -56, 8, -56, 12, -54, 14, -52, 16, -48, 16, -8, 14, -4, 12, -2, 8, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
