@@ -16,7 +16,7 @@ const SAVE_PATH: String = "res://save.bin"
 @export var JUMP_STRENGHT : float = 25
 @export var DASH_STRENGHT : float = 900
 @export var GROUND_FRICTION : float = 0.88
-@export var AIR_FRICTION : float = 0.992
+@export var AIR_FRICTION : float = 0.995
 @export var SLIDE_FRICTION : float = 0.98
 
 
@@ -258,3 +258,4 @@ func handle_abilities():
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
+	print(velocity)
