@@ -17,10 +17,10 @@ const SAVE_PATH: String = "res://save.bin"
 @export var DASH_STRENGHT : float = 900
 @export var GROUND_FRICTION : float = 0.88
 @export var AIR_FRICTION : float = 0.999
-@export var SLIDE_FRICTION : float = 0.975
+@export var SLIDE_FRICTION : float = 0.98
 @export var SLOPE_MAX_ANGLE : float = 0.45
 @export var SLIDE_STOP_VELOCITY : float = 40
-@export var SLOPES_ACCELERATION : float = 40
+@export var SLOPES_ACCELERATION : float = 20
 
 @export var SWITCH_SPEED : float = 0.2
 
@@ -179,7 +179,6 @@ func handle_jump(delta):
 	if Input.is_action_just_pressed("Jump") and (is_on_floor() or is_on_ceiling()) and not is_floor_wall():
 		velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
 		
-		$Polygon2D.rotation = Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90)).angle()
 
 func is_sliding():
 	var DirSign : int
@@ -261,12 +260,12 @@ func apply_gravity(delta):
 		velocity.y = velocity.y + GRAVITY * delta
 
 func apply_slopes():
-	if is_on_floor() and not is_floor_wall():
+	if is_on_floor() and (not abs(get_floor_normal().x) == 1 and is_sliding()) or is_floor_too_steep():
 		
 		var inverseY = (1 - get_floor_normal().y) * SLOPES_ACCELERATION
+		velocity += Vector2(SLOPES_ACCELERATION, 0).rotated(deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*sign(-GRAVITY)))
+		$Polygon2D.rotation = deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*sign(-GRAVITY))
 		
-		velocity.x += inverseY * get_floor_normal().x
-		velocity.y += inverseY * get_floor_normal().y*-1
 		
 func is_floor_too_steep():
 	if get_floor_normal().x >= SLOPE_MAX_ANGLE or get_floor_normal().x <= -SLOPE_MAX_ANGLE:
@@ -307,4 +306,4 @@ func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
 	is_floor_too_steep()
-	print(velocity)
+	print()
