@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/player_character.gd" id="1_c2kd2"]
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
-floor_max_angle = 1.309
+floor_max_angle = 3.14159
 floor_snap_length = 40.0
 script = ExtResource("1_c2kd2")
 

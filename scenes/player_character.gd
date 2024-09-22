@@ -16,9 +16,11 @@ const SAVE_PATH: String = "res://save.bin"
 @export var JUMP_STRENGHT : float = 25
 @export var DASH_STRENGHT : float = 900
 @export var GROUND_FRICTION : float = 0.88
-@export var AIR_FRICTION : float = 0.995
-@export var SLIDE_FRICTION : float = 0.98
-
+@export var AIR_FRICTION : float = 0.999
+@export var SLIDE_FRICTION : float = 0.975
+@export var SLOPE_MAX_ANGLE : float = 0.45
+@export var SLIDE_STOP_VELOCITY : float = 40
+@export var SLOPES_ACCELERATION : float = 40
 
 @export var SWITCH_SPEED : float = 0.2
 
@@ -32,6 +34,7 @@ var air_switch_amount : int = 1
 
 
 func _ready() -> void:
+	Engine.time_scale = 1
 	spawn = position
 	save_game()
 	load_game()
@@ -57,7 +60,10 @@ func save_game():
 		"SLIDE_FRICTION" : SLIDE_FRICTION,
 		"SWITCH_SPEED" : SWITCH_SPEED,
 		"GRAVITY" : GRAVITY,
-		"ONE_DASH_USAGE" : ONE_DASH_USAGE
+		"ONE_DASH_USAGE" : ONE_DASH_USAGE,
+		"SLOPE_MAX_ANGLE" : SLOPE_MAX_ANGLE,
+		"SLIDE_STOP_VELOCITY" : SLIDE_STOP_VELOCITY,
+		"SLOPES_ACCELERATION" : SLOPES_ACCELERATION
 	}
 	
 	var jstr = JSON.stringify(data)
@@ -88,8 +94,9 @@ func load_game():
 				SWITCH_SPEED = current_line["SWITCH_SPEED"] 
 				GRAVITY = current_line["GRAVITY"] 
 				ONE_DASH_USAGE = current_line["ONE_DASH_USAGE"]
-		
-
+				SLOPE_MAX_ANGLE = current_line["SLOPE_MAX_ANGLE"]
+				SLIDE_STOP_VELOCITY = current_line["SLIDE_STOP_VELOCITY"]
+				SLOPES_ACCELERATION = current_line["SLOPES_ACCELERATION"]
 
 
 #######OTHER#############
@@ -97,13 +104,25 @@ func handle_reset():
 	if Input.is_action_just_pressed("reset"):
 		position = spawn
 		velocity = Vector2(0, 0)
+		
+func round_to_dec(num, digit):
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+		
+func is_floor_wall():
+	if not is_on_floor():
+		return false
+	
+	if get_floor_normal().x >= 1 or get_floor_normal().x <= -1:
+		return true
+	else:
+		return false
 
 #######MOVEMENT############
 ##OTHER####
 func get_current_friction():
 	if is_sliding():
 		return SLIDE_FRICTION
-	elif is_on_floor() or is_on_ceiling():
+	elif is_on_floor() or is_on_ceiling() and not is_floor_wall():
 		return GROUND_FRICTION
 	else:
 		return AIR_FRICTION
@@ -130,30 +149,48 @@ func move_to_direction(directionStr, delta):
 		velocity.x += ACCELERATION*get_movement_friction_equation() * delta *intDir
 
 
+
 func handle_vertical_movement(delta):
+	apply_slopes()
 	
 	if (Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right")) and not is_sliding():
 		if sign(velocity.x) != -1 or abs(velocity.x) > MAX_SPEED:
 			apply_friction(get_current_friction(),delta)
-			
-		move_to_direction("left", delta)
+		
+		if get_floor_normal().x <= SLOPE_MAX_ANGLE:
+			move_to_direction("left", delta)
 	elif (Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left")) and not is_sliding():
 		if sign(velocity.x) != 1 or abs(velocity.x) > MAX_SPEED:
 			apply_friction(get_current_friction(),delta)
-			
-		move_to_direction("right", delta)
+		
+		if get_floor_normal().x >= -SLOPE_MAX_ANGLE:
+			move_to_direction("right", delta)
 	else:
 		apply_friction(get_current_friction(), delta)
 	
-	
+
 	
 
 func handle_jump(delta):
-	if Input.is_action_just_pressed("Jump") and (is_on_floor() or is_on_ceiling()):
-		velocity.y -= JUMP_STRENGHT * GRAVITY * delta
+	
+	if not is_floor_wall() and is_on_floor() and round(abs(rad_to_deg(get_floor_normal().angle()))) == 90:
+		velocity.y = 0
+	
+	if Input.is_action_just_pressed("Jump") and (is_on_floor() or is_on_ceiling()) and not is_floor_wall():
+		velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
+		
+		$Polygon2D.rotation = Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90)).angle()
 
 func is_sliding():
-	if (Slide_allowed and abs(velocity.x)>50.0) and Input.is_action_pressed("slide") and (is_on_ceiling() or is_on_floor()) and not was_sliding:
+	var DirSign : int
+	if Input.is_action_pressed("move_left"):
+		DirSign = vDir_to_intDir("left")
+	if Input.is_action_pressed("move_right"):
+		DirSign = vDir_to_intDir("right")
+	else:
+		DirSign = 0
+	
+	if (Slide_allowed and abs(velocity.x)>SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and (is_on_ceiling() or is_on_floor()) and not was_sliding and (sign(velocity.x) == DirSign or DirSign == 0):
 		
 		return true
 	else:
@@ -179,7 +216,8 @@ func handle_dashing():
 				dash_used = true
 
 func usage_update():
-	if is_on_ceiling() or is_on_floor():
+	
+	if is_on_ceiling() or is_on_floor() and not is_floor_too_steep():
 		dash_used = false
 
 func handle_movement(delta):
@@ -197,13 +235,13 @@ func handle_movement(delta):
 	handle_slide()
 	handle_reset()
 
-	
-	apply_gravity(delta)
+	if is_floor_wall() or not is_on_floor() or is_on_ceiling():
+		apply_gravity(delta)
 
 func handle_switch_reset():
 	if Input.is_action_just_pressed("switch"):
 		air_switch_amount = 0
-	elif is_on_floor() or is_on_ceiling():
+	elif is_on_floor() or is_on_ceiling() and not is_floor_too_steep():
 		air_switch_amount = 1
 
 func handle_sliding_reset():
@@ -217,15 +255,24 @@ func apply_friction(friction, delta):
 	velocity.x *= friction * delta*60
 
 func apply_gravity(delta):
-	if GRAVITY*delta + velocity.y*(GRAVITY/1000) > MAX_FALLING_SPEED:
+	if GRAVITY*delta + velocity.y * sign(GRAVITY) > MAX_FALLING_SPEED:
 		velocity.y = MAX_FALLING_SPEED*(GRAVITY/1000)
 	else:
 		velocity.y = velocity.y + GRAVITY * delta
 
-
-
-
-
+func apply_slopes():
+	if is_on_floor() and not is_floor_wall():
+		
+		var inverseY = (1 - get_floor_normal().y) * SLOPES_ACCELERATION
+		
+		velocity.x += inverseY * get_floor_normal().x
+		velocity.y += inverseY * get_floor_normal().y*-1
+		
+func is_floor_too_steep():
+	if get_floor_normal().x >= SLOPE_MAX_ANGLE or get_floor_normal().x <= -SLOPE_MAX_ANGLE:
+		return true
+	else:
+		return false
 
 
 
@@ -244,6 +291,7 @@ func handle_gravity_switch():
 
 func gravity_switch():
 	GRAVITY *= -1
+	up_direction *= -1
 	velocity.y += SWITCH_SPEED*GRAVITY
 
 func handle_abilities():
@@ -258,4 +306,5 @@ func handle_abilities():
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
+	is_floor_too_steep()
 	print(velocity)

@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=3 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" path="res://scenes/player_character.gd" id="1_c2kd2"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n44qb"]
+size = Vector2(32, 56)
+
 [node name="PlayerCharacter" type="CharacterBody2D"]
-floor_max_angle = 1.309
-floor_snap_length = 40.0
+floor_max_angle = 3.14159
+floor_snap_length = 20.0
 script = ExtResource("1_c2kd2")
+SLIDE_FRICTION = 0.975
 
 [node name="PlayerVisualPolygon" type="Polygon2D" parent="."]
 color = Color(0.427451, 1, 1, 1)
@@ -19,3 +23,7 @@ polygon = PackedVector2Array(-8, 0, -12, -2, -14, -4, -16, -8, -16, -48, -14, -5
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.54099, 0.54099, 0.54099, 1)
 polygon = PackedVector2Array(0, -2, 32, -2, 32, -6, 42, 0, 32, 6, 32, 2, 0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_n44qb")

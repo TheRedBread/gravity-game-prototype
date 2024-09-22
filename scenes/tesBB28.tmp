@@ -227,6 +227,7 @@ polygon = PackedVector2Array(128, -10, 128, 10, -128, 10, -128, -10)
 [node name="Node2D7" type="Node2D" parent="."]
 position = Vector2(-1704, 536)
 rotation = 2.87979
+scale = Vector2(1, 1)
 
 [node name="StaticBody2D13" type="StaticBody2D" parent="Node2D7"]
 position = Vector2(536, 8)
