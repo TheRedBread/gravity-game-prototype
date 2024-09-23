@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @onready var player_visual_polygon: Polygon2D = $PlayerVisualPolygon
+
 const SAVE_PATH: String = "res://save.bin"
 
 @export var switch_only_on_floor : bool = false
@@ -10,30 +11,37 @@ const SAVE_PATH: String = "res://save.bin"
 @export var ONE_DASH_USAGE : bool = true
 
 
-@export var ACCELERATION : float = 1500
-@export var MAX_SPEED : float = 400
+@export var ACCELERATION : float = 750
+@export var MAX_SPEED : float = 200
 @export var MAX_FALLING_SPEED : float = 800
-@export var JUMP_STRENGHT : float = 25
-@export var DASH_STRENGHT : float = 900
-@export var GROUND_FRICTION : float = 0.88
+@export var JUMP_STRENGHT : float = 20
+@export var DASH_STRENGHT : float = 500
+@export var GROUND_FRICTION : float = 0.9
 @export var AIR_FRICTION : float = 0.999
-@export var SLIDE_FRICTION : float = 0.98
+@export var SLIDE_FRICTION : float = 0.99
 @export var SLOPE_MAX_ANGLE : float = 0.45
-@export var SLIDE_STOP_VELOCITY : float = 40
+@export var SLIDE_STOP_VELOCITY : float = 0
 @export var SLOPES_ACCELERATION : float = 20
+@export var DASH_ACCELERATION : float = 3000
+@export var DASH_MAX_SPEED : float = 500
+@export var DASH_TIMER_TIME : float = 0.15
 
 @export var SWITCH_SPEED : float = 0.2
 
 @export var GRAVITY : float = 1200
 @export var spawn: Vector2
 
+var time_on_ground : int = 0
 var dash_used : bool = true
 var was_sliding : bool = false
 var air_switch_amount : int = 1 
-
+var current_max_speed : float
+var current_acceleration : float
 
 
 func _ready() -> void:
+	current_acceleration = ACCELERATION
+	current_max_speed = MAX_SPEED
 	Engine.time_scale = 1
 	spawn = position
 	save_game()
@@ -123,7 +131,10 @@ func get_current_friction():
 	if is_sliding():
 		return SLIDE_FRICTION
 	elif is_on_floor() or is_on_ceiling() and not is_floor_wall():
-		return GROUND_FRICTION
+		if not time_on_ground <= 10 or not abs(velocity.x) > current_max_speed: 
+			return GROUND_FRICTION
+		else:
+			return AIR_FRICTION
 	else:
 		return AIR_FRICTION
 func vDir_to_intDir(dirStr):
@@ -141,12 +152,12 @@ func move_to_direction(directionStr, delta):
 		return
 	var intDir = vDir_to_intDir(directionStr)
 	
-	if abs(velocity.x) > MAX_SPEED:
+	if abs(velocity.x)> current_max_speed:
 		return
-	elif ACCELERATION*get_movement_friction_equation()*delta + velocity.x*intDir > MAX_SPEED:
-		velocity.x = MAX_SPEED * intDir
+	elif current_acceleration*get_movement_friction_equation()*delta + abs(velocity.x)> current_max_speed:
+		velocity.x = current_max_speed * intDir
 	else:
-		velocity.x += ACCELERATION*get_movement_friction_equation() * delta *intDir
+		velocity.x += current_acceleration*get_movement_friction_equation() * delta *intDir
 
 
 
@@ -154,13 +165,13 @@ func handle_vertical_movement(delta):
 	apply_slopes()
 	
 	if (Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right")) and not is_sliding():
-		if sign(velocity.x) != -1 or abs(velocity.x) > MAX_SPEED:
+		if sign(velocity.x) != -1 or abs(velocity.x) > current_max_speed:
 			apply_friction(get_current_friction(),delta)
 		
 		if get_floor_normal().x <= SLOPE_MAX_ANGLE:
 			move_to_direction("left", delta)
 	elif (Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left")) and not is_sliding():
-		if sign(velocity.x) != 1 or abs(velocity.x) > MAX_SPEED:
+		if sign(velocity.x) != 1 or abs(velocity.x) > current_max_speed:
 			apply_friction(get_current_friction(),delta)
 		
 		if get_floor_normal().x >= -SLOPE_MAX_ANGLE:
@@ -195,11 +206,24 @@ func is_sliding():
 	else:
 		return false
 
+func dash_accelerate():
+	current_acceleration = DASH_ACCELERATION
+	current_max_speed = DASH_MAX_SPEED
+	await get_tree().create_timer(DASH_TIMER_TIME).timeout
+	current_acceleration = ACCELERATION
+	current_max_speed = MAX_SPEED
+
+func count_dash_velocity(sign):
+	velocity.x += DASH_STRENGHT * sign(sign)
+	
 func dash():
 	if Input.is_action_pressed("move_left"):
-		velocity.x = -DASH_STRENGHT
+		count_dash_velocity(-1)
+		dash_accelerate()
+		
 	if Input.is_action_pressed("move_right"):
-		velocity.x = DASH_STRENGHT
+		count_dash_velocity(1)
+		dash_accelerate()
 
 func handle_slide():
 	if is_sliding():
@@ -219,7 +243,15 @@ func usage_update():
 	if is_on_ceiling() or is_on_floor() and not is_floor_too_steep():
 		dash_used = false
 
+func count_time_on_ground():
+	if is_on_floor():
+		time_on_ground += 1
+	else:
+		time_on_ground = 0
+
 func handle_movement(delta):
+	count_time_on_ground()
+		
 	handle_vertical_movement(delta)
 	if Jump_allowed:
 		handle_jump(delta)
@@ -260,7 +292,6 @@ func apply_gravity(delta):
 		velocity.y = velocity.y + GRAVITY * delta
 
 func apply_slopes():
-	print(abs(get_floor_normal().y))
 	if is_on_floor() and (not abs(get_floor_normal().y) == 1 and is_sliding()) or is_floor_too_steep():
 		
 		var inverseY = (1 - get_floor_normal().y) * SLOPES_ACCELERATION
@@ -307,5 +338,4 @@ func handle_abilities():
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
-	is_floor_too_steep()
-	print(Engine.get_frames_drawn()/Engine.get_frames_per_second())
+	print(velocity.x)
