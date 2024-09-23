@@ -260,10 +260,12 @@ func apply_gravity(delta):
 		velocity.y = velocity.y + GRAVITY * delta
 
 func apply_slopes():
-	if is_on_floor() and (not abs(get_floor_normal().x) == 1 and is_sliding()) or is_floor_too_steep():
+	print(abs(get_floor_normal().y))
+	if is_on_floor() and (not abs(get_floor_normal().y) == 1 and is_sliding()) or is_floor_too_steep():
 		
 		var inverseY = (1 - get_floor_normal().y) * SLOPES_ACCELERATION
 		velocity += Vector2(SLOPES_ACCELERATION, 0).rotated(deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*sign(-GRAVITY)))
+		
 		$Polygon2D.rotation = deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*sign(-GRAVITY))
 		
 		
@@ -306,4 +308,4 @@ func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
 	is_floor_too_steep()
-	print()
+	print(Engine.get_frames_drawn()/Engine.get_frames_per_second())
