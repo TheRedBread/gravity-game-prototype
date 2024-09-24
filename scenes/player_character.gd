@@ -11,33 +11,36 @@ const SAVE_PATH: String = "res://save.bin"
 @export var ONE_DASH_USAGE : bool = true
 
 
-@export var ACCELERATION : float = 750
-@export var MAX_SPEED : float = 200
+@export var ACCELERATION : float = 1000
+@export var MAX_SPEED : float = 300
 @export var MAX_FALLING_SPEED : float = 800
 @export var JUMP_STRENGHT : float = 20
-@export var DASH_STRENGHT : float = 500
+@export var DASH_STRENGHT : float = 200
 @export var GROUND_FRICTION : float = 0.9
-@export var AIR_FRICTION : float = 0.999
+@export var AIR_FRICTION : float = 0.998
 @export var SLIDE_FRICTION : float = 0.99
 @export var SLOPE_MAX_ANGLE : float = 0.45
 @export var SLIDE_STOP_VELOCITY : float = 0
-@export var SLOPES_ACCELERATION : float = 20
+@export var SLOPES_ACCELERATION : float = 15
 @export var DASH_ACCELERATION : float = 3000
-@export var DASH_MAX_SPEED : float = 500
+@export var DASH_MAX_SPEED : float = 600
 @export var DASH_TIMER_TIME : float = 0.15
+@export var DASH_TIMER : float = 0.2
+@export var JUMP_TIMER : float = 0.2
 
 @export var SWITCH_SPEED : float = 0.2
 
 @export var GRAVITY : float = 1200
 @export var spawn: Vector2
 
+var can_dash : bool = true
 var time_on_ground : int = 0
 var dash_used : bool = true
 var was_sliding : bool = false
 var air_switch_amount : int = 1 
 var current_max_speed : float
 var current_acceleration : float
-
+var clicked_jump : bool = false
 
 func _ready() -> void:
 	current_acceleration = ACCELERATION
@@ -108,6 +111,17 @@ func load_game():
 
 
 #######OTHER#############
+func jump_delay_update():
+	clicked_jump = true
+	await get_tree().create_timer(JUMP_TIMER)
+	clicked_jump = false
+
+func can_dash_update():
+	
+	can_dash = false
+	await get_tree().create_timer(DASH_TIMER)
+	can_dash = true
+
 func handle_reset():
 	if Input.is_action_just_pressed("reset"):
 		position = spawn
@@ -187,8 +201,10 @@ func handle_jump(delta):
 	if not is_floor_wall() and is_on_floor() and round(abs(rad_to_deg(get_floor_normal().angle()))) == 90:
 		velocity.y = 0
 	
-	if Input.is_action_just_pressed("Jump") and (is_on_floor() or is_on_ceiling()) and not is_floor_wall():
+	if clicked_jump and (is_on_floor() or is_on_ceiling()) and not is_floor_wall():
 		velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
+		clicked_jump = false
+		
 		
 
 func is_sliding():
@@ -200,7 +216,7 @@ func is_sliding():
 	else:
 		DirSign = 0
 	
-	if (Slide_allowed and abs(velocity.x)>SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and (is_on_ceiling() or is_on_floor()) and not was_sliding and (sign(velocity.x) == DirSign or DirSign == 0):
+	if (Slide_allowed and abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and is_on_floor() and not was_sliding:
 		
 		return true
 	else:
@@ -214,12 +230,14 @@ func dash_accelerate():
 	current_max_speed = MAX_SPEED
 
 func count_dash_velocity(sign):
-	velocity.x += DASH_STRENGHT * sign(sign)
+	if not velocity.x>5000:
+		velocity.x += DASH_STRENGHT * sign(sign) * ((5000 - velocity.x)/5000)
 	
 func dash():
 	if Input.is_action_pressed("move_left"):
 		count_dash_velocity(-1)
 		dash_accelerate()
+		
 		
 	if Input.is_action_pressed("move_right"):
 		count_dash_velocity(1)
@@ -234,8 +252,10 @@ func handle_slide():
 func handle_dashing():
 	if Dash_allowed and Input.is_action_just_pressed("dash"):
 		if DASHING_WHILE_SLIDING or not is_sliding():
-			if dash_used == false or not ONE_DASH_USAGE:
+			if can_dash and dash_used == false or not ONE_DASH_USAGE:
+				
 				dash()
+				can_dash_update()
 				dash_used = true
 
 func usage_update():
@@ -249,10 +269,21 @@ func count_time_on_ground():
 	else:
 		time_on_ground = 0
 
+func damp_to_zero():
+	if abs(velocity.x) < 0.1:
+		velocity.x = 0
+
 func handle_movement(delta):
+	damp_to_zero()
 	count_time_on_ground()
 		
 	handle_vertical_movement(delta)
+	
+	if Input.is_action_just_pressed("Jump"):
+		clicked_jump = true
+		await get_tree().create_timer(JUMP_TIMER).timeout
+		clicked_jump = false
+	
 	if Jump_allowed:
 		handle_jump(delta)
 	
