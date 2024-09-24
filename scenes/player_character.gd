@@ -113,7 +113,7 @@ func load_game():
 #######OTHER#############
 func jump_delay_update():
 	clicked_jump = true
-	await get_tree().create_timer(JUMP_TIMER)
+	await get_tree().create_timer(JUMP_TIMER).timeout
 	clicked_jump = false
 
 func can_dash_update():
