@@ -27,6 +27,9 @@ const SAVE_PATH: String = "res://save.bin"
 @export var DASH_TIMER_TIME : float = 0.15
 @export var DASH_TIMER : float = 0.2
 @export var JUMP_TIMER : float = 0.2
+@export var COYOTE_TIME : float = 0.2
+@export var SWITCH_TIMER : float = 0.2
+
 
 @export var SWITCH_SPEED : float = 0.2
 
@@ -41,14 +44,17 @@ var air_switch_amount : int = 1
 var current_max_speed : float
 var current_acceleration : float
 var clicked_jump : bool = false
+var clicked_switch : bool = false
+var was_on_floor : bool = false
+
 
 func _ready() -> void:
 	current_acceleration = ACCELERATION
 	current_max_speed = MAX_SPEED
 	Engine.time_scale = 1
 	spawn = position
-	save_game()
 	load_game()
+	save_game()
 
 
 
@@ -74,7 +80,14 @@ func save_game():
 		"ONE_DASH_USAGE" : ONE_DASH_USAGE,
 		"SLOPE_MAX_ANGLE" : SLOPE_MAX_ANGLE,
 		"SLIDE_STOP_VELOCITY" : SLIDE_STOP_VELOCITY,
-		"SLOPES_ACCELERATION" : SLOPES_ACCELERATION
+		"SLOPES_ACCELERATION" : SLOPES_ACCELERATION,
+		"DASH_ACCELERATION" : DASH_ACCELERATION,
+		"DASH_MAX_SPEED" : DASH_MAX_SPEED,
+		"DASH_TIMER_TIME" : DASH_TIMER_TIME,
+		"DASH_TIMER" : DASH_TIMER,
+		"JUMP_TIMER" : JUMP_TIMER,
+		"COYOTE_TIME" : COYOTE_TIME,
+		"SWITCH_TIMER" : SWITCH_TIMER
 	}
 	
 	var jstr = JSON.stringify(data)
@@ -108,6 +121,14 @@ func load_game():
 				SLOPE_MAX_ANGLE = current_line["SLOPE_MAX_ANGLE"]
 				SLIDE_STOP_VELOCITY = current_line["SLIDE_STOP_VELOCITY"]
 				SLOPES_ACCELERATION = current_line["SLOPES_ACCELERATION"]
+				DASH_ACCELERATION = current_line["DASH_ACCELERATION"]
+				DASH_MAX_SPEED = current_line["DASH_MAX_SPEED"]
+				DASH_TIMER_TIME = current_line["DASH_TIMER_TIME"]
+				DASH_TIMER = current_line["DASH_TIMER"]
+				JUMP_TIMER = current_line["JUMP_TIMER"]
+				COYOTE_TIME = current_line["COYOTE_TIME"]
+				SWITCH_TIMER = current_line["SWITCH_TIMER"]
+
 
 
 #######OTHER#############
@@ -198,12 +219,17 @@ func handle_vertical_movement(delta):
 
 func handle_jump(delta):
 	
-	if not is_floor_wall() and is_on_floor() and round(abs(rad_to_deg(get_floor_normal().angle()))) == 90:
+	if not is_floor_wall() and was_on_floor and round(abs(rad_to_deg(get_floor_normal().angle()))) == 90:
 		velocity.y = 0
 	
-	if clicked_jump and (is_on_floor() or is_on_ceiling()) and not is_floor_wall():
-		velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
+	if clicked_jump and was_on_floor and not is_floor_wall():
+		was_on_floor = false
+		if is_on_floor():
+			velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
+		else:
+			velocity.y = -JUMP_STRENGHT*GRAVITY * delta
 		clicked_jump = false
+		
 		
 		
 
@@ -273,7 +299,15 @@ func damp_to_zero():
 	if abs(velocity.x) < 0.1:
 		velocity.x = 0
 
+func update_was_on_floor():
+	if is_on_floor():
+		was_on_floor = true
+	elif was_on_floor:
+		await get_tree().create_timer(COYOTE_TIME).timeout
+		was_on_floor = false
+
 func handle_movement(delta):
+	update_was_on_floor()
 	damp_to_zero()
 	count_time_on_ground()
 		
@@ -283,6 +317,12 @@ func handle_movement(delta):
 		clicked_jump = true
 		await get_tree().create_timer(JUMP_TIMER).timeout
 		clicked_jump = false
+	
+	if Input.is_action_just_pressed("switch"):
+		clicked_switch = true
+		await get_tree().create_timer(SWITCH_TIMER).timeout
+		clicked_switch = false
+	
 	
 	if Jump_allowed:
 		handle_jump(delta)
@@ -301,15 +341,15 @@ func handle_movement(delta):
 		apply_gravity(delta)
 
 func handle_switch_reset():
-	if Input.is_action_just_pressed("switch"):
+	if clicked_switch:
 		air_switch_amount = 0
-	elif is_on_floor() or is_on_ceiling() and not is_floor_too_steep():
+	elif is_on_floor() and not is_floor_too_steep():
 		air_switch_amount = 1
 
 func handle_sliding_reset():
 	if Input.is_action_just_released("slide"):
 		was_sliding = false
-	if Input.is_action_pressed("slide") and not is_sliding() and (is_on_ceiling() or is_on_floor()):
+	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
 		was_sliding = true
 
 ##NOT#PLAYER#CAUSED####
@@ -342,11 +382,13 @@ func is_floor_too_steep():
 #######ABILITIES###########
 func handle_gravity_switch():
 	
-	if Input.is_action_just_pressed("switch"):
+	if clicked_switch:
+		clicked_switch = false
+		was_on_floor = false
 		if switch_only_on_floor == false:
 			if air_switch_amount == 1:
 				gravity_switch()
-		elif (is_on_floor() or is_on_ceiling()):
+		elif is_on_floor():
 			gravity_switch()
 	
 	handle_switch_reset()
@@ -369,4 +411,4 @@ func handle_abilities():
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
-	print(velocity.x)
+	print(velocity.y)
