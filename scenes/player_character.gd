@@ -28,7 +28,7 @@ const SAVE_PATH: String = "res://save.bin"
 @export var DASH_TIMER : float = 0.2
 @export var JUMP_TIMER : float = 0.2
 @export var COYOTE_TIME : float = 0.2
-@export var SWITCH_TIMER : float = 1
+@export var SWITCH_TIMER : float = 0.2
 
 
 @export var SWITCH_SPEED : float = 0.2
@@ -396,7 +396,7 @@ func handle_gravity_switch():
 		
 		
 		if air_switch_amount == 1:
-			
+			clicked_switch = false
 			air_switch_amount = 0
 			
 			
