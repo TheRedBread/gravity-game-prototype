@@ -19,7 +19,7 @@ const SAVE_PATH: String = "res://save.bin"
 @export var GROUND_FRICTION : float = 0.9
 @export var AIR_FRICTION : float = 0.998
 @export var SLIDE_FRICTION : float = 0.99
-@export var SLOPE_MAX_ANGLE : float = 0.45
+@export var SLOPE_MAX_ANGLE : float = 0.50
 @export var SLIDE_STOP_VELOCITY : float = 0
 @export var SLOPES_ACCELERATION : float = 15
 @export var DASH_ACCELERATION : float = 3000
@@ -28,7 +28,7 @@ const SAVE_PATH: String = "res://save.bin"
 @export var DASH_TIMER : float = 0.2
 @export var JUMP_TIMER : float = 0.2
 @export var COYOTE_TIME : float = 0.2
-@export var SWITCH_TIMER : float = 0.2
+@export var SWITCH_TIMER : float = 1
 
 
 @export var SWITCH_SPEED : float = 0.2
@@ -53,6 +53,7 @@ func _ready() -> void:
 	current_max_speed = MAX_SPEED
 	Engine.time_scale = 1
 	spawn = position
+	
 	load_game()
 	save_game()
 
@@ -318,10 +319,8 @@ func handle_movement(delta):
 		await get_tree().create_timer(JUMP_TIMER).timeout
 		clicked_jump = false
 	
-	if Input.is_action_just_pressed("switch"):
-		clicked_switch = true
-		await get_tree().create_timer(SWITCH_TIMER).timeout
-		clicked_switch = false
+
+	
 	
 	
 	if Jump_allowed:
@@ -336,16 +335,17 @@ func handle_movement(delta):
 	handle_abilities()
 	handle_slide()
 	handle_reset()
+	
 
 	if is_floor_wall() or not is_on_floor() or is_on_ceiling():
 		apply_gravity(delta)
 
 func handle_switch_reset():
-	if clicked_switch:
-		air_switch_amount = 0
-	elif is_on_floor() and not is_floor_too_steep():
-		air_switch_amount = 1
+	pass
+	
 
+	
+	
 func handle_sliding_reset():
 	if Input.is_action_just_released("slide"):
 		was_sliding = false
@@ -381,17 +381,32 @@ func is_floor_too_steep():
 
 #######ABILITIES###########
 func handle_gravity_switch():
+	print(air_switch_amount)
+	
+	if is_on_floor() and not is_floor_too_steep():
+		air_switch_amount = 1
+	
+	if clicked_switch and air_switch_amount == 1:
+		print("switch")
+	
 	
 	if clicked_switch:
-		clicked_switch = false
 		was_on_floor = false
-		if switch_only_on_floor == false:
-			if air_switch_amount == 1:
-				gravity_switch()
-		elif is_on_floor():
+		
+		
+		
+		if air_switch_amount == 1:
+			
+			air_switch_amount = 0
+			
+			
 			gravity_switch()
+			
+		
+		
+		
 	
-	handle_switch_reset()
+	
 	
 
 func gravity_switch():
@@ -399,7 +414,16 @@ func gravity_switch():
 	up_direction *= -1
 	velocity.y += SWITCH_SPEED*GRAVITY
 
+func input_switch():
+	if Input.is_action_just_pressed("switch"):
+		clicked_switch = true
+		await get_tree().create_timer(SWITCH_TIMER).timeout
+		clicked_switch = false
+
+
 func handle_abilities():
+	input_switch()
+	
 	handle_gravity_switch()
 
 
@@ -411,4 +435,3 @@ func handle_abilities():
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
-	print(velocity.y)
