@@ -11,18 +11,18 @@ const SAVE_PATH: String = "res://save.bin"
 @export var ONE_DASH_USAGE : bool = true
 
 
-@export var ACCELERATION : float = 1000
+@export var ACCELERATION : float = 15000
 @export var MAX_SPEED : float = 300
 @export var MAX_FALLING_SPEED : float = 800
 @export var JUMP_STRENGHT : float = 20
 @export var DASH_STRENGHT : float = 200
-@export var GROUND_FRICTION : float = 0.9
-@export var AIR_FRICTION : float = 0.998
-@export var SLIDE_FRICTION : float = 0.99
+@export var GROUND_FRICTION : float = 0.15
+@export var AIR_FRICTION : float = 0.01
+@export var SLIDE_FRICTION : float = 0.01
 @export var SLOPE_MAX_ANGLE : float = 0.50
 @export var SLIDE_STOP_VELOCITY : float = 0
 @export var SLOPES_ACCELERATION : float = 15
-@export var DASH_ACCELERATION : float = 3000
+@export var DASH_ACCELERATION : float = 50000
 @export var DASH_MAX_SPEED : float = 600
 @export var DASH_TIMER_TIME : float = 0.15
 @export var DASH_TIMER : float = 0.2
@@ -54,7 +54,7 @@ func _ready() -> void:
 	Engine.time_scale = 1
 	spawn = position
 	
-	load_game()
+	##load_game()
 	save_game()
 
 
@@ -167,12 +167,14 @@ func get_current_friction():
 	if is_sliding():
 		return SLIDE_FRICTION
 	elif is_on_floor() or is_on_ceiling() and not is_floor_wall():
-		if not time_on_ground <= 10 or not abs(velocity.x) > current_max_speed: 
+		if not time_on_ground <= 100 or not abs(velocity.x) > current_max_speed: 
 			return GROUND_FRICTION
 		else:
 			return AIR_FRICTION
 	else:
 		return AIR_FRICTION
+
+
 func vDir_to_intDir(dirStr):
 	if dirStr == "right":
 		return 1
@@ -188,12 +190,17 @@ func move_to_direction(directionStr, delta):
 		return
 	var intDir = vDir_to_intDir(directionStr)
 	
-	if abs(velocity.x)> current_max_speed:
+	if abs(velocity.x)> current_max_speed or Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
 		return
-	elif current_acceleration*get_movement_friction_equation()*delta + abs(velocity.x)> current_max_speed:
-		velocity.x = current_max_speed * intDir
+	elif current_acceleration*get_current_friction()*delta + abs(velocity.x)> current_max_speed:
+		if Input.is_action_pressed("move_left"):
+			velocity.x += ((current_max_speed) - abs(velocity.x)) * intDir
+		if Input.is_action_pressed("move_right"):
+			velocity.x += ((current_max_speed) - abs(velocity.x)) * intDir
+
+
 	else:
-		velocity.x += current_acceleration*get_movement_friction_equation() * delta *intDir
+		velocity.x += current_acceleration * get_current_friction() * delta *intDir
 
 
 
@@ -290,9 +297,9 @@ func usage_update():
 	if is_on_ceiling() or is_on_floor() and not is_floor_too_steep():
 		dash_used = false
 
-func count_time_on_ground():
+func count_time_on_ground(delta):
 	if is_on_floor():
-		time_on_ground += 1
+		time_on_ground += 1 * delta * 60
 	else:
 		time_on_ground = 0
 
@@ -310,7 +317,7 @@ func update_was_on_floor():
 func handle_movement(delta):
 	update_was_on_floor()
 	damp_to_zero()
-	count_time_on_ground()
+	count_time_on_ground(delta)
 		
 	handle_vertical_movement(delta)
 	
@@ -354,8 +361,8 @@ func handle_sliding_reset():
 
 ##NOT#PLAYER#CAUSED####
 func apply_friction(friction, delta):
-	velocity.x *= friction * delta*60
-
+	velocity.x -= (velocity.x * friction) * delta * 60
+	
 func apply_gravity(delta):
 	if GRAVITY*delta + velocity.y * sign(GRAVITY) > MAX_FALLING_SPEED:
 		velocity.y = MAX_FALLING_SPEED*(GRAVITY/1000)
@@ -381,13 +388,10 @@ func is_floor_too_steep():
 
 #######ABILITIES###########
 func handle_gravity_switch():
-	print(air_switch_amount)
 	
 	if is_on_floor() and not is_floor_too_steep():
 		air_switch_amount = 1
 	
-	if clicked_switch and air_switch_amount == 1:
-		print("switch")
 	
 	
 	if clicked_switch:
@@ -435,3 +439,5 @@ func handle_abilities():
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
+	Engine.time_scale = 0.8
+	print(velocity.x)
