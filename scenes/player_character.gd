@@ -14,10 +14,10 @@ const SAVE_PATH: String = "res://save.bin"
 @export var ACCELERATION : float = 15000
 @export var MAX_SPEED : float = 300
 @export var MAX_FALLING_SPEED : float = 800
-@export var JUMP_STRENGHT : float = 20
+@export var JUMP_STRENGHT : float = 0.3
 @export var DASH_STRENGHT : float = 200
 @export var GROUND_FRICTION : float = 0.15
-@export var AIR_FRICTION : float = 0.01
+@export var AIR_FRICTION : float = 0.008
 @export var SLIDE_FRICTION : float = 0.01
 @export var SLOPE_MAX_ANGLE : float = 0.50
 @export var SLIDE_STOP_VELOCITY : float = 0
@@ -54,7 +54,7 @@ func _ready() -> void:
 	Engine.time_scale = 1
 	spawn = position
 	
-	##load_game()
+	load_game()
 	save_game()
 
 
@@ -166,8 +166,8 @@ func is_floor_wall():
 func get_current_friction():
 	if is_sliding():
 		return SLIDE_FRICTION
-	elif is_on_floor() or is_on_ceiling() and not is_floor_wall():
-		if not time_on_ground <= 100 or not abs(velocity.x) > current_max_speed: 
+	elif is_on_floor():
+		if time_on_ground >= 6:
 			return GROUND_FRICTION
 		else:
 			return AIR_FRICTION
@@ -190,18 +190,28 @@ func move_to_direction(directionStr, delta):
 		return
 	var intDir = vDir_to_intDir(directionStr)
 	
-	if abs(velocity.x)> current_max_speed or Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"):
-		return
-	elif current_acceleration*get_current_friction()*delta + abs(velocity.x)> current_max_speed:
-		if Input.is_action_pressed("move_left"):
-			velocity.x += ((current_max_speed) - abs(velocity.x)) * intDir
-		if Input.is_action_pressed("move_right"):
-			velocity.x += ((current_max_speed) - abs(velocity.x)) * intDir
+	
 
-
+	if abs(velocity.x) > current_max_speed:
+		if Input.is_action_pressed("move_left") and intDir == -1:
+			velocity.x += current_acceleration * get_current_friction() * delta *intDir
+		if Input.is_action_pressed("move_right") and intDir == 1:
+			velocity.x += current_acceleration * get_current_friction() * delta *intDir
+		else:
+			return
+		
+	elif abs(current_acceleration*get_current_friction()*delta) + abs(velocity.x)> abs(current_max_speed):
+		if Input.is_action_pressed("move_left") and intDir == 1:
+			print("left")
+			velocity.x += current_acceleration * get_current_friction() * delta *intDir
+		elif Input.is_action_pressed("move_right") and intDir == -1:
+			print("right")
+			velocity.x += current_acceleration * get_current_friction() * delta *intDir
+		else:
+			velocity.x = current_max_speed * intDir
 	else:
 		velocity.x += current_acceleration * get_current_friction() * delta *intDir
-
+	
 
 
 func handle_vertical_movement(delta):
@@ -209,13 +219,13 @@ func handle_vertical_movement(delta):
 	
 	if (Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right")) and not is_sliding():
 		if sign(velocity.x) != -1 or abs(velocity.x) > current_max_speed:
-			apply_friction(get_current_friction(),delta)
+			apply_friction(get_current_friction(), delta)
 		
 		if get_floor_normal().x <= SLOPE_MAX_ANGLE:
 			move_to_direction("left", delta)
 	elif (Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left")) and not is_sliding():
 		if sign(velocity.x) != 1 or abs(velocity.x) > current_max_speed:
-			apply_friction(get_current_friction(),delta)
+			apply_friction(get_current_friction(), delta)
 		
 		if get_floor_normal().x >= -SLOPE_MAX_ANGLE:
 			move_to_direction("right", delta)
@@ -233,9 +243,9 @@ func handle_jump(delta):
 	if clicked_jump and was_on_floor and not is_floor_wall():
 		was_on_floor = false
 		if is_on_floor():
-			velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY) * delta).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
+			velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY)).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
 		else:
-			velocity.y = -JUMP_STRENGHT*GRAVITY * delta
+			velocity.y = -JUMP_STRENGHT*GRAVITY
 		clicked_jump = false
 		
 		
@@ -298,7 +308,7 @@ func usage_update():
 		dash_used = false
 
 func count_time_on_ground(delta):
-	if is_on_floor():
+	if is_on_floor() and not is_sliding():
 		time_on_ground += 1 * delta * 60
 	else:
 		time_on_ground = 0
@@ -405,13 +415,6 @@ func handle_gravity_switch():
 			
 			
 			gravity_switch()
-			
-		
-		
-		
-	
-	
-	
 
 func gravity_switch():
 	GRAVITY *= -1
@@ -433,11 +436,8 @@ func handle_abilities():
 
 
 
-
-
-
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
-	Engine.time_scale = 0.8
-	print(velocity.x)
+	Engine.time_scale = 1 
+	print(velocity)
