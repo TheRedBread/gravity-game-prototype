@@ -11,10 +11,19 @@ config_version=5
 [application]
 
 config/name="gravity game"
-config/version="0.0.0"
-run/main_scene="res://scenes/test_scene.tscn"
+config/version="0.7.7"
+run/main_scene="res://scenes/levels/test_scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/visuals/icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=960
+window/size/window_height_override=540
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [editor]
 
@@ -59,7 +68,15 @@ dash={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="death"
+2d_physics/layer_4="spawnpoint"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=3
