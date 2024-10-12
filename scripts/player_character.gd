@@ -191,7 +191,7 @@ func update_was_on_floor():
 		was_on_floor = false
 func handle_snap_change():
 	if is_on_floor():
-		floor_snap_length = clamp(5+(abs(velocity.x)+abs(velocity.y))/10, 5, 40)
+		floor_snap_length = clamp(10+(abs(velocity.x)+abs(velocity.y))/10, 5, 40)
 	else:
 		floor_snap_length = 2
 func handle_sliding_reset():
@@ -455,7 +455,6 @@ func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
 	Engine.time_scale = 1 
-	print(is_floor_too_steep())
 
 
 func _on_death_detection_body_entered(body: Node2D) -> void:
