@@ -16,15 +16,15 @@ const SAVE_PATH: String = "res://save.bin"
 @export var MAX_FALLING_SPEED : float = 800
 @export var JUMP_STRENGHT : float = 0.3
 @export var DASH_STRENGHT : float = 250
-@export var GROUND_FRICTION : float = 0.15
-@export var AIR_FRICTION : float = 0.001
+@export var GROUND_FRICTION : float = 0.18
+@export var AIR_FRICTION : float = 0.005
 @export var SLIDE_FRICTION : float = 0.013
 @export var SLOPE_MAX_ANGLE : float = 0.50
 @export var SLIDE_STOP_VELOCITY : float = 0
 @export var SLOPES_ACCELERATION : float = 15
 @export var DASH_ACCELERATION : float = 50000
 @export var DASH_MAX_SPEED : float = 600
-@export var DASH_TIMER_TIME : float = 0.15
+@export var DASH_TIMER_TIME : float = 0.20
 @export var DASH_TIMER : float = 0.2
 @export var JUMP_TIMER : float = 0.2
 @export var COYOTE_TIME : float = 0.2
@@ -69,7 +69,7 @@ func _ready() -> void:
 	#------------------------- METHODS ------------------------------#
 	
 	##save_game()
-	load_game()
+	##load_game()
 	save_game()
 
 
@@ -200,6 +200,8 @@ func handle_sliding_reset():
 	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
 		was_sliding = true
 func damp_velocity_to_zero():
+	if abs(velocity.x) < 100:
+		velocity.x /= 1.2
 	if abs(velocity.x) < 0.1:
 		velocity.x = 0
 func count_time_on_ground(delta):
@@ -219,7 +221,7 @@ func get_current_friction():
 	if is_sliding():
 		return SLIDE_FRICTION
 	elif is_on_floor():
-		if time_on_ground >= 6:
+		if time_on_ground >= 4:
 			return GROUND_FRICTION
 		else:
 			return AIR_FRICTION
@@ -306,15 +308,15 @@ func move_to_direction(directionStr, delta):
 		return
 	var intDir = vDir_to_intDir(directionStr)
 	
-	
-
 	if abs(velocity.x) > current_max_speed:
+		
 		if input_direction_is_opposite(intDir):
 			velocity.x += current_acceleration * get_current_friction() * delta *intDir
 		else:
 			return
-		
+
 	elif abs(current_acceleration*get_current_friction()*delta) + abs(velocity.x)> abs(current_max_speed):
+		
 		velocity.x += clamp(current_acceleration * get_current_friction() * delta, 0, current_max_speed-abs(velocity.x)) *intDir
 		
 	else:
@@ -368,7 +370,7 @@ func dash():
 		count_dash_velocity(-1)
 		dash_accelerate()
 		if is_on_floor():
-			velocity.y -= 2 * sign(GRAVITY)
+			velocity.y -= 1 * sign(GRAVITY)
 		
 	if Input.is_action_pressed("move_right"):
 		count_dash_velocity(1)
@@ -455,8 +457,6 @@ func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
 	Engine.time_scale = 1 
-
-
 func _on_death_detection_body_entered(body: Node2D) -> void:
 	die()
 func _on_spawnpoint_detection_body_entered(body: Node2D) -> void:
