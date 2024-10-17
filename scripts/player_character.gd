@@ -3,16 +3,8 @@ extends CharacterBody2D
 
 const SAVE_PATH: String = "res://save.bin"
 
-@export var switch_only_on_floor : bool = false
-@export var Jump_allowed : bool = true
-@export var Slide_allowed : bool = true
-@export var Dash_allowed : bool = true
-@export var DASHING_WHILE_SLIDING : bool = false
-@export var ONE_DASH_USAGE : bool = true
-
-
 @export var ACCELERATION : float = 15000
-@export var MAX_SPEED : float = 200
+@export var MAX_SPEED : float = 220
 @export var MAX_FALLING_SPEED : float = 800
 @export var JUMP_STRENGHT : float = 0.3
 @export var DASH_STRENGHT : float = 250
@@ -24,8 +16,9 @@ const SAVE_PATH: String = "res://save.bin"
 @export var SLOPES_ACCELERATION : float = 15
 @export var DASH_ACCELERATION : float = 50000
 @export var DASH_MAX_SPEED : float = 600
-@export var DASH_TIMER_TIME : float = 0.20
-@export var DASH_TIMER : float = 0.2
+@export var DASH_TIMER_TIME : float = 0.3
+@export var DASH_TIMER : float = 0.4
+@export var DASH_INPUT_TIMER : float = 0.2
 @export var JUMP_TIMER : float = 0.2
 @export var COYOTE_TIME : float = 0.2
 @export var SWITCH_TIMER : float = 0.2
@@ -44,10 +37,11 @@ var air_switch_amount : int = 1
 var current_max_speed : float
 var current_acceleration : float
 var clicked_jump : bool = false
+var clicked_dash : bool = false
 var clicked_switch : bool = false
 var was_on_floor : bool = false
 var spawn_gravity : float = 0
-
+var gravity_direction : int = 1
 
 
 ##NOT FUNCTIONAL
@@ -60,7 +54,7 @@ func _ready() -> void:
 	#------------------------ VARIABLES ---------------------------#
 	current_acceleration = ACCELERATION
 	current_max_speed = MAX_SPEED
-	spawn_gravity = GRAVITY
+	spawn_gravity = gravity_direction
 	spawn = position
 	Engine.time_scale = 1
 	get_viewport().size = DisplayServer.screen_get_size()/2
@@ -68,11 +62,6 @@ func _ready() -> void:
 	
 	#------------------------- METHODS ------------------------------#
 	
-	##save_game()
-	##load_game()
-	save_game()
-
-
 
 
 
@@ -80,32 +69,7 @@ func _ready() -> void:
 func save_game():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	var data:Dictionary = {
-		"switch_only_on_floor" : switch_only_on_floor,
-		"Jump_allowed" : Jump_allowed,
-		"Slide_allowed" : Slide_allowed,
-		"Dash_allowed" : Dash_allowed,
-		"DASHING_WHILE_SLIDING" : DASHING_WHILE_SLIDING,
-		"ACCELERATION" : ACCELERATION,
-		"MAX_SPEED" : MAX_SPEED,
-		"MAX_FALLING_SPEED" : MAX_FALLING_SPEED,
-		"JUMP_STRENGHT" : JUMP_STRENGHT,
-		"DASH_STRENGHT" : DASH_STRENGHT,
-		"GROUND_FRICTION" : GROUND_FRICTION,
-		"AIR_FRICTION" : AIR_FRICTION,
-		"SLIDE_FRICTION" : SLIDE_FRICTION,
-		"SWITCH_SPEED" : SWITCH_SPEED,
-		"GRAVITY" : GRAVITY,
-		"ONE_DASH_USAGE" : ONE_DASH_USAGE,
-		"SLOPE_MAX_ANGLE" : SLOPE_MAX_ANGLE,
-		"SLIDE_STOP_VELOCITY" : SLIDE_STOP_VELOCITY,
-		"SLOPES_ACCELERATION" : SLOPES_ACCELERATION,
-		"DASH_ACCELERATION" : DASH_ACCELERATION,
-		"DASH_MAX_SPEED" : DASH_MAX_SPEED,
-		"DASH_TIMER_TIME" : DASH_TIMER_TIME,
-		"DASH_TIMER" : DASH_TIMER,
-		"JUMP_TIMER" : JUMP_TIMER,
-		"COYOTE_TIME" : COYOTE_TIME,
-		"SWITCH_TIMER" : SWITCH_TIMER
+
 	}
 	
 	var jstr = JSON.stringify(data)
@@ -120,35 +84,7 @@ func load_game():
 		if not file.eof_reached():
 			var current_line = JSON.parse_string(file.get_line())
 			if current_line:
-				switch_only_on_floor = current_line["switch_only_on_floor"] 
-				Jump_allowed = current_line["Jump_allowed"] 
-				Slide_allowed = current_line["Slide_allowed"] 
-				Dash_allowed = current_line["Dash_allowed"] 
-				DASHING_WHILE_SLIDING = current_line["DASHING_WHILE_SLIDING"] 
-				ACCELERATION = current_line["ACCELERATION"] 
-				MAX_SPEED = current_line["MAX_SPEED"] 
-				MAX_FALLING_SPEED = current_line["MAX_FALLING_SPEED"] 
-				JUMP_STRENGHT = current_line["JUMP_STRENGHT"] 
-				DASH_STRENGHT = current_line["DASH_STRENGHT"] 
-				GROUND_FRICTION = current_line["GROUND_FRICTION"] 
-				AIR_FRICTION = current_line["AIR_FRICTION"] 
-				SLIDE_FRICTION = current_line["SLIDE_FRICTION"] 
-				SWITCH_SPEED = current_line["SWITCH_SPEED"] 
-				GRAVITY = current_line["GRAVITY"] 
-				ONE_DASH_USAGE = current_line["ONE_DASH_USAGE"]
-				SLOPE_MAX_ANGLE = current_line["SLOPE_MAX_ANGLE"]
-				SLIDE_STOP_VELOCITY = current_line["SLIDE_STOP_VELOCITY"]
-				SLOPES_ACCELERATION = current_line["SLOPES_ACCELERATION"]
-				DASH_ACCELERATION = current_line["DASH_ACCELERATION"]
-				DASH_MAX_SPEED = current_line["DASH_MAX_SPEED"]
-				DASH_TIMER_TIME = current_line["DASH_TIMER_TIME"]
-				DASH_TIMER = current_line["DASH_TIMER"]
-				JUMP_TIMER = current_line["JUMP_TIMER"]
-				COYOTE_TIME = current_line["COYOTE_TIME"]
-				SWITCH_TIMER = current_line["SWITCH_TIMER"]
-
-
-
+				pass
 
 
 
@@ -160,10 +96,10 @@ func load_game():
 func apply_friction(friction, delta):
 	velocity.x -= ((velocity.x/1.4) * friction) * delta * 60
 func apply_gravity(delta):
-	if GRAVITY*delta + velocity.y * sign(GRAVITY) > MAX_FALLING_SPEED:
-		velocity.y += (MAX_FALLING_SPEED*(GRAVITY/1000) - velocity.y)
+	if GRAVITY*gravity_direction*delta + velocity.y * gravity_direction > MAX_FALLING_SPEED:
+		velocity.y += (MAX_FALLING_SPEED*(GRAVITY*gravity_direction/1000) - velocity.y)
 	else:
-		velocity.y = velocity.y + GRAVITY * delta
+		velocity.y = velocity.y + GRAVITY*gravity_direction * delta
 func apply_slopes():
 	if is_on_floor() and ((not abs(get_floor_normal().y) == 1 and is_sliding()) or is_floor_too_steep()):
 		var inverseY = (1 - get_floor_normal().y) * SLOPES_ACCELERATION
@@ -171,15 +107,23 @@ func apply_slopes():
 
 
 #updates
+func dash_input_update():
+	if Input.is_action_just_pressed("dash"):
+		clicked_dash = true
+		await get_tree().create_timer(DASH_INPUT_TIMER).timeout
+		clicked_dash = false
 func jump_input_update():
-	if Input.is_action_just_pressed("Jump"):
+	if Input.is_action_pressed("Jump"):
 		clicked_jump = true
 		await get_tree().create_timer(JUMP_TIMER).timeout
 		clicked_jump = false
 func can_dash_update():
+	print("dashUsed")
 	can_dash = false
-	await get_tree().create_timer(DASH_TIMER)
+	await get_tree().create_timer(DASH_TIMER).timeout
 	can_dash = true
+	print("redash")
+	
 func usage_update():
 	if (is_on_ceiling() or is_on_floor()) and not is_floor_too_steep():
 		dash_used = false
@@ -194,15 +138,16 @@ func handle_snap_change():
 		floor_snap_length = clamp(10+(abs(velocity.x)+abs(velocity.y))/10, 5, 40)
 	else:
 		floor_snap_length = 2
+		
 func handle_sliding_reset():
 	if Input.is_action_just_released("slide"):
 		was_sliding = false
 	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
 		was_sliding = true
 func damp_velocity_to_zero():
-	if abs(velocity.x) < 100:
+	if abs(velocity.x) < 100 and not is_sliding():
 		velocity.x /= 1.2
-	if abs(velocity.x) < 0.1:
+	if abs(velocity.x) < 0.1 and not is_sliding():
 		velocity.x = 0
 func count_time_on_ground(delta):
 	if is_on_floor() and not is_sliding():
@@ -246,7 +191,7 @@ func count_dash_velocity(sign):
 	if not abs(velocity.x)>5000:
 		velocity.x += DASH_STRENGHT * sign(sign) * ((5000 - velocity.x)/5000)
 func get_slope_rotation(inverseY):
-	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*sign(-GRAVITY))
+	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*-gravity_direction)
 
 
 
@@ -255,12 +200,12 @@ func get_slope_rotation(inverseY):
 #####NotPlayerCaused##########
 func set_spawnpoint():
 	spawn = position
-	spawn_gravity = GRAVITY
+	spawn_gravity = gravity_direction
 func die():
-	GRAVITY = 1200 * sign(spawn_gravity)
+	gravity_direction = spawn_gravity
 	velocity = Vector2(0, 0)
-	position = spawn + Vector2(0, -10*sign(GRAVITY))
-	up_direction = Vector2(0, sign(-GRAVITY))
+	position = spawn + Vector2(0, -10)*gravity_direction
+	up_direction = Vector2(0, -gravity_direction)
 	air_switch_amount = 1
 
 
@@ -274,14 +219,14 @@ func handle_movement(delta):
 	count_time_on_ground(delta)
 	handle_snap_change()
 	jump_input_update()
+	dash_input_update()
 	usage_update()
 	handle_sliding_reset()
 
 	
 	
 	handle_vertical_movement(delta)
-	if Jump_allowed:
-		handle_jump(delta)
+	handle_jump(delta)
 	handle_dashing()
 	handle_abilities()
 	handle_slide()
@@ -341,50 +286,48 @@ func handle_vertical_movement(delta):
 
 #jump
 func handle_jump(delta):
-	
 	if was_on_floor and round(abs(rad_to_deg(get_floor_normal().angle()))) == 90:
 		velocity.y = 0
-	
 	if clicked_jump and was_on_floor:
+		GRAVITY = 1200
 		was_on_floor = false
 		if is_on_floor():
-			velocity -= Vector2(0, JUMP_STRENGHT * abs(GRAVITY)).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
+			velocity -= Vector2(0, JUMP_STRENGHT * 1200).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
 		else:
-			velocity.y = -JUMP_STRENGHT*GRAVITY
+			velocity.y = -JUMP_STRENGHT*1200
 		clicked_jump = false
 
 #dash
 func dash_accelerate():
 	current_acceleration = DASH_ACCELERATION
 	current_max_speed = DASH_MAX_SPEED
-	if is_on_floor():
-		GRAVITY = 1200 / 1200 * sign(GRAVITY)
+	if is_on_floor() and not velocity.y != 0:
+		GRAVITY = 0
 	
 	
 	await get_tree().create_timer(DASH_TIMER_TIME).timeout
 	current_acceleration = ACCELERATION
 	current_max_speed = MAX_SPEED
-	GRAVITY = 1200 * sign(GRAVITY)
+	GRAVITY = 1200 
 func dash():
 	if Input.is_action_pressed("move_left"):
 		count_dash_velocity(-1)
 		dash_accelerate()
 		if is_on_floor():
-			velocity.y -= 1 * sign(GRAVITY)
+			velocity.y -= 0 * gravity_direction
 		
 	if Input.is_action_pressed("move_right"):
 		count_dash_velocity(1)
 		dash_accelerate()
 		if is_on_floor():
-			velocity.y -= 2 * sign(GRAVITY)
+			velocity.y -= 0 * gravity_direction
 func handle_dashing():
-	if Dash_allowed and Input.is_action_just_pressed("dash"):
-		if DASHING_WHILE_SLIDING or not is_sliding():
-			if can_dash and dash_used == false or not ONE_DASH_USAGE:
-				
-				dash()
-				can_dash_update()
-				dash_used = true
+	
+	if clicked_dash and not is_sliding() and (can_dash and dash_used == false):
+		clicked_dash = false
+		dash()
+		can_dash_update()
+		dash_used = true
 
 #slide
 func handle_slide():
@@ -401,7 +344,7 @@ func is_sliding():
 	else:
 		DirSign = 0
 	
-	if (Slide_allowed and abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and is_on_floor() and not was_sliding:
+	if (abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and is_on_floor() and not was_sliding:
 		
 		return true
 	else:
@@ -413,9 +356,9 @@ func handle_abilities():
 	
 	handle_gravity_switch()
 func gravity_switch():
-	GRAVITY *= -1
-	up_direction = Vector2(0, sign(-GRAVITY))
-	velocity.y += SWITCH_SPEED*GRAVITY
+	gravity_direction *= -1
+	up_direction = Vector2(0, -gravity_direction)
+	velocity.y += SWITCH_SPEED*GRAVITY*gravity_direction
 func input_switch():
 	if Input.is_action_just_pressed("switch"):
 		clicked_switch = true
@@ -448,15 +391,12 @@ func handle_reset():
 
 
 
-
-
-
-
-
 func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
 	Engine.time_scale = 1 
+	print()
+	
 func _on_death_detection_body_entered(body: Node2D) -> void:
 	die()
 func _on_spawnpoint_detection_body_entered(body: Node2D) -> void:
