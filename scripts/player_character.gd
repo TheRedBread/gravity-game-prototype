@@ -16,7 +16,7 @@ const SAVE_PATH: String = "res://save.bin"
 @export var SLOPES_ACCELERATION : float = 15
 @export var DASH_ACCELERATION : float = 50000
 @export var DASH_MAX_SPEED : float = 600
-@export var DASH_TIMER_TIME : float = 0.3
+@export var DASH_TIMER_TIME : float = 0.2
 @export var DASH_TIMER : float = 0.4
 @export var DASH_INPUT_TIMER : float = 0.2
 @export var JUMP_TIMER : float = 0.2
@@ -43,6 +43,12 @@ var was_on_floor : bool = false
 var spawn_gravity : float = 0
 var gravity_direction : int = 1
 
+############# STATISTIC ###################
+var playtime : float = 0
+var spawn_checked : int = 0
+
+
+
 
 ##NOT FUNCTIONAL
 #func round_to_dec(num, digit):
@@ -58,18 +64,26 @@ func _ready() -> void:
 	spawn = position
 	Engine.time_scale = 1
 	get_viewport().size = DisplayServer.screen_get_size()/2
+
+	
+	
+	
 	
 	
 	#------------------------- METHODS ------------------------------#
 	
-
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_game()
 
 
 #####################SAVEGAME#################
 func save_game():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	var data:Dictionary = {
-
+		"playtime": str(round(playtime)) + "s",
+		"spawn_checked": spawn_checked
+		
 	}
 	
 	var jstr = JSON.stringify(data)
@@ -112,17 +126,16 @@ func dash_input_update():
 		clicked_dash = true
 		await get_tree().create_timer(DASH_INPUT_TIMER).timeout
 		clicked_dash = false
-func jump_input_update():
+func jump_input_update():	
 	if Input.is_action_pressed("Jump"):
 		clicked_jump = true
 		await get_tree().create_timer(JUMP_TIMER).timeout
 		clicked_jump = false
 func can_dash_update():
-	print("dashUsed")
 	can_dash = false
 	await get_tree().create_timer(DASH_TIMER).timeout
 	can_dash = true
-	print("redash")
+
 	
 func usage_update():
 	if (is_on_ceiling() or is_on_floor()) and not is_floor_too_steep():
@@ -157,6 +170,10 @@ func count_time_on_ground(delta):
 
 
 #checks
+func DashAble():
+	return not is_sliding() and (can_dash and dash_used == false)
+func GravitySwitchAble():
+	return clicked_switch and air_switch_amount == 1
 func is_floor_too_steep():
 	if abs(get_floor_normal().x) >= abs(SLOPE_MAX_ANGLE):
 		return true
@@ -199,6 +216,7 @@ func get_slope_rotation(inverseY):
 ##############################
 #####NotPlayerCaused##########
 func set_spawnpoint():
+	spawn_checked += 1
 	spawn = position
 	spawn_gravity = gravity_direction
 func die():
@@ -286,8 +304,6 @@ func handle_vertical_movement(delta):
 
 #jump
 func handle_jump(delta):
-	if was_on_floor and round(abs(rad_to_deg(get_floor_normal().angle()))) == 90:
-		velocity.y = 0
 	if clicked_jump and was_on_floor:
 		GRAVITY = 1200
 		was_on_floor = false
@@ -323,7 +339,7 @@ func dash():
 			velocity.y -= 0 * gravity_direction
 func handle_dashing():
 	
-	if clicked_dash and not is_sliding() and (can_dash and dash_used == false):
+	if clicked_dash and DashAble():
 		clicked_dash = false
 		dash()
 		can_dash_update()
@@ -369,19 +385,12 @@ func handle_gravity_switch():
 	if is_on_floor() and not is_floor_too_steep():
 		air_switch_amount = 1
 	
-	
-	
-	if clicked_switch:
+	if GravitySwitchAble():
 		was_on_floor = false
+		clicked_switch = false
+		air_switch_amount = 0
 		
-		
-		
-		if air_switch_amount == 1:
-			clicked_switch = false
-			air_switch_amount = 0
-			
-			
-			gravity_switch()
+		gravity_switch()
 
 #reset
 func handle_reset():
@@ -392,10 +401,10 @@ func handle_reset():
 
 
 func _physics_process(delta):
+	playtime += 1*delta
 	handle_movement(delta)
 	move_and_slide()
 	Engine.time_scale = 1 
-	print()
 	
 func _on_death_detection_body_entered(body: Node2D) -> void:
 	die()
