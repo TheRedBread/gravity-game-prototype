@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=9 format=3 uid="uid://bord65n4suwnl"]
 
-[ext_resource type="Texture2D" uid="uid://b2wmh7rrbkqb" path="res://assets/visuals/prototype_tilesetSlopesVer.png" id="1_5ktm1"]
-[ext_resource type="Texture2D" uid="uid://qe0j2401k5be" path="res://assets/visuals/prototype_tileset.png" id="1_wapul"]
-[ext_resource type="Texture2D" uid="uid://cyggrr4dom6pg" path="res://assets/visuals/prototypeSpikes.png" id="3_x2n38"]
-[ext_resource type="Texture2D" uid="uid://carlwigumaul0" path="res://assets/visuals/flag.png" id="4_fgipw"]
+[ext_resource type="Texture2D" uid="uid://b2wmh7rrbkqb" path="res://assets/visuals/Tilesets/prototype_tilesetSlopesVer.png" id="1_5ktm1"]
+[ext_resource type="Texture2D" uid="uid://qe0j2401k5be" path="res://assets/visuals/Tilesets/prototype_tileset.png" id="1_wapul"]
+[ext_resource type="Texture2D" uid="uid://cyggrr4dom6pg" path="res://assets/visuals/Tilesets/prototypeSpikes.png" id="3_x2n38"]
+[ext_resource type="Texture2D" uid="uid://carlwigumaul0" path="res://assets/visuals/Tilesets/flag.png" id="4_fgipw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nwj4t"]
 texture = ExtResource("1_5ktm1")

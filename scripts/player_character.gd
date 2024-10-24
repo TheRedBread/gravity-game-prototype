@@ -1,14 +1,14 @@
 extends CharacterBody2D
 @onready var player_visual_polygon: Polygon2D = $PlayerVisualPolygon
 
-const SAVE_PATH: String = "res://save.bin"
+
 
 @export var ACCELERATION : float = 15000
 @export var MAX_SPEED : float = 220
-@export var MAX_FALLING_SPEED : float = 800
+@export var MAX_FALLING_SPEED : float = 1500
 @export var JUMP_STRENGHT : float = 0.3
 @export var DASH_STRENGHT : float = 250
-@export var GROUND_FRICTION : float = 0.18
+@export var GROUND_FRICTION : float = 0.30
 @export var AIR_FRICTION : float = 0.005
 @export var SLIDE_FRICTION : float = 0.013
 @export var SLOPE_MAX_ANGLE : float = 0.50
@@ -44,8 +44,7 @@ var spawn_gravity : float = 0
 var gravity_direction : int = 1
 
 ############# STATISTIC ###################
-var playtime : float = 0
-var spawn_checked : int = 0
+
 
 
 
@@ -72,33 +71,7 @@ func _ready() -> void:
 	
 	#------------------------- METHODS ------------------------------#
 	
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_game()
 
-
-#####################SAVEGAME#################
-func save_game():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	var data:Dictionary = {
-		"playtime": str(round(playtime)) + "s",
-		"spawn_checked": spawn_checked
-		
-	}
-	
-	var jstr = JSON.stringify(data)
-	
-	file.store_line(jstr)
-
-func load_game():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if not file or file == null:
-		return
-	if FileAccess.file_exists(SAVE_PATH) == true:
-		if not file.eof_reached():
-			var current_line = JSON.parse_string(file.get_line())
-			if current_line:
-				pass
 
 
 
@@ -108,7 +81,7 @@ func load_game():
 
 #apply forces
 func apply_friction(friction, delta):
-	velocity.x -= ((velocity.x/1.4) * friction) * delta * 60
+	velocity.x -= ((velocity.x/1.6) * friction) * delta * 60
 func apply_gravity(delta):
 	if GRAVITY*gravity_direction*delta + velocity.y * gravity_direction > MAX_FALLING_SPEED:
 		velocity.y += (MAX_FALLING_SPEED*(GRAVITY*gravity_direction/1000) - velocity.y)
@@ -183,7 +156,7 @@ func get_current_friction():
 	if is_sliding():
 		return SLIDE_FRICTION
 	elif is_on_floor():
-		if time_on_ground >= 4:
+		if time_on_ground >= 3 or (not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and not input_direction_is_opposite(get_intDir())):
 			return GROUND_FRICTION
 		else:
 			return AIR_FRICTION
@@ -194,6 +167,13 @@ func vDir_to_intDir(dirStr):
 		return 1
 	if dirStr == "left":
 		return -1
+func get_intDir():
+	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+		return 1
+	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+		return -1
+	else:
+		return 0
 func input_direction_is_opposite(intDir):
 	if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_left"):
 		return false
@@ -216,7 +196,7 @@ func get_slope_rotation(inverseY):
 ##############################
 #####NotPlayerCaused##########
 func set_spawnpoint():
-	spawn_checked += 1
+	GameSaveSystem.spawn_checked += 1
 	spawn = position
 	spawn_gravity = gravity_direction
 func die():
@@ -245,6 +225,7 @@ func handle_movement(delta):
 	
 	handle_vertical_movement(delta)
 	handle_jump(delta)
+	handle_slam()
 	handle_dashing()
 	handle_abilities()
 	handle_slide()
@@ -361,10 +342,18 @@ func is_sliding():
 		DirSign = 0
 	
 	if (abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and is_on_floor() and not was_sliding:
-		
 		return true
 	else:
 		return false
+func handle_slam():
+	if Input.is_action_pressed("slide") and not is_on_floor():
+		if Input.is_action_just_pressed("slide"):
+			velocity.y += 100 * gravity_direction
+		velocity.y += 20 * gravity_direction
+		MAX_FALLING_SPEED = 3000
+	else:
+		MAX_FALLING_SPEED = 1500
+		
 
 #gravity
 func handle_abilities():
@@ -401,10 +390,10 @@ func handle_reset():
 
 
 func _physics_process(delta):
-	playtime += 1*delta
 	handle_movement(delta)
 	move_and_slide()
 	Engine.time_scale = 1 
+	print(velocity.y)
 	
 func _on_death_detection_body_entered(body: Node2D) -> void:
 	die()

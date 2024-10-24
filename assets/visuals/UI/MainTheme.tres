@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://m54yaiaqs6ll"]
+
+[resource]
+Button/font_sizes/font_size = 32
+Label/font_sizes/font_size = 24
+MarginContainer/constants/margin_bottom = 64
+MarginContainer/constants/margin_left = 256
+MarginContainer/constants/margin_right = 256
+MarginContainer/constants/margin_top = 64
+TabBar/font_sizes/font_size = 32
+TabContainer/font_sizes/font_size = 32
+VBoxContainer/constants/separation = 30
