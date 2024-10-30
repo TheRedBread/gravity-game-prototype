@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/UI/MainTheme.tres" id="1_cvaib"]
 [ext_resource type="Texture2D" uid="uid://dx2u1j2k5c271" path="res://assets/visuals/UI/Title.png" id="1_rs7qy"]
-[ext_resource type="Script" path="res://scripts/systems/main_menu.gd" id="2_nwf8t"]
+[ext_resource type="Script" path="res://scripts/systems/UI/main_menu.gd" id="2_s1ykw"]
 [ext_resource type="AudioStream" uid="uid://w16dcvs7a775" path="res://assets/audio/tracks/1-Minute Audio Test for Stereo Speakers & Headphones.mp3" id="4_sqh0u"]
 
 [node name="MainMenu" type="Control"]
@@ -13,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cvaib")
-script = ExtResource("2_nwf8t")
+script = ExtResource("2_s1ykw")
 
 [node name="MainCenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
