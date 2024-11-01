@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://chor5ul85yl67"]
 
 [node name="ActionSetButton" type="Button"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 100)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 8.0
@@ -23,7 +23,7 @@ theme_override_constants/margin_bottom = 12
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="LabelAction" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Action name"
 
@@ -31,6 +31,6 @@ text = "Action name"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="LabelInput" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Action input"

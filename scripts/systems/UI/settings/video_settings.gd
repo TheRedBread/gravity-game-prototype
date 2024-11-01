@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func update_resolution_button():
-	if DisplayServer.window_get_mode(DisplayServer.window_get_current_screen()) == 4:
+	if DisplayServer.window_get_mode(DisplayServer.window_get_current_screen()) == 4 || 2:
 		resolution_option_button.disabled = true
 		resolution_option_button.select(settings.get_option_by_string(get_current_screen_resolution_string(), resolution_option_button))
 	else:

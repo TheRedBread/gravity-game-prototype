@@ -2,11 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/UI/MainTheme.tres" id="1_nb2ky"]
 [ext_resource type="Script" path="res://scripts/systems/UI/settings/settings.gd" id="2_ge88h"]
-[ext_resource type="Script" path="res://scripts/systems/UI/settings/video_settings.gd" id="3_3f48e"]
+[ext_resource type="PackedScene" uid="uid://b24snwbavpl4" path="res://scenes/UI/gameplay_settings.tscn" id="3_4fo3s"]
 [ext_resource type="AudioStream" uid="uid://w16dcvs7a775" path="res://assets/audio/tracks/1-Minute Audio Test for Stereo Speakers & Headphones.mp3" id="3_h0657"]
-[ext_resource type="Script" path="res://scripts/systems/UI/settings/audio_settings.gd" id="4_viu43"]
-[ext_resource type="PackedScene" uid="uid://chor5ul85yl67" path="res://scenes/UI/action_set_button.tscn" id="5_ktnkp"]
-[ext_resource type="Script" path="res://scripts/systems/UI/settings/controls.gd" id="5_rlifk"]
+[ext_resource type="PackedScene" uid="uid://bj3jki1e2lrco" path="res://scenes/UI/video_settings.tscn" id="4_hofsv"]
+[ext_resource type="PackedScene" uid="uid://cy4ijjujk4eh7" path="res://scenes/UI/controls_settings.tscn" id="5_7mkv6"]
+[ext_resource type="PackedScene" uid="uid://dixld1ee0o8bp" path="res://scenes/UI/audio_settings.tscn" id="5_ulo44"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -35,258 +35,16 @@ layout_mode = 2
 size_flags_vertical = 3
 current_tab = 3
 
-[node name="Gameplay" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="GameplayMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GameplayOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/GameplayMarginContainer"]
+[node name="Gameplay" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("3_4fo3s")]
 layout_mode = 2
 
-[node name="GameplayOptionsItem" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/GameplayMarginContainer/GameplayOptions"]
+[node name="Video" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("4_hofsv")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/GameplayMarginContainer/GameplayOptions/GameplayOptionsItem"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Some option:"
-
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/GameplayMarginContainer/GameplayOptions/GameplayOptionsItem"]
+[node name="Audio" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_ulo44")]
 layout_mode = 2
 
-[node name="Video" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="VideoMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VideoOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer"]
-layout_mode = 2
-script = ExtResource("3_3f48e")
-
-[node name="MaxFPS" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions"]
-layout_mode = 2
-
-[node name="FpsLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/MaxFPS"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Max fps"
-
-[node name="fpsOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/MaxFPS"]
-unique_name_in_owner = true
-layout_mode = 2
-selected = 1
-item_count = 6
-popup/item_0/text = "30"
-popup/item_1/text = "40"
-popup/item_1/id = 1
-popup/item_2/text = "60"
-popup/item_2/id = 2
-popup/item_3/text = "90"
-popup/item_3/id = 3
-popup/item_4/text = "120"
-popup/item_4/id = 4
-popup/item_5/text = "no limit"
-popup/item_5/id = 5
-
-[node name="VsyncOption" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions"]
-layout_mode = 2
-
-[node name="vsyncLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/VsyncOption"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "vsync"
-
-[node name="vsyncCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/VsyncOption"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="ResolutionOption" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions"]
-layout_mode = 2
-
-[node name="ResolutionLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/ResolutionOption"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Resolution"
-
-[node name="ResolutionOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/ResolutionOption"]
-unique_name_in_owner = true
-layout_mode = 2
-selected = 1
-item_count = 10
-popup/item_0/text = "1920x1080"
-popup/item_1/text = "1680x1050"
-popup/item_1/id = 1
-popup/item_2/text = "1600x900"
-popup/item_2/id = 2
-popup/item_3/text = "1536x864"
-popup/item_3/id = 3
-popup/item_4/text = "1366x768"
-popup/item_4/id = 4
-popup/item_5/text = "1280x1024"
-popup/item_5/id = 5
-popup/item_6/text = "1280x800"
-popup/item_6/id = 6
-popup/item_7/text = "1024x768"
-popup/item_7/id = 7
-popup/item_8/text = "960x540"
-popup/item_8/id = 8
-popup/item_9/text = "800x600"
-popup/item_9/id = 9
-
-[node name="ScreenModeOption" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions"]
-layout_mode = 2
-
-[node name="ScreenModeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/ScreenModeOption"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Screen resolution"
-
-[node name="ScreenModeOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/ScreenModeOption"]
-unique_name_in_owner = true
-layout_mode = 2
-selected = 1
-item_count = 3
-popup/item_0/text = "Windowed"
-popup/item_0/id = 1
-popup/item_1/text = "Fullscreen"
-popup/item_1/id = 9
-popup/item_2/text = "Maximized"
-popup/item_2/id = 2
-
-[node name="Audio" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="AudioMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AudioOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer"]
-layout_mode = 2
-script = ExtResource("4_viu43")
-
-[node name="MasterVolumeItem" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions"]
-layout_mode = 2
-
-[node name="MasterVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MasterVolumeItem"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Master volume"
-
-[node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MasterVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="MasterVolumePercent" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MasterVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="SfxVolumeItem" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions"]
-layout_mode = 2
-
-[node name="SfxVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/SfxVolumeItem"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Sound effects volume"
-
-[node name="SfxVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/SfxVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="SfxVolumePercent" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/SfxVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="MusicVolumeItem" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions"]
-layout_mode = 2
-
-[node name="MusicVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MusicVolumeItem"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Music volume"
-
-[node name="MusicVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MusicVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="MusicVolumePercent" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MusicVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="AmbienceVolumeItem" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions"]
-layout_mode = 2
-
-[node name="AmbienceVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/AmbienceVolumeItem"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Ambience volume"
-
-[node name="AmbienceVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/AmbienceVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="AmbienceVolumePercent" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/AmbienceVolumeItem"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Controls" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
-layout_mode = 2
-script = ExtResource("5_rlifk")
-metadata/_tab_index = 3
-
-[node name="ControlsMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ControlsOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls/ControlsMarginContainer"]
-layout_mode = 2
-
-[node name="ActionSetButton" parent="MarginContainer/VBoxContainer/TabContainer/Controls/ControlsMarginContainer/ControlsOptions" instance=ExtResource("5_ktnkp")]
+[node name="Controls" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_7mkv6")]
 layout_mode = 2
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -300,12 +58,4 @@ stream = ExtResource("3_h0657")
 autoplay = true
 bus = &"Ambience"
 
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/MaxFPS/fpsOptionButton" to="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions" method="_on_fps_option_button_item_selected"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/VsyncOption/vsyncCheckBox" to="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions" method="_on_vsync_check_box_toggled"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/ResolutionOption/ResolutionOptionButton" to="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions" method="_on_resolution_option_button_item_selected"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions/ScreenModeOption/ScreenModeOptionButton" to="MarginContainer/VBoxContainer/TabContainer/Video/VideoMarginContainer/VideoOptions" method="_on_screen_mode_option_button_item_selected"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MasterVolumeItem/MasterVolumeSlider" to="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions" method="_on_master_volume_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/SfxVolumeItem/SfxVolumeSlider" to="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions" method="_on_sfx_volume_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/MusicVolumeItem/MusicVolumeSlider" to="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions" method="_on_music_volume_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions/AmbienceVolumeItem/AmbienceVolumeSlider" to="MarginContainer/VBoxContainer/TabContainer/Audio/AudioMarginContainer/AudioOptions" method="_on_ambience_volume_slider_value_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

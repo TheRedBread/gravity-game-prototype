@@ -29,8 +29,9 @@ SettingsApplier="*res://scripts/systems/saves/settings_applier.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=4
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
+window/stretch/aspect="expand"
 
 [editor]
 

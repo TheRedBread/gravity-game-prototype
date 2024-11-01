@@ -37,6 +37,7 @@ func set_screen_mode(modeString):
 			var veciStr = str(DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())).left(-1).right(-1).replace(", ", "x")
 			user_prefs.resolution = veciStr
 			set_resolution(veciStr)
+			
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 			
 		"Maximized":
@@ -57,9 +58,11 @@ func set_resolution(resString : String):
 	user_prefs.resolution = resString
 	
 	var cords = str_to_Vectori(resString)
+	print(cords)
 	get_window().size = cords
 	center_window()
 	user_prefs.save()
+	get_viewport().size = cords
 	print(user_prefs.resolution)
 
 func apply_vsync(value : bool):
@@ -125,5 +128,6 @@ func apply_settings():
 
 func _ready() -> void:
 	apply_settings()
+	print("wat")
 	
 	

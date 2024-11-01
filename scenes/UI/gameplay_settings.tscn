@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b24snwbavpl4"]
+
+[node name="Gameplay" type="TabBar"]
+visible = false
+metadata/_tab_index = 0
+
+[node name="GameplayMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameplayOptions" type="VBoxContainer" parent="GameplayMarginContainer"]
+layout_mode = 2
+
+[node name="GameplayOptionsItem" type="HBoxContainer" parent="GameplayMarginContainer/GameplayOptions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameplayMarginContainer/GameplayOptions/GameplayOptionsItem"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Some option:"
+
+[node name="CheckButton" type="CheckButton" parent="GameplayMarginContainer/GameplayOptions/GameplayOptionsItem"]
+layout_mode = 2

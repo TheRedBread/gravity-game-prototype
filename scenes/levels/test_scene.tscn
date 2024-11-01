@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://clagahpl7cggx"]
+[gd_scene load_steps=3 format=4 uid="uid://clagahpl7cggx"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://scenes/player_character.tscn" id="1_0rcdk"]
 [ext_resource type="TileSet" uid="uid://bord65n4suwnl" path="res://assets/visuals/Tilesets/prototyping_tileset.tres" id="2_hfjb6"]
-[ext_resource type="AudioStream" uid="uid://w16dcvs7a775" path="res://assets/audio/tracks/1-Minute Audio Test for Stereo Speakers & Headphones.mp3" id="3_todfp"]
 
 [node name="Test_scene" type="Node2D"]
 
@@ -104,7 +103,3 @@ offset_right = -903.0
 offset_bottom = 975.0
 text = "Slide - Ctrl"
 horizontal_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_todfp")
-autoplay = true

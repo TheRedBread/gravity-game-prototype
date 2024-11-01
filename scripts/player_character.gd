@@ -63,8 +63,7 @@ func _ready() -> void:
 	spawn = position
 	Engine.time_scale = 1
 	get_viewport().size = DisplayServer.screen_get_size()/2
-
-	
+	SettingsApplier.apply_settings()
 	
 	
 	
@@ -393,7 +392,6 @@ func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
 	Engine.time_scale = 1 
-	print(velocity.y)
 	
 func _on_death_detection_body_entered(body: Node2D) -> void:
 	die()
