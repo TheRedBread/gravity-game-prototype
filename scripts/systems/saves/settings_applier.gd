@@ -58,12 +58,10 @@ func set_resolution(resString : String):
 	user_prefs.resolution = resString
 	
 	var cords = str_to_Vectori(resString)
-	print(cords)
 	get_window().size = cords
 	center_window()
 	user_prefs.save()
 	get_viewport().size = cords
-	print(user_prefs.resolution)
 
 func apply_vsync(value : bool):
 	if value == true:
@@ -128,6 +126,5 @@ func apply_settings():
 
 func _ready() -> void:
 	apply_settings()
-	print("wat")
 	
 	

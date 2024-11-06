@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cavvejidpcinq"]
+[gd_scene load_steps=4 format=3 uid="uid://cavvejidpcinq"]
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/UI/MainTheme.tres" id="1_cvaib"]
 [ext_resource type="Texture2D" uid="uid://dx2u1j2k5c271" path="res://assets/visuals/UI/Title.png" id="1_rs7qy"]
 [ext_resource type="Script" path="res://scripts/systems/UI/main_menu.gd" id="2_s1ykw"]
-[ext_resource type="AudioStream" uid="uid://w16dcvs7a775" path="res://assets/audio/tracks/1-Minute Audio Test for Stereo Speakers & Headphones.mp3" id="4_sqh0u"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -62,10 +61,6 @@ text = "Options"
 layout_mode = 2
 text = "Quit
 "
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_sqh0u")
-autoplay = true
 
 [connection signal="pressed" from="MainCenterContainer/VBoxContainer2/BoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="MainCenterContainer/VBoxContainer2/BoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
