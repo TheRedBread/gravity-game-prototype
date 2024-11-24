@@ -1,21 +1,23 @@
 extends CharacterBody2D
 @onready var player_visual_polygon: Polygon2D = $PlayerVisualPolygon
+@onready var player_sprite: AnimatedSprite2D = $PlayerSprite
+@onready var player_collision: CollisionShape2D = $PlayerCollision
 
 
 
-@export var ACCELERATION : float = 15000
-@export var MAX_SPEED : float = 220
+@export var ACCELERATION : float = 10000
+@export var MAX_SPEED : float = 150
 @export var MAX_FALLING_SPEED : float = 1500
-@export var JUMP_STRENGHT : float = 0.3
-@export var DASH_STRENGHT : float = 250
+@export var JUMP_STRENGHT : float = 0.22
+@export var DASH_STRENGHT : float = 150
 @export var GROUND_FRICTION : float = 0.30
 @export var AIR_FRICTION : float = 0.005
 @export var SLIDE_FRICTION : float = 0.013
 @export var SLOPE_MAX_ANGLE : float = 0.50
 @export var SLIDE_STOP_VELOCITY : float = 0
 @export var SLOPES_ACCELERATION : float = 15
-@export var DASH_ACCELERATION : float = 50000
-@export var DASH_MAX_SPEED : float = 600
+@export var DASH_ACCELERATION : float = 20000
+@export var DASH_MAX_SPEED : float = 400
 @export var DASH_TIMER_TIME : float = 0.2
 @export var DASH_TIMER : float = 0.4
 @export var DASH_INPUT_TIMER : float = 0.2
@@ -23,10 +25,11 @@ extends CharacterBody2D
 @export var COYOTE_TIME : float = 0.2
 @export var SWITCH_TIMER : float = 0.2
 
+@onready var dash_timer: Timer = $DashTimer
 
 @export var SWITCH_SPEED : float = 0.2
 
-@export var GRAVITY : float = 1200
+@export var GRAVITY : float = 800
 @export var spawn: Vector2
 
 var can_dash : bool = true
@@ -300,8 +303,8 @@ func dash_accelerate():
 	if is_on_floor() and not velocity.y != 0:
 		GRAVITY = 0
 	
-	
-	await get_tree().create_timer(DASH_TIMER_TIME).timeout
+	dash_timer.start()
+	await dash_timer.timeout
 	current_acceleration = ACCELERATION
 	current_max_speed = MAX_SPEED
 	GRAVITY = 1200 
@@ -363,6 +366,9 @@ func gravity_switch():
 	gravity_direction *= -1
 	up_direction = Vector2(0, -gravity_direction)
 	velocity.y += SWITCH_SPEED*GRAVITY*gravity_direction
+	player_collision.scale.y *= -1
+	
+	
 func input_switch():
 	if Input.is_action_just_pressed("switch"):
 		clicked_switch = true
@@ -385,13 +391,77 @@ func handle_reset():
 	if Input.is_action_just_pressed("reset"):
 		die()
 
+func sign_to_bool(val):
+	if sign(val) == -1:
+		return true
+	if sign(val) == 1:
+		return false
+	else:
+		return false
+
+
+func walk_anim():
+	player_sprite.speed_scale = abs(velocity.x)/50
+	player_sprite.flip_h = sign_to_bool(velocity.x)
+	player_sprite.play("walk")
+	
+
+func idle_anim():
+	player_sprite.speed_scale = 1
+	player_sprite.play("Idle")
+
+func slide_anim():
+	player_sprite.flip_h = sign_to_bool(velocity.x)
+	player_sprite.play("slide")
+
+func jump_anim():
+	player_sprite.flip_h = sign_to_bool(velocity.x)
+	player_sprite.play("Jump")
+
+func dash_anim():
+	player_sprite.flip_h = sign_to_bool(velocity.x)
+	player_sprite.play("Dash")
+
+
+func handle_player_animation():
+	if (!velocity.x) and velocity.x != 0:
+		return
+	
+	
+	player_sprite.flip_v = sign_to_bool(gravity_direction)
+	if dash_timer.time_left == 0:
+		if is_on_floor():
+			if abs(velocity.x) > 5:
+				if is_sliding():
+					slide_anim()
+				else:
+					walk_anim()
+			else:
+				idle_anim()
+		else:
+			jump_anim()
+	else:
+		dash_anim()
+
+
+
+func handle_animations():
+	handle_player_animation()
+
+
+
+
+
+
 
 
 
 func _physics_process(delta):
 	handle_movement(delta)
+	handle_animations()
 	move_and_slide()
 	Engine.time_scale = 1 
+	
 	
 func _on_death_detection_body_entered(body: Node2D) -> void:
 	die()

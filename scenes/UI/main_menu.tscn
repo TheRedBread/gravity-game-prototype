@@ -25,10 +25,9 @@ scale = Vector2(1.00074, 1)
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MainCenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 150
+theme_override_constants/separation = 18
 
 [node name="MainTitle" type="TextureRect" parent="MainCenterContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 texture = ExtResource("1_rs7qy")
 expand_mode = 5
