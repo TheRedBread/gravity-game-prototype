@@ -1,7 +1,7 @@
 extends CharacterBody2D
-@onready var player_visual_polygon: Polygon2D = $PlayerVisualPolygon
-@onready var player_sprite: AnimatedSprite2D = $PlayerSprite
+@onready var player_sprite: Sprite2D = $Sprite2D
 @onready var player_collision: CollisionShape2D = $PlayerCollision
+@onready var player_sprite_animation: AnimationPlayer = $PlayerSpriteAnimation
 
 
 
@@ -45,6 +45,7 @@ var clicked_switch : bool = false
 var was_on_floor : bool = false
 var spawn_gravity : float = 0
 var gravity_direction : int = 1
+var was_just_sliding : bool = false
 
 ############# STATISTIC ###################
 
@@ -132,7 +133,7 @@ func handle_sliding_reset():
 		was_sliding = false
 	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
 		was_sliding = true
-func damp_velocity_to_zero():
+func damp_velocity_to_zero(delta):
 	if abs(velocity.x) < 100 and not is_sliding():
 		velocity.x /= 1.2
 	if abs(velocity.x) < 0.1 and not is_sliding():
@@ -215,7 +216,7 @@ func die():
 #######MOVEMENT############
 func handle_movement(delta):
 	update_was_on_floor()
-	damp_velocity_to_zero()
+	damp_velocity_to_zero(delta)
 	count_time_on_ground(delta)
 	handle_snap_change()
 	jump_input_update()
@@ -330,10 +331,7 @@ func handle_dashing():
 
 #slide
 func handle_slide():
-	if is_sliding():
-		player_visual_polygon.scale.y = 0.5
-	else:
-		player_visual_polygon.scale.y = 1
+	pass
 func is_sliding():
 	var DirSign : int
 	if Input.is_action_pressed("move_left"):
@@ -366,8 +364,6 @@ func gravity_switch():
 	gravity_direction *= -1
 	up_direction = Vector2(0, -gravity_direction)
 	velocity.y += SWITCH_SPEED*GRAVITY*gravity_direction
-	player_collision.scale.y *= -1
-	
 	
 func input_switch():
 	if Input.is_action_just_pressed("switch"):
@@ -391,6 +387,10 @@ func handle_reset():
 	if Input.is_action_just_pressed("reset"):
 		die()
 
+
+
+
+########################## ANIMATIONS #####################
 func sign_to_bool(val):
 	if sign(val) == -1:
 		return true
@@ -399,36 +399,47 @@ func sign_to_bool(val):
 	else:
 		return false
 
-
 func walk_anim():
-	player_sprite.speed_scale = abs(velocity.x)/50
-	player_sprite.flip_h = sign_to_bool(velocity.x)
-	player_sprite.play("walk")
+
 	
+	player_sprite_animation.speed_scale = abs(velocity.x)/80
+	player_sprite.flip_h = sign_to_bool(velocity.x)
+	player_sprite_animation.play("walk")
 
 func idle_anim():
-	player_sprite.speed_scale = 1
-	player_sprite.play("Idle")
+	player_sprite_animation.stop()
+	player_sprite_animation.speed_scale = 1
+	player_sprite_animation.play("Idle")
 
 func slide_anim():
+	if (gravity_direction == -1 and Input.is_action_just_pressed("slide")):
+		was_just_sliding = true
+	
+	player_sprite_animation.stop()
 	player_sprite.flip_h = sign_to_bool(velocity.x)
-	player_sprite.play("slide")
+	player_sprite_animation.play("slide")
 
 func jump_anim():
 	player_sprite.flip_h = sign_to_bool(velocity.x)
-	player_sprite.play("Jump")
+	player_sprite_animation.stop()
+	if (abs(velocity.y) < 100):
+		player_sprite.frame = 16
+	elif (sign(velocity.y * gravity_direction) == -1):
+		player_sprite.frame = 17
+	elif (sign(velocity.y * gravity_direction) == 1):
+		player_sprite.frame = 18
 
 func dash_anim():
 	player_sprite.flip_h = sign_to_bool(velocity.x)
-	player_sprite.play("Dash")
-
+	player_sprite_animation.play("dash")
 
 func handle_player_animation():
 	if (!velocity.x) and velocity.x != 0:
 		return
+	if (was_just_sliding):
+		position.y += 32
 	
-	
-	player_sprite.flip_v = sign_to_bool(gravity_direction)
+	player_sprite.scale.y = gravity_direction
 	if dash_timer.time_left == 0:
 		if is_on_floor():
 			if abs(velocity.x) > 5:
@@ -439,10 +450,12 @@ func handle_player_animation():
 			else:
 				idle_anim()
 		else:
+			player_sprite_animation.stop()
 			jump_anim()
 	else:
+		
 		dash_anim()
-
+	was_just_sliding = false
 
 
 func handle_animations():
@@ -454,13 +467,11 @@ func handle_animations():
 
 
 
-
-
 func _physics_process(delta):
 	handle_movement(delta)
 	handle_animations()
 	move_and_slide()
-	Engine.time_scale = 1 
+	Engine.time_scale = 1
 	
 	
 func _on_death_detection_body_entered(body: Node2D) -> void:
