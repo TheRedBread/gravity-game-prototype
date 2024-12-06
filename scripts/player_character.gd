@@ -2,6 +2,7 @@ extends CharacterBody2D
 @onready var player_sprite: Sprite2D = $Sprite2D
 @onready var player_collision: CollisionShape2D = $PlayerCollision
 @onready var player_sprite_animation: AnimationPlayer = $PlayerSpriteAnimation
+@onready var eye_sprite: Sprite2D = $EyeSprite
 
 
 
@@ -20,10 +21,10 @@ extends CharacterBody2D
 @export var DASH_MAX_SPEED : float = 400
 @export var DASH_TIMER_TIME : float = 0.2
 @export var DASH_TIMER : float = 0.4
-@export var DASH_INPUT_TIMER : float = 0.2
-@export var JUMP_TIMER : float = 0.2
-@export var COYOTE_TIME : float = 0.2
-@export var SWITCH_TIMER : float = 0.2
+@export var DASH_INPUT_TIMER : float = 0.1
+@export var JUMP_TIMER : float = 0.1
+@export var COYOTE_TIME : float = 0.15
+@export var SWITCH_TIMER : float = 0.1
 
 @onready var dash_timer: Timer = $DashTimer
 
@@ -46,6 +47,14 @@ var was_on_floor : bool = false
 var spawn_gravity : float = 0
 var gravity_direction : int = 1
 var was_just_sliding : bool = false
+
+#------------------------- PRELOADS ------------------------------#
+const eyes_blue = preload("res://assets/visuals/sprites/player/gravityPlayerSprite_EyesTrue.png")
+const eyes_red = preload("res://assets/visuals/sprites/player/gravityPlayerSprite_EyesFalse.png")
+
+
+
+
 
 ############# STATISTIC ###################
 
@@ -74,7 +83,8 @@ func _ready() -> void:
 	
 	#------------------------- METHODS ------------------------------#
 	
-
+	
+	
 
 
 
@@ -123,7 +133,7 @@ func update_was_on_floor():
 		await get_tree().create_timer(COYOTE_TIME).timeout
 		was_on_floor = false
 func handle_snap_change():
-	if is_on_floor():
+	if is_on_floor() && is_sliding():
 		floor_snap_length = clamp(10+(abs(velocity.x)+abs(velocity.y))/10, 5, 40)
 	else:
 		floor_snap_length = 2
@@ -134,10 +144,11 @@ func handle_sliding_reset():
 	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
 		was_sliding = true
 func damp_velocity_to_zero(delta):
-	if abs(velocity.x) < 100 and not is_sliding():
-		velocity.x /= 1.2
-	if abs(velocity.x) < 0.1 and not is_sliding():
-		velocity.x = 0
+	if  not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
+		if abs(velocity.x) < 100 and not is_sliding():
+			velocity.x /= 1.2
+		if abs(velocity.x) < 0.1 and not is_sliding():
+			velocity.x = 0
 func count_time_on_ground(delta):
 	if is_on_floor() and not is_sliding():
 		time_on_ground += 1 * delta * 60
@@ -327,6 +338,7 @@ func handle_dashing():
 		clicked_dash = false
 		dash()
 		can_dash_update()
+		
 		dash_used = true
 
 #slide
@@ -378,7 +390,8 @@ func handle_gravity_switch():
 	if GravitySwitchAble():
 		was_on_floor = false
 		clicked_switch = false
-		air_switch_amount = 0
+		if !is_on_floor():
+			air_switch_amount = 0
 		
 		gravity_switch()
 
@@ -404,7 +417,11 @@ func walk_anim():
 	
 	player_sprite_animation.speed_scale = abs(velocity.x)/80
 	player_sprite.flip_h = sign_to_bool(velocity.x)
+	eye_sprite.flip_h = sign_to_bool(velocity.x)
+	
 	player_sprite_animation.play("walk")
+	
+	
 
 func idle_anim():
 	player_sprite_animation.stop()
@@ -417,29 +434,70 @@ func slide_anim():
 	
 	player_sprite_animation.stop()
 	player_sprite.flip_h = sign_to_bool(velocity.x)
+	eye_sprite.flip_h = sign_to_bool(velocity.x)
 	player_sprite_animation.play("slide")
 
-func jump_anim():
-	player_sprite.flip_h = sign_to_bool(velocity.x)
-	player_sprite_animation.stop()
+func moving_jump_anim():
 	if (abs(velocity.y) < 100):
 		player_sprite.frame = 16
+		eye_sprite.frame = 16
 	elif (sign(velocity.y * gravity_direction) == -1):
 		player_sprite.frame = 17
+		eye_sprite.frame = 17
 	elif (sign(velocity.y * gravity_direction) == 1):
 		player_sprite.frame = 18
+		eye_sprite.frame = 18
+		
+
+func standing_jump_anim():
+	if (abs(velocity.y) < 100):
+		player_sprite.frame = 41
+		eye_sprite.frame = 41
+		
+	elif (sign(velocity.y * gravity_direction) == -1):
+		player_sprite.frame = 40
+		eye_sprite.frame = 40
+		
+	elif (sign(velocity.y * gravity_direction) == 1):
+		player_sprite.frame = 42
+		eye_sprite.frame = 42
+		
+
+
+func jump_anim():
+	if abs(velocity.x) > 0:
+		player_sprite.flip_h = sign_to_bool(velocity.x)
+		eye_sprite.flip_h = sign_to_bool(velocity.x)
+		
+	player_sprite_animation.stop()
+	if (abs(velocity.x) > 50):
+		moving_jump_anim()
+	else:
+		standing_jump_anim()
+	
+func eye_anim():
+	if air_switch_amount > 0:
+		eye_sprite.texture = eyes_blue
+	else:
+		eye_sprite.texture = eyes_red
+
 
 func dash_anim():
 	player_sprite.flip_h = sign_to_bool(velocity.x)
+	eye_sprite.flip_h = sign_to_bool(velocity.x)
+	
 	player_sprite_animation.play("dash")
 
 func handle_player_animation():
+	eye_anim()
 	if (!velocity.x) and velocity.x != 0:
 		return
 	if (was_just_sliding):
 		position.y += 32
 	
 	player_sprite.scale.y = gravity_direction
+	eye_sprite.scale.y = gravity_direction
+	
 	if dash_timer.time_left == 0:
 		if is_on_floor():
 			if abs(velocity.x) > 5:
@@ -472,6 +530,7 @@ func _physics_process(delta):
 	handle_animations()
 	move_and_slide()
 	Engine.time_scale = 1
+	
 	
 	
 func _on_death_detection_body_entered(body: Node2D) -> void:
