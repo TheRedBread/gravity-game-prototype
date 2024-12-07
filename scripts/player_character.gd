@@ -217,6 +217,21 @@ func die():
 	gravity_direction = spawn_gravity
 	velocity = Vector2(0, 0)
 	position = spawn + Vector2(0, -10)*gravity_direction
+	
+	
+	can_dash = true
+	time_on_ground = 0
+	dash_used = true
+	was_sliding = false
+	air_switch_amount = 1
+	clicked_jump = false
+	clicked_dash = false
+	clicked_switch = false
+	was_on_floor = false
+	was_just_sliding = false
+	
+	
+	
 	up_direction = Vector2(0, -gravity_direction)
 	air_switch_amount = 1
 
