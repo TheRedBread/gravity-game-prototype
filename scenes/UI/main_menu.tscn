@@ -18,9 +18,42 @@ grow_vertical = 2
 theme = ExtResource("1_cvaib")
 script = ExtResource("2_s1ykw")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+layer = -6
+script = ExtResource("3_3enrp")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2(0.01, 0.01)
+motion_mirroring = Vector2(480, 270)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+position = Vector2(240, 135)
+texture = ExtResource("3_o55w2")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2(0.02, 0.02)
+motion_mirroring = Vector2(480, 270)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(240, 135)
+texture = ExtResource("4_mb1jm")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(480, 270)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer3"]
+position = Vector2(240, 135)
+texture = ExtResource("5_jk5nu")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -100
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,36 +61,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.168627, 0.145098, 0.192157, 1)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="ColorRect"]
-layer = 0
-script = ExtResource("3_3enrp")
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ColorRect/ParallaxBackground"]
-motion_scale = Vector2(0.01, 0.01)
-motion_mirroring = Vector2(480, 270)
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/ParallaxBackground/ParallaxLayer"]
-position = Vector2(240, 135)
-texture = ExtResource("3_o55w2")
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ColorRect/ParallaxBackground"]
-motion_scale = Vector2(0.02, 0.02)
-motion_mirroring = Vector2(480, 270)
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/ParallaxBackground/ParallaxLayer2"]
-position = Vector2(240, 135)
-texture = ExtResource("4_mb1jm")
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ColorRect/ParallaxBackground"]
-motion_scale = Vector2(0.05, 0.05)
-motion_mirroring = Vector2(480, 270)
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/ParallaxBackground/ParallaxLayer3"]
-position = Vector2(240, 135)
-texture = ExtResource("5_jk5nu")
-
 [node name="MainCenterContainer" type="CenterContainer" parent="."]
-z_index = 9
+z_index = 100
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,6 +76,7 @@ layout_mode = 2
 theme_override_constants/separation = 18
 
 [node name="MainTitle" type="TextureRect" parent="MainCenterContainer/VBoxContainer2"]
+z_index = 10
 layout_mode = 2
 texture = ExtResource("1_rs7qy")
 expand_mode = 5

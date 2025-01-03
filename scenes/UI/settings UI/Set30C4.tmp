@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://tlxp3lqpj0jc"]
+
+[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/UI/MainTheme.tres" id="1_nb2ky"]
+[ext_resource type="Script" path="res://scripts/systems/UI/settings/settings.gd" id="2_ge88h"]
+[ext_resource type="PackedScene" uid="uid://b24snwbavpl4" path="res://scenes/UI/settings UI/gameplay_settings.tscn" id="3_4fo3s"]
+[ext_resource type="PackedScene" uid="uid://bj3jki1e2lrco" path="res://scenes/UI/settings UI/video_settings.tscn" id="4_hofsv"]
+[ext_resource type="PackedScene" uid="uid://cy4ijjujk4eh7" path="res://scenes/UI/settings UI/controls_settings.tscn" id="5_7mkv6"]
+[ext_resource type="PackedScene" uid="uid://dixld1ee0o8bp" path="res://scenes/UI/settings UI/audio_settings.tscn" id="5_ulo44"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nb2ky")
+theme_type_variation = &"OptionsMenu"
+script = ExtResource("2_ge88h")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 3
+
+[node name="Gameplay" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("3_4fo3s")]
+layout_mode = 2
+
+[node name="Video" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("4_hofsv")]
+layout_mode = 2
+
+[node name="Audio" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_ulo44")]
+layout_mode = 2
+
+[node name="Controls" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_7mkv6")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Quit to Main Menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

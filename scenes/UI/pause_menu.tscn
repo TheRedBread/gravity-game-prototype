@@ -58,7 +58,7 @@ theme_override_constants/separation = 80
 
 [node name="Label" type="Label" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Game Paused"
 horizontal_alignment = 1
 
@@ -68,12 +68,10 @@ theme_override_constants/separation = 20
 
 [node name="ResumeButton" type="Button" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "Resume"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "Quit to main menu"
 
 [connection signal="pressed" from="MarginContainer/ColorRect/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

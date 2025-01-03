@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://chor5ul85yl67"]
 
 [node name="ActionSetButton" type="Button"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 26)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 8.0

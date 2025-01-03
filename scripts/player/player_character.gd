@@ -48,6 +48,18 @@ var spawn_gravity : float = 0
 var gravity_direction : int = 1
 var was_just_sliding : bool = false
 
+
+
+@export var step_sound : AudioStream = preload("res://assets/audio/tracks/sfx/step.ogg")
+@export var land_sound : AudioStream = preload("res://assets/audio/tracks/sfx/land.ogg")
+
+
+
+
+
+
+
+
 #------------------------- PRELOADS ------------------------------#
 const eyes_blue = preload("res://assets/visuals/sprites/player/gravityPlayerSprite_EyesTrue.png")
 const eyes_red = preload("res://assets/visuals/sprites/player/gravityPlayerSprite_EyesFalse.png")
@@ -540,11 +552,68 @@ func handle_animations():
 
 
 
+
+################################# SOUNDS ################################
+var was_falling : bool = false 
+var land_force : float = 0
+
+func handle_audio():
+	handle_land_audio()
+
+func step_audio(foot : String):
+	#when foot is left it lowers the pitch
+	var step_pitch = 1
+	
+	match foot:
+		"left":
+			step_pitch = 1.05
+		"right":
+			step_pitch = 0.95
+	
+	
+	AudioManager.play_sound(step_sound, -20, 1, step_pitch, 0.05, "Sound effects")
+
+
+func handle_land_audio():
+	if is_on_floor() and was_falling:
+		land_audio()
+	if velocity.y * gravity_direction > 0 and !is_on_floor():
+		was_falling = true
+		land_force += 0.15
+	else:
+		land_force = 0
+		was_falling = false
+
+
+func land_audio():
+	
+	AudioManager.play_sound(land_sound, land_force - 15, 1, 1, 0.05, "Sound effects")
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 func _physics_process(delta):
 	handle_movement(delta)
 	handle_animations()
+	handle_audio()
 	move_and_slide()
 	Engine.time_scale = 1
+	
+	
 	
 	
 	

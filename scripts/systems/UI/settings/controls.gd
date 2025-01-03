@@ -1,5 +1,5 @@
 extends TabBar
-const input_button_scene = preload("res://scenes/UI/action_set_button.tscn")
+const input_button_scene = preload("res://scenes/UI/settings UI/action_set_button.tscn")
 @onready var action_list: VBoxContainer = $PanelContainer/ControlsMarginContainer/ControlsOptions/ScrollContainer/ActionList
 
 var is_remapping = false
