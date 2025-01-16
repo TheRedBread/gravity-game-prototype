@@ -1,13 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=20 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" path="res://scripts/player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_yxov5"]
 [ext_resource type="PackedScene" uid="uid://bxyx1h7i814d6" path="res://scenes/UI/pause_menu.tscn" id="3_lwsbi"]
+[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="4_jjck1"]
 [ext_resource type="Texture2D" uid="uid://bqr7nq887fhtb" path="res://assets/visuals/sprites/player/gravityPlayerSprite_EyesFalse.png" id="5_w3pip"]
 [ext_resource type="Script" path="res://scripts/player/player_stars_parallax.gd" id="6_85wnx"]
-[ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://assets/visuals/UI/stars/starsExported/Star1.png" id="6_msyva"]
-[ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://assets/visuals/UI/stars/starsExported/Star2.png" id="7_ukj1r"]
-[ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://assets/visuals/UI/stars/starsExported/Star3.png" id="8_qmn1e"]
+[ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://assets/visuals/sprites/stars/starsExported/Star1.png" id="6_msyva"]
+[ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://assets/visuals/sprites/stars/starsExported/Star2.png" id="7_ukj1r"]
+[ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://assets/visuals/sprites/stars/starsExported/Star3.png" id="8_qmn1e"]
 [ext_resource type="Texture2D" uid="uid://dbetihp3me8at" path="res://assets/visuals/sprites/player/gravityPlayerSpriteAll.png" id="9_vx43m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2j5l"]
@@ -536,6 +537,7 @@ process_mode = 3
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource("3_lwsbi")]
 process_mode = 3
+theme = ExtResource("4_jjck1")
 
 [node name="DashTimer" type="Timer" parent="."]
 process_callback = 0

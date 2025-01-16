@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp44vh5m3bfo5"
-path="res://.godot/imported/Star3.png-a85145f29151f14115656cf8308b37e6.ctex"
+uid="uid://bo3u5vpudo7de"
+path="res://.godot/imported/NewGame2.png-22b74db7787bf16a355b573ed2054ce4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/UI/stars/starsExported/Star3.png"
-dest_files=["res://.godot/imported/Star3.png-a85145f29151f14115656cf8308b37e6.ctex"]
+source_file="res://assets/visuals/other/fonts/monogram/premade/Title Screen/NewGame2.png"
+dest_files=["res://.godot/imported/NewGame2.png-22b74db7787bf16a355b573ed2054ce4.ctex"]
 
 [params]
 

@@ -1,23 +1,53 @@
 extends Control
+var previous_position : Vector2 = Vector2(0, 0)
+var input_focus_mode = "mouse"
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
+	
+
+func focus_update():
+	if (Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_up")):
+		if input_focus_mode == "mouse":
+			print("aaa")
+			%ContinueButton.grab_focus()
+		input_focus_mode = "keys"
+
+	elif get_global_mouse_position() - previous_position	 != Vector2(0,0):
+		
+		if input_focus_mode == "keys":
+			%ContinueButton.release_focus()
+			%NewGameButton.release_focus()
+			%OptionsButton.release_focus()
+			%QuitButton.release_focus()
+		
+		input_focus_mode = "mouse"
+	
+	previous_position = get_global_mouse_position()
+	
+
+
 
 
 func _process(delta: float) -> void:
-	pass
+	focus_update()
 
 
-func _on_quit_pressed() -> void:
+
+
+
+
+
+
+func _on_quit_button_pressed() -> void:
 	GameSaveSystem.save_game()
 	get_tree().quit()
 
-	
-func _on_continue_pressed() -> void:
+
+func _on_options_button_pressed() -> void:
+		get_tree().change_scene_to_file("res://scenes/UI/settings UI/Settings.tscn")
+
+
+func _on_continue_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels/test_scene.tscn")
-
-
-func _on_options_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/settings UI/Settings.tscn")
-	
