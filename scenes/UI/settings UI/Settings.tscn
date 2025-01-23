@@ -25,26 +25,51 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_right = 70
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12.365)
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 3
+vertical_scroll_mode = 2
 
-[node name="Gameplay" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("3_4fo3s")]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(8.42288e-08, 0.247925, 0.304766, 1)
 
-[node name="Video" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("4_hofsv")]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Audio" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_ulo44")]
+[node name="Gameplay" parent="MarginContainer/VBoxContainer/ScrollContainer/ColorRect/VBoxContainer" instance=ExtResource("3_4fo3s")]
 layout_mode = 2
+size_flags_vertical = 4
 
-[node name="Controls" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_7mkv6")]
+[node name="Video" parent="MarginContainer/VBoxContainer/ScrollContainer/ColorRect/VBoxContainer" instance=ExtResource("4_hofsv")]
 layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Audio" parent="MarginContainer/VBoxContainer/ScrollContainer/ColorRect/VBoxContainer" instance=ExtResource("5_ulo44")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Controls" parent="MarginContainer/VBoxContainer/ScrollContainer/ColorRect/VBoxContainer" instance=ExtResource("5_7mkv6")]
+layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

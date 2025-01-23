@@ -3,7 +3,7 @@ extends VBoxContainer
 @onready var fps_option_button: OptionButton = %fpsOptionButton
 @onready var vsync_check_box: CheckBox = %vsyncCheckBox
 @onready var resolution_option_button: OptionButton = %ResolutionOptionButton
-@onready var settings: Control = $"../../../../../.."
+@onready var settings: Control = $"../../../../../../.."
 @onready var screen_mode_option_button: OptionButton = %ScreenModeOptionButton
 
 

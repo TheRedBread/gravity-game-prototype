@@ -1,6 +1,6 @@
-extends TabBar
+extends PanelContainer
 const input_button_scene = preload("res://scenes/UI/settings UI/action_set_button.tscn")
-@onready var action_list: VBoxContainer = $PanelContainer/ControlsMarginContainer/ControlsOptions/ScrollContainer/ActionList
+@onready var action_list: VBoxContainer = %ActionList
 
 var is_remapping = false
 var action_to_remap = null
@@ -14,9 +14,6 @@ var input_actions = {
 	"slide" : "Slide",
 	"dash" : "Dash",
 	"reset" : "Reset"
-	
-	
-	
 	
 }
 

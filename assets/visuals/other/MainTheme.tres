@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://m54yaiaqs6ll"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://m54yaiaqs6ll"]
 
 [ext_resource type="FontFile" uid="uid://x8xpsunusqmx" path="res://assets/visuals/other/fonts/monogram.ttf" id="1_6cqq2"]
+[ext_resource type="Texture2D" uid="uid://cmj6jfwhsd1cu" path="res://assets/visuals/other/UIElements/CheckButton1.png" id="2_bn855"]
+[ext_resource type="Texture2D" uid="uid://d1gq6oci302f3" path="res://assets/visuals/other/UIElements/CheckButton2.png" id="3_cyx2d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rh1lq"]
 
@@ -17,6 +19,9 @@ Button/fonts/font = ExtResource("1_6cqq2")
 Button/styles/hover = SubResource("StyleBoxEmpty_rh1lq")
 Button/styles/normal = SubResource("StyleBoxEmpty_thm6f")
 Button/styles/pressed = SubResource("StyleBoxEmpty_ogqbm")
+CheckButton/icons/checked = ExtResource("3_cyx2d")
+CheckButton/icons/checked_mirrored = ExtResource("2_bn855")
+CheckButton/icons/unchecked = ExtResource("2_bn855")
 Label/font_sizes/font_size = 16
 MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 32
