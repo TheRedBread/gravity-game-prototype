@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dixld1ee0o8bp"]
+[gd_scene load_steps=3 format=3 uid="uid://dixld1ee0o8bp"]
 
 [ext_resource type="Script" path="res://scripts/systems/UI/settings/audio_settings.gd" id="1_7n6ch"]
+[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="1_uq2y4"]
 
 [node name="AudioMarginContainer" type="MarginContainer"]
+theme = ExtResource("1_uq2y4")
 
 [node name="AudioOptions" type="VBoxContainer" parent="."]
 layout_mode = 2

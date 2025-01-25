@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj3jki1e2lrco"]
+[gd_scene load_steps=3 format=3 uid="uid://bj3jki1e2lrco"]
 
+[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="1_7fn40"]
 [ext_resource type="Script" path="res://scripts/systems/UI/settings/video_settings.gd" id="1_tv8xe"]
 
 [node name="VideoMarginContainer" type="MarginContainer"]
@@ -12,6 +13,7 @@ offset_right = 88.0
 offset_bottom = 24.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_7fn40")
 
 [node name="VideoOptions" type="VBoxContainer" parent="."]
 layout_mode = 2
