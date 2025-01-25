@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmj6jfwhsd1cu"
-path="res://.godot/imported/CheckButton1.png-05f9f6af8646d44e3f0d97ed42f4f22c.ctex"
+uid="uid://brpq23ff7l28v"
+path="res://.godot/imported/screwPanel.png-7f0173ff833f81c4b92399540dd36c9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/other/UIElements/CheckButton1.png"
-dest_files=["res://.godot/imported/CheckButton1.png-05f9f6af8646d44e3f0d97ed42f4f22c.ctex"]
+source_file="res://assets/visuals/other/UIElements/panels/screwPanel.png"
+dest_files=["res://.godot/imported/screwPanel.png-7f0173ff833f81c4b92399540dd36c9d.ctex"]
 
 [params]
 
