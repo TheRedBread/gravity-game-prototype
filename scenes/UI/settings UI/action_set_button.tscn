@@ -1,4 +1,22 @@
-[gd_scene format=3 uid="uid://chor5ul85yl67"]
+[gd_scene load_steps=6 format=3 uid="uid://chor5ul85yl67"]
+
+[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="1_di2sg"]
+[ext_resource type="Texture2D" uid="uid://d0i8lg7y3exox" path="res://assets/visuals/other/UIElements/panels/borderPanelsoft.png" id="2_iyhjk"]
+[ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://assets/visuals/other/UIElements/panels/plainPanel_rounded.png" id="2_vlq6j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4f4od"]
+texture = ExtResource("2_iyhjk")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndh08"]
+texture = ExtResource("2_vlq6j")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [node name="ActionSetButton" type="Button"]
 custom_minimum_size = Vector2(0, 26)
@@ -7,6 +25,10 @@ anchor_right = 1.0
 offset_bottom = 8.0
 grow_horizontal = 2
 focus_mode = 0
+theme = ExtResource("1_di2sg")
+theme_override_styles/focus = SubResource("StyleBoxTexture_4f4od")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4f4od")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ndh08")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
