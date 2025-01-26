@@ -9,8 +9,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	scroll_base_offset = get_viewport().get_mouse_position()
-	scroll_offset.x += 2
-	scroll_offset.y -= 1
+	scroll_offset += Vector2(2, -1) * delta *60
+
 	
 	
 	

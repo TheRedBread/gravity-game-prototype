@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://tlxp3lqpj0jc"]
+[gd_scene load_steps=17 format=3 uid="uid://tlxp3lqpj0jc"]
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="1_nb2ky"]
 [ext_resource type="Script" path="res://scripts/systems/UI/settings/settings.gd" id="2_ge88h"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bj3jki1e2lrco" path="res://scenes/UI/settings UI/video_settings.tscn" id="4_hofsv"]
 [ext_resource type="PackedScene" uid="uid://cy4ijjujk4eh7" path="res://scenes/UI/settings UI/controls_settings.tscn" id="5_7mkv6"]
 [ext_resource type="PackedScene" uid="uid://dixld1ee0o8bp" path="res://scenes/UI/settings UI/audio_settings.tscn" id="5_ulo44"]
+[ext_resource type="Texture2D" uid="uid://d1pp7ue86yh26" path="res://assets/visuals/other/UIElements/panels/premadequit.png" id="8_0b6eq"]
 [ext_resource type="Script" path="res://scripts/systems/UI/parallax_background.gd" id="8_ae6om"]
+[ext_resource type="Texture2D" uid="uid://bemm1ujrhw1qn" path="res://assets/visuals/other/UIElements/panels/premadequit2.png" id="8_h5n1k"]
 [ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://assets/visuals/sprites/stars/starsExported/Star1.png" id="9_i1ink"]
 [ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://assets/visuals/sprites/stars/starsExported/Star2.png" id="10_3iffe"]
 [ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://assets/visuals/sprites/stars/starsExported/Star3.png" id="11_3dueu"]
@@ -18,6 +20,24 @@ texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xhd5d"]
+texture = ExtResource("8_h5n1k")
+texture_margin_left = 11.0
+texture_margin_top = 10.0
+texture_margin_right = 11.0
+texture_margin_bottom = 8.0
+expand_margin_top = 4.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tkmqa"]
+texture = ExtResource("8_0b6eq")
+texture_margin_left = 11.0
+texture_margin_top = 10.0
+texture_margin_right = 11.0
+texture_margin_bottom = 8.0
+expand_margin_top = 4.0
+expand_margin_bottom = 2.0
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -50,15 +70,17 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_hwv1o")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 12.365)
 layout_mode = 2
 size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer"]
@@ -82,10 +104,13 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="QtoMainMenu" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_styles/focus = SubResource("StyleBoxTexture_xhd5d")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xhd5d")
+theme_override_styles/normal = SubResource("StyleBoxTexture_tkmqa")
 text = "Quit to Main Menu"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -131,4 +156,4 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.168627, 0.145098, 0.192157, 1)
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QtoMainMenu" to="." method="_on_button_pressed"]
