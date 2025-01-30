@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4l13to5df3vj"
-path="res://.godot/imported/translucent panel.png-1dc1a05da05b5b724710ec32fcae9797.ctex"
+uid="uid://d1pp7ue86yh26"
+path="res://.godot/imported/premadequit.png-92795f5fc08dc3367d75e56d8c0446ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/other/UIElements/panels/translucent panel.png"
-dest_files=["res://.godot/imported/translucent panel.png-1dc1a05da05b5b724710ec32fcae9797.ctex"]
+source_file="res://assets/visuals/other/UIElements/panels/Blue/premadequit.png"
+dest_files=["res://.godot/imported/premadequit.png-92795f5fc08dc3367d75e56d8c0446ad.ctex"]
 
 [params]
 

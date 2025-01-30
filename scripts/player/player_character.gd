@@ -595,17 +595,6 @@ func land_audio():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 func _physics_process(delta):
 	handle_movement(delta)
 	handle_animations()

@@ -28,6 +28,7 @@ func center_window() -> void:
 
 
 func set_screen_mode(modeString):
+	print("setting screen mode on: ", modeString)
 	match modeString:
 		"Windowed":
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -36,16 +37,15 @@ func set_screen_mode(modeString):
 		"Fullscreen":
 			var veciStr = str(DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())).left(-1).right(-1).replace(", ", "x")
 			user_prefs.resolution = veciStr
-			set_resolution(veciStr)
 			
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 			
 		"Maximized":
 			var veciStr = str(DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())).left(-1).right(-1).replace(", ", "x")
 			user_prefs.resolution = veciStr
-			set_resolution(veciStr)
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
-			
+		_:
+			print_rich("[b][color=red]Screen mode is incorrect: " + modeString + "[/color][/b]")
 			
 	
 	
@@ -62,6 +62,8 @@ func set_resolution(resString : String):
 	center_window()
 	user_prefs.save()
 	get_viewport().size = cords
+	
+	print("resolution set to: ", resString)
 
 func apply_vsync(value : bool):
 	if value == true:
@@ -71,6 +73,7 @@ func apply_vsync(value : bool):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		user_prefs.vsync_on = false
 	user_prefs.save()
+	print("V-Sync on: ", value)
 
 func apply_max_fps(value):
 	value = str(value)
@@ -115,8 +118,9 @@ func apply_audio_settings():
 func apply_video_settings():
 	apply_max_fps(user_prefs.max_fps)
 	apply_vsync(user_prefs.vsync_on)
-	set_resolution(user_prefs.resolution)
 	set_screen_mode(user_prefs.screen_mode)
+	set_resolution(user_prefs.resolution)
+	
 
 func apply_settings():
 	apply_audio_settings()

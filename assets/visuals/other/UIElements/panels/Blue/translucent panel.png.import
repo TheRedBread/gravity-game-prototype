@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5mhnddxn3gqo"
-path="res://.godot/imported/initialscrewPanel.png-062bf194a7b21a6844f4d05d0b618817.ctex"
+uid="uid://d4l13to5df3vj"
+path="res://.godot/imported/translucent panel.png-ceb198904fd3abe365e1dc5da7c63a7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/other/UIElements/panels/initialscrewPanel.png"
-dest_files=["res://.godot/imported/initialscrewPanel.png-062bf194a7b21a6844f4d05d0b618817.ctex"]
+source_file="res://assets/visuals/other/UIElements/panels/Blue/translucent panel.png"
+dest_files=["res://.godot/imported/translucent panel.png-ceb198904fd3abe365e1dc5da7c63a7b.ctex"]
 
 [params]
 

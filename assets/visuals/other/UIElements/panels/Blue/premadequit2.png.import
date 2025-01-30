@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbviopdooui75"
-path="res://.godot/imported/borderPanel.png-ef585df67085fddfc2e616f2c376828c.ctex"
+uid="uid://bemm1ujrhw1qn"
+path="res://.godot/imported/premadequit2.png-9533a42d5bd20686eefca7bf136805fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/other/UIElements/panels/borderPanel.png"
-dest_files=["res://.godot/imported/borderPanel.png-ef585df67085fddfc2e616f2c376828c.ctex"]
+source_file="res://assets/visuals/other/UIElements/panels/Blue/premadequit2.png"
+dest_files=["res://.godot/imported/premadequit2.png-9533a42d5bd20686eefca7bf136805fe.ctex"]
 
 [params]
 

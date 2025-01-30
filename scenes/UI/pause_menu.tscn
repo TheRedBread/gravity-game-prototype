@@ -1,15 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxyx1h7i814d6"]
+[gd_scene load_steps=11 format=3 uid="uid://bxyx1h7i814d6"]
 
-[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="1_hf765"]
+[ext_resource type="Theme" uid="uid://bbukrwpjpdfyf" path="res://assets/visuals/other/GreenTheme.tres" id="1_xajx1"]
 [ext_resource type="Script" path="res://scripts/systems/UI/pause_menu.gd" id="1_yb67a"]
-[ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://assets/visuals/other/UIElements/panels/plainPanel_rounded.png" id="3_4yolh"]
+[ext_resource type="Shader" path="res://scenes/player_character.gdshader" id="3_xxyqb"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6qps4"]
-texture = ExtResource("3_4yolh")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_m3536"]
+color = Color(0.47451, 0.709804, 0.278431, 1)
+grow_begin = -48.0
+grow_end = -48.0
+thickness = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nd67e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e5p3c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mjsix"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ujo6y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5dp7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1w107"]
+shader = ExtResource("3_xxyqb")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.4
+shader_parameter/color_over = null
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -18,17 +33,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_hf765")
+theme = ExtResource("1_xajx1")
 script = ExtResource("1_yb67a")
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.25098)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -37,62 +43,99 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 500
 theme_override_constants/margin_top = 300
-theme_override_constants/margin_right = 500
 theme_override_constants/margin_bottom = 300
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
-color = Color(0.145098, 0.145098, 0.145098, 1)
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -182.5
-offset_right = 182.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ColorRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 80
+size_flags_horizontal = 4
+theme = ExtResource("1_xajx1")
+theme_override_constants/separation = 8
+alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.27451, 0.580392, 0.658824, 1)
-theme_override_font_sizes/font_size = 24
+size_flags_horizontal = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.47451, 0.709804, 0.278431, 1)
+theme_override_font_sizes/font_size = 16
 text = "Game Paused"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 0
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxLine_m3536")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 8
+alignment = 1
 
-[node name="ResumeButton" type="Button" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_6qps4")
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.47451, 0.709804, 0.278431, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_pressed_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_colors/icon_hover_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nd67e")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_e5p3c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mjsix")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ujo6y")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m5dp7")
 text = "Resume"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_6qps4")
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.47451, 0.709804, 0.278431, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_pressed_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_colors/icon_hover_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nd67e")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_e5p3c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mjsix")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ujo6y")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m5dp7")
 text = "Quit to main menu"
 
-[connection signal="pressed" from="MarginContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="MarginContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="QuittoDesktop" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.47451, 0.709804, 0.278431, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_pressed_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_colors/icon_hover_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.721569, 0.811765, 0.380392, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nd67e")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_e5p3c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mjsix")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ujo6y")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m5dp7")
+text = "Quit to Desktop"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="blurShader" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_1w107")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/QuittoDesktop" to="." method="_on_quitto_desktop_pressed"]

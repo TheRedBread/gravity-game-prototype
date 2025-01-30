@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0i8lg7y3exox"
-path="res://.godot/imported/borderPanelsoft.png-926259ee782c687567d1f0e48c5cda9e.ctex"
+uid="uid://da6a24vpm14sj"
+path="res://.godot/imported/plainPanel_rounded_panel.png-eedcd3497df7aa7b9e1f01805df380d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/other/UIElements/panels/borderPanelsoft.png"
-dest_files=["res://.godot/imported/borderPanelsoft.png-926259ee782c687567d1f0e48c5cda9e.ctex"]
+source_file="res://assets/visuals/other/UIElements/panels/Green/plainPanel_rounded_panel.png"
+dest_files=["res://.godot/imported/plainPanel_rounded_panel.png-eedcd3497df7aa7b9e1f01805df380d4.ctex"]
 
 [params]
 

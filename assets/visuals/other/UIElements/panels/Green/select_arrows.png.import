@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bde7cptuj7yw4"
-path="res://.godot/imported/plainPanel_rounded.png-a3bf8d0c4315592621489c42b367de7e.ctex"
+uid="uid://c1qe1vd8yw5fd"
+path="res://.godot/imported/select_arrows.png-74b78c40d4a0081744b2f6a013684c78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/other/UIElements/panels/plainPanel_rounded.png"
-dest_files=["res://.godot/imported/plainPanel_rounded.png-a3bf8d0c4315592621489c42b367de7e.ctex"]
+source_file="res://assets/visuals/other/UIElements/panels/Green/select_arrows.png"
+dest_files=["res://.godot/imported/select_arrows.png-74b78c40d4a0081744b2f6a013684c78.ctex"]
 
 [params]
 

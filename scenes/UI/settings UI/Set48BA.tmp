@@ -3,26 +3,26 @@
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="1_nb2ky"]
 [ext_resource type="Script" path="res://scripts/systems/UI/settings/settings.gd" id="2_ge88h"]
 [ext_resource type="PackedScene" uid="uid://b24snwbavpl4" path="res://scenes/UI/settings UI/gameplay_settings.tscn" id="3_4fo3s"]
-[ext_resource type="Texture2D" uid="uid://brpq23ff7l28v" path="res://assets/visuals/other/UIElements/panels/Blue/screwPanel.png" id="3_priph"]
+[ext_resource type="Texture2D" uid="uid://brpq23ff7l28v" path="res://assets/visuals/other/UIElements/panels/screwPanel.png" id="3_j505f"]
 [ext_resource type="PackedScene" uid="uid://bj3jki1e2lrco" path="res://scenes/UI/settings UI/video_settings.tscn" id="4_hofsv"]
 [ext_resource type="PackedScene" uid="uid://cy4ijjujk4eh7" path="res://scenes/UI/settings UI/controls_settings.tscn" id="5_7mkv6"]
 [ext_resource type="PackedScene" uid="uid://dixld1ee0o8bp" path="res://scenes/UI/settings UI/audio_settings.tscn" id="5_ulo44"]
+[ext_resource type="Texture2D" uid="uid://d1pp7ue86yh26" path="res://assets/visuals/other/UIElements/panels/premadequit.png" id="8_0b6eq"]
 [ext_resource type="Script" path="res://scripts/systems/UI/parallax_background.gd" id="8_ae6om"]
-[ext_resource type="Texture2D" uid="uid://bemm1ujrhw1qn" path="res://assets/visuals/other/UIElements/panels/Blue/premadequit2.png" id="8_lqs7f"]
-[ext_resource type="Texture2D" uid="uid://d1pp7ue86yh26" path="res://assets/visuals/other/UIElements/panels/Blue/premadequit.png" id="9_2nrmg"]
+[ext_resource type="Texture2D" uid="uid://bemm1ujrhw1qn" path="res://assets/visuals/other/UIElements/panels/premadequit2.png" id="8_h5n1k"]
 [ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://assets/visuals/sprites/stars/starsExported/Star1.png" id="9_i1ink"]
 [ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://assets/visuals/sprites/stars/starsExported/Star2.png" id="10_3iffe"]
 [ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://assets/visuals/sprites/stars/starsExported/Star3.png" id="11_3dueu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hwv1o"]
-texture = ExtResource("3_priph")
+texture = ExtResource("3_j505f")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xhd5d"]
-texture = ExtResource("8_lqs7f")
+texture = ExtResource("8_h5n1k")
 texture_margin_left = 11.0
 texture_margin_top = 10.0
 texture_margin_right = 11.0
@@ -31,7 +31,7 @@ expand_margin_top = 4.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tkmqa"]
-texture = ExtResource("9_2nrmg")
+texture = ExtResource("8_0b6eq")
 texture_margin_left = 11.0
 texture_margin_top = 10.0
 texture_margin_right = 11.0

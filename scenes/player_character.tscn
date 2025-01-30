@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=19 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" path="res://scripts/player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_yxov5"]
 [ext_resource type="PackedScene" uid="uid://bxyx1h7i814d6" path="res://scenes/UI/pause_menu.tscn" id="3_lwsbi"]
-[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="4_jjck1"]
 [ext_resource type="Texture2D" uid="uid://bqr7nq887fhtb" path="res://assets/visuals/sprites/player/gravityPlayerSprite_EyesFalse.png" id="5_w3pip"]
 [ext_resource type="Script" path="res://scripts/player/player_stars_parallax.gd" id="6_85wnx"]
 [ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://assets/visuals/sprites/stars/starsExported/Star1.png" id="6_msyva"]
@@ -537,7 +536,6 @@ process_mode = 3
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource("3_lwsbi")]
 process_mode = 3
-theme = ExtResource("4_jjck1")
 
 [node name="DashTimer" type="Timer" parent="."]
 process_callback = 0

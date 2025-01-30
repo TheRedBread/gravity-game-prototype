@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bemlnotgg8ccc"
-path="res://.godot/imported/plainPanel.png-34f4722e455c855cea360f793e949eb0.ctex"
+uid="uid://brpq23ff7l28v"
+path="res://.godot/imported/screwPanel.png-5c4381bb6ea946d89c9060a3e5d3cebb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visuals/other/UIElements/panels/plainPanel.png"
-dest_files=["res://.godot/imported/plainPanel.png-34f4722e455c855cea360f793e949eb0.ctex"]
+source_file="res://assets/visuals/other/UIElements/panels/Blue/screwPanel.png"
+dest_files=["res://.godot/imported/screwPanel.png-5c4381bb6ea946d89c9060a3e5d3cebb.ctex"]
 
 [params]
 

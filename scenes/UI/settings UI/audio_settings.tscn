@@ -26,6 +26,7 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 value = 1.0
+scrollable = false
 
 [node name="MasterVolumePercent" type="Label" parent="AudioOptions/MasterVolumeItem"]
 unique_name_in_owner = true
@@ -49,6 +50,7 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 value = 1.0
+scrollable = false
 
 [node name="SfxVolumePercent" type="Label" parent="AudioOptions/SfxVolumeItem"]
 unique_name_in_owner = true
@@ -72,6 +74,7 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 value = 1.0
+scrollable = false
 
 [node name="MusicVolumePercent" type="Label" parent="AudioOptions/MusicVolumeItem"]
 unique_name_in_owner = true
@@ -95,6 +98,7 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 value = 1.0
+scrollable = false
 
 [node name="AmbienceVolumePercent" type="Label" parent="AudioOptions/AmbienceVolumeItem"]
 unique_name_in_owner = true
