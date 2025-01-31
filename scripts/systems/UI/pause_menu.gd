@@ -39,7 +39,8 @@ func _on_resume_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	switch_pause()
-	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+	SceneTransition.change_scene("res://scenes/UI/main_menu.tscn", "Green1")
+	
 
 
 func _on_quitto_desktop_pressed() -> void:

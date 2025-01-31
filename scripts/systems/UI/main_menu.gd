@@ -46,8 +46,8 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_options_button_pressed() -> void:
-		get_tree().change_scene_to_file("res://scenes/UI/settings UI/Settings.tscn")
+	SceneTransition.change_scene("res://scenes/UI/settings UI/Settings.tscn", "Blue1")
 
 
 func _on_continue_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/levels/test_scene.tscn")
+	SceneTransition.change_scene("res://scenes/levels/test_scene.tscn", "Green1")

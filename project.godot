@@ -24,6 +24,7 @@ buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 GameSaveSystem="*res://scripts/systems/saves/Game_save_system.gd"
 SettingsApplier="*res://scripts/systems/saves/settings_applier.gd"
 AudioManager="*res://scripts/systems/Audio/AudioManager.gd"
+SceneTransition="*res://scenes/systems/scene_transition.tscn"
 
 [display]
 

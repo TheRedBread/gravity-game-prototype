@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://tlxp3lqpj0jc"]
+[gd_scene load_steps=18 format=3 uid="uid://tlxp3lqpj0jc"]
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="1_nb2ky"]
 [ext_resource type="Script" path="res://scripts/systems/UI/settings/settings.gd" id="2_ge88h"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://assets/visuals/sprites/stars/starsExported/Star1.png" id="9_i1ink"]
 [ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://assets/visuals/sprites/stars/starsExported/Star2.png" id="10_3iffe"]
 [ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://assets/visuals/sprites/stars/starsExported/Star3.png" id="11_3dueu"]
+[ext_resource type="PackedScene" uid="uid://pmt13y54ku2i" path="res://scenes/systems/scene_transition.tscn" id="14_v68q1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hwv1o"]
 texture = ExtResource("3_priph")
@@ -170,5 +171,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.168627, 0.145098, 0.192157, 1)
+
+[node name="sceneTransition" parent="." instance=ExtResource("14_v68q1")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QtoMainMenu" to="." method="_on_button_pressed"]
