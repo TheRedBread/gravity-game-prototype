@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b24snwbavpl4"]
 
 [node name="GameplayMarginContainer" type="MarginContainer"]
+visible = false
 
 [node name="GameplayOptions" type="VBoxContainer" parent="."]
 layout_mode = 2

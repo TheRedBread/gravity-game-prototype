@@ -10,7 +10,10 @@ extends VBoxContainer
 func _ready() -> void:
 	display_video_settings()
 	update_resolution_button()
-
+	fps_option_button.get_popup().transparent = true
+	resolution_option_button.get_popup().transparent = true
+	screen_mode_option_button.get_popup().transparent = true
+	
 
 func update_resolution_button():
 	if DisplayServer.window_get_mode(DisplayServer.window_get_current_screen()) == 4 || DisplayServer.window_get_mode(DisplayServer.window_get_current_screen()) == 2:

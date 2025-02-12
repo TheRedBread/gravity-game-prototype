@@ -41,7 +41,8 @@ func _create_action_list():
 			
 		else:
 			input_label.text = ""
-			
+		
+		
 		action_list.add_child(button)
 		button.pressed.connect(_on_input_button_pressed.bind(button, action))
 
