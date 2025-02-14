@@ -20,6 +20,8 @@ var input_actions = {
 
 
 func _ready() -> void:
+	if Input.get_connected_joypads():
+		%MarginContainer.hide()
 	_create_action_list()
 
 
@@ -53,6 +55,7 @@ func _on_input_button_pressed(button : Button, action):
 		action_to_remap = action
 		remapping_button = button
 		button.find_child("LabelInput").text = "press key to bind..."
+		AudioManager.button_click_sound()
 
 func _input(event: InputEvent) -> void:
 	if is_remapping:

@@ -49,10 +49,10 @@ var gravity_direction : int = 1
 var was_just_sliding : bool = false
 
 
-
+# ------------------------ SOUNDS -------------------------------#
 @export var step_sound : AudioStream = preload("res://assets/audio/tracks/sfx/step.ogg")
 @export var land_sound : AudioStream = preload("res://assets/audio/tracks/sfx/land.ogg")
-
+@export var dash_sound : AudioStream = preload("res://assets/audio/tracks/sfx/player actions/dash.mp3")
 
 
 
@@ -359,9 +359,11 @@ func dash():
 		dash_accelerate()
 		if is_on_floor():
 			velocity.y -= 0 * gravity_direction
+	AudioManager.play_sound(dash_sound, -20, 1, 1.1, 0.05, "Sound effects")
+	
 func handle_dashing():
 	
-	if clicked_dash and DashAble():
+	if clicked_dash and DashAble() and (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")):
 		clicked_dash = false
 		dash()
 		can_dash_update()
@@ -571,7 +573,7 @@ func step_audio(foot : String):
 			step_pitch = 0.95
 	
 	
-	AudioManager.play_sound(step_sound, -20, 1, step_pitch, 0.05, "Sound effects")
+	AudioManager.play_sound(step_sound, -25, 1, step_pitch, 0.05, "Sound effects")
 
 
 func handle_land_audio():
@@ -587,7 +589,7 @@ func handle_land_audio():
 
 func land_audio():
 	
-	AudioManager.play_sound(land_sound, land_force - 15, 1, 1, 0.05, "Sound effects")
+	AudioManager.play_sound(land_sound, land_force - 25, 1, 1, 0.05, "Sound effects")
 	
 
 

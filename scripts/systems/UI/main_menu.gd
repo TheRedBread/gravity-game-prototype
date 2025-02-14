@@ -3,9 +3,6 @@ var previous_position : Vector2 = Vector2(0, 0)
 var input_focus_mode = "mouse"
 
 
-func _ready() -> void:
-	pass
-	
 
 func focus_update():
 	if (Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_up")):
@@ -43,11 +40,12 @@ func _process(delta: float) -> void:
 func _on_quit_button_pressed() -> void:
 	GameSaveSystem.save_game()
 	get_tree().quit()
-
+	AudioManager.button_click_sound()
 
 func _on_options_button_pressed() -> void:
 	SceneTransition.change_scene("res://scenes/UI/settings UI/Settings.tscn", "Blue1")
-
+	AudioManager.button_click_sound()
 
 func _on_continue_button_pressed() -> void:
 	SceneTransition.change_scene("res://scenes/levels/test_scene.tscn", "Green1")
+	AudioManager.button_click_sound()

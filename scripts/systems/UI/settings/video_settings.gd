@@ -41,16 +41,18 @@ func display_video_settings():
 ################### Video Settings #############
 func _on_fps_option_button_item_selected(index: int) -> void:
 	SettingsApplier.apply_max_fps(fps_option_button.get_item_text(index))
+	AudioManager.button_click_sound()
 
 func _on_vsync_check_box_toggled(toggled_on: bool) -> void:
 	SettingsApplier.apply_vsync(toggled_on)
 	fps_option_button.disabled = toggled_on
-
+	AudioManager.button_click_sound()
 
 func _on_resolution_option_button_item_selected(index: int) -> void:
 	SettingsApplier.set_resolution(resolution_option_button.get_item_text(index))
-	
+	AudioManager.button_click_sound()
 
 func _on_screen_mode_option_button_item_selected(index: int) -> void:
 	SettingsApplier.set_screen_mode(screen_mode_option_button.get_item_text(index))
 	update_resolution_button()
+	AudioManager.button_click_sound()

@@ -35,13 +35,15 @@ func switch_pause():
 
 func _on_resume_button_pressed() -> void:
 	switch_pause()
+	AudioManager.button_click_sound()
 
 
 func _on_quit_button_pressed() -> void:
 	switch_pause()
 	SceneTransition.change_scene("res://scenes/UI/main_menu.tscn", "Green1")
-	
+	AudioManager.button_click_sound()
 
 
 func _on_quitto_desktop_pressed() -> void:
 	get_tree().quit()
+	AudioManager.button_click_sound()

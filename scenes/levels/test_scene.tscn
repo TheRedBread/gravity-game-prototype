@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://clagahpl7cggx"]
+[gd_scene load_steps=12 format=4 uid="uid://clagahpl7cggx"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://scenes/player_character.tscn" id="1_0rcdk"]
 [ext_resource type="TileSet" uid="uid://bord65n4suwnl" path="res://assets/visuals/Tilesets/prototyping_tileset.tres" id="2_hfjb6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cfb08p11b3k0v" path="res://assets/visuals/Tilesets/pipes.png" id="4_bgsya"]
 [ext_resource type="Texture2D" uid="uid://ibo36fdoums8" path="res://assets/visuals/Tilesets/boxes.png" id="5_iupbm"]
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://assets/visuals/other/MainTheme.tres" id="6_pblda"]
+[ext_resource type="AudioStream" uid="uid://cvpv6q3c6d8rw" path="res://assets/audio/tracks/Ambience/Ambiance1.mp3" id="7_1vq8n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eaw1v"]
 texture = ExtResource("3_jwdsc")
@@ -1633,3 +1634,11 @@ theme = ExtResource("6_pblda")
 theme_override_font_sizes/font_size = 16
 text = "Slide - Ctrl"
 horizontal_alignment = 1
+
+[node name="Ambience1" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_1vq8n")
+volume_db = -10.0
+autoplay = true
+bus = &"Ambience"
+parameters/looping = true

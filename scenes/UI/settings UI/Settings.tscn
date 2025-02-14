@@ -111,6 +111,7 @@ focus_neighbor_bottom = NodePath("../MarginContainer/VBoxContainer/Controls")
 theme = ExtResource("1_gb2l0")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_gb2l0")
 theme_override_constants/margin_left = 4
