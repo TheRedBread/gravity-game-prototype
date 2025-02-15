@@ -1,36 +1,50 @@
+## used to save data to bin file (uncoded)
 extends Node
-const SAVE_PATH: String = "res://save.bin"
+
+const SAVE_PATH: String = "user://save.bin"
+
 var playtime : float = 0
-var spawn_checked : int = 0
+var spawn_checked_count : int = 0
+
+func _ready() -> void:
+	load_game()
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_game()
+func _notification(notification: int) -> void:
+	if notification == NOTIFICATION_WM_CLOSE_REQUEST:
+		GameManager.close_game()
 
 
-#####################SAVEGAME#################
 func save_game():
+	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	var data:Dictionary = {
-		"playtime": str(round(playtime)) + "s",
-		"spawn_checked": spawn_checked
+	var data : Dictionary = {
+		"playtime": round(playtime),
+		"spawn_checked_count": spawn_checked_count
 		
 	}
 	
-	var jstr = JSON.stringify(data)
 	
-	file.store_line(jstr)
+	file.store_line(JSON.stringify(data))
+	print("Saving stats to: ", ProjectSettings.globalize_path(SAVE_PATH))
 
 func load_game():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if not file or file == null:
+	if not FileAccess.file_exists(SAVE_PATH):
 		return
-	if FileAccess.file_exists(SAVE_PATH) == true:
-		if not file.eof_reached():
-			var current_line = JSON.parse_string(file.get_line())
-			if current_line:
-				pass
+	
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file.eof_reached():
+		return
+	
+	var data = JSON.parse_string(file.get_line())
+	
+	if typeof(data) == TYPE_DICTIONARY:
+		playtime = data.get("playtime", 0)  # Default to 0 if missing
+		spawn_checked_count = data.get("spawn_checked_count", 0)
+	
+	print("Loading stats From: ", ProjectSettings.globalize_path(SAVE_PATH))
+
 
 func _physics_process(delta: float) -> void:
-	GameSaveSystem.playtime += 1*delta
+	# updates play time every frame
+	playtime += 1 * delta

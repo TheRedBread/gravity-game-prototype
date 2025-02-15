@@ -1,11 +1,11 @@
 extends CharacterBody2D
+
 @onready var player_sprite: Sprite2D = $Sprite2D
 @onready var player_collision: CollisionShape2D = $PlayerCollision
 @onready var player_sprite_animation: AnimationPlayer = $PlayerSpriteAnimation
 @onready var eye_sprite: Sprite2D = $EyeSprite
 
-
-
+# -------------- Physics variables and player stats -------------- #
 @export var ACCELERATION : float = 10000
 @export var MAX_SPEED : float = 150
 @export var MAX_FALLING_SPEED : float = 1500
@@ -25,29 +25,8 @@ extends CharacterBody2D
 @export var JUMP_TIMER : float = 0.1
 @export var COYOTE_TIME : float = 0.15
 @export var SWITCH_TIMER : float = 0.1
-
-@onready var dash_timer: Timer = $DashTimer
-
 @export var SWITCH_SPEED : float = 0.2
-
 @export var GRAVITY : float = 800
-@export var spawn: Vector2
-
-var can_dash : bool = true
-var time_on_ground : int = 0
-var dash_used : bool = true
-var was_sliding : bool = false
-var air_switch_amount : int = 1 
-var current_max_speed : float
-var current_acceleration : float
-var clicked_jump : bool = false
-var clicked_dash : bool = false
-var clicked_switch : bool = false
-var was_on_floor : bool = false
-var spawn_gravity : float = 0
-var gravity_direction : int = 1
-var was_just_sliding : bool = false
-
 
 # ------------------------ SOUNDS -------------------------------#
 @export var step_sound : AudioStream = preload("res://assets/audio/tracks/sfx/step.ogg")
@@ -55,9 +34,31 @@ var was_just_sliding : bool = false
 @export var dash_sound : AudioStream = preload("res://assets/audio/tracks/sfx/player actions/dash.mp3")
 
 
+@export var spawn: Vector2
 
+@onready var dash_timer: Timer = $DashTimer
 
+var spawn_gravity : float = 0
+var gravity_direction : int = 1
+var can_dash : bool = true
 
+var air_switch_amount : int = 1
+var dash_used : bool = true
+var time_on_ground : int = 0
+var land_force : float = 0
+ 
+
+var current_max_speed : float
+var current_acceleration : float
+
+var clicked_jump : bool = false
+var clicked_dash : bool = false
+var clicked_switch : bool = false
+
+var was_sliding : bool = false
+var was_on_floor : bool = false
+var was_just_sliding : bool = false
+var was_falling : bool = false 
 
 
 #------------------------- PRELOADS ------------------------------#
@@ -67,120 +68,82 @@ const eyes_red = preload("res://assets/visuals/sprites/player/gravityPlayerSprit
 
 
 
-
-############# STATISTIC ###################
-
-
-
-
-
-##NOT FUNCTIONAL
-#func round_to_dec(num, digit):
-	#return round(num * pow(10.0, digit)) / pow(10.0, digit)
-#func get_movement_friction_equation():
-	#return ((1 - get_current_friction()+0.01)*10)
-
 func _ready() -> void:
-	#------------------------ VARIABLES ---------------------------#
 	current_acceleration = ACCELERATION
 	current_max_speed = MAX_SPEED
 	spawn_gravity = gravity_direction
 	spawn = position
-	Engine.time_scale = 1
-	get_viewport().size = DisplayServer.screen_get_size()/2
-	SettingsApplier.apply_settings()
-	
-	
-	
-	
-	#------------------------- METHODS ------------------------------#
-	
-	
-	
 
-
-
-#------------------------------------------------------------------------------------------#
-#-------------------------------GAME-------------------------------------------------------#
-#------------------------------------------------------------------------------------------#
 
 #apply forces
 func apply_friction(friction, delta):
 	velocity.x -= ((velocity.x/1.6) * friction) * delta * 60
+
+
 func apply_gravity(delta):
 	if GRAVITY*gravity_direction*delta + velocity.y * gravity_direction > MAX_FALLING_SPEED:
 		velocity.y += (MAX_FALLING_SPEED*(GRAVITY*gravity_direction/1000) - velocity.y)
 	else:
 		velocity.y = velocity.y + GRAVITY*gravity_direction * delta
+
+
+## generates force to player while being on a slope
 func apply_slopes():
 	if is_on_floor() and ((not abs(get_floor_normal().y) == 1 and is_sliding()) or is_floor_too_steep()):
 		var inverseY = (1 - get_floor_normal().y) * SLOPES_ACCELERATION
 		velocity += Vector2(SLOPES_ACCELERATION*abs(get_floor_normal().x*2), 0).rotated(get_slope_rotation(inverseY))
 
 
-#updates
+# --------------- updates ------------ #
 func dash_input_update():
-	if Input.is_action_just_pressed("dash"):
-		clicked_dash = true
-		await get_tree().create_timer(DASH_INPUT_TIMER).timeout
-		clicked_dash = false
-func jump_input_update():	
+	if not Input.is_action_just_pressed("dash"):
+		return
+	
+	clicked_dash = true
+	await get_tree().create_timer(DASH_INPUT_TIMER).timeout
+	clicked_dash = false
+
+func jump_input_update():
 	if Input.is_action_pressed("Jump"):
 		clicked_jump = true
 		await get_tree().create_timer(JUMP_TIMER).timeout
 		clicked_jump = false
+
 func can_dash_update():
 	can_dash = false
 	await get_tree().create_timer(DASH_TIMER).timeout
 	can_dash = true
 
-	
 func usage_update():
 	if (is_on_ceiling() or is_on_floor()) and not is_floor_too_steep():
 		dash_used = false
+
 func update_was_on_floor():
 	if is_on_floor():
 		was_on_floor = true
+	
 	elif was_on_floor:
 		await get_tree().create_timer(COYOTE_TIME).timeout
 		was_on_floor = false
-func handle_snap_change():
-	if is_on_floor() && is_sliding():
-		floor_snap_length = clamp(10+(abs(velocity.x)+abs(velocity.y))/10, 5, 40)
-	else:
-		floor_snap_length = 2
-		
-func handle_sliding_reset():
-	if Input.is_action_just_released("slide"):
-		was_sliding = false
-	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
-		was_sliding = true
-func damp_velocity_to_zero(delta):
-	if  not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
-		if abs(velocity.x) < 100 and not is_sliding():
-			velocity.x /= 1.2
-		if abs(velocity.x) < 0.1 and not is_sliding():
-			velocity.x = 0
-func count_time_on_ground(delta):
-	if is_on_floor() and not is_sliding():
-		time_on_ground += 1 * delta * 60
-	else:
-		time_on_ground = 0
 
 
-#checks
+# --------------- checks -------------- #
 func DashAble():
 	return not is_sliding() and (can_dash and dash_used == false)
+
 func GravitySwitchAble():
 	return clicked_switch and air_switch_amount == 1
+
 func is_floor_too_steep():
 	if abs(get_floor_normal().x) >= abs(SLOPE_MAX_ANGLE):
 		return true
 	else:
 		return false
+
 func get_current_friction():
 	if is_sliding():
 		return SLIDE_FRICTION
+	
 	elif is_on_floor():
 		if time_on_ground >= 3 or (not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and not input_direction_is_opposite(get_intDir())):
 			return GROUND_FRICTION
@@ -188,11 +151,16 @@ func get_current_friction():
 			return AIR_FRICTION
 	else:
 		return AIR_FRICTION
+
 func vDir_to_intDir(dirStr):
 	if dirStr == "right":
 		return 1
 	if dirStr == "left":
 		return -1
+	else:
+		return 0
+		print("ERROR! could not covert to int Direction")
+
 func get_intDir():
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		return 1
@@ -200,6 +168,7 @@ func get_intDir():
 		return -1
 	else:
 		return 0
+
 func input_direction_is_opposite(intDir):
 	if Input.is_action_pressed("move_left") and Input.is_action_pressed("move_left"):
 		return false
@@ -208,50 +177,27 @@ func input_direction_is_opposite(intDir):
 	else:
 		return false
 
-
-#maths
+# ------------------ maths ------------------#
 func count_dash_velocity(sign):
 	if not abs(velocity.x)>5000:
 		velocity.x += DASH_STRENGHT * sign(sign) * ((5000 - velocity.x)/5000)
+
 func get_slope_rotation(inverseY):
 	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*-gravity_direction)
 
-
-
-
-##############################
-#####NotPlayerCaused##########
-func set_spawnpoint():
-	GameSaveSystem.spawn_checked += 1
-	spawn = position
-	spawn_gravity = gravity_direction
-func die():
-	gravity_direction = spawn_gravity
-	velocity = Vector2(0, 0)
-	position = spawn + Vector2(0, -10)*gravity_direction
-	
-	
-	can_dash = true
-	time_on_ground = 0
-	dash_used = true
-	was_sliding = false
-	air_switch_amount = 1
-	clicked_jump = false
-	clicked_dash = false
-	clicked_switch = false
-	was_on_floor = false
-	was_just_sliding = false
-	
-	
-	
-	up_direction = Vector2(0, -gravity_direction)
-	air_switch_amount = 1
+func handle_snap_change():
+	if is_on_floor() && is_sliding():
+		floor_snap_length = clamp(10+(abs(velocity.x)+abs(velocity.y))/10, 5, 40)
+	else:
+		floor_snap_length = 2
 
 
 
 
-###########################
-#######MOVEMENT############
+
+
+
+# ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
 	update_was_on_floor()
 	damp_velocity_to_zero(delta)
@@ -285,7 +231,6 @@ func handle_movement(delta):
 
 	if not is_on_floor():
 		apply_gravity(delta)
-
 
 #left-right
 func move_to_direction(directionStr, delta):
@@ -442,19 +387,18 @@ func sign_to_bool(val):
 		return false
 
 func walk_anim():
-
-	
 	player_sprite_animation.speed_scale = abs(velocity.x)/80
+	
 	player_sprite.flip_h = sign_to_bool(velocity.x)
 	eye_sprite.flip_h = sign_to_bool(velocity.x)
 	
 	player_sprite_animation.play("walk")
-	
-	
 
 func idle_anim():
 	player_sprite_animation.stop()
+	
 	player_sprite_animation.speed_scale = 1
+	
 	player_sprite_animation.play("Idle")
 
 func slide_anim():
@@ -462,21 +406,24 @@ func slide_anim():
 		was_just_sliding = true
 	
 	player_sprite_animation.stop()
+	
 	player_sprite.flip_h = sign_to_bool(velocity.x)
 	eye_sprite.flip_h = sign_to_bool(velocity.x)
+	
 	player_sprite_animation.play("slide")
 
 func moving_jump_anim():
 	if (abs(velocity.y) < 100):
 		player_sprite.frame = 16
 		eye_sprite.frame = 16
+	
 	elif (sign(velocity.y * gravity_direction) == -1):
 		player_sprite.frame = 17
 		eye_sprite.frame = 17
+	
 	elif (sign(velocity.y * gravity_direction) == 1):
 		player_sprite.frame = 18
 		eye_sprite.frame = 18
-		
 
 func standing_jump_anim():
 	if (abs(velocity.y) < 100):
@@ -490,26 +437,24 @@ func standing_jump_anim():
 	elif (sign(velocity.y * gravity_direction) == 1):
 		player_sprite.frame = 42
 		eye_sprite.frame = 42
-		
-
 
 func jump_anim():
 	if abs(velocity.x) > 0:
 		player_sprite.flip_h = sign_to_bool(velocity.x)
 		eye_sprite.flip_h = sign_to_bool(velocity.x)
-		
+	
 	player_sprite_animation.stop()
+	
 	if (abs(velocity.x) > 50):
 		moving_jump_anim()
 	else:
 		standing_jump_anim()
-	
+
 func eye_anim():
 	if air_switch_amount > 0:
 		eye_sprite.texture = eyes_blue
 	else:
 		eye_sprite.texture = eyes_red
-
 
 func dash_anim():
 	player_sprite.flip_h = sign_to_bool(velocity.x)
@@ -519,6 +464,7 @@ func dash_anim():
 
 func handle_player_animation():
 	eye_anim()
+	
 	if (!velocity.x) and velocity.x != 0:
 		return
 	if (was_just_sliding):
@@ -540,10 +486,8 @@ func handle_player_animation():
 			player_sprite_animation.stop()
 			jump_anim()
 	else:
-		
 		dash_anim()
 	was_just_sliding = false
-
 
 func handle_animations():
 	handle_player_animation()
@@ -552,18 +496,58 @@ func handle_animations():
 
 
 
+# --------- UNSORTED METHODS ---------------#
+func handle_sliding_reset():
+	if Input.is_action_just_released("slide"):
+		was_sliding = false
+	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
+		was_sliding = true
+
+func damp_velocity_to_zero(delta):
+	if  not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
+		if abs(velocity.x) < 100 and not is_sliding():
+			velocity.x /= 1.2
+		if abs(velocity.x) < 0.1 and not is_sliding():
+			velocity.x = 0
+
+func count_time_on_ground(delta):
+	if is_on_floor() and not is_sliding():
+		time_on_ground += 1 * delta * 60
+	else:
+		time_on_ground = 0
+
+func set_spawnpoint():
+	GameSaveSystem.spawn_checked_count += 1
+	spawn = position
+	spawn_gravity = gravity_direction
+
+func die():
+	gravity_direction = spawn_gravity
+	velocity = Vector2(0, 0)
+	position = spawn + Vector2(0, -10)*gravity_direction
+	
+	can_dash = true
+	time_on_ground = 0
+	dash_used = true
+	was_sliding = false
+	air_switch_amount = 1
+	clicked_jump = false
+	clicked_dash = false
+	clicked_switch = false
+	was_on_floor = false
+	was_just_sliding = false
+	
+	up_direction = Vector2(0, -gravity_direction)
+	air_switch_amount = 1
 
 
 
-################################# SOUNDS ################################
-var was_falling : bool = false 
-var land_force : float = 0
-
+# ---------------------- SOUNDS -------------------------- #
 func handle_audio():
 	handle_land_audio()
 
 func step_audio(foot : String):
-	#when foot is left it lowers the pitch
+	# when foot is left it lowers the pitch
 	var step_pitch = 1
 	
 	match foot:
@@ -572,27 +556,22 @@ func step_audio(foot : String):
 		"right":
 			step_pitch = 0.95
 	
-	
 	AudioManager.play_sound(step_sound, -25, 1, step_pitch, 0.05, "Sound effects")
-
 
 func handle_land_audio():
 	if is_on_floor() and was_falling:
 		land_audio()
+	
 	if velocity.y * gravity_direction > 0 and !is_on_floor():
 		was_falling = true
 		land_force += 0.15
+	
 	else:
 		land_force = 0
 		was_falling = false
 
-
 func land_audio():
-	
 	AudioManager.play_sound(land_sound, land_force - 25, 1, 1, 0.05, "Sound effects")
-	
-
-
 
 
 
@@ -602,13 +581,10 @@ func _physics_process(delta):
 	handle_animations()
 	handle_audio()
 	move_and_slide()
-	Engine.time_scale = 1
-	
-	
-	
-	
-	
+
+
 func _on_death_detection_body_entered(body: Node2D) -> void:
 	die()
+
 func _on_spawnpoint_detection_body_entered(body: Node2D) -> void:
 	set_spawnpoint()

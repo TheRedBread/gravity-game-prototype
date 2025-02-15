@@ -15,15 +15,9 @@ static func get_current_screen_resolution_string() -> String:
 	return veciStr.left(-1).right(-1).replace(", ", "x")
 
 
-
-
-
-
-
-
-
 func save() -> void:
 	ResourceSaver.save(self, "user://user_prefs.tres")
+
 
 static func load_or_create() -> UserSettings:
 	var res : UserSettings = load("user://user_prefs.tres") as UserSettings

@@ -1,62 +1,61 @@
+## Used to apply settings from file or directly from settings menu
 extends Node
 
-var user_prefs = UserSettings.load_or_create()
+const DEFAULT_RESOLUTION : String = "1920x1080"
 
-func str_to_Vectori(VecString):
-	var x = int(VecString.left(VecString.find("x")))
-	var y = int(VecString.right(VecString.find("x")))
-	return Vector2i(x,y)
+var user_prefs : UserSettings = UserSettings.load_or_create()
 
 
+func _ready() -> void:
+	apply_settings()
 
-	
+func str_to_Vectori(res_string: String) -> Vector2i:
+	# Split the resolution string, defaulting to DEFAULT_RESOLUTION if invalid
+	var res_components = res_string.split("x")
+	var width = res_components[0]
+	var height = res_components[1]
+	if res_components.size() != 2 or int(width) <= 0 or int(height) <= 0:
+		print("Invalid resolution, using default: ", DEFAULT_RESOLUTION)
+		return Vector2i(1920, 1080)
+		
+
+	# Return parsed resolution
+	return Vector2i(int(width), int(height))
+
 
 func center_window() -> void:
-	# Get the current window
 	var window = get_window()
-	# And get the current screen the window's in
 	var screen = window.current_screen
-	# Get the usable rect for that screen
 	var screen_rect = DisplayServer.screen_get_usable_rect(screen)
-	# Get the window's size
 	var window_size = window.get_size_with_decorations()
+	
 	# Set its position to the middle
 	window.position = screen_rect.position + (screen_rect.size / 2 - window_size / 2)
-	
-
-
-
+	print("window centered")
 
 func set_screen_mode(modeString):
 	print("setting screen mode on: ", modeString)
 	match modeString:
 		"Windowed":
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-			
-			
+		
 		"Fullscreen":
-			var veciStr = str(DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())).left(-1).right(-1).replace(", ", "x")
-			user_prefs.resolution = veciStr
-			
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-			
+		
 		"Maximized":
-			var veciStr = str(DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())).left(-1).right(-1).replace(", ", "x")
-			user_prefs.resolution = veciStr
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		
 		_:
 			print_rich("[b][color=red]Screen mode is incorrect: " + modeString + "[/color][/b]")
-			
 	
-	
-	
+	# saves screen mode to file
 	user_prefs.screen_mode = modeString
 	user_prefs.save()
 	center_window()
 
+
 func set_resolution(resString : String):
 	user_prefs.resolution = resString
-	
 	var cords = str_to_Vectori(resString)
 	get_window().size = cords
 	center_window()
@@ -65,15 +64,18 @@ func set_resolution(resString : String):
 	
 	print("resolution set to: ", resString)
 
+
 func apply_vsync(value : bool):
 	if value == true:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 		user_prefs.vsync_on = true
+	
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		user_prefs.vsync_on = false
 	user_prefs.save()
 	print("V-Sync on: ", value)
+
 
 func apply_max_fps(value):
 	value = str(value)
@@ -84,11 +86,10 @@ func apply_max_fps(value):
 	user_prefs.max_fps = Engine.max_fps
 	user_prefs.save()
 
+
 func set_volume(bus, value):
-	
 	var volume_bus = 0
 	
-	####################
 	match bus:
 		0:
 			user_prefs.master_audio_level = value
@@ -98,15 +99,10 @@ func set_volume(bus, value):
 			user_prefs.music_audio_level = value
 		3:
 			user_prefs.ambience_audio_level = value
-	##########################
-	
 	
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
 	AudioServer.set_bus_mute(bus, value < 0.01)
 	user_prefs.save()
-
-
-
 
 
 func apply_audio_settings():
@@ -118,17 +114,11 @@ func apply_audio_settings():
 func apply_video_settings():
 	apply_max_fps(user_prefs.max_fps)
 	apply_vsync(user_prefs.vsync_on)
-	set_screen_mode(user_prefs.screen_mode)
 	set_resolution(user_prefs.resolution)
+	set_screen_mode(user_prefs.screen_mode)
 	
 
+# apply all settings
 func apply_settings():
 	apply_audio_settings()
 	apply_video_settings()
-
-
-
-func _ready() -> void:
-	apply_settings()
-	
-	

@@ -1,5 +1,9 @@
+## Controls section in options menu
 extends PanelContainer
-const input_button_scene = preload("res://scenes/UI/settings UI/action_set_button.tscn")
+
+
+const INPUT_BUTTON_SCENE = preload("res://scenes/UI/settings UI/action_set_button.tscn")
+
 @onready var action_list: VBoxContainer = %ActionList
 
 var is_remapping = false
@@ -13,10 +17,8 @@ var input_actions = {
 	"Jump" : "Jump",
 	"slide" : "Slide",
 	"dash" : "Dash",
-	"reset" : "Reset"
-	
+	"reset" : "Reset",
 }
-
 
 
 func _ready() -> void:
@@ -27,11 +29,14 @@ func _ready() -> void:
 
 func _create_action_list():
 	InputMap.load_from_project_settings()
+	
+	# Clear existing action buttons
 	for item in action_list.get_children():
 		item.queue_free()
 	
+	# Add a new button for each action
 	for action in input_actions:
-		var button : Button = input_button_scene.instantiate()
+		var button : Button = INPUT_BUTTON_SCENE.instantiate()
 		var action_label : Label = button.find_child("LabelAction")
 		var input_label : Label = button.find_child("LabelInput")
 		
@@ -44,7 +49,6 @@ func _create_action_list():
 		else:
 			input_label.text = ""
 		
-		
 		action_list.add_child(button)
 		button.pressed.connect(_on_input_button_pressed.bind(button, action))
 
@@ -54,26 +58,25 @@ func _on_input_button_pressed(button : Button, action):
 		is_remapping = true
 		action_to_remap = action
 		remapping_button = button
-		button.find_child("LabelInput").text = "press key to bind..."
+		button.find_child("LabelInput").text = "Press key to bind..."
 		AudioManager.button_click_sound()
 
+
 func _input(event: InputEvent) -> void:
-	if is_remapping:
-		if (event is InputEventKey || (event is InputEventMouseButton && event.is_pressed())):
-			
-			if event is InputEventMouseButton && event.double_click:
-				event.double_click = false
-			
-			InputMap.action_erase_events(action_to_remap)
-			InputMap.action_add_event(action_to_remap, event)
-			_update_action_list(remapping_button, event)
-			
-			is_remapping = false
-			action_to_remap = null
-			remapping_button = null
-			
-			accept_event()
+	if is_remapping and (event is InputEventKey || (event is InputEventMouseButton && event.is_pressed())):
+		if event is InputEventMouseButton && event.double_click:
+			event.double_click = false
+		
+		InputMap.action_erase_events(action_to_remap)
+		InputMap.action_add_event(action_to_remap, event)
+		_update_action_list(remapping_button, event)
+		
+		is_remapping = false
+		action_to_remap = null
+		remapping_button = null
+		
+		accept_event()
 
-
+# Update the action list after remapping an input
 func _update_action_list(button, event):
 	button.find_child("LabelInput").text = event.as_text().trim_suffix(" (Physical)")
