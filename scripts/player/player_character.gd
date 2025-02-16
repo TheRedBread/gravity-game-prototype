@@ -158,8 +158,9 @@ func vDir_to_intDir(dirStr):
 	if dirStr == "left":
 		return -1
 	else:
-		return 0
 		print("ERROR! could not covert to int Direction")
+		return 0
+		
 
 func get_intDir():
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -178,9 +179,9 @@ func input_direction_is_opposite(intDir):
 		return false
 
 # ------------------ maths ------------------#
-func count_dash_velocity(sign):
+func count_dash_velocity(signv):
 	if not abs(velocity.x)>5000:
-		velocity.x += DASH_STRENGHT * sign(sign) * ((5000 - velocity.x)/5000)
+		velocity.x += DASH_STRENGHT * sign(signv) * ((5000 - velocity.x)/5000)
 
 func get_slope_rotation(inverseY):
 	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*-gravity_direction)
@@ -211,7 +212,7 @@ func handle_movement(delta):
 	
 	
 	handle_vertical_movement(delta)
-	handle_jump(delta)
+	handle_jump()
 	handle_slam()
 	handle_dashing()
 	handle_abilities()
@@ -270,7 +271,7 @@ func handle_vertical_movement(delta):
 		apply_friction(get_current_friction(), delta)
 
 #jump
-func handle_jump(delta):
+func handle_jump():
 	if clicked_jump and was_on_floor:
 		GRAVITY = 1200
 		was_on_floor = false
@@ -583,8 +584,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_death_detection_body_entered(body: Node2D) -> void:
+func _on_death_detection_body_entered(_body: Node2D) -> void:
 	die()
 
-func _on_spawnpoint_detection_body_entered(body: Node2D) -> void:
+func _on_spawnpoint_detection_body_entered(_body: Node2D) -> void:
 	set_spawnpoint()

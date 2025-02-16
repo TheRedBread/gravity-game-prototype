@@ -12,7 +12,7 @@ func _ready() -> void:
 	blur_shader.hide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_paused:
 		pause_menu.show()
 		blur_shader.show()

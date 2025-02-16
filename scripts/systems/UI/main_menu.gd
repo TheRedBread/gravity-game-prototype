@@ -28,7 +28,7 @@ func focus_update():
 	previous_position = get_global_mouse_position()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	focus_update()
 
 

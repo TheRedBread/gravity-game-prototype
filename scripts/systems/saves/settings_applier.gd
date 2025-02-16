@@ -88,7 +88,7 @@ func apply_max_fps(value):
 
 
 func set_volume(bus, value):
-	var volume_bus = 0
+
 	
 	match bus:
 		0:
