@@ -21,11 +21,11 @@ buses/default_bus_layout="res://global elements/default_bus_layout.tres"
 
 [autoload]
 
-GameSaveSystem="*res://scripts/systems/saves/game_save_system.gd"
-SettingsApplier="*res://scripts/systems/saves/settings_applier.gd"
-AudioManager="*res://scripts/systems/Audio/audio_manager.gd"
+GameSaveSystem="*res://global elements/game_save_system.gd"
+SettingsApplier="*res://global elements/settings_applier.gd"
+AudioManager="*res://global elements/audio_manager.gd"
 SceneTransition="*res://global elements/scene transition/scene_transition.tscn"
-GameManager="*res://scripts/systems/game_manager.gd"
+GameManager="*res://global elements/game_manager.gd"
 
 [display]
 
