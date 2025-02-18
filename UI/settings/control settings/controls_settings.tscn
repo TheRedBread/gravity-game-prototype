@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy4ijjujk4eh7"]
+
+[ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://UI/themes/MainTheme.tres" id="1_3ksxg"]
+[ext_resource type="Script" path="res://UI/settings/control settings/controls.gd" id="1_qqmir"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uxyo"]
+
+[node name="PanelContainer" type="PanelContainer"]
+theme = ExtResource("1_3ksxg")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2uxyo")
+script = ExtResource("1_qqmir")
+
+[node name="ControlsMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ControlsOptions" type="VBoxContainer" parent="ControlsMarginContainer"]
+layout_mode = 2
+
+[node name="ActionList" type="VBoxContainer" parent="ControlsMarginContainer/ControlsOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3

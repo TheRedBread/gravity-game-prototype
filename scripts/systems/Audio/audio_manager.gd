@@ -2,8 +2,8 @@
 extends Node
 
 
-@export var click1_sound : AudioStream = preload("res://assets/audio/tracks/sfx/player actions/click.mp3")
-@export var click2_sound : AudioStream = preload("res://assets/audio/tracks/sfx/player actions/click2.mp3")
+@export var click1_sound : AudioStream = preload("res://UI/sfx/click.mp3")
+@export var click2_sound : AudioStream = preload("res://UI/sfx/click2.mp3")
 
 
 func _ready() -> void:

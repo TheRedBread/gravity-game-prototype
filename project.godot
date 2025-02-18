@@ -11,20 +11,20 @@ config_version=5
 [application]
 
 config/name="gravity game"
-run/main_scene="res://scenes/UI/main_menu.tscn"
+run/main_scene="res://UI/main menu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://assets/visuals/icon.svg"
+config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
+buses/default_bus_layout="res://global elements/default_bus_layout.tres"
 
 [autoload]
 
 GameSaveSystem="*res://scripts/systems/saves/game_save_system.gd"
 SettingsApplier="*res://scripts/systems/saves/settings_applier.gd"
 AudioManager="*res://scripts/systems/Audio/audio_manager.gd"
-SceneTransition="*res://scenes/systems/scene_transition.tscn"
+SceneTransition="*res://global elements/scene transition/scene_transition.tscn"
 GameManager="*res://scripts/systems/game_manager.gd"
 
 [display]

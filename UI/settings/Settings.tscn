@@ -1,0 +1,191 @@
+[gd_scene load_steps=18 format=3 uid="uid://tlxp3lqpj0jc"]
+
+[ext_resource type="Theme" uid="uid://w12814t6xtdl" path="res://UI/themes/BlueGlassy.tres" id="1_0fq65"]
+[ext_resource type="Script" path="res://UI/settings/settings.gd" id="2_0heom"]
+[ext_resource type="Texture2D" uid="uid://brpq23ff7l28v" path="res://UI/UIElements/panels/BlueGlassy/screwPanel.png" id="3_1tfhk"]
+[ext_resource type="PackedScene" uid="uid://b24snwbavpl4" path="res://UI/settings/gameplay settings/gameplay_settings.tscn" id="4_lkpju"]
+[ext_resource type="PackedScene" uid="uid://bj3jki1e2lrco" path="res://UI/settings/video settings/video_settings.tscn" id="5_gxwuj"]
+[ext_resource type="PackedScene" uid="uid://dixld1ee0o8bp" path="res://UI/settings/audio settings/audio_settings.tscn" id="6_be1sn"]
+[ext_resource type="PackedScene" uid="uid://cy4ijjujk4eh7" path="res://UI/settings/control settings/controls_settings.tscn" id="7_xnki3"]
+[ext_resource type="Texture2D" uid="uid://bemm1ujrhw1qn" path="res://UI/UIElements/panels/BlueGlassy/premadequit2.png" id="8_m4whw"]
+[ext_resource type="Texture2D" uid="uid://d1pp7ue86yh26" path="res://UI/UIElements/panels/BlueGlassy/premadequit.png" id="9_2mupe"]
+[ext_resource type="Script" path="res://UI/parallax_background.gd" id="10_no5sj"]
+[ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://global elements/parallax/stars/Star1.png" id="11_pjp2t"]
+[ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://global elements/parallax/stars/Star2.png" id="12_jonvn"]
+[ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://global elements/parallax/stars/Star3.png" id="13_0ofho"]
+[ext_resource type="PackedScene" uid="uid://pmt13y54ku2i" path="res://global elements/scene transition/scene_transition.tscn" id="14_f1a67"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hwv1o"]
+texture = ExtResource("3_1tfhk")
+texture_margin_left = 22.0
+texture_margin_top = 22.0
+texture_margin_right = 22.0
+texture_margin_bottom = 22.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tkmqa"]
+texture = ExtResource("8_m4whw")
+texture_margin_left = 12.0
+texture_margin_top = 8.0
+texture_margin_right = 12.0
+texture_margin_bottom = 8.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mgkw5"]
+texture = ExtResource("9_2mupe")
+texture_margin_left = 12.0
+texture_margin_top = 8.0
+texture_margin_right = 12.0
+texture_margin_bottom = 8.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+axis_stretch_vertical = 2
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0fq65")
+theme_type_variation = &"OptionsMenu"
+script = ExtResource("2_0heom")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_right = 70
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_hwv1o")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 12.365)
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Gameplay" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_lkpju")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Video" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_gxwuj")]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_0fq65")
+
+[node name="Audio" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_be1sn")]
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../MarginContainer/VBoxContainer/Controls")
+theme = ExtResource("1_0fq65")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_0fq65")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Controls" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_xnki3")]
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../../../Audio")
+focus_neighbor_bottom = NodePath("../../../../../../../QtoMainMenu")
+
+[node name="QtoMainMenu" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.352941, 0.772549, 0.807843, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_tkmqa")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tkmqa")
+theme_override_styles/normal = SubResource("StyleBoxTexture_mgkw5")
+text = "Quit to Main Menu"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+layer = -6
+script = ExtResource("10_no5sj")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2(0.01, 0.01)
+motion_mirroring = Vector2(480, 270)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+position = Vector2(240, 135)
+texture = ExtResource("11_pjp2t")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2(0.02, 0.02)
+motion_mirroring = Vector2(480, 270)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(240, 135)
+texture = ExtResource("12_jonvn")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(480, 270)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer3"]
+position = Vector2(240, 135)
+texture = ExtResource("13_0ofho")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.145098, 0.192157, 1)
+
+[node name="sceneTransition" parent="." instance=ExtResource("14_f1a67")]
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QtoMainMenu" to="." method="_on_button_pressed"]
