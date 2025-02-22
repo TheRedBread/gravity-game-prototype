@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var player_collision: CollisionShape2D = $PlayerCollision
 @onready var player_sprite_animation: AnimationPlayer = $PlayerSpriteAnimation
 @onready var eye_sprite: Sprite2D = $EyeSprite
+@onready var slide_audio_player: AudioStreamPlayer = $SlideAudioPlayer
+
 
 # -------------- Physics variables and player stats -------------- #
 @export var ACCELERATION : float = 10000
@@ -32,6 +34,8 @@ extends CharacterBody2D
 @export var step_sound : AudioStream = preload("res://player/step.ogg")
 @export var land_sound : AudioStream = preload("res://player/land.ogg")
 @export var dash_sound : AudioStream = preload("res://player/dash.mp3")
+@export var JUMP_AUDIO : AudioStream = preload("res://player/jump.mp3")
+@export var DESTROYED : AudioStream = preload("res://player/destroyed.mp3")
 
 
 @export var spawn: Vector2
@@ -64,8 +68,6 @@ var was_falling : bool = false
 #------------------------- PRELOADS ------------------------------#
 const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
 const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
-
-
 
 
 func _ready() -> void:
@@ -193,10 +195,6 @@ func handle_snap_change():
 
 
 
-
-
-
-
 # ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
 	update_was_on_floor()
@@ -207,27 +205,13 @@ func handle_movement(delta):
 	dash_input_update()
 	usage_update()
 	handle_sliding_reset()
-
-	
-	
 	handle_vertical_movement(delta)
 	handle_jump(delta)
 	handle_slam()
 	handle_dashing()
 	handle_abilities()
-	handle_slide()
 	handle_reset()
-	
-	
-	
 
-	
-
-	
-
-	
-	
-	
 
 	if not is_on_floor():
 		apply_gravity(delta)
@@ -274,6 +258,7 @@ func handle_jump(delta):
 	if clicked_jump and was_on_floor:
 		GRAVITY = 1200
 		was_on_floor = false
+		AudioManager.play_sound(JUMP_AUDIO, -5, 0.1, 1, 0.08, "sound Effects")
 		if is_on_floor():
 			velocity -= Vector2(0, JUMP_STRENGHT * 1200).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
 		else:
@@ -316,21 +301,12 @@ func handle_dashing():
 		dash_used = true
 
 #slide
-func handle_slide():
-	pass
 func is_sliding():
-	var DirSign : int
-	if Input.is_action_pressed("move_left"):
-		DirSign = vDir_to_intDir("left")
-	if Input.is_action_pressed("move_right"):
-		DirSign = vDir_to_intDir("right")
-	else:
-		DirSign = 0
-	
 	if (abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and is_on_floor() and not was_sliding:
 		return true
 	else:
 		return false
+
 func handle_slam():
 	if Input.is_action_pressed("slide") and not is_on_floor():
 		if Input.is_action_just_pressed("slide"):
@@ -339,7 +315,7 @@ func handle_slam():
 		MAX_FALLING_SPEED = 3000
 	else:
 		MAX_FALLING_SPEED = 1500
-		
+
 
 #gravity
 func handle_abilities():
@@ -377,7 +353,7 @@ func handle_reset():
 
 
 
-########################## ANIMATIONS #####################
+# ----------------------- ANIMATIONS ------------------------- #
 func sign_to_bool(val):
 	if sign(val) == -1:
 		return true
@@ -406,7 +382,6 @@ func slide_anim():
 		was_just_sliding = true
 	
 	player_sprite_animation.stop()
-	
 	player_sprite.flip_h = sign_to_bool(velocity.x)
 	eye_sprite.flip_h = sign_to_bool(velocity.x)
 	
@@ -522,9 +497,9 @@ func set_spawnpoint():
 	spawn_gravity = gravity_direction
 
 func die():
+	AudioManager.play_sound(DESTROYED, -15, 0.01, 1.2, 0.5, "Sound effects")
 	gravity_direction = spawn_gravity
 	velocity = Vector2(0, 0)
-	position = spawn + Vector2(0, -10)*gravity_direction
 	
 	can_dash = true
 	time_on_ground = 0
@@ -539,12 +514,15 @@ func die():
 	
 	up_direction = Vector2(0, -gravity_direction)
 	air_switch_amount = 1
+	position = spawn + Vector2(0, -10)*gravity_direction
+	
 
 
 
 # ---------------------- SOUNDS -------------------------- #
 func handle_audio():
 	handle_land_audio()
+	handle_sliding_audio()
 
 func step_audio(foot : String):
 	# when foot is left it lowers the pitch
@@ -569,6 +547,17 @@ func handle_land_audio():
 	else:
 		land_force = 0
 		was_falling = false
+
+func handle_sliding_audio():
+	slide_audio_player.volume_db = ((abs(velocity.x) + abs(velocity.y))/60)-12 
+	slide_audio_player.pitch_scale = ((abs(velocity.x) + abs(velocity.y))/500)+0.6
+	
+	if is_sliding() and not slide_audio_player.playing:
+		slide_audio_player.play()
+	
+	if not is_sliding() or abs(velocity.x) < 5:
+		slide_audio_player.stop()
+
 
 func land_audio():
 	AudioManager.play_sound(land_sound, land_force - 25, 1, 1, 0.05, "Sound effects")

@@ -4,6 +4,9 @@ extends Control
 @onready var pause_menu: Control = $"."
 @onready var blur_shader: ColorRect = $CanvasLayer/blurShader
 
+const SCENE_TRANSITION_IN = preload("res://global elements/scene transition/scene_transition_in.mp3")
+const SCENE_TRANSITION_OUT = preload("res://global elements/scene transition/scene_transition_out.mp3")
+
 var is_paused = false
 
 
@@ -28,6 +31,13 @@ func _input(event: InputEvent) -> void:
 
 
 func switch_pause():
+	if is_paused:
+		AudioManager.play_sound(SCENE_TRANSITION_OUT, 0, 0, 4, 0, "sound Effects")
+		AudioManager.play_sound(SCENE_TRANSITION_OUT, 0, 0, 3, 0, "sound Effects")
+	else:
+		AudioManager.play_sound(SCENE_TRANSITION_IN, 0, 0, 4, 0, "sound Effects")
+		AudioManager.play_sound(SCENE_TRANSITION_IN, 0, 0, 3, 0, "sound Effects")
+	
 	is_paused = !is_paused
 	get_tree().paused = is_paused
 

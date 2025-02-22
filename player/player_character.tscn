@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=20 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" path="res://player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" path="res://player/player_camera.gd" id="2_yxov5"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://global elements/parallax/stars/Star2.png" id="7_ukj1r"]
 [ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://global elements/parallax/stars/Star3.png" id="8_qmn1e"]
 [ext_resource type="Texture2D" uid="uid://dbetihp3me8at" path="res://player/sprites/gravityPlayerSpriteAll.png" id="9_vx43m"]
+[ext_resource type="AudioStream" uid="uid://cr6djfcjftlna" path="res://player/slide.mp3" id="10_oggeb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2j5l"]
 radius = 3.96806
@@ -591,6 +592,11 @@ motion_mirroring = Vector2(480, 270)
 [node name="Sprite2D" type="Sprite2D" parent="playerStarsParallax/ParallaxLayer3"]
 position = Vector2(240, 135)
 texture = ExtResource("8_qmn1e")
+
+[node name="SlideAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_oggeb")
+bus = &"Sound effects"
+parameters/looping = true
 
 [connection signal="body_entered" from="DeathDetection" to="." method="_on_death_detection_body_entered"]
 [connection signal="body_entered" from="SpawnpointDetection" to="." method="_on_spawnpoint_detection_body_entered"]

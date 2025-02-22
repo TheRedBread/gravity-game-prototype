@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=43 format=3 uid="uid://w12814t6xtdl"]
+[gd_resource type="Theme" load_steps=42 format=3 uid="uid://w12814t6xtdl"]
 
 [ext_resource type="FontFile" uid="uid://x8xpsunusqmx" path="res://UI/fonts/monogram.ttf" id="1_hipad"]
 [ext_resource type="Texture2D" uid="uid://wqyd8vy4pdu1" path="res://UI/UIElements/panels/BlueGlassy/plainPanel_rounded_lighter.png" id="2_7cec4"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://d4l13to5df3vj" path="res://UI/UIElements/panels/BlueGlassy/translucent panel.png" id="14_xnjvo"]
 [ext_resource type="Texture2D" uid="uid://cbviopdooui75" path="res://UI/UIElements/panels/BlueGlassy/borderPanel.png" id="15_t1fgw"]
 [ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://UI/UIElements/panels/BlueGlassy/plainPanel_rounded.png" id="16_0b8vf"]
-[ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://UI/UIElements/panels/Blue/plainPanel_rounded.png" id="16_r54yg"]
 [ext_resource type="Texture2D" uid="uid://bemlnotgg8ccc" path="res://UI/UIElements/panels/BlueGlassy/plainPanel.png" id="17_dei15"]
 [ext_resource type="Texture2D" uid="uid://bngpr5738hkwy" path="res://UI/UIElements/scroll/scrollBarGlassy.png" id="18_5fktd"]
 [ext_resource type="Texture2D" uid="uid://bl05kaw4u6iaj" path="res://UI/UIElements/scroll/scrollBarPressedGlassy.png" id="19_sffeb"]
@@ -101,7 +100,7 @@ expand_margin_right = 4.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ob87"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bur5x"]
-texture = ExtResource("16_r54yg")
+texture = ExtResource("16_0b8vf")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
