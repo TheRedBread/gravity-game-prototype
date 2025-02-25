@@ -31,13 +31,14 @@ extends CharacterBody2D
 @export var GRAVITY : float = 800
 
 # ------------------------ SOUNDS -------------------------------#
-@export var step_sound : AudioStream = preload("res://player/step.ogg")
-@export var land_sound : AudioStream = preload("res://player/land.ogg")
-@export var dash_sound : AudioStream = preload("res://player/dash.mp3")
-@export var JUMP_AUDIO : AudioStream = preload("res://player/jump.mp3")
-@export var DESTROYED : AudioStream = preload("res://player/destroyed.mp3")
-
-
+const STEP_SOUND : AudioStream = preload("res://player/step.ogg")
+const LAND_SOUND : AudioStream = preload("res://player/land.ogg")
+const DASH_SOUND : AudioStream = preload("res://player/dash.mp3")
+const JUMP_AUDIO : AudioStream = preload("res://player/jump.mp3")
+const DESTROYED : AudioStream = preload("res://player/destroyed.mp3")
+const SPAWNPOINT_CHECKED : AudioStream = preload("res://player/spawnpoint_checked.mp3")
+const GRAVITY_CHANGE : AudioStream = preload("res://player/gravity_change.mp3")
+const SWITCH_FAIL : AudioStream = preload("res://player/switch_fail.mp3")
 @export var spawn: Vector2
 
 @onready var dash_timer: Timer = $DashTimer
@@ -67,7 +68,7 @@ var was_falling : bool = false
 
 #------------------------- PRELOADS ------------------------------#
 const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
-const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
+const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesFalse.png")
 
 
 func _ready() -> void:
@@ -289,7 +290,7 @@ func dash():
 		dash_accelerate()
 		if is_on_floor():
 			velocity.y -= 0 * gravity_direction
-	AudioManager.play_sound(dash_sound, -20, 1, 1.1, 0.05, "Sound effects")
+	AudioManager.play_sound(DASH_SOUND, -20, 1, 1.1, 0.05, "Sound effects")
 	
 func handle_dashing():
 	
@@ -323,6 +324,7 @@ func handle_abilities():
 	
 	handle_gravity_switch()
 func gravity_switch():
+	AudioManager.play_sound(GRAVITY_CHANGE, -5, 0.02, 1, 0.2, "Sound effects")
 	gravity_direction *= -1
 	up_direction = Vector2(0, -gravity_direction)
 	velocity.y += SWITCH_SPEED*GRAVITY*gravity_direction
@@ -344,6 +346,9 @@ func handle_gravity_switch():
 			air_switch_amount = 0
 		
 		gravity_switch()
+	elif Input.is_action_just_pressed("switch"):
+		AudioManager.play_sound(SWITCH_FAIL, 0, 0.02, 1, 0.01, "Sound effects")
+
 
 #reset
 func handle_reset():
@@ -492,6 +497,7 @@ func count_time_on_ground(delta):
 		time_on_ground = 0
 
 func set_spawnpoint():
+	AudioManager.play_sound(SPAWNPOINT_CHECKED, -8, 0.02, 2, 0.1, "Sound effects")
 	GameSaveSystem.spawn_checked_count += 1
 	spawn = position
 	spawn_gravity = gravity_direction
@@ -534,7 +540,7 @@ func step_audio(foot : String):
 		"right":
 			step_pitch = 0.95
 	
-	AudioManager.play_sound(step_sound, -25, 1, step_pitch, 0.05, "Sound effects")
+	AudioManager.play_sound(STEP_SOUND, -25, 1, step_pitch, 0.05, "Sound effects")
 
 func handle_land_audio():
 	if is_on_floor() and was_falling:
@@ -560,7 +566,7 @@ func handle_sliding_audio():
 
 
 func land_audio():
-	AudioManager.play_sound(land_sound, land_force - 25, 1, 1, 0.05, "Sound effects")
+	AudioManager.play_sound(LAND_SOUND, land_force - 25, 1, 1, 0.05, "Sound effects")
 
 
 

@@ -1,8 +1,6 @@
 ## Audio section in options menu
 extends VBoxContainer
 
-
-############ AUDIO #################
 @onready var master_volume_slider: HSlider = %MasterVolumeSlider
 @onready var master_volume_percent: Label = %MasterVolumePercent
 @onready var music_volume_slider: HSlider = %MusicVolumeSlider
@@ -12,10 +10,11 @@ extends VBoxContainer
 @onready var ambience_volume_slider: HSlider = %AmbienceVolumeSlider
 @onready var ambience_volume_percent: Label = %AmbienceVolumePercent
 
+const SLIDER_CLICK = preload("res://UI/settings/slider_click.mp3")
+
 
 func set_volume_display_percent(percentLabel, Vslider):
 	percentLabel.text = str(Vslider.value * 100) + "%"
-
 
 func display_audio_settings():
 	# master display
@@ -48,20 +47,24 @@ func _ready() -> void:
 
 
 func _on_master_volume_slider_value_changed(value: float) -> void:
+	AudioManager.play_sound(SLIDER_CLICK, 0, 0.02, 2.5, 0.01, "Sound effects")
 	SettingsApplier.set_volume(0, master_volume_slider.value)
 	set_volume_display_percent(master_volume_percent, master_volume_slider)
 
 
 func _on_sfx_volume_slider_value_changed(value: float) -> void:
+	AudioManager.play_sound(SLIDER_CLICK, 0, 0.02, 2.5, 0.01, "Sound effects")
 	SettingsApplier.set_volume(1, sfx_volume_slider.value)
 	set_volume_display_percent(sfx_volume_percent, sfx_volume_slider)
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
+	AudioManager.play_sound(SLIDER_CLICK, 0, 0.02, 2.5, 0.01, "Sound effects")
 	SettingsApplier.set_volume(2, music_volume_slider.value)
 	set_volume_display_percent(music_volume_percent, music_volume_slider)
 
 
 func _on_ambience_volume_slider_value_changed(value: float) -> void:
+	AudioManager.play_sound(SLIDER_CLICK, 0, 0.02, 2.5, 0.01, "Sound effects")
 	SettingsApplier.set_volume(3, ambience_volume_slider.value)
 	set_volume_display_percent(ambience_volume_percent, ambience_volume_slider)
