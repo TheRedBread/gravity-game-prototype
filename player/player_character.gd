@@ -46,6 +46,16 @@ const SWITCH_FAIL : AudioStream = preload("res://player/switch_fail.mp3")
 
 @onready var dash_timer: Timer = $DashTimer
 
+enum PlayerState {
+	IDLE,
+	SLIDING,
+	WALKING,
+	DASHING,
+	FALLING,
+	FLYING,
+}
+
+
 var spawn_gravity : int = 0
 var gravity_direction : int = 1
 var can_dash : bool = true
@@ -68,6 +78,8 @@ var was_on_floor : bool = false
 var was_just_sliding : bool = false
 var was_falling : bool = false 
 
+var player_state : PlayerState = PlayerState.IDLE
+var no_clip : bool = false
 
 #------------------------- PRELOADS ------------------------------#
 const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
@@ -95,7 +107,7 @@ func apply_gravity(delta):
 
 ## generates force to player while being on a slope
 func apply_slopes():
-	if is_on_floor() and ((not abs(get_floor_normal().y) == 1 and is_sliding()) or is_floor_too_steep()):
+	if is_on_floor() and ((not abs(get_floor_normal().y) == 1 and player_state == PlayerState.SLIDING) or is_floor_too_steep()):
 		var inverseY = (1 - get_floor_normal().y) * SLOPES_ACCELERATION
 		velocity += Vector2(SLOPES_ACCELERATION*abs(get_floor_normal().x*2), 0).rotated(get_slope_rotation(inverseY))
 
@@ -135,7 +147,7 @@ func update_was_on_floor():
 
 # --------------- checks -------------- #
 func DashAble():
-	return not is_sliding() and (can_dash and dash_used == false)
+	return not player_state == PlayerState.SLIDING and (can_dash and dash_used == false)
 
 func GravitySwitchAble():
 	return clicked_switch and air_switch_amount == 1
@@ -147,7 +159,7 @@ func is_floor_too_steep():
 		return false
 
 func get_current_friction():
-	if is_sliding():
+	if player_state == PlayerState.SLIDING:
 		return SLIDE_FRICTION
 	
 	elif is_on_floor():
@@ -192,7 +204,7 @@ func get_slope_rotation(inverseY):
 	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*-gravity_direction)
 
 func handle_snap_change():
-	if is_on_floor() && is_sliding():
+	if is_on_floor() && player_state == PlayerState.SLIDING:
 		floor_snap_length = clamp(10+(abs(velocity.x)+abs(velocity.y))/10, 5, 40)
 	else:
 		floor_snap_length = 2
@@ -201,28 +213,38 @@ func handle_snap_change():
 
 # ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
-	update_was_on_floor()
-	damp_velocity_to_zero()
-	count_time_on_ground(delta)
-	handle_snap_change()
-	jump_input_update()
-	dash_input_update()
-	usage_update()
+	if player_state == PlayerState.FLYING:
+		$PlayerCollision.disabled = true
+		$DeathDetection/DeathDetectionCollision.disabled = true
+		handle_flying()
+		
+	else:
+		$PlayerCollision.disabled = false
+		$DeathDetection/DeathDetectionCollision.disabled = false
+		
+		update_was_on_floor()
+		damp_velocity_to_zero()
+		count_time_on_ground(delta)
+		jump_input_update()
+		dash_input_update()
+		usage_update()
+		handle_vertical_movement(delta)
+		handle_jump()
+		handle_slam()
+		handle_dashing()
+		handle_abilities()
+		handle_reset()
+		if not is_on_floor():
+			apply_gravity(delta)
+	
+	handle_state()
 	handle_sliding_reset()
-	handle_vertical_movement(delta)
-	handle_jump()
-	handle_slam()
-	handle_dashing()
-	handle_abilities()
-	handle_reset()
-
-
-	if not is_on_floor():
-		apply_gravity(delta)
+	handle_snap_change()
+		
 
 #left-right
 func move_to_direction(directionStr, delta):
-	if is_sliding():
+	if player_state == PlayerState.SLIDING:
 		return
 	var intDir = vDir_to_intDir(directionStr)
 	
@@ -239,16 +261,17 @@ func move_to_direction(directionStr, delta):
 		
 	else:
 		velocity.x += current_acceleration * get_current_friction() * delta *intDir
+
 func handle_vertical_movement(delta):
 	apply_slopes()
 	
-	if (Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right")) and not is_sliding():
+	if (Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right")) and not player_state == PlayerState.SLIDING:
 		if sign(velocity.x) != -1 or abs(velocity.x) > current_max_speed:
 			apply_friction(get_current_friction(), delta)
 		
 		if get_floor_normal().x <= SLOPE_MAX_ANGLE:
 			move_to_direction("left", delta)
-	elif (Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left")) and not is_sliding():
+	elif (Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left")) and not player_state == PlayerState.SLIDING:
 		if sign(velocity.x) != 1 or abs(velocity.x) > current_max_speed:
 			apply_friction(get_current_friction(), delta)
 		
@@ -281,6 +304,7 @@ func dash_accelerate():
 	current_acceleration = ACCELERATION
 	current_max_speed = MAX_SPEED
 	GRAVITY = 1200 
+
 func dash():
 	if Input.is_action_pressed("move_left"):
 		count_dash_velocity(-1)
@@ -294,9 +318,8 @@ func dash():
 		if is_on_floor():
 			velocity.y -= 0 * gravity_direction
 	AudioManager.play_sound(DASH_SOUND, -20, 1, 1.1, 0.05, "Sound effects")
-	
+
 func handle_dashing():
-	
 	if clicked_dash and DashAble() and (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")):
 		clicked_dash = false
 		dash()
@@ -304,12 +327,7 @@ func handle_dashing():
 		
 		dash_used = true
 
-#slide
-func is_sliding():
-	if (abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and is_on_floor() and not was_sliding:
-		return true
-	else:
-		return false
+
 
 func handle_slam():
 	if Input.is_action_pressed("slide") and not is_on_floor():
@@ -358,8 +376,45 @@ func handle_reset():
 	if Input.is_action_just_pressed("reset"):
 		die()
 
+func handle_state():
+	no_clip = !no_clip if Input.is_action_just_pressed("debug_mode") else no_clip
+	
+	if dash_timer.time_left == 0:
+		if is_on_floor():
+			if abs(velocity.x) > 5:
+				
+
+				if (abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and not was_sliding:
+					player_state = PlayerState.SLIDING
+					
+				else:
+					player_state = PlayerState.WALKING
+					
+			else:
+				player_state = PlayerState.IDLE
+		else:
+			player_state = PlayerState.FALLING
+	else:
+		player_state = PlayerState.DASHING
+		
+	was_just_sliding = false
+	
+	if no_clip:
+		player_state = PlayerState.FLYING
 
 
+func handle_flying():
+	if Input.is_action_pressed("ui_left"):
+		position.x -= 10
+		
+	if Input.is_action_pressed("ui_right"):
+		position.x += 10
+		
+	if Input.is_action_pressed("ui_down"):
+		position.y += 10
+		
+	if Input.is_action_pressed("ui_up"):
+		position.y -= 10
 
 # ----------------------- ANIMATIONS ------------------------- #
 func sign_to_bool(val):
@@ -448,34 +503,33 @@ func dash_anim():
 
 func handle_player_animation():
 	eye_anim()
-	
-	if (!velocity.x) and velocity.x != 0:
-		return
 	if (was_just_sliding):
 		position.y += 32
 	
 	player_sprite.scale.y = gravity_direction
 	eye_sprite.scale.y = gravity_direction
 	
-	if dash_timer.time_left == 0:
-		if is_on_floor():
-			if abs(velocity.x) > 5:
-				if is_sliding():
-					slide_anim()
-					walking_particles.emitting = false
-				else:
-					
-					walk_anim()
-			else:
-				walking_particles.emitting = false
-				idle_anim()
-		else:
+	match player_state:
+		PlayerState.IDLE:
+			walking_particles.emitting = false
+			idle_anim()
+		
+		PlayerState.FALLING:
 			walking_particles.emitting = false
 			player_sprite_animation.stop()
 			jump_anim()
-	else:
-		dash_anim()
-	was_just_sliding = false
+		
+		PlayerState.DASHING:
+			dash_anim()
+		
+		PlayerState.SLIDING:
+			slide_anim()
+			walking_particles.emitting = false
+		
+		PlayerState.WALKING:
+			walk_anim()
+
+
 
 func handle_animations():
 	handle_player_animation()
@@ -501,18 +555,18 @@ func handle_particles():
 func handle_sliding_reset():
 	if Input.is_action_just_released("slide"):
 		was_sliding = false
-	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
+	if Input.is_action_pressed("slide") and not player_state == PlayerState.SLIDING and is_on_floor():
 		was_sliding = true
 
 func damp_velocity_to_zero():
 	if  not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
-		if abs(velocity.x) < 100 and not is_sliding():
+		if abs(velocity.x) < 100 and not player_state == PlayerState.SLIDING:
 			velocity.x /= 1.2
-		if abs(velocity.x) < 0.1 and not is_sliding():
+		if abs(velocity.x) < 0.1 and not player_state == PlayerState.SLIDING:
 			velocity.x = 0
 
 func count_time_on_ground(delta):
-	if is_on_floor() and not is_sliding():
+	if is_on_floor() and not player_state == PlayerState.SLIDING:
 		time_on_ground += 1 * delta * 60
 	else:
 		time_on_ground = 0
@@ -579,10 +633,10 @@ func handle_sliding_audio():
 	slide_audio_player.volume_db = ((abs(velocity.x) + abs(velocity.y))/60)-12 
 	slide_audio_player.pitch_scale = ((abs(velocity.x) + abs(velocity.y))/500)+0.6
 	
-	if is_sliding() and not slide_audio_player.playing:
+	if player_state == PlayerState.SLIDING and not slide_audio_player.playing:
 		slide_audio_player.play()
 	
-	if not is_sliding() or abs(velocity.x) < 5:
+	if not player_state == PlayerState.SLIDING or abs(velocity.x) < 5:
 		slide_audio_player.stop()
 
 
@@ -597,6 +651,7 @@ func _physics_process(delta):
 	handle_animations()
 	handle_audio()
 	move_and_slide()
+
 
 
 func _on_death_detection_body_entered(_body: Node2D) -> void:
