@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
-@onready var player_sprite: Sprite2D = $Sprite2D
+@onready var player_sprite: Sprite2D = $playerSprite
 @onready var player_collision: CollisionShape2D = $PlayerCollision
 @onready var player_sprite_animation: AnimationPlayer = $PlayerSpriteAnimation
-@onready var eye_sprite: Sprite2D = $EyeSprite
+@onready var eye_sprite: Sprite2D = $playerEyeSprite
 @onready var slide_audio_player: AudioStreamPlayer = $SlideAudioPlayer
+
+# ----------- PARTICLES ------------ #
+@onready var walking_particles: CPUParticles2D = $WalkingParticles
 
 
 # -------------- Physics variables and player stats -------------- #
@@ -43,7 +46,7 @@ const SWITCH_FAIL : AudioStream = preload("res://player/switch_fail.mp3")
 
 @onready var dash_timer: Timer = $DashTimer
 
-var spawn_gravity : float = 0
+var spawn_gravity : int = 0
 var gravity_direction : int = 1
 var can_dash : bool = true
 
@@ -161,8 +164,8 @@ func vDir_to_intDir(dirStr):
 	if dirStr == "left":
 		return -1
 	else:
-		return 0
 		print("ERROR! could not covert to int Direction")
+		return 0
 
 func get_intDir():
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -181,9 +184,9 @@ func input_direction_is_opposite(intDir):
 		return false
 
 # ------------------ maths ------------------#
-func count_dash_velocity(sign):
+func count_dash_velocity(vsign):
 	if not abs(velocity.x)>5000:
-		velocity.x += DASH_STRENGHT * sign(sign) * ((5000 - velocity.x)/5000)
+		velocity.x += DASH_STRENGHT * sign(vsign) * ((5000 - velocity.x)/5000)
 
 func get_slope_rotation(inverseY):
 	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*-gravity_direction)
@@ -199,7 +202,7 @@ func handle_snap_change():
 # ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
 	update_was_on_floor()
-	damp_velocity_to_zero(delta)
+	damp_velocity_to_zero()
 	count_time_on_ground(delta)
 	handle_snap_change()
 	jump_input_update()
@@ -207,7 +210,7 @@ func handle_movement(delta):
 	usage_update()
 	handle_sliding_reset()
 	handle_vertical_movement(delta)
-	handle_jump(delta)
+	handle_jump()
 	handle_slam()
 	handle_dashing()
 	handle_abilities()
@@ -255,7 +258,7 @@ func handle_vertical_movement(delta):
 		apply_friction(get_current_friction(), delta)
 
 #jump
-func handle_jump(delta):
+func handle_jump():
 	if clicked_jump and was_on_floor:
 		GRAVITY = 1200
 		was_on_floor = false
@@ -369,6 +372,7 @@ func sign_to_bool(val):
 
 func walk_anim():
 	player_sprite_animation.speed_scale = abs(velocity.x)/80
+	walking_particles.emitting = true
 	
 	player_sprite.flip_h = sign_to_bool(velocity.x)
 	eye_sprite.flip_h = sign_to_bool(velocity.x)
@@ -458,11 +462,15 @@ func handle_player_animation():
 			if abs(velocity.x) > 5:
 				if is_sliding():
 					slide_anim()
+					walking_particles.emitting = false
 				else:
+					
 					walk_anim()
 			else:
+				walking_particles.emitting = false
 				idle_anim()
 		else:
+			walking_particles.emitting = false
 			player_sprite_animation.stop()
 			jump_anim()
 	else:
@@ -471,7 +479,20 @@ func handle_player_animation():
 
 func handle_animations():
 	handle_player_animation()
+	handle_particles()
 
+func handle_particles():
+	if gravity_direction == 1:
+		walking_particles.position.y = -2
+	else:
+		walking_particles.position.y = -24
+	
+	walking_particles.initial_velocity_max = (abs(velocity.x) + abs(velocity.y))/4
+	walking_particles.initial_velocity_min = (abs(velocity.x) + abs(velocity.y))/8
+	
+
+	
+	walking_particles.gravity.y = 100 * gravity_direction
 
 
 
@@ -483,7 +504,7 @@ func handle_sliding_reset():
 	if Input.is_action_pressed("slide") and not is_sliding() and is_on_floor():
 		was_sliding = true
 
-func damp_velocity_to_zero(delta):
+func damp_velocity_to_zero():
 	if  not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 		if abs(velocity.x) < 100 and not is_sliding():
 			velocity.x /= 1.2
@@ -578,8 +599,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_death_detection_body_entered(body: Node2D) -> void:
+func _on_death_detection_body_entered(_body: Node2D) -> void:
 	die()
 
-func _on_spawnpoint_detection_body_entered(body: Node2D) -> void:
+func _on_spawnpoint_detection_body_entered(_body: Node2D) -> void:
 	set_spawnpoint()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=22 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" path="res://player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" path="res://player/player_camera.gd" id="2_yxov5"]
@@ -11,12 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://dbetihp3me8at" path="res://player/sprites/gravityPlayerSpriteAll.png" id="9_vx43m"]
 [ext_resource type="AudioStream" uid="uid://cr6djfcjftlna" path="res://player/slide.mp3" id="10_oggeb"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ywmw"]
+size = Vector2(9.92014, 22)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2j5l"]
 radius = 3.96806
 height = 20.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ywmw"]
-size = Vector2(9.92014, 22)
 
 [sub_resource type="Animation" id="Animation_i5e0n"]
 resource_name = "Idle"
@@ -24,7 +24,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("playerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -84,7 +84,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("EyeSprite:frame")
+tracks/5/path = NodePath("playerEyeSprite:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -99,7 +99,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("playerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -159,7 +159,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("EyeSprite:frame")
+tracks/5/path = NodePath("playerEyeSprite:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -175,7 +175,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("playerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -235,7 +235,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("EyeSprite:frame")
+tracks/5/path = NodePath("playerEyeSprite:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -314,7 +314,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("playerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -374,7 +374,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("EyeSprite:frame")
+tracks/5/path = NodePath("playerEyeSprite:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -391,7 +391,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("playerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -451,7 +451,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("EyeSprite:frame")
+tracks/5/path = NodePath("playerEyeSprite:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -488,6 +488,16 @@ _data = {
 "walk": SubResource("Animation_g4cth")
 }
 
+[sub_resource type="Curve" id="Curve_6ljk8"]
+min_value = 1.0
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.155882, 1.2194), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_8pgiu"]
+offsets = PackedFloat32Array(0, 0.583333, 1)
+colors = PackedColorArray(1, 0.878431, 0.717647, 1, 0.721569, 0.811765, 0.380392, 1, 1, 1, 1, 1)
+
 [node name="PlayerCharacter" type="CharacterBody2D"]
 position = Vector2(0, 1)
 scale = Vector2(1.00805, 1)
@@ -496,14 +506,6 @@ floor_stop_on_slope = false
 floor_max_angle = 1.309
 floor_snap_length = 10.0
 script = ExtResource("1_c2kd2")
-
-[node name="DeathDetection" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="DeathDetectionCollision" type="CollisionShape2D" parent="DeathDetection"]
-position = Vector2(0, -12)
-shape = SubResource("CapsuleShape2D_f2j5l")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -519,23 +521,23 @@ collision_mask = 8
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_f2j5l")
 
+[node name="DeathDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="DeathDetectionCollision" type="CollisionShape2D" parent="DeathDetection"]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_f2j5l")
+
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 script = ExtResource("2_yxov5")
 
-[node name="runParticles" type="CPUParticles2D" parent="."]
-visible = false
-emission_shape = 1
-emission_sphere_radius = 10.0
-gravity = Vector2(0, 100)
-scale_amount_min = 2.0
-scale_amount_max = 4.0
-
-[node name="GUI" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 process_mode = 3
 
-[node name="PauseMenu" parent="GUI" instance=ExtResource("3_lwsbi")]
+[node name="PauseMenu" parent="HUD" instance=ExtResource("3_lwsbi")]
 process_mode = 3
 
 [node name="DashTimer" type="Timer" parent="."]
@@ -543,19 +545,19 @@ process_callback = 0
 wait_time = 0.2
 one_shot = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerSpriteAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ce6h6")
+}
+
+[node name="playerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
 texture = ExtResource("9_vx43m")
 offset = Vector2(0, -4)
 hframes = 8
 vframes = 6
 
-[node name="PlayerSpriteAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ce6h6")
-}
-
-[node name="EyeSprite" type="Sprite2D" parent="."]
+[node name="playerEyeSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
 texture = ExtResource("5_w3pip")
 offset = Vector2(0, -4)
@@ -598,5 +600,19 @@ stream = ExtResource("10_oggeb")
 bus = &"Sound effects"
 parameters/looping = true
 
-[connection signal="body_entered" from="DeathDetection" to="." method="_on_death_detection_body_entered"]
+[node name="WalkingParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, -2)
+amount = 20
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+spread = 180.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_6ljk8")
+color_initial_ramp = SubResource("Gradient_8pgiu")
+
 [connection signal="body_entered" from="SpawnpointDetection" to="." method="_on_spawnpoint_detection_body_entered"]
+[connection signal="body_entered" from="DeathDetection" to="." method="_on_death_detection_body_entered"]
