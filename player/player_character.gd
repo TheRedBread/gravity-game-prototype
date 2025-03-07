@@ -113,9 +113,6 @@ func apply_gravity(delta):
 		velocity.y += (MAX_FALLING_SPEED*(GRAVITY*gravity_direction/1000) - velocity.y)
 	else:
 		velocity.y = velocity.y + GRAVITY*gravity_direction * delta
-	
-
-
 
 ## generates force to player while being on a slope
 func apply_slopes():
@@ -249,8 +246,7 @@ func handle_movement(delta):
 		if not is_on_floor():
 			apply_gravity(delta)
 			
-		if player_state == PlayerState.SLIDING and is_on_floor():
-			velocity.y += 100 * gravity_direction
+
 	
 	handle_state()
 	handle_sliding_reset()
@@ -405,6 +401,9 @@ func handle_state():
 				if (abs(velocity.x)>=SLIDE_STOP_VELOCITY) and Input.is_action_pressed("slide") and not was_sliding:
 					player_state = PlayerState.SLIDING
 					
+					if is_on_floor():
+						velocity.y += 100 * gravity_direction
+					
 				else:
 					player_state = PlayerState.WALKING
 					
@@ -459,7 +458,8 @@ func idle_anim():
 	
 	player_sprite_animation.play("Idle")
 
-func slide_anim():
+func slide_anim(delta):
+
 	
 	if (gravity_direction == -1 and Input.is_action_just_pressed("slide")):
 		was_just_sliding = true
@@ -520,7 +520,7 @@ func dash_anim():
 	
 	player_sprite_animation.play("dash")
 
-func handle_player_animation():
+func handle_player_animation(delta):
 	eye_anim()
 	if (was_just_sliding):
 		position.y += 32
@@ -544,15 +544,15 @@ func handle_player_animation():
 		
 		PlayerState.SLIDING:
 			sliding_particles.emitting = true
-			slide_anim()
+			slide_anim(delta)
 		
 		PlayerState.WALKING:
 			sliding_particles.emitting = false
 			walk_anim()
 
 
-func handle_animations():
-	handle_player_animation()
+func handle_animations(delta):
+	handle_player_animation(delta)
 	handle_particles()
 
 func handle_particles():
@@ -578,8 +578,8 @@ func handle_particles():
 	
 	
 	
-	sliding_particles.initial_velocity_max = absolute_velocity/2
-	sliding_particles.initial_velocity_min = absolute_velocity/4
+	sliding_particles.initial_velocity_max = absolute_velocity/3
+	sliding_particles.initial_velocity_min = absolute_velocity/5
 	
 	sliding_particles.gravity.y = 100 * gravity_direction
 	
@@ -599,7 +599,7 @@ func spawn_stable_particle(type):
 		particle.scale.x = sign(velocity.x)
 	
 	if gravity_direction == -1:
-		particle.position += Vector2(0, -5)
+		particle.position += Vector2(0, -6)
 	
 	match type:
 		"jump":
@@ -609,9 +609,14 @@ func spawn_stable_particle(type):
 				particle.selected_animation = particle.ParticleAnimations.STAYING_JUMP
 		"land":
 			particle.selected_animation = particle.ParticleAnimations.LANDING
+			particle.position = position + Vector2(0, -9)
+			if gravity_direction == -1:
+				particle.position += Vector2(0, -8)
+			
+		"step":
+			particle.selected_animation = particle.ParticleAnimations.STEP
 	
-	
-	
+
 	get_parent().add_child(particle)
 
 
@@ -680,6 +685,8 @@ func step_audio(foot : String):
 			step_pitch = 0.95
 	
 	AudioManager.play_sound(STEP_SOUND, -25, 1, step_pitch, 0.05, "Sound effects")
+	
+	spawn_stable_particle("step")
 
 func handle_land_audio():
 	if is_on_floor() and was_falling:
@@ -712,7 +719,7 @@ func land_audio():
 
 func _physics_process(delta):
 	handle_movement(delta)
-	handle_animations()
+	handle_animations(delta)
 	handle_audio()
 	move_and_slide()
 

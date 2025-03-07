@@ -7,13 +7,11 @@ enum ParticleAnimations{
 	STAYING_JUMP,
 	MOVING_JUMP,
 	LANDING,
+	STEP,
 }
 
 
 func _ready() -> void:
-	
-	
-	
 	match selected_animation:
 		ParticleAnimations.STAYING_JUMP:
 			animation_player.play("staying_jump")
@@ -21,6 +19,9 @@ func _ready() -> void:
 			animation_player.play("moving_jump")
 		ParticleAnimations.LANDING:
 			animation_player.play("landing")
+		ParticleAnimations.STEP:
+			animation_player.play("step")
+		
 		
 
 
