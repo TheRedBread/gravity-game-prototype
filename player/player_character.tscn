@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=21 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" uid="uid://c02eddk36m51" path="res://player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" uid="uid://bbjrrqys0dutu" path="res://player/player_camera.gd" id="2_yxov5"]
@@ -480,10 +480,6 @@ _data = {
 offsets = PackedFloat32Array(0, 0.25, 0.641026, 1)
 colors = PackedColorArray(1, 0.878431, 0.717647, 1, 0.956863, 0.729412, 0.478431, 1, 0.807843, 0.392157, 0.258824, 1, 0.580392, 0.286275, 0.25098, 1)
 
-[sub_resource type="Gradient" id="Gradient_8pgiu"]
-offsets = PackedFloat32Array(0, 0.583333, 1)
-colors = PackedColorArray(1, 0.878431, 0.717647, 1, 0.721569, 0.811765, 0.380392, 1, 1, 1, 1, 1)
-
 [node name="PlayerCharacter" type="CharacterBody2D"]
 position = Vector2(0, 1)
 scale = Vector2(1.00805, 1)
@@ -619,7 +615,6 @@ gravity = Vector2(0, 200)
 initial_velocity_min = 30.0
 initial_velocity_max = 50.0
 scale_amount_max = 2.0
-color_initial_ramp = SubResource("Gradient_8pgiu")
 
 [node name="LandingParticles" type="CPUParticles2D" parent="."]
 position = Vector2(0, -1)
@@ -638,7 +633,6 @@ gravity = Vector2(0, 100)
 initial_velocity_min = 20.0
 initial_velocity_max = 40.0
 scale_amount_max = 2.0
-color_initial_ramp = SubResource("Gradient_8pgiu")
 
 [connection signal="body_entered" from="SpawnpointDetection" to="." method="_on_spawnpoint_detection_body_entered"]
 [connection signal="body_entered" from="DeathDetection" to="." method="_on_death_detection_body_entered"]

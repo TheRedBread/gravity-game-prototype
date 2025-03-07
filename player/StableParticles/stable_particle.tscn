@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqtcqvw3g0ifs"]
+[gd_scene load_steps=10 format=3 uid="uid://bqtcqvw3g0ifs"]
 
 [ext_resource type="Script" uid="uid://cqc48dq1v2x0a" path="res://stable_particle.gd" id="1_2p78b"]
 [ext_resource type="Texture2D" uid="uid://1oncq4syvkow" path="res://player/StableParticles/jump_woosh/staying/jump_woosh-Sheet.png" id="2_2p78b"]
 [ext_resource type="Texture2D" uid="uid://bhwa18o2gjs4j" path="res://player/StableParticles/jump_woosh/moving/jump_woosh-Sheet.png" id="3_bpk8d"]
+[ext_resource type="Texture2D" uid="uid://djc78hehcxgkm" path="res://player/StableParticles/land_woosh/land_woosh-Sheet.png" id="4_84jyo"]
 
 [sub_resource type="Animation" id="Animation_2p78b"]
 length = 0.001
@@ -54,33 +55,29 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
-
-[sub_resource type="Animation" id="Animation_84jyo"]
-resource_name = "staying_jump"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("stayingJumpSprite:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LandingSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("stayingJumpSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LandingSprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_bpk8d"]
@@ -111,9 +108,66 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_84jyo"]
+resource_name = "staying_jump"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("stayingJumpSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("stayingJumpSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_okgoj"]
+resource_name = "landing"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LandingSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.348856),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LandingSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_okgoj"]
 _data = {
 &"RESET": SubResource("Animation_2p78b"),
+&"landing": SubResource("Animation_okgoj"),
 &"moving_jump": SubResource("Animation_bpk8d"),
 &"staying_jump": SubResource("Animation_84jyo")
 }
@@ -129,6 +183,11 @@ hframes = 5
 [node name="movingJumpSprite" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("3_bpk8d")
+hframes = 5
+
+[node name="LandingSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_84jyo")
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
