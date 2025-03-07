@@ -6,8 +6,11 @@ extends CharacterBody2D
 @onready var eye_sprite: Sprite2D = $playerEyeSprite
 @onready var slide_audio_player: AudioStreamPlayer = $SlideAudioPlayer
 
+
 # ----------- PARTICLES ------------ #
-@onready var walking_particles: CPUParticles2D = $WalkingParticles
+@onready var sliding_particles: CPUParticles2D = $SlidingParticles
+@onready var jumping_particles: CPUParticles2D = $JumpingParticles
+@onready var landing_particles: CPUParticles2D = $LandingParticles
 
 
 # -------------- Physics variables and player stats -------------- #
@@ -33,6 +36,13 @@ extends CharacterBody2D
 @export var SWITCH_SPEED : float = 0.2
 @export var GRAVITY : float = 800
 
+
+#------------------------- PRELOADS ------------------------------#
+const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
+const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesFalse.png")
+const STABLE_PARTICLE = preload("res://player/StableParticles/stable_particle.tscn")
+
+
 # ------------------------ SOUNDS -------------------------------#
 const STEP_SOUND : AudioStream = preload("res://player/step.ogg")
 const LAND_SOUND : AudioStream = preload("res://player/land.ogg")
@@ -42,6 +52,9 @@ const DESTROYED : AudioStream = preload("res://player/destroyed.mp3")
 const SPAWNPOINT_CHECKED : AudioStream = preload("res://player/spawnpoint_checked.mp3")
 const GRAVITY_CHANGE : AudioStream = preload("res://player/gravity_change.mp3")
 const SWITCH_FAIL : AudioStream = preload("res://player/switch_fail.mp3")
+
+
+
 @export var spawn: Vector2
 
 @onready var dash_timer: Timer = $DashTimer
@@ -81,9 +94,6 @@ var was_falling : bool = false
 var player_state : PlayerState = PlayerState.IDLE
 var no_clip : bool = false
 
-#------------------------- PRELOADS ------------------------------#
-const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
-const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesFalse.png")
 
 
 func _ready() -> void:
@@ -283,9 +293,12 @@ func handle_vertical_movement(delta):
 #jump
 func handle_jump():
 	if clicked_jump and was_on_floor:
+		spawn_stable_particle()
 		GRAVITY = 1200
 		was_on_floor = false
 		AudioManager.play_sound(JUMP_AUDIO, -5, 0.1, 1, 0.08, "sound Effects")
+		jumping_particles.restart()
+		jumping_particles.emitting = true
 		if is_on_floor():
 			velocity -= Vector2(0, JUMP_STRENGHT * 1200).rotated(deg_to_rad(rad_to_deg(get_floor_normal().angle())+90))
 		else:
@@ -427,7 +440,7 @@ func sign_to_bool(val):
 
 func walk_anim():
 	player_sprite_animation.speed_scale = abs(velocity.x)/80
-	walking_particles.emitting = true
+	
 	
 	player_sprite.flip_h = sign_to_bool(velocity.x)
 	eye_sprite.flip_h = sign_to_bool(velocity.x)
@@ -442,6 +455,7 @@ func idle_anim():
 	player_sprite_animation.play("Idle")
 
 func slide_anim():
+	
 	if (gravity_direction == -1 and Input.is_action_just_pressed("slide")):
 		was_just_sliding = true
 	
@@ -511,24 +525,25 @@ func handle_player_animation():
 	
 	match player_state:
 		PlayerState.IDLE:
-			walking_particles.emitting = false
+			sliding_particles.emitting = false
 			idle_anim()
 		
 		PlayerState.FALLING:
-			walking_particles.emitting = false
+			sliding_particles.emitting = false
 			player_sprite_animation.stop()
 			jump_anim()
 		
 		PlayerState.DASHING:
+			sliding_particles.emitting = false
 			dash_anim()
 		
 		PlayerState.SLIDING:
+			sliding_particles.emitting = true
 			slide_anim()
-			walking_particles.emitting = false
 		
 		PlayerState.WALKING:
+			sliding_particles.emitting = false
 			walk_anim()
-
 
 
 func handle_animations():
@@ -536,18 +551,57 @@ func handle_animations():
 	handle_particles()
 
 func handle_particles():
+	var absolute_velocity = abs(velocity.x) + abs(velocity.y)
+	
 	if gravity_direction == 1:
-		walking_particles.position.y = -2
+		sliding_particles.position.y = -2
+		jumping_particles.position.y = -2
+		landing_particles.position.y = -2
+		
 	else:
-		walking_particles.position.y = -24
+		sliding_particles.position.y = -24
+		landing_particles.position.y = -24
+		jumping_particles.position.y = -24
 	
-	walking_particles.initial_velocity_max = (abs(velocity.x) + abs(velocity.y))/4
-	walking_particles.initial_velocity_min = (abs(velocity.x) + abs(velocity.y))/8
+	sliding_particles.direction.y = -gravity_direction
+	jumping_particles.direction.y = gravity_direction
+	landing_particles.direction.y = -gravity_direction
 	
+	sliding_particles.gravity.y = 50 * gravity_direction
+	jumping_particles.gravity.y = 200 * gravity_direction
+	landing_particles.gravity.y = 100 * gravity_direction
+	
+	
+	
+	sliding_particles.initial_velocity_max = absolute_velocity/2
+	sliding_particles.initial_velocity_min = absolute_velocity/4
+	
+	sliding_particles.gravity.y = 100 * gravity_direction
+	
+	if is_on_floor() and was_falling:
+		landing_particles.amount = land_force*5+1
+		landing_particles.initial_velocity_max = land_force*6+1
+		landing_particles.initial_velocity_min = land_force*3+1
+		landing_particles.emitting = true
 
+func spawn_stable_particle():
+	var particle = STABLE_PARTICLE.instantiate()
+	particle.position = position + Vector2(0, -10)
 	
-	walking_particles.gravity.y = 100 * gravity_direction
-
+	if not velocity.x == 0:
+		particle.scale.x = sign(velocity.x)
+	
+	if gravity_direction == -1:
+		particle.scale.y = gravity_direction
+		particle.position += Vector2(0, -5)
+	
+	if abs(velocity.x) > 10:
+		particle.selected_animation = particle.ParticleAnimations.MOVING_JUMP
+	else:
+		particle.selected_animation = particle.ParticleAnimations.STAYING_JUMP
+		
+	
+	get_parent().add_child(particle)
 
 
 
@@ -572,13 +626,13 @@ func count_time_on_ground(delta):
 		time_on_ground = 0
 
 func set_spawnpoint():
-	AudioManager.play_sound(SPAWNPOINT_CHECKED, -8, 0.02, 2, 0.1, "Sound effects")
+	AudioManager.play_sound(SPAWNPOINT_CHECKED, -20, 0.02, 2, 0.1, "Sound effects")
 	GameSaveSystem.spawn_checked_count += 1
 	spawn = position
 	spawn_gravity = gravity_direction
 
 func die():
-	AudioManager.play_sound(DESTROYED, -15, 0.01, 1.2, 0.5, "Sound effects")
+	AudioManager.play_sound(DESTROYED, -15, 0.01, 1, 0.5, "Sound effects")
 	gravity_direction = spawn_gravity
 	velocity = Vector2(0, 0)
 	
@@ -596,7 +650,6 @@ func die():
 	up_direction = Vector2(0, -gravity_direction)
 	air_switch_amount = 1
 	position = spawn + Vector2(0, -10)*gravity_direction
-	
 
 
 
@@ -631,7 +684,7 @@ func handle_land_audio():
 
 func handle_sliding_audio():
 	slide_audio_player.volume_db = ((abs(velocity.x) + abs(velocity.y))/60)-12 
-	slide_audio_player.pitch_scale = ((abs(velocity.x) + abs(velocity.y))/500)+0.6
+	slide_audio_player.pitch_scale = ((abs(velocity.x) + abs(velocity.y))/1500)+0.5
 	
 	if player_state == PlayerState.SLIDING and not slide_audio_player.playing:
 		slide_audio_player.play()

@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0yffubfxkca6"]
+
+[sub_resource type="Environment" id="Environment_ah1fx"]
+background_mode = 3
+ssr_fade_in = 4.50858e-05
+ssr_depth_tolerance = 128.0
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 10.0
+glow_bloom = 0.1
+glow_hdr_scale = 1.0
+fog_light_energy = 51.4
+fog_sun_scatter = 50.25
+volumetric_fog_density = 1.0
+adjustment_brightness = 1.57
+adjustment_contrast = 5.75
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ah1fx"]
+exposure_multiplier = 8.0
+auto_exposure_enabled = true
+auto_exposure_scale = 64.0
+dof_blur_far_distance = 0.01
+
+[node name="BasicPostProcess" type="WorldEnvironment"]
+environment = SubResource("Environment_ah1fx")
+camera_attributes = SubResource("CameraAttributesPractical_ah1fx")

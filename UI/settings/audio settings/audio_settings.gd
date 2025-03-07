@@ -14,7 +14,7 @@ const SLIDER_CLICK = preload("res://UI/settings/slider_click.mp3")
 
 
 func set_volume_display_percent(percentLabel, Vslider):
-	percentLabel.text = str(Vslider.value * 100) + "%"
+	percentLabel.text = str(int(Vslider.value * 100)) + "%"
 
 func display_audio_settings():
 	# master display
