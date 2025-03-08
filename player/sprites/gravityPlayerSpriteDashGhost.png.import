@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbviopdooui75"
-path="res://.godot/imported/borderPanel.png-afbda22630b51e87177b805dc4747d68.ctex"
+uid="uid://dks4aa5ygr2y8"
+path="res://.godot/imported/gravityPlayerSpriteDashGhost.png-cfa1278755197ea7c6bcdf6896e1270e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/borderPanel.png"
-dest_files=["res://.godot/imported/borderPanel.png-afbda22630b51e87177b805dc4747d68.ctex"]
+source_file="res://player/sprites/gravityPlayerSpriteDashGhost.png"
+dest_files=["res://.godot/imported/gravityPlayerSpriteDashGhost.png-cfa1278755197ea7c6bcdf6896e1270e.ctex"]
 
 [params]
 

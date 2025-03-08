@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c76j8lbc3akr" path="res://UI/UIElements/slider/sliderGrabberHighlight.png" id="11_rxyu1"]
 [ext_resource type="Texture2D" uid="uid://dxfs0kl4m1jsq" path="res://UI/UIElements/optionButton/arrowdown.png" id="13_ls5f6"]
 [ext_resource type="Texture2D" uid="uid://d4l13to5df3vj" path="res://UI/UIElements/panels/BlueGlassy/translucent panel.png" id="14_xnjvo"]
-[ext_resource type="Texture2D" uid="uid://cbviopdooui75" path="res://UI/UIElements/panels/BlueGlassy/borderPanel.png" id="15_t1fgw"]
+[ext_resource type="Texture2D" uid="uid://cbviopdooui75" path="res://UI/UIElements/panels/BlueGlassy/glassy_border_panel.png" id="15_t1fgw"]
 [ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://UI/UIElements/panels/BlueGlassy/plainPanel_rounded.png" id="16_0b8vf"]
 [ext_resource type="Texture2D" uid="uid://bemlnotgg8ccc" path="res://UI/UIElements/panels/BlueGlassy/plainPanel.png" id="17_dei15"]
 [ext_resource type="Texture2D" uid="uid://bngpr5738hkwy" path="res://UI/UIElements/scroll/scrollBarGlassy.png" id="18_5fktd"]

@@ -313,6 +313,7 @@ func dash_accelerate():
 	if is_on_floor() and not velocity.y != 0:
 		GRAVITY = 0
 	
+	
 	dash_timer.start()
 	await dash_timer.timeout
 	current_acceleration = ACCELERATION
@@ -338,9 +339,11 @@ func handle_dashing():
 		clicked_dash = false
 		dash()
 		can_dash_update()
-		
 		dash_used = true
-
+	
+	if dash_timer.time_left != 0:
+		spawn_stable_particle("dash")
+		
 
 
 func handle_slam():
@@ -458,7 +461,7 @@ func idle_anim():
 	
 	player_sprite_animation.play("Idle")
 
-func slide_anim(delta):
+func slide_anim():
 
 	
 	if (gravity_direction == -1 and Input.is_action_just_pressed("slide")):
@@ -520,7 +523,7 @@ func dash_anim():
 	
 	player_sprite_animation.play("dash")
 
-func handle_player_animation(delta):
+func handle_player_animation():
 	eye_anim()
 	if (was_just_sliding):
 		position.y += 32
@@ -544,15 +547,15 @@ func handle_player_animation(delta):
 		
 		PlayerState.SLIDING:
 			sliding_particles.emitting = true
-			slide_anim(delta)
+			slide_anim()
 		
 		PlayerState.WALKING:
 			sliding_particles.emitting = false
 			walk_anim()
 
 
-func handle_animations(delta):
-	handle_player_animation(delta)
+func handle_animations():
+	handle_player_animation()
 	handle_particles()
 
 func handle_particles():
@@ -563,10 +566,15 @@ func handle_particles():
 		jumping_particles.position.y = -2
 		landing_particles.position.y = -2
 		
+		
 	else:
 		sliding_particles.position.y = -24
 		landing_particles.position.y = -24
 		jumping_particles.position.y = -24
+		
+		
+		
+	
 	
 	sliding_particles.direction.y = -gravity_direction
 	jumping_particles.direction.y = gravity_direction
@@ -584,11 +592,12 @@ func handle_particles():
 	sliding_particles.gravity.y = 100 * gravity_direction
 	
 	if is_on_floor() and was_falling:
-		landing_particles.amount = land_force*5+1
+		landing_particles.amount = int(land_force*5+1)
 		landing_particles.initial_velocity_max = land_force*6+1
 		landing_particles.initial_velocity_min = land_force*3+1
 		landing_particles.emitting = true
 		spawn_stable_particle("land")
+
 
 func spawn_stable_particle(type):
 	var particle = STABLE_PARTICLE.instantiate()
@@ -615,8 +624,14 @@ func spawn_stable_particle(type):
 			
 		"step":
 			particle.selected_animation = particle.ParticleAnimations.STEP
+		
+		"dash":
+			particle.position = position + Vector2(0, -9)
+			particle.selected_animation = particle.ParticleAnimations.DASH
+			if gravity_direction == 1:
+				particle.position += Vector2(0, -8)
+			
 	
-
 	get_parent().add_child(particle)
 
 
@@ -719,7 +734,7 @@ func land_audio():
 
 func _physics_process(delta):
 	handle_movement(delta)
-	handle_animations(delta)
+	handle_animations()
 	handle_audio()
 	move_and_slide()
 

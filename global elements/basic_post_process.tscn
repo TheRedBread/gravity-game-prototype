@@ -5,15 +5,16 @@ background_mode = 3
 ssr_fade_in = 4.50858e-05
 ssr_depth_tolerance = 128.0
 glow_enabled = true
-glow_levels/1 = 1.0
 glow_levels/2 = 10.0
+glow_intensity = 1.0
 glow_bloom = 0.1
-glow_hdr_scale = 1.0
+glow_hdr_threshold = 0.5
 fog_light_energy = 51.4
 fog_sun_scatter = 50.25
 volumetric_fog_density = 1.0
-adjustment_brightness = 1.57
-adjustment_contrast = 5.75
+volumetric_fog_emission_energy = 50.65
+volumetric_fog_gi_inject = 10.55
+volumetric_fog_detail_spread = 6.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ah1fx"]
 exposure_multiplier = 8.0

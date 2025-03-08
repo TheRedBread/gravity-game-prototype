@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqtcqvw3g0ifs"]
+[gd_scene load_steps=14 format=3 uid="uid://bqtcqvw3g0ifs"]
 
 [ext_resource type="Script" uid="uid://cqc48dq1v2x0a" path="res://stable_particle.gd" id="1_2p78b"]
 [ext_resource type="Texture2D" uid="uid://1oncq4syvkow" path="res://player/StableParticles/jump_woosh/staying/jump_woosh-Sheet.png" id="2_2p78b"]
 [ext_resource type="Texture2D" uid="uid://bhwa18o2gjs4j" path="res://player/StableParticles/jump_woosh/moving/jump_woosh-Sheet.png" id="3_bpk8d"]
 [ext_resource type="Texture2D" uid="uid://djc78hehcxgkm" path="res://player/StableParticles/land_woosh/land_woosh-Sheet.png" id="4_84jyo"]
 [ext_resource type="Texture2D" uid="uid://fe01gy8khop2" path="res://player/StableParticles/step_woosh/step_woosh-Sheet.png" id="5_okgoj"]
+[ext_resource type="Texture2D" uid="uid://dks4aa5ygr2y8" path="res://player/sprites/gravityPlayerSpriteDashGhost.png" id="6_cqe5y"]
 
 [sub_resource type="Animation" id="Animation_2p78b"]
 length = 0.001
@@ -103,6 +104,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GhostSprite:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GhostSprite:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_okgoj"]
@@ -217,9 +242,38 @@ tracks/1/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_qqfok"]
+resource_name = "dash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GhostSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.176777, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_okgoj"]
 _data = {
 &"RESET": SubResource("Animation_2p78b"),
+&"dash": SubResource("Animation_qqfok"),
 &"landing": SubResource("Animation_okgoj"),
 &"moving_jump": SubResource("Animation_bpk8d"),
 &"staying_jump": SubResource("Animation_84jyo"),
@@ -251,6 +305,10 @@ visible = false
 position = Vector2(0, 4)
 texture = ExtResource("5_okgoj")
 hframes = 3
+
+[node name="GhostSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_cqe5y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

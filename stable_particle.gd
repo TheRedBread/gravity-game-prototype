@@ -8,6 +8,7 @@ enum ParticleAnimations{
 	MOVING_JUMP,
 	LANDING,
 	STEP,
+	DASH,
 }
 
 
@@ -21,6 +22,8 @@ func _ready() -> void:
 			animation_player.play("landing")
 		ParticleAnimations.STEP:
 			animation_player.play("step")
+		ParticleAnimations.DASH:
+			animation_player.play("dash")
 		
 		
 

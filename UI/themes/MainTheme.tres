@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://ccxq3q4netbty" path="res://UI/UIElements/radioButton/radio_checked.png" id="8_mou48"]
 [ext_resource type="Texture2D" uid="uid://2p1x7124cc0g" path="res://UI/UIElements/radioButton/radio.png" id="9_n1m28"]
 [ext_resource type="Texture2D" uid="uid://d4l13to5df3vj" path="res://UI/UIElements/panels/BlueGlassy/translucent panel.png" id="14_btykg"]
-[ext_resource type="Texture2D" uid="uid://cbviopdooui75" path="res://UI/UIElements/panels/BlueGlassy/borderPanel.png" id="15_3r0k1"]
+[ext_resource type="Texture2D" uid="uid://cbviopdooui75" path="res://UI/UIElements/panels/BlueGlassy/glassy_border_panel.png" id="15_13t8b"]
 [ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://UI/UIElements/panels/BlueGlassy/plainPanel_rounded.png" id="16_rjh8i"]
 [ext_resource type="Texture2D" uid="uid://bemlnotgg8ccc" path="res://UI/UIElements/panels/BlueGlassy/plainPanel.png" id="17_gvh4s"]
 
@@ -89,7 +89,7 @@ expand_margin_left = 8.0
 expand_margin_right = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ro45i"]
-texture = ExtResource("15_3r0k1")
+texture = ExtResource("15_13t8b")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
