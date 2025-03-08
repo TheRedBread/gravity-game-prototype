@@ -343,6 +343,8 @@ func handle_dashing():
 	
 	if dash_timer.time_left != 0:
 		spawn_stable_particle("dash")
+		if is_on_floor() and int(dash_timer.time_left*1000) % 5 == 0:
+			spawn_stable_particle("dash_step")
 		
 
 
@@ -616,6 +618,7 @@ func spawn_stable_particle(type):
 				particle.selected_animation = particle.ParticleAnimations.MOVING_JUMP
 			else:
 				particle.selected_animation = particle.ParticleAnimations.STAYING_JUMP
+				
 		"land":
 			particle.selected_animation = particle.ParticleAnimations.LANDING
 			particle.position = position + Vector2(0, -9)
@@ -630,7 +633,9 @@ func spawn_stable_particle(type):
 			particle.selected_animation = particle.ParticleAnimations.DASH
 			if gravity_direction == 1:
 				particle.position += Vector2(0, -8)
-			
+		
+		"dash_step":
+			particle.selected_animation = particle.ParticleAnimations.DASH_STEP
 	
 	get_parent().add_child(particle)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqtcqvw3g0ifs"]
+[gd_scene load_steps=16 format=3 uid="uid://bqtcqvw3g0ifs"]
 
 [ext_resource type="Script" uid="uid://cqc48dq1v2x0a" path="res://stable_particle.gd" id="1_2p78b"]
 [ext_resource type="Texture2D" uid="uid://1oncq4syvkow" path="res://player/StableParticles/jump_woosh/staying/jump_woosh-Sheet.png" id="2_2p78b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://djc78hehcxgkm" path="res://player/StableParticles/land_woosh/land_woosh-Sheet.png" id="4_84jyo"]
 [ext_resource type="Texture2D" uid="uid://fe01gy8khop2" path="res://player/StableParticles/step_woosh/step_woosh-Sheet.png" id="5_okgoj"]
 [ext_resource type="Texture2D" uid="uid://dks4aa5ygr2y8" path="res://player/sprites/gravityPlayerSpriteDashGhost.png" id="6_cqe5y"]
+[ext_resource type="Texture2D" uid="uid://cpdkgwtceeb8h" path="res://player/StableParticles/dash_step_woosh/dash_step_woosh-Sheet.png" id="6_qqfok"]
 
 [sub_resource type="Animation" id="Animation_2p78b"]
 length = 0.001
@@ -129,6 +130,110 @@ tracks/9/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("DashStepSprite:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("DashStepSprite:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("DashStepSprite:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qqfok"]
+resource_name = "dash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GhostSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.176777, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ddr2u"]
+resource_name = "dash_step"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DashStepSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DashStepSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1.99999, 1.68179),
+"update": 0,
+"values": [Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DashStepSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_okgoj"]
 resource_name = "landing"
@@ -186,6 +291,34 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_cqe5y"]
+resource_name = "normal_step"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StepSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StepSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="Animation" id="Animation_84jyo"]
 resource_name = "staying_jump"
 length = 0.3
@@ -214,70 +347,15 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_cqe5y"]
-resource_name = "step"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StepSprite:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StepSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
-[sub_resource type="Animation" id="Animation_qqfok"]
-resource_name = "dash"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GhostSprite:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GhostSprite:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.176777, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_okgoj"]
 _data = {
 &"RESET": SubResource("Animation_2p78b"),
 &"dash": SubResource("Animation_qqfok"),
+&"dash_step": SubResource("Animation_ddr2u"),
 &"landing": SubResource("Animation_okgoj"),
 &"moving_jump": SubResource("Animation_bpk8d"),
-&"staying_jump": SubResource("Animation_84jyo"),
-&"step": SubResource("Animation_cqe5y")
+&"normal_step": SubResource("Animation_cqe5y"),
+&"staying_jump": SubResource("Animation_84jyo")
 }
 
 [node name="StableParticle" type="Node2D"]
@@ -304,6 +382,12 @@ hframes = 5
 visible = false
 position = Vector2(0, 4)
 texture = ExtResource("5_okgoj")
+hframes = 3
+
+[node name="DashStepSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 4)
+texture = ExtResource("6_qqfok")
 hframes = 3
 
 [node name="GhostSprite" type="Sprite2D" parent="."]

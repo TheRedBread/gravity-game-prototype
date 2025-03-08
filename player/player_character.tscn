@@ -650,7 +650,6 @@ texture = SubResource("GradientTexture2D_wi17q")
 texture_scale = 4.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 position = Vector2(-111.722, -9)
 energy = 0.1
 blend_mode = 1

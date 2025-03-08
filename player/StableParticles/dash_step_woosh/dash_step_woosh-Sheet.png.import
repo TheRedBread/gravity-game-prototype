@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csxi647crmdfv"
-path="res://.godot/imported/step_woosh1.png-e3ecf7dde6e1f83d21a94a6ae00ab608.ctex"
+uid="uid://cpdkgwtceeb8h"
+path="res://.godot/imported/dash_step_woosh-Sheet.png-04aa27cc23700a41d62122ca4cbf7814.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/StableParticles/step_woosh/step_woosh1.png"
-dest_files=["res://.godot/imported/step_woosh1.png-e3ecf7dde6e1f83d21a94a6ae00ab608.ctex"]
+source_file="res://player/StableParticles/dash_step_woosh/dash_step_woosh-Sheet.png"
+dest_files=["res://.godot/imported/dash_step_woosh-Sheet.png-04aa27cc23700a41d62122ca4cbf7814.ctex"]
 
 [params]
 
