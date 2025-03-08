@@ -1510,7 +1510,7 @@ sources/2 = SubResource("TileSetAtlasSource_xspp0")
 [node name="Test_scene" type="Node2D"]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_0rcdk")]
-position = Vector2(112, 16)
+position = Vector2(111, -3)
 floor_max_angle = 0.785398
 floor_snap_length = 15.0
 

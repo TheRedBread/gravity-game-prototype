@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var sliding_particles: CPUParticles2D = $SlidingParticles
 @onready var jumping_particles: CPUParticles2D = $JumpingParticles
 @onready var landing_particles: CPUParticles2D = $LandingParticles
+@onready var die_particles: GPUParticles2D = $DieParticles
 
 
 # -------------- Physics variables and player stats -------------- #
@@ -59,6 +60,7 @@ const SWITCH_FAIL : AudioStream = preload("res://player/switch_fail.mp3")
 
 @onready var dash_timer: Timer = $DashTimer
 
+
 enum PlayerState {
 	IDLE,
 	SLIDING,
@@ -66,6 +68,7 @@ enum PlayerState {
 	DASHING,
 	FALLING,
 	FLYING,
+	
 }
 
 
@@ -93,7 +96,7 @@ var was_falling : bool = false
 
 var player_state : PlayerState = PlayerState.IDLE
 var no_clip : bool = false
-
+var player_controls : bool = true
 
 
 func _ready() -> void:
@@ -222,36 +225,36 @@ func handle_snap_change():
 
 # ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
-	if player_state == PlayerState.FLYING:
-		$PlayerCollision.disabled = true
-		$DeathDetection/DeathDetectionCollision.disabled = true
-		handle_flying()
-		
-	else:
-		$PlayerCollision.disabled = false
-		$DeathDetection/DeathDetectionCollision.disabled = false
-		
-		update_was_on_floor()
-		damp_velocity_to_zero()
-		count_time_on_ground(delta)
-		jump_input_update()
-		dash_input_update()
-		usage_update()
-		handle_vertical_movement(delta)
-		handle_jump()
-		handle_slam()
-		handle_dashing()
-		handle_abilities()
-		handle_reset()
-		if not is_on_floor():
-			apply_gravity(delta)
+	if player_controls:
+		if player_state == PlayerState.FLYING:
+			$PlayerCollision.disabled = true
+			$DeathDetection/DeathDetectionCollision.disabled = true
+			handle_flying()
 			
-
-	
-	handle_state()
-	handle_sliding_reset()
-	handle_snap_change()
+		else:
+			$PlayerCollision.disabled = false
+			$DeathDetection/DeathDetectionCollision.disabled = false
+			
+			update_was_on_floor()
+			damp_velocity_to_zero()
+			count_time_on_ground(delta)
+			jump_input_update()
+			dash_input_update()
+			usage_update()
+			handle_vertical_movement(delta)
+			handle_jump()
+			handle_slam()
+			handle_dashing()
+			handle_abilities()
+			handle_reset()
+			if not is_on_floor():
+				apply_gravity(delta)
+				
 		
+		handle_state()
+		handle_sliding_reset()
+		handle_snap_change()
+	
 
 #left-right
 func move_to_direction(directionStr, delta):
@@ -669,6 +672,11 @@ func set_spawnpoint():
 	spawn_gravity = gravity_direction
 
 func die():
+	
+	die_particles.restart()
+	die_particles.process_material.set("gravity", Vector3(0, 300*gravity_direction, 0))
+	die_particles.emitting = true
+	
 	AudioManager.play_sound(DESTROYED, -15, 0.01, 1, 0.5, "Sound effects")
 	gravity_direction = spawn_gravity
 	velocity = Vector2(0, 0)
@@ -686,7 +694,14 @@ func die():
 	
 	up_direction = Vector2(0, -gravity_direction)
 	air_switch_amount = 1
+	
+	
+	player_sprite.visible = false
+	player_controls = false
+	await get_tree().create_timer(1).timeout
 	position = spawn + Vector2(0, -10)*gravity_direction
+	player_controls = true
+	player_sprite.visible = true
 
 
 

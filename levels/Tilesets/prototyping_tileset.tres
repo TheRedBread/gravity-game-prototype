@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://bord65n4suwnl"]
+[gd_resource type="TileSet" load_steps=18 format=3 uid="uid://bord65n4suwnl"]
 
 [ext_resource type="Texture2D" uid="uid://u18jdahn5hqs" path="res://levels/Tilesets/greentilesetSlopesVer.png" id="1_vdpua"]
 [ext_resource type="Texture2D" uid="uid://dthx21daup7ju" path="res://levels/Tilesets/greentileset.png" id="2_c53vy"]
@@ -13,6 +13,12 @@ polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aea7e"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f1420"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ukjkx"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nwj4t"]
@@ -33,8 +39,10 @@ texture = ExtResource("1_vdpua")
 4:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tatcc")
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:0/0 = 0
+5:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f1420")
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:0/0 = 0
+6:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ukjkx")
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:0/0 = 0
 7:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_lt7sh")
@@ -713,6 +721,7 @@ texture = ExtResource("5_ynp8n")
 
 [resource]
 occlusion_layer_0/light_mask = 1
+occlusion_layer_0/sdf_collision = true
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 physics_layer_1/collision_layer = 4

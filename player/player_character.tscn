@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=34 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" uid="uid://c02eddk36m51" path="res://player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" uid="uid://bbjrrqys0dutu" path="res://player/player_camera.gd" id="2_yxov5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://global elements/parallax/stars/Star3.png" id="8_qmn1e"]
 [ext_resource type="Texture2D" uid="uid://dbetihp3me8at" path="res://player/sprites/gravityPlayerSpriteAll.png" id="9_vx43m"]
 [ext_resource type="AudioStream" uid="uid://cr6djfcjftlna" path="res://player/slide.mp3" id="10_oggeb"]
+[ext_resource type="Texture2D" uid="uid://cge0mawnsvunc" path="res://player/sprites/death.png" id="12_3d672"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ywmw"]
 size = Vector2(9.92014, 22)
@@ -487,6 +488,42 @@ shader = ExtResource("4_qep63")
 shader_parameter/whiten = false
 shader_parameter/mix_weight = 1.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3d672"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_l18q3"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.908088, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_20tpk"]
+gradient = SubResource("Gradient_l18q3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ty42v"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -11.395, 0)
+emission_shape = 1
+emission_sphere_radius = 10.0
+angle_min = -2382.5
+angle_max = 2382.5
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 200.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 10.0
+damping_max = 25.0
+color_ramp = SubResource("GradientTexture1D_20tpk")
+anim_offset_max = 1.0
+collision_mode = 1
+collision_friction = 0.01
+collision_bounce = 0.5
+
 [sub_resource type="Gradient" id="Gradient_ah1fx"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -499,6 +536,57 @@ fill_from = Vector2(0.5, 0.495726)
 fill_to = Vector2(0.923077, 0.653846)
 
 [sub_resource type="Environment" id="Environment_wi17q"]
+
+[sub_resource type="Animation" id="Animation_3d672"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playerSprite:material:shader_parameter/whiten")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("playerEyeSprite:material:shader_parameter/whiten")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("playerEyeSprite:material:shader_parameter/mix_weight")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("playerSprite:material:shader_parameter/mix_weight")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_qep63"]
 resource_name = "dash"
@@ -550,57 +638,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(3.5, 1),
 "update": 0,
 "values": [1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_3d672"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("playerSprite:material:shader_parameter/whiten")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("playerEyeSprite:material:shader_parameter/whiten")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("playerEyeSprite:material:shader_parameter/mix_weight")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("playerSprite:material:shader_parameter/mix_weight")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l18q3"]
@@ -714,7 +751,22 @@ stream = ExtResource("10_oggeb")
 bus = &"Sound effects"
 parameters/looping = true
 
+[node name="DieParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_3d672")
+position = Vector2(0, -11)
+emitting = false
+amount = 5
+texture = ExtResource("12_3d672")
+lifetime = 1.5
+one_shot = true
+preprocess = 0.02
+explosiveness = 1.0
+randomness = 0.2
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_ty42v")
+
 [node name="SlidingParticles" type="CPUParticles2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 amount = 25
 lifetime = 0.2
@@ -730,6 +782,7 @@ initial_velocity_max = 100.0
 scale_amount_max = 2.0
 
 [node name="JumpingParticles" type="CPUParticles2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 emitting = false
 amount = 20
@@ -748,6 +801,7 @@ initial_velocity_max = 50.0
 scale_amount_max = 2.0
 
 [node name="LandingParticles" type="CPUParticles2D" parent="."]
+visible = false
 position = Vector2(0, -1)
 emitting = false
 amount = 20
