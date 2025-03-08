@@ -321,6 +321,7 @@ func dash_accelerate():
 	GRAVITY = 1200 
 
 func dash():
+	$WhitenAnimation.play("dash")
 	if Input.is_action_pressed("move_left"):
 		count_dash_velocity(-1)
 		dash_accelerate()

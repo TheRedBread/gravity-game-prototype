@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=29 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" uid="uid://c02eddk36m51" path="res://player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" uid="uid://bbjrrqys0dutu" path="res://player/player_camera.gd" id="2_yxov5"]
 [ext_resource type="PackedScene" uid="uid://bxyx1h7i814d6" path="res://UI/pause menu/pause_menu.tscn" id="3_lwsbi"]
+[ext_resource type="Shader" uid="uid://bu13jc3rhv6w5" path="res://player/whiten.gdshader" id="4_qep63"]
 [ext_resource type="Texture2D" uid="uid://bqr7nq887fhtb" path="res://player/sprites/gravityPlayerSprite_EyesFalse.png" id="5_w3pip"]
 [ext_resource type="Script" uid="uid://cc0g12425cq4j" path="res://player/player_stars_parallax.gd" id="6_85wnx"]
 [ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://global elements/parallax/stars/Star1.png" id="6_msyva"]
@@ -159,7 +160,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_5welk"]
 resource_name = "dash"
-length = 0.05
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -476,6 +477,16 @@ _data = {
 &"walk": SubResource("Animation_g4cth")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3d672"]
+shader = ExtResource("4_qep63")
+shader_parameter/whiten = false
+shader_parameter/mix_weight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qep63"]
+shader = ExtResource("4_qep63")
+shader_parameter/whiten = false
+shader_parameter/mix_weight = 1.0
+
 [sub_resource type="Gradient" id="Gradient_ah1fx"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -488,6 +499,115 @@ fill_from = Vector2(0.5, 0.495726)
 fill_to = Vector2(0.923077, 0.653846)
 
 [sub_resource type="Environment" id="Environment_wi17q"]
+
+[sub_resource type="Animation" id="Animation_qep63"]
+resource_name = "dash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playerSprite:material:shader_parameter/whiten")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("playerEyeSprite:material:shader_parameter/whiten")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("playerEyeSprite:material:shader_parameter/mix_weight")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(3.5, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("playerSprite:material:shader_parameter/mix_weight")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(3.5, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3d672"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playerSprite:material:shader_parameter/whiten")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("playerEyeSprite:material:shader_parameter/whiten")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("playerEyeSprite:material:shader_parameter/mix_weight")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("playerSprite:material:shader_parameter/mix_weight")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l18q3"]
+_data = {
+&"RESET": SubResource("Animation_3d672"),
+&"dash": SubResource("Animation_qep63")
+}
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 position = Vector2(0, 1)
@@ -542,6 +662,7 @@ libraries = {
 }
 
 [node name="playerSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3d672")
 position = Vector2(0, -13)
 texture = ExtResource("9_vx43m")
 offset = Vector2(0, -4)
@@ -549,11 +670,13 @@ hframes = 8
 vframes = 6
 
 [node name="playerEyeSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qep63")
 position = Vector2(0, -13)
 texture = ExtResource("5_w3pip")
 offset = Vector2(0, -4)
 hframes = 8
 vframes = 6
+frame = 24
 
 [node name="playerStarsParallax" type="ParallaxBackground" parent="."]
 layer = -2
@@ -656,6 +779,11 @@ blend_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wi17q")
+
+[node name="WhitenAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l18q3")
+}
 
 [connection signal="body_entered" from="SpawnpointDetection" to="." method="_on_spawnpoint_detection_body_entered"]
 [connection signal="body_entered" from="DeathDetection" to="." method="_on_death_detection_body_entered"]
