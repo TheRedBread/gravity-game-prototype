@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmccc1io65eoq"]
+
+[ext_resource type="Texture2D" uid="uid://bx7ulmvmp1nuu" path="res://player/sprites/heads.png" id="1_v6u3w"]
+[ext_resource type="Texture2D" uid="uid://bwqyuistd4yrk" path="res://player/sprites/body.png" id="2_l74m2"]
+[ext_resource type="Texture2D" uid="uid://oe3xx1gvxy17" path="res://player/sprites/limbs.png" id="3_q3gka"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lmj3d"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_l74m2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.805147, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_20tpk"]
+gradient = SubResource("Gradient_l74m2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q3gka"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -11.395, 0)
+emission_shape = 1
+emission_sphere_radius = 10.0
+angle_min = -2382.5
+angle_max = 2382.5
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 200.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+gravity = Vector3(0, 200, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 10.0
+damping_min = 10.0
+damping_max = 20.0
+color_ramp = SubResource("GradientTexture1D_20tpk")
+anim_offset_max = 1.0
+collision_mode = 1
+collision_friction = 0.2
+collision_bounce = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_43eqm"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f6i41"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="DeathParticles" type="Node2D"]
+
+[node name="HeadParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_lmj3d")
+position = Vector2(0, -11)
+emitting = false
+amount = 1
+texture = ExtResource("1_v6u3w")
+lifetime = 2.0
+one_shot = true
+preprocess = 0.02
+explosiveness = 1.0
+randomness = 0.2
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_q3gka")
+
+[node name="BodyParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_43eqm")
+position = Vector2(0, -11)
+emitting = false
+amount = 1
+texture = ExtResource("2_l74m2")
+lifetime = 2.0
+one_shot = true
+preprocess = 0.02
+explosiveness = 1.0
+randomness = 0.2
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_q3gka")
+
+[node name="LimbParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_f6i41")
+position = Vector2(0, -11)
+emitting = false
+amount = 4
+texture = ExtResource("3_q3gka")
+lifetime = 2.0
+one_shot = true
+preprocess = 0.02
+explosiveness = 1.0
+randomness = 0.2
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_q3gka")

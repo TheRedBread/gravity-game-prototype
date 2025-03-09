@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brpq23ff7l28v"
-path="res://.godot/imported/screwPanel.png-961f754313247fd31ecf137a7d216191.ctex"
+uid="uid://d1pp7ue86yh26"
+path="res://.godot/imported/glassypremadequit.png-c5ac37aaf9f871042ed13032872162e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/screwPanel.png"
-dest_files=["res://.godot/imported/screwPanel.png-961f754313247fd31ecf137a7d216191.ctex"]
+source_file="res://UI/UIElements/panels/BlueGlassy/glassypremadequit.png"
+dest_files=["res://.godot/imported/glassypremadequit.png-c5ac37aaf9f871042ed13032872162e9.ctex"]
 
 [params]
 

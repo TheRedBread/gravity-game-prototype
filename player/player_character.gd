@@ -11,8 +11,6 @@ extends CharacterBody2D
 @onready var sliding_particles: CPUParticles2D = $SlidingParticles
 @onready var jumping_particles: CPUParticles2D = $JumpingParticles
 @onready var landing_particles: CPUParticles2D = $LandingParticles
-@onready var die_particles: GPUParticles2D = $DieParticles
-
 
 # -------------- Physics variables and player stats -------------- #
 @export var ACCELERATION : float = 10000
@@ -42,6 +40,7 @@ extends CharacterBody2D
 const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
 const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesFalse.png")
 const STABLE_PARTICLE = preload("res://player/StableParticles/stable_particle.tscn")
+const DEATH_PARTICLES = preload("res://player/death_particles.tscn")
 
 
 # ------------------------ SOUNDS -------------------------------#
@@ -671,14 +670,24 @@ func set_spawnpoint():
 	spawn = position
 	spawn_gravity = gravity_direction
 
+func spawn_limbs():
+	var limbs = DEATH_PARTICLES.instantiate()
+	limbs.position = position
+	limbs.get_child(0).emitting = true
+	limbs.get_child(1).emitting = true
+	limbs.get_child(2).emitting = true
+	var particle_gravity = Vector3(0, 300*gravity_direction, 0)
+	limbs.get_child(0).process_material.set("gravity", particle_gravity)
+	limbs.get_child(1).process_material.set("gravity", particle_gravity)
+	limbs.get_child(2).process_material.set("gravity", particle_gravity)
+	
+	get_parent().add_child(limbs)
+	
+
+
 func die():
-	
-	die_particles.restart()
-	die_particles.process_material.set("gravity", Vector3(0, 300*gravity_direction, 0))
-	die_particles.emitting = true
-	
+	spawn_limbs()
 	AudioManager.play_sound(DESTROYED, -15, 0.01, 1, 0.5, "Sound effects")
-	gravity_direction = spawn_gravity
 	velocity = Vector2(0, 0)
 	
 	can_dash = true
@@ -692,16 +701,23 @@ func die():
 	was_on_floor = false
 	was_just_sliding = false
 	
-	up_direction = Vector2(0, -gravity_direction)
 	air_switch_amount = 1
 	
-	
+	eye_sprite.visible = false
 	player_sprite.visible = false
 	player_controls = false
+	
+	
 	await get_tree().create_timer(1).timeout
+	gravity_direction = spawn_gravity
+	
 	position = spawn + Vector2(0, -10)*gravity_direction
 	player_controls = true
 	player_sprite.visible = true
+	eye_sprite.visible = true
+	
+	up_direction = Vector2(0, -gravity_direction)
+	
 
 
 

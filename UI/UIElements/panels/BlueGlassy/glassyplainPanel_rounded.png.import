@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wqyd8vy4pdu1"
-path="res://.godot/imported/plainPanel_rounded_lighter.png-6b9a4fd505b65e0c6383168fab440ef5.ctex"
+uid="uid://bde7cptuj7yw4"
+path="res://.godot/imported/glassyplainPanel_rounded.png-00c12b098f27e4f5871d93cefa39525b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/plainPanel_rounded_lighter.png"
-dest_files=["res://.godot/imported/plainPanel_rounded_lighter.png-6b9a4fd505b65e0c6383168fab440ef5.ctex"]
+source_file="res://UI/UIElements/panels/BlueGlassy/glassyplainPanel_rounded.png"
+dest_files=["res://.godot/imported/glassyplainPanel_rounded.png-00c12b098f27e4f5871d93cefa39525b.ctex"]
 
 [params]
 

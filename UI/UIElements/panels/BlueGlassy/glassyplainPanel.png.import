@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bemlnotgg8ccc"
-path="res://.godot/imported/plainPanel.png-0060f6d8033c93ed51d53a40fdab8b0d.ctex"
+path="res://.godot/imported/glassyplainPanel.png-ee11be52277ec8ef3e8808859d4c7977.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/plainPanel.png"
-dest_files=["res://.godot/imported/plainPanel.png-0060f6d8033c93ed51d53a40fdab8b0d.ctex"]
+source_file="res://UI/UIElements/panels/BlueGlassy/glassyplainPanel.png"
+dest_files=["res://.godot/imported/glassyplainPanel.png-ee11be52277ec8ef3e8808859d4c7977.ctex"]
 
 [params]
 

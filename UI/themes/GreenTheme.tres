@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ccxq3q4netbty" path="res://UI/UIElements/radioButton/radio_checked.png" id="4_54bpc"]
 [ext_resource type="Texture2D" uid="uid://2p1x7124cc0g" path="res://UI/UIElements/radioButton/radio.png" id="5_tyewr"]
 [ext_resource type="Texture2D" uid="uid://bvsf80phifaew" path="res://UI/UIElements/CheckButton/checkBox_unchecked.png" id="6_1oaiv"]
-[ext_resource type="Texture2D" uid="uid://d0i8lg7y3exox" path="res://UI/UIElements/panels/BlueGlassy/borderPanelsoft.png" id="7_001u0"]
 [ext_resource type="Texture2D" uid="uid://bcjbhutsjff52" path="res://UI/UIElements/CheckButton/CheckButtonON.png" id="8_3xx6a"]
+[ext_resource type="Texture2D" uid="uid://d0i8lg7y3exox" path="res://UI/UIElements/panels/BlueGlassy/glassyborderPanelsoft.png" id="8_np0no"]
 [ext_resource type="Texture2D" uid="uid://cl7q4r4sxi10u" path="res://UI/UIElements/CheckButton/CheckButtonOff.png" id="9_ii5ow"]
 [ext_resource type="Texture2D" uid="uid://bxm2yfvs4dk48" path="res://UI/UIElements/slider/sliderGrabber.png" id="10_twntu"]
 [ext_resource type="Texture2D" uid="uid://c76j8lbc3akr" path="res://UI/UIElements/slider/sliderGrabberHighlight.png" id="11_hgnay"]
@@ -16,10 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://dxfs0kl4m1jsq" path="res://UI/UIElements/optionButton/arrowdown.png" id="13_mhgb0"]
 [ext_resource type="Texture2D" uid="uid://d4l13to5df3vj" path="res://UI/UIElements/panels/BlueGlassy/translucent panel.png" id="14_bra3k"]
 [ext_resource type="Texture2D" uid="uid://b5au6dv7va5qe" path="res://UI/UIElements/panels/Green/plainPanel_rounded.png" id="16_f5tuj"]
-[ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://UI/UIElements/panels/BlueGlassy/plainPanel_rounded.png" id="16_mqd4e"]
 [ext_resource type="Texture2D" uid="uid://cbviopdooui75" path="res://UI/UIElements/panels/BlueGlassy/glassy_border_panel.png" id="16_np0no"]
-[ext_resource type="Texture2D" uid="uid://bemlnotgg8ccc" path="res://UI/UIElements/panels/BlueGlassy/plainPanel.png" id="17_nq1qu"]
 [ext_resource type="Texture2D" uid="uid://clri6l01vk7be" path="res://UI/UIElements/scroll/scrollBar.png" id="18_kb6s7"]
+[ext_resource type="Texture2D" uid="uid://bde7cptuj7yw4" path="res://UI/UIElements/panels/BlueGlassy/glassyplainPanel_rounded.png" id="18_w0nbe"]
+[ext_resource type="Texture2D" uid="uid://bemlnotgg8ccc" path="res://UI/UIElements/panels/BlueGlassy/glassyplainPanel.png" id="19_0xsix"]
 [ext_resource type="Texture2D" uid="uid://dscd8h2mshm50" path="res://UI/UIElements/scroll/scrollBarPressed.png" id="19_4aarw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wgsx4"]
@@ -37,7 +37,7 @@ texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qmvqu"]
-texture = ExtResource("7_001u0")
+texture = ExtResource("8_np0no")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
@@ -50,7 +50,7 @@ expand_margin_right = 4.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5n0vt"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_25760"]
-texture = ExtResource("7_001u0")
+texture = ExtResource("8_np0no")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
@@ -112,14 +112,14 @@ texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gqf10"]
-texture = ExtResource("16_mqd4e")
+texture = ExtResource("18_w0nbe")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rh24w"]
-texture = ExtResource("17_nq1qu")
+texture = ExtResource("19_0xsix")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0

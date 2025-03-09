@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gkunq8e1fr53"
-path="res://.godot/imported/borderPanelsoftButtnHihglight.png-37bce8e890d2540ace2d2cadbe9fb35b.ctex"
+uid="uid://bx7ulmvmp1nuu"
+path="res://.godot/imported/heads.png-122cfed721511b9a1401faf9b1c0b769.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/borderPanelsoftButtnHihglight.png"
-dest_files=["res://.godot/imported/borderPanelsoftButtnHihglight.png-37bce8e890d2540ace2d2cadbe9fb35b.ctex"]
+source_file="res://player/sprites/heads.png"
+dest_files=["res://.godot/imported/heads.png-122cfed721511b9a1401faf9b1c0b769.ctex"]
 
 [params]
 

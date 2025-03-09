@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bemm1ujrhw1qn"
-path="res://.godot/imported/premadequit2.png-99ad4bbafdf8a5e5456c2d340bc44e7d.ctex"
+uid="uid://d0i8lg7y3exox"
+path="res://.godot/imported/glassyborderPanelsoft.png-772ef3b218ad0f6ffb7c7160e3cef41c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/premadequit2.png"
-dest_files=["res://.godot/imported/premadequit2.png-99ad4bbafdf8a5e5456c2d340bc44e7d.ctex"]
+source_file="res://UI/UIElements/panels/BlueGlassy/glassyborderPanelsoft.png"
+dest_files=["res://.godot/imported/glassyborderPanelsoft.png-772ef3b218ad0f6ffb7c7160e3cef41c.ctex"]
 
 [params]
 

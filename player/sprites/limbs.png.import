@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0i8lg7y3exox"
-path="res://.godot/imported/borderPanelsoft.png-2f74aef237becc7c1eb327cd87c28bfe.ctex"
+uid="uid://oe3xx1gvxy17"
+path="res://.godot/imported/limbs.png-a21aee824f906e27860d3de48e20f7bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/borderPanelsoft.png"
-dest_files=["res://.godot/imported/borderPanelsoft.png-2f74aef237becc7c1eb327cd87c28bfe.ctex"]
+source_file="res://player/sprites/limbs.png"
+dest_files=["res://.godot/imported/limbs.png-a21aee824f906e27860d3de48e20f7bc.ctex"]
 
 [params]
 

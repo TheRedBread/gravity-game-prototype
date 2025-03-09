@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://chor5ul85yl67"]
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://UI/themes/MainTheme.tres" id="1_di2sg"]
-[ext_resource type="Texture2D" uid="uid://gkunq8e1fr53" path="res://UI/UIElements/panels/BlueGlassy/borderPanelsoftButtnHihglight.png" id="2_x2kx2"]
-[ext_resource type="Texture2D" uid="uid://cqxpwrplm88p3" path="res://UI/UIElements/panels/BlueGlassy/borderPanelsoftButtn.png" id="3_g777m"]
+[ext_resource type="Texture2D" uid="uid://gkunq8e1fr53" path="res://UI/UIElements/panels/BlueGlassy/glassyborderPanelsoftButtnHihglight.png" id="2_x2kx2"]
+[ext_resource type="Texture2D" uid="uid://cqxpwrplm88p3" path="res://UI/UIElements/panels/BlueGlassy/glassyborderPanelsoftButtn.png" id="3_g777m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4f4od"]
 texture = ExtResource("2_x2kx2")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bde7cptuj7yw4"
-path="res://.godot/imported/plainPanel_rounded.png-bdaa2a74e131da6a491f6fb35f91c0cf.ctex"
+uid="uid://bemm1ujrhw1qn"
+path="res://.godot/imported/glassypremadequit2.png-53e957163e7e136b95129e583fea17a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/UIElements/panels/BlueGlassy/plainPanel_rounded.png"
-dest_files=["res://.godot/imported/plainPanel_rounded.png-bdaa2a74e131da6a491f6fb35f91c0cf.ctex"]
+source_file="res://UI/UIElements/panels/BlueGlassy/glassypremadequit2.png"
+dest_files=["res://.godot/imported/glassypremadequit2.png-53e957163e7e136b95129e583fea17a3.ctex"]
 
 [params]
 
