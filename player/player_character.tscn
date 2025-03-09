@@ -715,7 +715,6 @@ bus = &"Sound effects"
 parameters/looping = true
 
 [node name="SlidingParticles" type="CPUParticles2D" parent="."]
-visible = false
 position = Vector2(0, 1)
 amount = 25
 lifetime = 0.2
@@ -750,7 +749,6 @@ initial_velocity_max = 50.0
 scale_amount_max = 2.0
 
 [node name="LandingParticles" type="CPUParticles2D" parent="."]
-visible = false
 position = Vector2(0, -1)
 emitting = false
 amount = 20
