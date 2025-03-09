@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxvi00tbv0cyu"]
+
+[ext_resource type="Script" uid="uid://ckup1k8gxd2k0" path="res://player/spawnpoint/checkpoint_particles.gd" id="1_36gno"]
+[ext_resource type="Texture2D" uid="uid://u6qmweecu0od" path="res://player/spawnpoint/flag.png" id="2_wptfc"]
+
+[sub_resource type="Gradient" id="Gradient_otbmj"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.685897, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_6t7go"]
+offsets = PackedFloat32Array(0, 0.387821, 0.74359, 0.887821, 1)
+colors = PackedColorArray(0.160784, 0.407843, 0.290196, 1, 0.215686, 0.588235, 0.282353, 1, 0.47451, 0.709804, 0.278431, 1, 0.721569, 0.811765, 0.380392, 1, 0.952941, 0.858824, 0.435294, 1)
+
+[node name="checkpointParticles" type="Node2D"]
+script = ExtResource("1_36gno")
+
+[node name="particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+texture = ExtResource("2_wptfc")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.05
+emission_shape = 1
+emission_sphere_radius = 6.0
+spread = 180.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+damping_max = 10.0
+angle_min = -180.0
+angle_max = 180.0
+color_ramp = SubResource("Gradient_otbmj")
+color_initial_ramp = SubResource("Gradient_6t7go")
+
+[connection signal="finished" from="particles" to="." method="_on_particles_finished"]

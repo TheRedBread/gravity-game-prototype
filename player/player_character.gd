@@ -40,8 +40,8 @@ extends CharacterBody2D
 const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
 const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesFalse.png")
 const STABLE_PARTICLE = preload("res://player/StableParticles/stable_particle.tscn")
-const DEATH_PARTICLES = preload("res://player/death_particles.tscn")
-
+const DEATH_PARTICLES = preload("res://player/death/death_particles.tscn")
+const CHECKPOINT_PARTICLES = preload("res://player/spawnpoint/checkpoint_particles.tscn")
 
 # ------------------------ SOUNDS -------------------------------#
 const STEP_SOUND : AudioStream = preload("res://player/step.ogg")
@@ -49,7 +49,7 @@ const LAND_SOUND : AudioStream = preload("res://player/land.ogg")
 const DASH_SOUND : AudioStream = preload("res://player/dash.mp3")
 const JUMP_AUDIO : AudioStream = preload("res://player/jump.mp3")
 const DESTROYED : AudioStream = preload("res://player/destroyed.mp3")
-const SPAWNPOINT_CHECKED : AudioStream = preload("res://player/spawnpoint_checked.mp3")
+const SPAWNPOINT_CHECKED : AudioStream = preload("res://player/spawnpoint/spawnpoint_checked.mp3")
 const GRAVITY_CHANGE : AudioStream = preload("res://player/gravity_change.mp3")
 const SWITCH_FAIL : AudioStream = preload("res://player/switch_fail.mp3")
 
@@ -676,18 +676,14 @@ func spawn_limbs():
 	limbs.get_child(0).emitting = true
 	limbs.get_child(1).emitting = true
 	limbs.get_child(2).emitting = true
-	var particle_gravity = Vector3(0, 300*gravity_direction, 0)
+	var particle_gravity = Vector3(0, 250*gravity_direction, 0)
 	limbs.get_child(0).process_material.set("gravity", particle_gravity)
 	limbs.get_child(1).process_material.set("gravity", particle_gravity)
 	limbs.get_child(2).process_material.set("gravity", particle_gravity)
 	
 	get_parent().add_child(limbs)
-	
 
-
-func die():
-	spawn_limbs()
-	AudioManager.play_sound(DESTROYED, -15, 0.01, 1, 0.5, "Sound effects")
+func death_variable_reset():
 	velocity = Vector2(0, 0)
 	
 	can_dash = true
@@ -706,8 +702,12 @@ func die():
 	eye_sprite.visible = false
 	player_sprite.visible = false
 	player_controls = false
-	
-	
+
+
+func die():
+	spawn_limbs()
+	AudioManager.play_sound(DESTROYED, -15, 0.01, 1, 0.5, "Sound effects")
+	death_variable_reset()
 	await get_tree().create_timer(1).timeout
 	gravity_direction = spawn_gravity
 	
@@ -782,3 +782,14 @@ func _on_death_detection_body_entered(_body: Node2D) -> void:
 
 func _on_spawnpoint_detection_body_entered(_body: Node2D) -> void:
 	set_spawnpoint()
+	var checkpoint_particles = CHECKPOINT_PARTICLES.instantiate()
+	checkpoint_particles.get_child(0).emitting = true
+	checkpoint_particles.get_child(0).gravity = Vector2(0, 60 * gravity_direction)
+	
+	checkpoint_particles.position = position + Vector2(0, -5 * gravity_direction)
+	if gravity_direction == 1:
+		checkpoint_particles.position = position + Vector2(0, -30 * gravity_direction)
+		
+	
+	get_parent().add_child(checkpoint_particles)
+	

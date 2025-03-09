@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwqyuistd4yrk"
-path="res://.godot/imported/body.png-0676a2c51d9ff7955dbfe87aa9cda535.ctex"
+uid="uid://u6qmweecu0od"
+path="res://.godot/imported/flag.png-0f13a1e71de5fe2fe5a6b67be9c67b6d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/sprites/body.png"
-dest_files=["res://.godot/imported/body.png-0676a2c51d9ff7955dbfe87aa9cda535.ctex"]
+source_file="res://player/spawnpoint/flag.png"
+dest_files=["res://.godot/imported/flag.png-0f13a1e71de5fe2fe5a6b67be9c67b6d.ctex"]
 
 [params]
 
