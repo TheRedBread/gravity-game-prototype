@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://clagahpl7cggx"]
+[gd_scene load_steps=13 format=4 uid="uid://clagahpl7cggx"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://player/player_character.tscn" id="1_0rcdk"]
 [ext_resource type="TileSet" uid="uid://bord65n4suwnl" path="res://levels/Tilesets/prototyping_tileset.tres" id="2_hfjb6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ibo36fdoums8" path="res://levels/Tilesets/boxes.png" id="5_iupbm"]
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://UI/themes/MainTheme.tres" id="6_pblda"]
 [ext_resource type="AudioStream" uid="uid://cvpv6q3c6d8rw" path="res://levels/Ambiance1.mp3" id="7_1vq8n"]
+[ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/doors.tscn" id="8_vrunm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eaw1v"]
 texture = ExtResource("3_jwdsc")
@@ -1642,3 +1643,6 @@ volume_db = -10.0
 autoplay = true
 bus = &"Ambience"
 parameters/looping = true
+
+[node name="Doors" parent="." instance=ExtResource("8_vrunm")]
+position = Vector2(265, -63)

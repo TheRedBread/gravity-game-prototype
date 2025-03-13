@@ -1,6 +1,7 @@
 extends Node
 
 const BASIC_POST_PROCESS = preload("res://global elements/basic_post_process.tscn")
+@export var gravity_direction : int = 1
 
 
 

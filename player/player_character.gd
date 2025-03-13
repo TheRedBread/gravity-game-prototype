@@ -72,7 +72,6 @@ enum PlayerState {
 
 
 var spawn_gravity : int = 0
-var gravity_direction : int = 1
 var can_dash : bool = true
 
 var air_switch_amount : int = 1
@@ -101,7 +100,7 @@ var player_controls : bool = true
 func _ready() -> void:
 	current_acceleration = ACCELERATION
 	current_max_speed = MAX_SPEED
-	spawn_gravity = gravity_direction
+	spawn_gravity = GameManager.gravity_direction
 	spawn = position
 
 
@@ -111,10 +110,10 @@ func apply_friction(friction, delta):
 
 
 func apply_gravity(delta):
-	if GRAVITY*gravity_direction*delta + velocity.y * gravity_direction > MAX_FALLING_SPEED:
-		velocity.y += (MAX_FALLING_SPEED*(GRAVITY*gravity_direction/1000) - velocity.y)
+	if GRAVITY*GameManager.gravity_direction*delta + velocity.y * GameManager.gravity_direction > MAX_FALLING_SPEED:
+		velocity.y += (MAX_FALLING_SPEED*(GRAVITY*GameManager.gravity_direction/1000) - velocity.y)
 	else:
-		velocity.y = velocity.y + GRAVITY*gravity_direction * delta
+		velocity.y = velocity.y + GRAVITY*GameManager.gravity_direction * delta
 
 ## generates force to player while being on a slope
 func apply_slopes():
@@ -212,7 +211,7 @@ func count_dash_velocity(vsign):
 		velocity.x += DASH_STRENGHT * sign(vsign) * ((5000 - velocity.x)/5000)
 
 func get_slope_rotation(inverseY):
-	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*-gravity_direction)
+	return deg_to_rad(rad_to_deg(Vector2(inverseY * get_floor_normal().x, inverseY * get_floor_normal().y).angle()) - 90  * sign(get_floor_normal().x)*-GameManager.gravity_direction)
 
 func handle_snap_change():
 	if is_on_floor() && player_state == PlayerState.SLIDING:
@@ -328,13 +327,13 @@ func dash():
 		count_dash_velocity(-1)
 		dash_accelerate()
 		if is_on_floor():
-			velocity.y -= 0 * gravity_direction
+			velocity.y -= 0 * GameManager.gravity_direction
 		
 	if Input.is_action_pressed("move_right"):
 		count_dash_velocity(1)
 		dash_accelerate()
 		if is_on_floor():
-			velocity.y -= 0 * gravity_direction
+			velocity.y -= 0 * GameManager.gravity_direction
 	AudioManager.play_sound(DASH_SOUND, -20, 1, 1.1, 0.05, "Sound effects")
 
 func handle_dashing():
@@ -354,8 +353,8 @@ func handle_dashing():
 func handle_slam():
 	if Input.is_action_pressed("slide") and not is_on_floor():
 		if Input.is_action_just_pressed("slide"):
-			velocity.y += 100 * gravity_direction
-		velocity.y += 20 * gravity_direction
+			velocity.y += 100 * GameManager.gravity_direction
+		velocity.y += 20 * GameManager.gravity_direction
 		MAX_FALLING_SPEED = 3000
 	else:
 		MAX_FALLING_SPEED = 1500
@@ -368,9 +367,9 @@ func handle_abilities():
 	handle_gravity_switch()
 func gravity_switch():
 	AudioManager.play_sound(GRAVITY_CHANGE, -5, 0.02, 1, 0.2, "Sound effects")
-	gravity_direction *= -1
-	up_direction = Vector2(0, -gravity_direction)
-	velocity.y += SWITCH_SPEED*GRAVITY*gravity_direction
+	GameManager.gravity_direction *= -1
+	up_direction = Vector2(0, -GameManager.gravity_direction)
+	velocity.y += SWITCH_SPEED*GRAVITY*GameManager.gravity_direction
 	
 func input_switch():
 	if Input.is_action_just_pressed("switch"):
@@ -410,7 +409,7 @@ func handle_state():
 					player_state = PlayerState.SLIDING
 					
 					if is_on_floor():
-						velocity.y += 100 * gravity_direction
+						velocity.y += 100 * GameManager.gravity_direction
 					
 				else:
 					player_state = PlayerState.WALKING
@@ -469,7 +468,7 @@ func idle_anim():
 func slide_anim():
 
 	
-	if (gravity_direction == -1 and Input.is_action_just_pressed("slide")):
+	if (GameManager.gravity_direction == -1 and Input.is_action_just_pressed("slide")):
 		was_just_sliding = true
 	
 	player_sprite_animation.stop()
@@ -483,11 +482,11 @@ func moving_jump_anim():
 		player_sprite.frame = 16
 		eye_sprite.frame = 16
 	
-	elif (sign(velocity.y * gravity_direction) == -1):
+	elif (sign(velocity.y * GameManager.gravity_direction) == -1):
 		player_sprite.frame = 17
 		eye_sprite.frame = 17
 	
-	elif (sign(velocity.y * gravity_direction) == 1):
+	elif (sign(velocity.y * GameManager.gravity_direction) == 1):
 		player_sprite.frame = 18
 		eye_sprite.frame = 18
 
@@ -496,11 +495,11 @@ func standing_jump_anim():
 		player_sprite.frame = 41
 		eye_sprite.frame = 41
 		
-	elif (sign(velocity.y * gravity_direction) == -1):
+	elif (sign(velocity.y * GameManager.gravity_direction) == -1):
 		player_sprite.frame = 40
 		eye_sprite.frame = 40
 		
-	elif (sign(velocity.y * gravity_direction) == 1):
+	elif (sign(velocity.y * GameManager.gravity_direction) == 1):
 		player_sprite.frame = 42
 		eye_sprite.frame = 42
 
@@ -533,8 +532,8 @@ func handle_player_animation():
 	if (was_just_sliding):
 		position.y += 32
 	
-	player_sprite.scale.y = gravity_direction
-	eye_sprite.scale.y = gravity_direction
+	player_sprite.scale.y = GameManager.gravity_direction
+	eye_sprite.scale.y = GameManager.gravity_direction
 	
 	match player_state:
 		PlayerState.IDLE:
@@ -566,7 +565,7 @@ func handle_animations():
 func handle_particles():
 	var absolute_velocity = abs(velocity.x) + abs(velocity.y)
 	
-	if gravity_direction == 1:
+	if GameManager.gravity_direction == 1:
 		sliding_particles.position.y = -2
 		jumping_particles.position.y = -2
 		landing_particles.position.y = -2
@@ -581,20 +580,20 @@ func handle_particles():
 		
 	
 	
-	sliding_particles.direction.y = -gravity_direction
-	jumping_particles.direction.y = gravity_direction
-	landing_particles.direction.y = -gravity_direction
+	sliding_particles.direction.y = -GameManager.gravity_direction
+	jumping_particles.direction.y = GameManager.gravity_direction
+	landing_particles.direction.y = -GameManager.gravity_direction
 	
-	sliding_particles.gravity.y = 50 * gravity_direction
-	jumping_particles.gravity.y = 200 * gravity_direction
-	landing_particles.gravity.y = 100 * gravity_direction
+	sliding_particles.gravity.y = 50 * GameManager.gravity_direction
+	jumping_particles.gravity.y = 200 * GameManager.gravity_direction
+	landing_particles.gravity.y = 100 * GameManager.gravity_direction
 	
 	
 	
 	sliding_particles.initial_velocity_max = absolute_velocity/3
 	sliding_particles.initial_velocity_min = absolute_velocity/5
 	
-	sliding_particles.gravity.y = 100 * gravity_direction
+	sliding_particles.gravity.y = 100 * GameManager.gravity_direction
 	
 	if is_on_floor() and was_falling:
 		landing_particles.amount = int(land_force*5+1)
@@ -607,12 +606,12 @@ func handle_particles():
 func spawn_stable_particle(type):
 	var particle = STABLE_PARTICLE.instantiate()
 	particle.position = position + Vector2(0, -10)
-	particle.scale.y = gravity_direction
+	particle.scale.y = GameManager.gravity_direction
 	
 	if not velocity.x == 0:
 		particle.scale.x = sign(velocity.x)
 	
-	if gravity_direction == -1:
+	if GameManager.gravity_direction == -1:
 		particle.position += Vector2(0, -6)
 	
 	match type:
@@ -625,7 +624,7 @@ func spawn_stable_particle(type):
 		"land":
 			particle.selected_animation = particle.ParticleAnimations.LANDING
 			particle.position = position + Vector2(0, -9)
-			if gravity_direction == -1:
+			if GameManager.gravity_direction == -1:
 				particle.position += Vector2(0, -8)
 			
 		"step":
@@ -634,7 +633,7 @@ func spawn_stable_particle(type):
 		"dash":
 			particle.position = position + Vector2(0, -9)
 			particle.selected_animation = particle.ParticleAnimations.DASH
-			if gravity_direction == 1:
+			if GameManager.gravity_direction == 1:
 				particle.position += Vector2(0, -8)
 		
 		"dash_step":
@@ -668,7 +667,7 @@ func set_spawnpoint():
 	AudioManager.play_sound(SPAWNPOINT_CHECKED, -20, 0.02, 2, 0.1, "Sound effects")
 	GameSaveSystem.spawn_checked_count += 1
 	spawn = position
-	spawn_gravity = gravity_direction
+	spawn_gravity = GameManager.gravity_direction
 
 func spawn_limbs():
 	var limbs = DEATH_PARTICLES.instantiate()
@@ -676,7 +675,7 @@ func spawn_limbs():
 	limbs.get_child(0).emitting = true
 	limbs.get_child(1).emitting = true
 	limbs.get_child(2).emitting = true
-	var particle_gravity = Vector3(0, 250*gravity_direction, 0)
+	var particle_gravity = Vector3(0, 250*GameManager.gravity_direction, 0)
 	limbs.get_child(0).process_material.set("gravity", particle_gravity)
 	limbs.get_child(1).process_material.set("gravity", particle_gravity)
 	limbs.get_child(2).process_material.set("gravity", particle_gravity)
@@ -709,14 +708,14 @@ func die():
 	AudioManager.play_sound(DESTROYED, -15, 0.01, 1, 0.5, "Sound effects")
 	death_variable_reset()
 	await get_tree().create_timer(1).timeout
-	gravity_direction = spawn_gravity
+	GameManager.gravity_direction = spawn_gravity
 	
-	position = spawn + Vector2(0, -10)*gravity_direction
+	position = spawn + Vector2(0, -10)*GameManager.gravity_direction
 	player_controls = true
 	player_sprite.visible = true
 	eye_sprite.visible = true
 	
-	up_direction = Vector2(0, -gravity_direction)
+	up_direction = Vector2(0, -GameManager.gravity_direction)
 	
 
 
@@ -744,7 +743,7 @@ func handle_land_audio():
 	if is_on_floor() and was_falling:
 		land_audio()
 	
-	if velocity.y * gravity_direction > 0 and !is_on_floor():
+	if velocity.y * GameManager.gravity_direction > 0 and !is_on_floor():
 		was_falling = true
 		land_force += 0.15
 	
@@ -784,11 +783,11 @@ func _on_spawnpoint_detection_body_entered(_body: Node2D) -> void:
 	set_spawnpoint()
 	var checkpoint_particles = CHECKPOINT_PARTICLES.instantiate()
 	checkpoint_particles.get_child(0).emitting = true
-	checkpoint_particles.get_child(0).gravity = Vector2(0, 60 * gravity_direction)
+	checkpoint_particles.get_child(0).gravity = Vector2(0, 60 * GameManager.gravity_direction)
 	
-	checkpoint_particles.position = position + Vector2(0, -5 * gravity_direction)
-	if gravity_direction == 1:
-		checkpoint_particles.position = position + Vector2(0, -30 * gravity_direction)
+	checkpoint_particles.position = position + Vector2(0, -5 * GameManager.gravity_direction)
+	if GameManager.gravity_direction == 1:
+		checkpoint_particles.position = position + Vector2(0, -30 * GameManager.gravity_direction)
 		
 	
 	get_parent().add_child(checkpoint_particles)
