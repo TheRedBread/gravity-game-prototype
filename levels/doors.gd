@@ -5,6 +5,13 @@ extends AnimatableBody2D
 var state = "opened"
 var direction = -1
 
+func _ready() -> void:
+	if rotation < 90 and rotation > -90:
+		direction = -1
+	else:
+		direction = 1
+
+
 func _physics_process(delta: float) -> void:
 	if GameManager.gravity_direction * direction == 1 and not state == "opened":
 		state = "opening"

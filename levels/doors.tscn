@@ -14,7 +14,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 0.2)]
+"values": [Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -42,7 +42,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 0.2), Vector2(1, 1)]
+"values": [Vector2(1, 0), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -54,7 +54,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [PackedVector2Array(0, 0, 16, 0, 16, 13, 0, 13), PackedVector2Array(0, 0, 16, 0, 16, 64, 0, 64)]
+"values": [PackedVector2Array(0, 0, 16, 0, 16, 0, 0, 0), PackedVector2Array(0, 0, 16, 0, 16, 64, 0, 64)]
 }
 
 [sub_resource type="Animation" id="Animation_1tyfe"]
@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.2)]
+"values": [Vector2(1, 1), Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -82,7 +82,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [PackedVector2Array(0, 0, 16, 0, 16, 64, 0, 64), PackedVector2Array(0, 0, 16, 0, 16, 13, 0, 13)]
+"values": [PackedVector2Array(0, 0, 16, 0, 16, 64, 0, 64), PackedVector2Array(0, 0, 16, 0, 16, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_75tly"]
@@ -101,7 +101,7 @@ libraries = {
 }
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-scale = Vector2(1, 0.2)
+scale = Vector2(1, 1e-05)
 polygon = PackedVector2Array(0, 0, 0, 64, 16, 64, 16, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

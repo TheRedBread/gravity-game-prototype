@@ -561,6 +561,13 @@ func handle_player_animation():
 func handle_animations():
 	handle_player_animation()
 	handle_particles()
+	
+	player_sprite.scale.x = lerp(player_sprite.scale.x, 1 /clamp(1+abs(velocity.y)/2000, 1, 1.3), 0.15)
+	
+	eye_sprite.scale.x = lerp(eye_sprite.scale.x, 1 /clamp(1+abs(velocity.y)/2000, 1, 1.3), 0.15)
+	
+	
+	
 
 func handle_particles():
 	var absolute_velocity = abs(velocity.x) + abs(velocity.y)

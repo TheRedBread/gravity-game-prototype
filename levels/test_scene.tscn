@@ -1646,3 +1646,7 @@ parameters/looping = true
 
 [node name="Doors" parent="." instance=ExtResource("8_vrunm")]
 position = Vector2(265, -63)
+
+[node name="Doors2" parent="." instance=ExtResource("8_vrunm")]
+position = Vector2(88, -191)
+rotation = 3.14159
