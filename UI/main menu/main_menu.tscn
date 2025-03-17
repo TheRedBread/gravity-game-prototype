@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://cavvejidpcinq"]
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://UI/themes/MainTheme.tres" id="1_jpwtu"]
-[ext_resource type="Script" path="res://UI/main menu/main_menu.gd" id="2_nbubv"]
-[ext_resource type="Script" path="res://UI/parallax_background.gd" id="3_u3541"]
+[ext_resource type="Script" uid="uid://bcmriycpq4wi3" path="res://UI/main menu/main_menu.gd" id="2_nbubv"]
+[ext_resource type="Script" uid="uid://dgfyonvmv2fye" path="res://UI/parallax_background.gd" id="3_u3541"]
 [ext_resource type="Texture2D" uid="uid://cu8vrej6ewvcs" path="res://global elements/parallax/stars/Star1.png" id="4_acg0l"]
 [ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://global elements/parallax/stars/Star2.png" id="5_jxwij"]
 [ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://global elements/parallax/stars/Star3.png" id="6_lfhod"]
