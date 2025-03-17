@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnuckj6iaql0c"]
+
+[ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="1_xuonk"]
+[ext_resource type="Texture2D" uid="uid://b2bfqb0u4p2to" path="res://levels/Tilesets/lamp.png" id="2_df6wj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4pg1"]
+shader = ExtResource("1_xuonk")
+shader_parameter/BLOOM_THRESHOLD = 0.905
+shader_parameter/BLOOM_INTENSITY = 3.0
+shader_parameter/BLUR_ITERATIONS = 3
+shader_parameter/BLUR_SIZE = 0.03
+shader_parameter/BLUR_SUBDIVISIONS = 32
+
+[sub_resource type="Gradient" id="Gradient_kdcll"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j4pg1"]
+gradient = SubResource("Gradient_kdcll")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.491453, 0.487179)
+fill_to = Vector2(0.166667, 0.876068)
+
+[node name="Lamp" type="Sprite2D"]
+material = SubResource("ShaderMaterial_j4pg1")
+texture = ExtResource("2_df6wj")
+
+[node name="LampLight" type="PointLight2D" parent="."]
+energy = 0.4
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_j4pg1")
+texture_scale = 2.0

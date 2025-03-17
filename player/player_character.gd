@@ -580,7 +580,7 @@ func handle_particles():
 		
 	else:
 		sliding_particles.position.y = -24
-		landing_particles.position.y = -24
+		landing_particles.position.y = -10
 		jumping_particles.position.y = -24
 		
 		

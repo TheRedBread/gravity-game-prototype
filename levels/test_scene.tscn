@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cvpv6q3c6d8rw" path="res://levels/Ambiance1.mp3" id="7_1vq8n"]
 [ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/doors.tscn" id="8_vrunm"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eaw1v"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vrunm"]
 texture = ExtResource("3_jwdsc")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -378,7 +378,7 @@ texture = ExtResource("3_jwdsc")
 18:0/0/terrains_peering_bit/top_side = 0
 18:0/0/terrains_peering_bit/top_right_corner = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_45fn3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3iph"]
 texture = ExtResource("4_bgsya")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -810,7 +810,7 @@ texture = ExtResource("4_bgsya")
 12:0/0 = 0
 10:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xspp0"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vehgu"]
 texture = ExtResource("5_iupbm")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -1504,9 +1504,9 @@ terrain_set_0/terrain_3/name = "Boxes"
 terrain_set_0/terrain_3/color = Color(0.375, 0.5, 0.25, 1)
 terrain_set_0/terrain_4/name = "boxesBack"
 terrain_set_0/terrain_4/color = Color(0.28125, 0.5, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_eaw1v")
-sources/1 = SubResource("TileSetAtlasSource_45fn3")
-sources/2 = SubResource("TileSetAtlasSource_xspp0")
+sources/0 = SubResource("TileSetAtlasSource_vrunm")
+sources/1 = SubResource("TileSetAtlasSource_f3iph")
+sources/2 = SubResource("TileSetAtlasSource_vehgu")
 
 [node name="Test_scene" type="Node2D"]
 
