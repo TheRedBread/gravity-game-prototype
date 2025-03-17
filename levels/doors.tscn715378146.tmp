@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx58b4d7u32at"]
+[gd_scene load_steps=8 format=3 uid="uid://cx58b4d7u32at"]
 
 [ext_resource type="Script" uid="uid://bf5nksqkut8tk" path="res://levels/doors.gd" id="1_g5rw1"]
 [ext_resource type="Texture2D" uid="uid://dyx527ch5i6dd" path="res://levels/Tilesets/door_closing-Sheet.png" id="2_75tly"]
@@ -26,9 +26,6 @@ _data = {
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8cykf"]
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 63, 15, 63, 15, 64, 1, 64, 1, 63, 0, 63)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_75tly"]
-size = Vector2(16, 63)
-
 [node name="Doors" type="AnimatableBody2D"]
 position = Vector2(0, 24)
 collision_mask = 0
@@ -51,11 +48,3 @@ hframes = 6
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(-8, -32)
 occluder = SubResource("OccluderPolygon2D_8cykf")
-
-[node name="crashDetector" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="crashDetector"]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_75tly")

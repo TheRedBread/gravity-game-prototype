@@ -786,4 +786,5 @@ libraries = {
 }
 
 [connection signal="body_entered" from="SpawnpointDetection" to="." method="_on_spawnpoint_detection_body_entered"]
+[connection signal="area_entered" from="DeathDetection" to="." method="_on_death_detection_area_entered"]
 [connection signal="body_entered" from="DeathDetection" to="." method="_on_death_detection_body_entered"]

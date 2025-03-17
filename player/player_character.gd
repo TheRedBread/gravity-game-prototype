@@ -784,7 +784,14 @@ func _physics_process(delta):
 
 
 func _on_death_detection_body_entered(_body: Node2D) -> void:
+	print("player enters death body")
 	die()
+
+
+func _on_death_detection_area_entered(area: Area2D) -> void:
+	print("player enters death area")
+	die()
+
 
 func _on_spawnpoint_detection_body_entered(_body: Node2D) -> void:
 	set_spawnpoint()

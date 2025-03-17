@@ -21,6 +21,18 @@ func _physics_process(delta: float) -> void:
 	
 	var local_door_position = door_position - position
 	
+	
+	if GameManager.gravity_direction * direction == 1 and not state == "opened":
+		state = "opening"
+		velocity -= door_speed
+		
+	
+	if GameManager.gravity_direction * direction == -1 and not state == "closed":
+		state = "closing"
+		velocity += door_speed
+	
+	
+	
 	if local_door_position.y < 0:
 		state = "closed"
 		velocity = 0
@@ -33,21 +45,12 @@ func _physics_process(delta: float) -> void:
 		position.y = door_position.y - 58
 	
 	
-	if GameManager.gravity_direction * direction == 1 and not state == "opened":
-		state = "opening"
-		velocity -= door_speed
-		
-	
-	if GameManager.gravity_direction * direction == -1 and not state == "closed":
-		state = "closing"
-		velocity += door_speed
+
 		
 		
 	
 
 		
 	
-	print(state)
-	print(door_position - position)
 	
 	
