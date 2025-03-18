@@ -768,13 +768,13 @@ scale_amount_max = 2.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(1.27771, -18)
-energy = 0.2
+energy = 0.05
 texture = SubResource("GradientTexture2D_wi17q")
 texture_scale = 4.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(-111.722, -9)
-energy = 0.6
+energy = 0.8
 blend_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
