@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fov1ieoesbwa"
-path="res://.godot/imported/pod-Sheet.png-362cd0305019d247af07e8cc3b0dacc3.ctex"
+uid="uid://b2wmh7rrbkqb"
+path="res://.godot/imported/prototype_tilesetSlopesVer.png-b65b1160450949b71621c76d268a8176.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/pod-Sheet.png"
-dest_files=["res://.godot/imported/pod-Sheet.png-362cd0305019d247af07e8cc3b0dacc3.ctex"]
+source_file="res://levels/Tilesets/colliding tiles/prototype_tilesetSlopesVer.png"
+dest_files=["res://.godot/imported/prototype_tilesetSlopesVer.png-b65b1160450949b71621c76d268a8176.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2n2cksvtcwer"
-path="res://.godot/imported/cables.png-94b3c37ae58dbcfffd99e7f0e13423ae.ctex"
+uid="uid://t8jp3uej7p3q"
+path="res://.godot/imported/white_panels.png-d657f8c129e3339be096c97f7ae41ecc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/cables.png"
-dest_files=["res://.godot/imported/cables.png-94b3c37ae58dbcfffd99e7f0e13423ae.ctex"]
+source_file="res://levels/Tilesets/backgrounds/white_panels.png"
+dest_files=["res://.godot/imported/white_panels.png-d657f8c129e3339be096c97f7ae41ecc.ctex"]
 
 [params]
 

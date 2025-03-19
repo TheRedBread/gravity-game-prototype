@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyx527ch5i6dd"
-path="res://.godot/imported/door_closing-Sheet.png-5efd8cb978493ee0620a9655b238a561.ctex"
+uid="uid://fov1ieoesbwa"
+path="res://.godot/imported/pod-Sheet.png-6177ff6284994d4cf760259bf8dd13ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/door_closing-Sheet.png"
-dest_files=["res://.godot/imported/door_closing-Sheet.png-5efd8cb978493ee0620a9655b238a561.ctex"]
+source_file="res://levels/Tilesets/decorations/pod-Sheet.png"
+dest_files=["res://.godot/imported/pod-Sheet.png-6177ff6284994d4cf760259bf8dd13ca.ctex"]
 
 [params]
 

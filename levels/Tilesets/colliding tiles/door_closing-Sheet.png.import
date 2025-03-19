@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t8jp3uej7p3q"
-path="res://.godot/imported/white_panels.png-dc9956554d7719e61bf0d07be62451ec.ctex"
+uid="uid://dyx527ch5i6dd"
+path="res://.godot/imported/door_closing-Sheet.png-ca0975d1f62333befef5b6cd1e8b9561.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/white_panels.png"
-dest_files=["res://.godot/imported/white_panels.png-dc9956554d7719e61bf0d07be62451ec.ctex"]
+source_file="res://levels/Tilesets/colliding tiles/door_closing-Sheet.png"
+dest_files=["res://.godot/imported/door_closing-Sheet.png-ca0975d1f62333befef5b6cd1e8b9561.ctex"]
 
 [params]
 

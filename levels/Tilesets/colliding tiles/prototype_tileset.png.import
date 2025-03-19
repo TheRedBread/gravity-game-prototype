@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qyyw4ih26e31"
-path="res://.godot/imported/lamp_emmision.png-9ed13252a9b50ac7319b64a4cd25af62.ctex"
+uid="uid://qe0j2401k5be"
+path="res://.godot/imported/prototype_tileset.png-4a11e132725f1320600f8aafd13b019d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/lamp_emmision.png"
-dest_files=["res://.godot/imported/lamp_emmision.png-9ed13252a9b50ac7319b64a4cd25af62.ctex"]
+source_file="res://levels/Tilesets/colliding tiles/prototype_tileset.png"
+dest_files=["res://.godot/imported/prototype_tileset.png-4a11e132725f1320600f8aafd13b019d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u18jdahn5hqs"
-path="res://.godot/imported/greentilesetSlopesVer.png-87b52e65f44f326f2719bade105c6327.ctex"
+uid="uid://b2bfqb0u4p2to"
+path="res://.godot/imported/lamp.png-ed3ef4995d6bef8a327c4d68fb8ad533.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/greentilesetSlopesVer.png"
-dest_files=["res://.godot/imported/greentilesetSlopesVer.png-87b52e65f44f326f2719bade105c6327.ctex"]
+source_file="res://levels/Tilesets/decorations/lamp.png"
+dest_files=["res://.godot/imported/lamp.png-ed3ef4995d6bef8a327c4d68fb8ad533.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2wmh7rrbkqb"
-path="res://.godot/imported/prototype_tilesetSlopesVer.png-6509b05f7467125f96a345363a465617.ctex"
+uid="uid://c2n2cksvtcwer"
+path="res://.godot/imported/cables.png-927c6429a347922cd680f975cddf4bb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/prototype_tilesetSlopesVer.png"
-dest_files=["res://.godot/imported/prototype_tilesetSlopesVer.png-6509b05f7467125f96a345363a465617.ctex"]
+source_file="res://levels/Tilesets/decorations/cables.png"
+dest_files=["res://.godot/imported/cables.png-927c6429a347922cd680f975cddf4bb5.ctex"]
 
 [params]
 

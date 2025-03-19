@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cx58b4d7u32at"]
 
 [ext_resource type="Script" uid="uid://bf5nksqkut8tk" path="res://levels/doors.gd" id="1_g5rw1"]
-[ext_resource type="Texture2D" uid="uid://dyx527ch5i6dd" path="res://levels/Tilesets/door_closing-Sheet.png" id="2_75tly"]
+[ext_resource type="Texture2D" uid="uid://dyx527ch5i6dd" path="res://levels/Tilesets/colliding tiles/door_closing-Sheet.png" id="2_75tly"]
 
 [sub_resource type="Animation" id="Animation_g5rw1"]
 length = 0.001

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ibo36fdoums8"
-path="res://.godot/imported/boxes.png-17f5df16314d7d4bcf2147a2f257c312.ctex"
+uid="uid://cheiej8ctpd80"
+path="res://.godot/imported/wentlator-Sheet.png-0092e1ae3a8dd815ae0e2f7ad423784f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/boxes.png"
-dest_files=["res://.godot/imported/boxes.png-17f5df16314d7d4bcf2147a2f257c312.ctex"]
+source_file="res://levels/Tilesets/decorations/wentlator-Sheet.png"
+dest_files=["res://.godot/imported/wentlator-Sheet.png-0092e1ae3a8dd815ae0e2f7ad423784f.ctex"]
 
 [params]
 

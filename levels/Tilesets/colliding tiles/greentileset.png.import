@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cheiej8ctpd80"
-path="res://.godot/imported/wentlator-Sheet.png-3a81c360c435472294e967413b993a88.ctex"
+uid="uid://dthx21daup7ju"
+path="res://.godot/imported/greentileset.png-de1469e4a2b91fe372e2587ba15a24be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/wentlator-Sheet.png"
-dest_files=["res://.godot/imported/wentlator-Sheet.png-3a81c360c435472294e967413b993a88.ctex"]
+source_file="res://levels/Tilesets/colliding tiles/greentileset.png"
+dest_files=["res://.godot/imported/greentileset.png-de1469e4a2b91fe372e2587ba15a24be.ctex"]
 
 [params]
 

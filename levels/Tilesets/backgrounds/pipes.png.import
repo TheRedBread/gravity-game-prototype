@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcigvybwucxly"
-path="res://.godot/imported/tilesetSlopesVer.png-a948a0e2216095ef92f29f13d63da02f.ctex"
+uid="uid://cfb08p11b3k0v"
+path="res://.godot/imported/pipes.png-570fcdce092c908ba3d85beda573bd98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/tilesetSlopesVer.png"
-dest_files=["res://.godot/imported/tilesetSlopesVer.png-a948a0e2216095ef92f29f13d63da02f.ctex"]
+source_file="res://levels/Tilesets/backgrounds/pipes.png"
+dest_files=["res://.godot/imported/pipes.png-570fcdce092c908ba3d85beda573bd98.ctex"]
 
 [params]
 

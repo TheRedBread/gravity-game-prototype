@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drvk1tkbdqnvf"
-path="res://.godot/imported/graytileset.png-6d3f91b5bbd33d0481dfe3bb459c76bc.ctex"
+uid="uid://boclpwk04ukrr"
+path="res://.godot/imported/signs.png-36b349fbed4aed83f38e623979acf44e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/graytileset.png"
-dest_files=["res://.godot/imported/graytileset.png-6d3f91b5bbd33d0481dfe3bb459c76bc.ctex"]
+source_file="res://levels/Tilesets/decorations/signs.png"
+dest_files=["res://.godot/imported/signs.png-36b349fbed4aed83f38e623979acf44e.ctex"]
 
 [params]
 

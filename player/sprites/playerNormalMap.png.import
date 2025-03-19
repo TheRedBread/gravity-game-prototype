@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfb08p11b3k0v"
-path="res://.godot/imported/pipes.png-b9aca7d831ac07f52735788c9913cd61.ctex"
+uid="uid://bj7sm76gr8agf"
+path="res://.godot/imported/playerNormalMap.png-5c6f3bcccd1cee0546266dd9d128c9d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/pipes.png"
-dest_files=["res://.godot/imported/pipes.png-b9aca7d831ac07f52735788c9913cd61.ctex"]
+source_file="res://player/sprites/playerNormalMap.png"
+dest_files=["res://.godot/imported/playerNormalMap.png-5c6f3bcccd1cee0546266dd9d128c9d7.ctex"]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1

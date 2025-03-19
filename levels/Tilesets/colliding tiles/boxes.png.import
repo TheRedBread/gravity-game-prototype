@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boclpwk04ukrr"
-path="res://.godot/imported/signs.png-e6f21eb2e55b433ce1bd848b51a30554.ctex"
+uid="uid://ibo36fdoums8"
+path="res://.godot/imported/boxes.png-04062d4f6dc277d999a71e11bf9288be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/signs.png"
-dest_files=["res://.godot/imported/signs.png-e6f21eb2e55b433ce1bd848b51a30554.ctex"]
+source_file="res://levels/Tilesets/colliding tiles/boxes.png"
+dest_files=["res://.godot/imported/boxes.png-04062d4f6dc277d999a71e11bf9288be.ctex"]
 
 [params]
 

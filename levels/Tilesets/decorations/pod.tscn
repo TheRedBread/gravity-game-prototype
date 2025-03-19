@@ -1,7 +1,6 @@
-[gd_scene load_steps=45 format=3 uid="uid://j6hsrc2ou8a5"]
+[gd_scene load_steps=44 format=3 uid="uid://j6hsrc2ou8a5"]
 
-[ext_resource type="Script" uid="uid://dc42ljie2qtfi" path="res://levels/Tilesets/pod.gd" id="1_jfh4f"]
-[ext_resource type="Texture2D" uid="uid://fov1ieoesbwa" path="res://levels/Tilesets/pod-Sheet.png" id="2_jfh4f"]
+[ext_resource type="Texture2D" uid="uid://fov1ieoesbwa" path="res://levels/Tilesets/decorations/pod-Sheet.png" id="2_jfh4f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfh4f"]
 atlas = ExtResource("2_jfh4f")
@@ -299,8 +298,6 @@ animations = [{
 }]
 
 [node name="pod" type="Node2D"]
-script = ExtResource("1_jfh4f")
-direction = 1
 
 [node name="podAnimatedSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, -24)

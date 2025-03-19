@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qe0j2401k5be"
-path="res://.godot/imported/prototype_tileset.png-6773589d2c2486f5f51eff42604c7444.ctex"
+uid="uid://drvk1tkbdqnvf"
+path="res://.godot/imported/graytileset.png-2e75ad33658e55457b37b3d406c0df51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/prototype_tileset.png"
-dest_files=["res://.godot/imported/prototype_tileset.png-6773589d2c2486f5f51eff42604c7444.ctex"]
+source_file="res://levels/Tilesets/colliding tiles/graytileset.png"
+dest_files=["res://.godot/imported/graytileset.png-2e75ad33658e55457b37b3d406c0df51.ctex"]
 
 [params]
 

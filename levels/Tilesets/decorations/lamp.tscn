@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dnuckj6iaql0c"]
 
 [ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="1_xuonk"]
-[ext_resource type="Texture2D" uid="uid://b2bfqb0u4p2to" path="res://levels/Tilesets/lamp.png" id="2_df6wj"]
+[ext_resource type="Texture2D" uid="uid://b2bfqb0u4p2to" path="res://levels/Tilesets/decorations/lamp.png" id="2_df6wj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j4pg1"]
 shader = ExtResource("1_xuonk")
