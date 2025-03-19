@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=50 format=3 uid="uid://bord65n4suwnl"]
+[gd_resource type="TileSet" load_steps=51 format=3 uid="uid://bord65n4suwnl"]
 
 [ext_resource type="Texture2D" uid="uid://u18jdahn5hqs" path="res://levels/Tilesets/colliding tiles/greentilesetSlopesVer.png" id="1_gj3ec"]
 [ext_resource type="Texture2D" uid="uid://dthx21daup7ju" path="res://levels/Tilesets/colliding tiles/greentileset.png" id="2_bntfb"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://drvk1tkbdqnvf" path="res://levels/Tilesets/colliding tiles/graytileset.png" id="6_cmx2r"]
 [ext_resource type="PackedScene" uid="uid://hecqwfuelcaf" path="res://levels/Tilesets/decorations/wentylator.tscn" id="7_42e66"]
 [ext_resource type="PackedScene" uid="uid://dnuckj6iaql0c" path="res://levels/Tilesets/decorations/lamp.tscn" id="8_tdxi8"]
+[ext_resource type="PackedScene" uid="uid://crgam5wyajl0l" path="res://levels/Tilesets/decorations/green_console.tscn" id="9_bntfb"]
 [ext_resource type="Texture2D" uid="uid://boclpwk04ukrr" path="res://levels/Tilesets/decorations/signs.png" id="9_j5oq1"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tatcc"]
@@ -1076,6 +1077,7 @@ texture = ExtResource("6_cmx2r")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_lti7l"]
 scenes/1/scene = ExtResource("7_42e66")
 scenes/2/scene = ExtResource("8_tdxi8")
+scenes/5/scene = ExtResource("9_bntfb")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aea7e"]
 texture = ExtResource("9_j5oq1")

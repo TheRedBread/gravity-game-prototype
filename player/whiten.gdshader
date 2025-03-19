@@ -5,7 +5,7 @@ uniform float mix_weight = 1.0;
 
 
 void fragment() {
-
+	
 	vec4 texture_color = texture(TEXTURE, UV);
 	
 	if (whiten) {
