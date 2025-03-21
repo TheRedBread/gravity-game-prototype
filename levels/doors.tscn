@@ -1,27 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx58b4d7u32at"]
+[gd_scene load_steps=5 format=3 uid="uid://cx58b4d7u32at"]
 
 [ext_resource type="Script" uid="uid://bf5nksqkut8tk" path="res://levels/doors.gd" id="1_g5rw1"]
 [ext_resource type="Texture2D" uid="uid://dyx527ch5i6dd" path="res://levels/Tilesets/colliding tiles/door_closing-Sheet.png" id="2_75tly"]
-
-[sub_resource type="Animation" id="Animation_g5rw1"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_75tly"]
-resource_name = "close"
-length = 0.05
-step = 0.005
-
-[sub_resource type="Animation" id="Animation_1tyfe"]
-resource_name = "open"
-length = 0.05
-step = 0.005
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_75tly"]
-_data = {
-&"RESET": SubResource("Animation_g5rw1"),
-&"close": SubResource("Animation_75tly"),
-&"open": SubResource("Animation_1tyfe")
-}
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8cykf"]
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 63, 15, 63, 15, 64, 1, 64, 1, 63, 0, 63)
@@ -33,12 +13,7 @@ size = Vector2(16, 63)
 position = Vector2(0, 24)
 collision_mask = 0
 script = ExtResource("1_g5rw1")
-
-[node name="animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_75tly")
-}
-speed_scale = 0.1
+door_speed = 0.05
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-8, -32)

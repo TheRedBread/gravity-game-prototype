@@ -4,6 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://bg0bnckvxubj0" path="res://levels/Tilesets/decorations/greenConsole-Sheet.png" id="1_tfa1x"]
 [ext_resource type="Texture2D" uid="uid://bpvhm1bupho38" path="res://levels/Tilesets/decorations/greenConsoleScreen-Sheet.png" id="3_p6pb0"]
 
+[sub_resource type="Animation" id="Animation_t64h1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_tfa1x"]
 resource_name = "blink"
 loop_mode = 1
@@ -19,21 +34,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 0]
-}
-
-[sub_resource type="Animation" id="Animation_t64h1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p6pb0"]

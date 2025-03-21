@@ -1,11 +1,19 @@
 extends Node2D
 
-@onready var pod_animated_sprite: AnimatedSprite2D = $podAnimatedSprite
+@onready var bubbles_animated_sprite: AnimatedSprite2D = $bubblesAnimatedSprite
+@onready var robot_sprite: Sprite2D = $robotSprite
+
 @export_range(-1, 1, 2) var direction : int
+@export_range(-1, 9, 1) var robot_variation : int = -1
 
 func _ready() -> void:
 	if direction == -1:
-		pod_animated_sprite.flip_h = true
+		bubbles_animated_sprite.flip_h = true
 	else:
-		pod_animated_sprite.flip_h = false
+		bubbles_animated_sprite.flip_h = false
+	
+	if robot_variation == -1:
+		robot_sprite.frame = randi_range(0, 9)
+	else:
+		robot_sprite.frame = robot_variation
 		

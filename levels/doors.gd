@@ -1,5 +1,4 @@
 extends AnimatableBody2D
-@onready var animation: AnimationPlayer = $animation
 @export var door_speed : float = 0.1
 
 var state = "opened"
