@@ -3,6 +3,8 @@ shader_type canvas_item;
 
 uniform float BLOOM_THRESHOLD = 0.7;
 uniform float BLOOM_INTENSITY = 3.0;
+uniform float OPACITY = 0;
+
 
 uniform int BLUR_ITERATIONS = 3;
 uniform float BLUR_SIZE = 0.03;
@@ -49,4 +51,8 @@ void fragment() {
 	final = bg + tx;
 
     COLOR = final;
+	
+	if (COLOR.a > 1.0) {
+	COLOR.a = OPACITY+0.2;
+	}
 }

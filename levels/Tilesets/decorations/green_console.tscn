@@ -46,6 +46,7 @@ _data = {
 shader = ExtResource("1_t64h1")
 shader_parameter/BLOOM_THRESHOLD = 0.25
 shader_parameter/BLOOM_INTENSITY = 1.0
+shader_parameter/OPACITY = 0.0
 shader_parameter/BLUR_ITERATIONS = 15
 shader_parameter/BLUR_SIZE = 0.01
 shader_parameter/BLUR_SUBDIVISIONS = 100

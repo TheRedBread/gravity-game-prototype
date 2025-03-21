@@ -661,7 +661,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_ce6h6")
 }
 
-[node name="playerSprite" type="Sprite2D" parent="." groups=["PP"]]
+[node name="playerSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_3d672")
 position = Vector2(0, -13)
 texture = ExtResource("9_vx43m")

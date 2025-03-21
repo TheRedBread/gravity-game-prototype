@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnuckj6iaql0c"]
+[gd_scene load_steps=8 format=3 uid="uid://dnuckj6iaql0c"]
 
 [ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="1_xuonk"]
 [ext_resource type="Texture2D" uid="uid://b2bfqb0u4p2to" path="res://levels/Tilesets/decorations/lamp.png" id="2_df6wj"]
+[ext_resource type="Script" uid="uid://dcnupdp2rucu3" path="res://levels/Tilesets/decorations/lamp.gd" id="3_yw8ja"]
+[ext_resource type="Texture2D" uid="uid://qyyw4ih26e31" path="res://levels/Tilesets/decorations/lamp_emmision.png" id="4_coi52"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4pg1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_coi52"]
+resource_local_to_scene = true
 shader = ExtResource("1_xuonk")
-shader_parameter/BLOOM_THRESHOLD = 0.905
-shader_parameter/BLOOM_INTENSITY = 3.0
-shader_parameter/BLUR_ITERATIONS = 3
+shader_parameter/BLOOM_THRESHOLD = 0.8
+shader_parameter/BLOOM_INTENSITY = 1.0
+shader_parameter/OPACITY = 0.0
+shader_parameter/BLUR_ITERATIONS = 5
 shader_parameter/BLUR_SIZE = 0.03
 shader_parameter/BLUR_SUBDIVISIONS = 32
 
@@ -23,9 +27,13 @@ fill_from = Vector2(0.491453, 0.487179)
 fill_to = Vector2(0.166667, 0.876068)
 
 [node name="Lamp" type="Sprite2D"]
-material = SubResource("ShaderMaterial_j4pg1")
-position = Vector2(8, 0)
+position = Vector2(8, 1)
 texture = ExtResource("2_df6wj")
+script = ExtResource("3_yw8ja")
+
+[node name="Lights" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_coi52")
+texture = ExtResource("4_coi52")
 
 [node name="LampLight" type="PointLight2D" parent="."]
 energy = 0.7

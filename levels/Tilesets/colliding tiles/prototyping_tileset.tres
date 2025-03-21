@@ -788,7 +788,6 @@ texture = ExtResource("6_cmx2r")
 10:1/0/terrain_set = 1
 10:1/0/terrain = 0
 10:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fws6w")
-10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:1/0/terrains_peering_bit/right_side = 0
 10:1/0/terrains_peering_bit/bottom_right_corner = 0
 10:1/0/terrains_peering_bit/bottom_side = 0
