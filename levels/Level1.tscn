@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://doesro7l1goe6"]
+[gd_scene load_steps=26 format=4 uid="uid://doesro7l1goe6"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://player/player_character.tscn" id="1_cr8f5"]
 [ext_resource type="TileSet" uid="uid://bord65n4suwnl" path="res://levels/Tilesets/colliding tiles/prototyping_tileset.tres" id="2_gqfrg"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/doors.tscn" id="10_kdcll"]
 [ext_resource type="Texture2D" uid="uid://cheiej8ctpd80" path="res://levels/Tilesets/decorations/wentlator-Sheet.png" id="11_j4pg1"]
 [ext_resource type="PackedScene" uid="uid://j6hsrc2ou8a5" path="res://levels/Tilesets/decorations/pod.tscn" id="12_kdcll"]
+[ext_resource type="Texture2D" uid="uid://o6n17ywmy17i" path="res://levels/Tilesets/decorations/claw.png" id="14_nu2w0"]
+[ext_resource type="Script" uid="uid://loel07v7y3fu" path="res://levels/pixel_line.gd" id="15_rv5to"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdcll"]
 texture = ExtResource("3_dkril")
@@ -2636,3 +2638,13 @@ position = Vector2(-512, 232)
 z_index = -2
 position = Vector2(-528, 232)
 scale = Vector2(-1, 1)
+
+[node name="Claw" type="Sprite2D" parent="."]
+position = Vector2(-712, 195)
+rotation = 1.57079
+texture = ExtResource("14_nu2w0")
+flip_v = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-74, 165)
+script = ExtResource("15_rv5to")
