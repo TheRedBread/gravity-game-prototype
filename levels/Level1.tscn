@@ -2609,14 +2609,17 @@ parameters/looping = true
 
 [node name="Lamp" parent="." instance=ExtResource("13_j4pg1")]
 position = Vector2(-504, 166)
-lamp_type = 1
+light_type = 1
+lamp_sprite_variation = 2
+sparking = true
 
 [node name="Lamp2" parent="." instance=ExtResource("13_j4pg1")]
 position = Vector2(-408, 167)
 
 [node name="Lamp3" parent="." instance=ExtResource("13_j4pg1")]
 position = Vector2(-328, 166)
+light_type = 1
 
 [node name="Lamp4" parent="." instance=ExtResource("13_j4pg1")]
 position = Vector2(-152, 167)
-lamp_type = 1
+lamp_sprite_variation = 1

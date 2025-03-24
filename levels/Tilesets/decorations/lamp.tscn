@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnuckj6iaql0c"]
+[gd_scene load_steps=10 format=3 uid="uid://dnuckj6iaql0c"]
 
 [ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="1_xuonk"]
 [ext_resource type="Texture2D" uid="uid://b2bfqb0u4p2to" path="res://levels/Tilesets/decorations/lamp.png" id="2_df6wj"]
@@ -26,18 +26,51 @@ fill = 1
 fill_from = Vector2(0.491453, 0.487179)
 fill_to = Vector2(0.166667, 0.876068)
 
+[sub_resource type="Gradient" id="Gradient_coi52"]
+offsets = PackedFloat32Array(0.942308, 1)
+colors = PackedColorArray(0.510816, 0.733544, 0.861869, 1, 0.989825, 1, 0.756121, 1)
+
+[sub_resource type="Gradient" id="Gradient_ba88j"]
+offsets = PackedFloat32Array(0.0352564, 0.099359)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
 [node name="Lamp" type="Sprite2D"]
 position = Vector2(8, 1)
 texture = ExtResource("2_df6wj")
+hframes = 3
 script = ExtResource("3_yw8ja")
 
 [node name="Lights" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_coi52")
 texture = ExtResource("4_coi52")
+hframes = 3
 
 [node name="LampLight" type="PointLight2D" parent="."]
+position = Vector2(-11, 0)
 energy = 0.7
 shadow_enabled = true
 shadow_filter = 2
 shadow_filter_smooth = 1.0
 texture = SubResource("GradientTexture2D_j4pg1")
+
+[node name="sparkingParticles" type="CPUParticles2D" parent="."]
+position = Vector2(9, -1)
+amount = 16
+lifetime = 3.0
+preprocess = 0.1
+explosiveness = 0.9
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+spread = 180.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angle_min = -180.0
+angle_max = 180.0
+color = Color(5, 5, 5, 1)
+color_ramp = SubResource("Gradient_coi52")
+color_initial_ramp = SubResource("Gradient_ba88j")

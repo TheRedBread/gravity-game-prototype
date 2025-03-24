@@ -2,27 +2,40 @@ extends Sprite2D
 
 @onready var lamp_light: PointLight2D = $LampLight
 @onready var lights: Sprite2D = $Lights
+@onready var sparking_particles: CPUParticles2D = $sparkingParticles
 
-enum LampType{
+
+enum LightningType{
 	Normal,
 	Blinking,
-	Overgrown,
-	Sparking
+	Off,
 }
 
-@export var lamp_type : LampType
+@export var light_type : LightningType
+@export var lamp_sprite_variation : int = 0
+@export var sparking : bool = false
+
 var brightness : float = 1
 var brightness_target : float = 1
 
+func _ready() -> void:
+	handle_sprite_variations()
+
+
 func _physics_process(delta: float) -> void:
-	match lamp_type:
-		LampType.Normal:
-			pass
-		LampType.Blinking:
-			handle_blinkging()
-	lights.material.set_shader_parameter("OPACITY", brightness)
-	lamp_light.energy = brightness/1.4
+	if light_type == LightningType.Blinking:
+		handle_blinkging()
+	elif light_type == LightningType.Off:
+		brightness = 0
 	
+	sparking_particles.emitting = sparking
+	
+	lights.material.set_shader_parameter("OPACITY", brightness)
+	
+	lamp_light.energy = brightness/1.4
+	if brightness == 0:
+		lights.material.set_shader_parameter("OPACITY", 0)
+		lamp_light.energy = 0
 
 
 func handle_blinkging():
@@ -34,3 +47,7 @@ func handle_blinkging():
 	
 	
 	brightness = lerpf(brightness, brightness_target, 1)
+
+func handle_sprite_variations():
+	lights.frame = lamp_sprite_variation
+	frame = lamp_sprite_variation

@@ -53,6 +53,10 @@ void fragment() {
     COLOR = final;
 	
 	if (COLOR.a > 1.0) {
-	COLOR.a = OPACITY+0.2;
+		if (OPACITY == 0.){
+			COLOR.a = 0.;
+		}else{
+		COLOR.a = OPACITY+0.2;
+		}
 	}
 }
