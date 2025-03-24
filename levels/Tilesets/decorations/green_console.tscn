@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://crgam5wyajl0l"]
 
 [ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="1_t64h1"]
-[ext_resource type="Texture2D" uid="uid://bg0bnckvxubj0" path="res://levels/Tilesets/decorations/greenConsole-Sheet.png" id="1_tfa1x"]
-[ext_resource type="Texture2D" uid="uid://bpvhm1bupho38" path="res://levels/Tilesets/decorations/greenConsoleScreen-Sheet.png" id="3_p6pb0"]
+[ext_resource type="Texture2D" uid="uid://bg0bnckvxubj0" path="res://levels/Tilesets/decorations/green_console-Sheet.png" id="1_tfa1x"]
+[ext_resource type="Texture2D" uid="uid://bpvhm1bupho38" path="res://levels/Tilesets/decorations/green_console_screen-sheet.png" id="3_p6pb0"]
 
 [sub_resource type="Animation" id="Animation_t64h1"]
 length = 0.001

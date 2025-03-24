@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpvhm1bupho38"
-path="res://.godot/imported/greenConsoleScreen-Sheet.png-b1f83e3f69493970e2495481773cb5bb.ctex"
+uid="uid://cyggrr4dom6pg"
+path="res://.godot/imported/prototype_spikes.png-d2421d4e57e5be6d4a6eeef8983d1940.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/decorations/greenConsoleScreen-Sheet.png"
-dest_files=["res://.godot/imported/greenConsoleScreen-Sheet.png-b1f83e3f69493970e2495481773cb5bb.ctex"]
+source_file="res://levels/Tilesets/prototype_spikes.png"
+dest_files=["res://.godot/imported/prototype_spikes.png-d2421d4e57e5be6d4a6eeef8983d1940.ctex"]
 
 [params]
 

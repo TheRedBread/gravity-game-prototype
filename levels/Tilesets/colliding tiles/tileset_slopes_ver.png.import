@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fa8be3lqh0es"
-path="res://.godot/imported/wentylator-variations.png-7839997f1d5ec25e1784e5cc507de25e.ctex"
+uid="uid://dcigvybwucxly"
+path="res://.godot/imported/tileset_slopes_ver.png-32eb88ea7a1b88f25236296dc1944198.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/decorations/wentylator-variations.png"
-dest_files=["res://.godot/imported/wentylator-variations.png-7839997f1d5ec25e1784e5cc507de25e.ctex"]
+source_file="res://levels/Tilesets/colliding tiles/tileset_slopes_ver.png"
+dest_files=["res://.godot/imported/tileset_slopes_ver.png-32eb88ea7a1b88f25236296dc1944198.ctex"]
 
 [params]
 

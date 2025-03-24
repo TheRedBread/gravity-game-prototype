@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u18jdahn5hqs"
-path="res://.godot/imported/greentilesetSlopesVer.png-c880a2db608e6b66d9f172447eb03b36.ctex"
+uid="uid://qe4gol26sef3"
+path="res://.godot/imported/rails.png-2e58e8ffa6c1b0994ea7bb4c10ce2808.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/colliding tiles/greentilesetSlopesVer.png"
-dest_files=["res://.godot/imported/greentilesetSlopesVer.png-c880a2db608e6b66d9f172447eb03b36.ctex"]
+source_file="res://levels/Tilesets/decorations/rails.png"
+dest_files=["res://.godot/imported/rails.png-2e58e8ffa6c1b0994ea7bb4c10ce2808.ctex"]
 
 [params]
 

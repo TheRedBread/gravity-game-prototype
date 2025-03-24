@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2wmh7rrbkqb"
-path="res://.godot/imported/prototype_tilesetSlopesVer.png-b65b1160450949b71621c76d268a8176.ctex"
+uid="uid://cqug3iv1i23ee"
+path="res://.godot/imported/big_claw.png-3c9538e4f9b78bda701d47599641371f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/colliding tiles/prototype_tilesetSlopesVer.png"
-dest_files=["res://.godot/imported/prototype_tilesetSlopesVer.png-b65b1160450949b71621c76d268a8176.ctex"]
+source_file="res://levels/Tilesets/decorations/big_claw.png"
+dest_files=["res://.godot/imported/big_claw.png-3c9538e4f9b78bda701d47599641371f.ctex"]
 
 [params]
 
