@@ -1,5 +1,5 @@
 extends Camera2D
-@export var camera_desired_position_lerp : float = 2
+@export var camera_desired_position_lerp : float = 0.05
 @export var lerp_amount : float = 0.3
 
 
@@ -24,4 +24,5 @@ func get_camera_desired_position2():
 
 
 func _process(delta: float) -> void:
-	position = position.lerp((get_camera_desired_position1()+get_camera_desired_position3())/2, delta * camera_desired_position_lerp)
+	position.x = lerp(position.x, (get_camera_desired_position1().x+get_camera_desired_position3().x)/2, delta*60 * camera_desired_position_lerp)
+	position.y = lerp(position.y, GameManager.gravity_direction*-25.0, 0.06)

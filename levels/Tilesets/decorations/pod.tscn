@@ -316,4 +316,5 @@ vframes = 4
 [node name="bubblesAnimatedSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, -24)
 sprite_frames = SubResource("SpriteFrames_tofd3")
+autoplay = "default"
 frame_progress = 0.223987
