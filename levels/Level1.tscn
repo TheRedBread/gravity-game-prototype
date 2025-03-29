@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://doesro7l1goe6"]
+[gd_scene load_steps=36 format=4 uid="uid://doesro7l1goe6"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://player/player_character.tscn" id="1_cr8f5"]
 [ext_resource type="TileSet" uid="uid://bord65n4suwnl" path="res://levels/Tilesets/colliding tiles/prototyping_tileset.tres" id="2_gqfrg"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://j6hsrc2ou8a5" path="res://levels/Tilesets/decorations/pod.tscn" id="16_j4mar"]
 [ext_resource type="PackedScene" uid="uid://crgam5wyajl0l" path="res://levels/Tilesets/decorations/green_console.tscn" id="19_0bnej"]
 [ext_resource type="PackedScene" uid="uid://f6xubyrfspxg" path="res://levels/box.tscn" id="20_audcl"]
+[ext_resource type="PackedScene" uid="uid://b5ryhket3022u" path="res://levels/pressure_plate.tscn" id="21_ccxey"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j4mar"]
 texture = ExtResource("12_rv5to")
@@ -3023,3 +3024,6 @@ position = Vector2(456, 200)
 
 [node name="Box" parent="." instance=ExtResource("20_audcl")]
 position = Vector2(73, 168)
+
+[node name="PressurePlate" parent="." instance=ExtResource("21_ccxey")]
+position = Vector2(608, 233)
