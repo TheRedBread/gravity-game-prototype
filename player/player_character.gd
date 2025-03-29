@@ -292,6 +292,12 @@ func handle_vertical_movement(delta):
 	else:
 		apply_friction(get_current_friction(), delta)
 
+func handle_box_pushing():
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody2D:
+			c.get_collider().apply_central_impulse(-c.get_normal()*BOX_PUSH_FORCE)
+
 #jump
 func handle_jump():
 	if clicked_jump and was_on_floor:
@@ -425,7 +431,6 @@ func handle_state():
 	
 	if no_clip:
 		player_state = PlayerState.FLYING
-
 
 func handle_flying():
 	if Input.is_action_pressed("ui_left"):
@@ -782,15 +787,8 @@ func _physics_process(delta):
 	
 	
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody2D:
-			print(velocity.y)
-			if abs(velocity.y) > 10:
-				c.get_collider().apply_central_impulse(-c.get_normal()*BOX_PUSH_FORCE/2)
-				c.get_collider().apply_central_impulse(Vector2(20*randi_range(-1, 1), 0))
-				
-			c.get_collider().apply_central_impulse(-c.get_normal()*BOX_PUSH_FORCE)
+	handle_box_pushing()
+
 	
 
 
