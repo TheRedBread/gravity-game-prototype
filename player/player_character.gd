@@ -34,7 +34,7 @@ extends CharacterBody2D
 @export var SWITCH_TIMER : float = 0.1
 @export var SWITCH_SPEED : float = 0.2
 @export var GRAVITY : float = 800
-
+@export var BOX_PUSH_FORCE : float = 80.0
 
 #------------------------- PRELOADS ------------------------------#
 const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
@@ -779,7 +779,19 @@ func _physics_process(delta):
 	handle_movement(delta)
 	handle_animations()
 	handle_audio()
+	
+	
 	move_and_slide()
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody2D:
+			print(velocity.y)
+			if abs(velocity.y) > 10:
+				c.get_collider().apply_central_impulse(-c.get_normal()*BOX_PUSH_FORCE/2)
+				c.get_collider().apply_central_impulse(Vector2(20*randi_range(-1, 1), 0))
+				
+			c.get_collider().apply_central_impulse(-c.get_normal()*BOX_PUSH_FORCE)
+	
 
 
 

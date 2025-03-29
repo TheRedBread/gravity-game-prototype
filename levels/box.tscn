@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://f6xubyrfspxg"]
+
+[ext_resource type="Script" uid="uid://dfntu85ocw11b" path="res://levels/box.gd" id="1_xlutm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xlutm"]
+friction = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xlutm"]
+radius = 8.0
+
+[node name="Box" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 3
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_xlutm")
+lock_rotation = true
+script = ExtResource("1_xlutm")
+
+[node name="BoxCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xlutm")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.345989, 0.495097, 0.760733, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

@@ -614,6 +614,7 @@ z_index = 1
 position = Vector2(0, 1)
 scale = Vector2(1.00805, 1)
 collision_layer = 2
+collision_mask = 17
 floor_stop_on_slope = false
 floor_max_angle = 1.309
 floor_snap_length = 10.0
