@@ -1,0 +1,5 @@
+[gd_resource type="Gradient" format=3 uid="uid://j4a5cqax2txi"]
+
+[resource]
+resource_local_to_scene = true
+colors = PackedColorArray(0.317647, 0.560784, 0.282353, 1, 0, 0, 0, 1)
