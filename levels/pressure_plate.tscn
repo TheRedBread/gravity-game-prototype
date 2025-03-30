@@ -4,17 +4,14 @@
 [ext_resource type="Script" uid="uid://bek6muld67ln7" path="res://levels/pressure_plate.gd" id="2_n667r"]
 [ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="3_i4rw8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4rw8"]
-size = Vector2(32, 5)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mc7ro"]
 shader = ExtResource("3_i4rw8")
 shader_parameter/BLOOM_THRESHOLD = 0.65
 shader_parameter/BLOOM_INTENSITY = 6.0
 shader_parameter/OPACITY = 0.5
-shader_parameter/BLUR_ITERATIONS = 6
+shader_parameter/BLUR_ITERATIONS = 3
 shader_parameter/BLUR_SIZE = 0.02
-shader_parameter/BLUR_SUBDIVISIONS = 32
+shader_parameter/BLUR_SUBDIVISIONS = 64
 
 [sub_resource type="Gradient" id="Gradient_i4rw8"]
 colors = PackedColorArray(0.647059, 0.690196, 0.713726, 1, 0, 0, 0, 1)
@@ -27,12 +24,28 @@ fill = 1
 fill_from = Vector2(0.487179, 0.491453)
 fill_to = Vector2(0.811966, 0.183761)
 
-[node name="PressurePlate" type="Sprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4rw8"]
+size = Vector2(32, 5)
+
+[node name="PressurePlate" type="Node2D"]
+script = ExtResource("2_n667r")
+metadata/_custom_type_script = "uid://cggxrmqeulsxp"
+
+[node name="PressurePlate" type="Sprite2D" parent="."]
 texture = ExtResource("1_xaqss")
 hframes = 2
-script = ExtResource("2_n667r")
+
+[node name="PressurePlateGlow" type="Sprite2D" parent="PressurePlate"]
+material = SubResource("ShaderMaterial_mc7ro")
+texture = ExtResource("1_xaqss")
+hframes = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="PressurePlate"]
+energy = 0.3
+texture = SubResource("GradientTexture2D_mc7ro")
 
 [node name="PressureAreaPlayerDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -48,15 +61,6 @@ collision_mask = 16
 [node name="BoxPressionCollisionShape" type="CollisionShape2D" parent="PressureAreaBoxDetector"]
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_i4rw8")
-
-[node name="PressurePlateGlow" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_mc7ro")
-texture = ExtResource("1_xaqss")
-hframes = 2
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.3
-texture = SubResource("GradientTexture2D_mc7ro")
 
 [connection signal="body_entered" from="PressureAreaPlayerDetector" to="." method="_on_pressure_area_player_detector_body_entered"]
 [connection signal="body_exited" from="PressureAreaPlayerDetector" to="." method="_on_pressure_area_player_detector_body_exited"]

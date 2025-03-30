@@ -621,7 +621,6 @@ floor_snap_length = 10.0
 script = ExtResource("1_c2kd2")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_2ywmw")
 

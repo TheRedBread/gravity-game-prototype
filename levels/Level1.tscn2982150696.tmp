@@ -3028,11 +3028,10 @@ position = Vector2(296, 233)
 [node name="PressurePlate" parent="." instance=ExtResource("21_ccxey")]
 position = Vector2(608, 233)
 
-[node name="Doors" parent="." node_paths=PackedStringArray("power_supply") instance=ExtResource("10_kdcll")]
+[node name="Doors" parent="." instance=ExtResource("10_kdcll")]
 position = Vector2(672, 209)
 reversed = false
-door_type = 1
-power_supply = NodePath("../PressurePlate")
+door_type = 0
 
 [node name="Doors2" parent="." instance=ExtResource("10_kdcll")]
 position = Vector2(-96, 209)

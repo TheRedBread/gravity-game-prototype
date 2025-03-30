@@ -14,12 +14,15 @@ position = Vector2(0, 24)
 collision_mask = 0
 script = ExtResource("1_g5rw1")
 door_speed = 0.05
+reversed = null
+door_type = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-8, -32)
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 64, 0, 64)
 
 [node name="DoorSprite" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("2_75tly")
 hframes = 6
 
