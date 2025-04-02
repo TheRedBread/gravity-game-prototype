@@ -9,9 +9,9 @@
 resource_local_to_scene = true
 shader = ExtResource("1_xuonk")
 shader_parameter/BLOOM_THRESHOLD = 0.8
-shader_parameter/BLOOM_INTENSITY = 1.4
-shader_parameter/OPACITY = 0.0
-shader_parameter/BLUR_ITERATIONS = 3
+shader_parameter/BLOOM_INTENSITY = 1.5
+shader_parameter/OPACITY = 1.0
+shader_parameter/BLUR_ITERATIONS = 5
 shader_parameter/BLUR_SIZE = 0.03
 shader_parameter/BLUR_SUBDIVISIONS = 32
 
@@ -37,13 +37,13 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 [node name="Lamp" type="Sprite2D"]
 position = Vector2(8, 1)
 texture = ExtResource("2_df6wj")
-hframes = 3
+hframes = 4
 script = ExtResource("3_yw8ja")
 
 [node name="Lights" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_coi52")
 texture = ExtResource("4_coi52")
-hframes = 3
+hframes = 4
 
 [node name="LampLight" type="PointLight2D" parent="."]
 position = Vector2(-11, 0)

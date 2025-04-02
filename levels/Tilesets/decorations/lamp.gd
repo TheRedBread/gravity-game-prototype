@@ -14,6 +14,8 @@ enum LightningType{
 @export var light_type : LightningType
 @export var lamp_sprite_variation : int = 0
 @export var sparking : bool = false
+@export var brightness_scale : float = 1
+
 
 var brightness : float = 1
 var brightness_target : float = 1
@@ -30,9 +32,9 @@ func _physics_process(delta: float) -> void:
 	
 	sparking_particles.emitting = sparking
 	
-	lights.material.set_shader_parameter("OPACITY", brightness)
+	lights.material.set_shader_parameter("OPACITY", brightness * brightness_scale)
 	
-	lamp_light.energy = brightness/1.4
+	lamp_light.energy = brightness/1.4*brightness_scale
 	if brightness == 0:
 		lights.material.set_shader_parameter("OPACITY", 0)
 		lamp_light.energy = 0
