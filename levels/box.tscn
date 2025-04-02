@@ -16,7 +16,7 @@ shader_parameter/BLOOM_THRESHOLD = 0.92
 shader_parameter/BLOOM_INTENSITY = 5.0
 shader_parameter/OPACITY = 1.0
 shader_parameter/BLUR_ITERATIONS = 5
-shader_parameter/BLUR_SIZE = 0.03
+shader_parameter/BLUR_SIZE = 0.02
 shader_parameter/BLUR_SUBDIVISIONS = 32
 
 [node name="Box" type="RigidBody2D"]

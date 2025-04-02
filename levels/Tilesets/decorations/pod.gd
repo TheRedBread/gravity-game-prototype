@@ -4,7 +4,7 @@ extends Node2D
 @onready var robot_sprite: Sprite2D = $robotSprite
 
 @export_range(-1, 1, 2) var direction : int
-@export_range(-1, 9, 1) var robot_variation : int = -1
+@export_range(-1, 10, 1) var robot_variation : int = -1
 
 func _ready() -> void:
 	if direction == -1:
