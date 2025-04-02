@@ -9,9 +9,9 @@
 resource_local_to_scene = true
 shader = ExtResource("1_xuonk")
 shader_parameter/BLOOM_THRESHOLD = 0.8
-shader_parameter/BLOOM_INTENSITY = 1.0
+shader_parameter/BLOOM_INTENSITY = 1.4
 shader_parameter/OPACITY = 0.0
-shader_parameter/BLUR_ITERATIONS = 5
+shader_parameter/BLUR_ITERATIONS = 3
 shader_parameter/BLUR_SIZE = 0.03
 shader_parameter/BLUR_SUBDIVISIONS = 32
 
