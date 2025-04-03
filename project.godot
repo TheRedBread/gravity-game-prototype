@@ -103,6 +103,10 @@ debug_mode={
 2d_physics/layer_4="spawnpoint"
 2d_physics/layer_5="Box"
 
+[physics]
+
+2d/run_on_separate_thread=true
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

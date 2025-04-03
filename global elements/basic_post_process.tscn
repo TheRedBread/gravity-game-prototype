@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0yffubfxkca6"]
+[gd_scene load_steps=2 format=3 uid="uid://c0yffubfxkca6"]
 
 [sub_resource type="Environment" id="Environment_ah1fx"]
 background_mode = 3
@@ -21,12 +21,5 @@ volumetric_fog_emission_energy = 50.65
 volumetric_fog_gi_inject = 10.55
 volumetric_fog_detail_spread = 6.0
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ah1fx"]
-exposure_multiplier = 8.0
-auto_exposure_enabled = true
-auto_exposure_scale = 64.0
-dof_blur_far_distance = 0.01
-
 [node name="BasicPostProcess" type="WorldEnvironment"]
 environment = SubResource("Environment_ah1fx")
-camera_attributes = SubResource("CameraAttributesPractical_ah1fx")

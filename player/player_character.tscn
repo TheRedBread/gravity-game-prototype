@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cnpisc0ppc6qp"]
+[gd_scene load_steps=27 format=3 uid="uid://cnpisc0ppc6qp"]
 
 [ext_resource type="Script" uid="uid://c02eddk36m51" path="res://player/player_character.gd" id="1_c2kd2"]
 [ext_resource type="Script" uid="uid://bbjrrqys0dutu" path="res://player/player_camera.gd" id="2_yxov5"]
@@ -487,18 +487,6 @@ shader = ExtResource("4_qep63")
 shader_parameter/whiten = false
 shader_parameter/mix_weight = 1.0
 
-[sub_resource type="Gradient" id="Gradient_ah1fx"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_wi17q"]
-gradient = SubResource("Gradient_ah1fx")
-width = 1024
-height = 1024
-use_hdr = true
-fill = 1
-fill_from = Vector2(0.5, 0.495726)
-fill_to = Vector2(0.923077, 0.653846)
-
 [sub_resource type="Environment" id="Environment_wi17q"]
 
 [sub_resource type="Animation" id="Animation_3d672"]
@@ -766,12 +754,6 @@ gravity = Vector2(0, 100)
 initial_velocity_min = 20.0
 initial_velocity_max = 40.0
 scale_amount_max = 2.0
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-texture_filter = 2
-position = Vector2(1.27771, -18)
-energy = 0.05
-texture = SubResource("GradientTexture2D_wi17q")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(-111.722, -9)
