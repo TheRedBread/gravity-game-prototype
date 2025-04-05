@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=69 format=3 uid="uid://bord65n4suwnl"]
+[gd_resource type="TileSet" load_steps=71 format=3 uid="uid://bord65n4suwnl"]
 
 [ext_resource type="Texture2D" uid="uid://u18jdahn5hqs" path="res://levels/Tilesets/colliding tiles/greentileset_slopes_ver.png" id="1_eebbh"]
 [ext_resource type="Texture2D" uid="uid://dthx21daup7ju" path="res://levels/Tilesets/colliding tiles/greentileset.png" id="2_bntfb"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://puwmcdrfc8af" path="res://levels/Tilesets/decorations/chest.png" id="9_34ygp"]
 [ext_resource type="PackedScene" uid="uid://crgam5wyajl0l" path="res://levels/Tilesets/decorations/green_console.tscn" id="9_bntfb"]
 [ext_resource type="Texture2D" uid="uid://boclpwk04ukrr" path="res://levels/Tilesets/decorations/signs.png" id="9_j5oq1"]
+[ext_resource type="Texture2D" uid="uid://diwnn5h85bkgl" path="res://levels/Tilesets/decorations/Elevator.png" id="10_8igxw"]
 [ext_resource type="Texture2D" uid="uid://cheiej8ctpd80" path="res://levels/Tilesets/decorations/wentlator-Sheet.png" id="11_7fi1m"]
 [ext_resource type="Texture2D" uid="uid://fa8be3lqh0es" path="res://levels/Tilesets/decorations/wentylator_variations.png" id="13_42e66"]
 
@@ -534,6 +535,45 @@ texture_region_size = Vector2i(16, 32)
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_omkc3"]
 texture = ExtResource("9_34ygp")
 0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kujfw"]
+texture = ExtResource("10_8igxw")
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+5:1/0 = 0
+4:1/0 = 0
+3:1/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+0:0/0 = 0
+0:1/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+1:0/0 = 0
+1:4/0 = 0
+0:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+5:5/0 = 0
+4:5/0 = 0
+3:5/0 = 0
+2:5/0 = 0
+1:5/0 = 0
+0:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_awk0b"]
 texture = ExtResource("4_cmx2r")
@@ -1292,3 +1332,4 @@ sources/13 = SubResource("TileSetAtlasSource_ev8xa")
 sources/14 = SubResource("TileSetAtlasSource_34ygp")
 sources/15 = SubResource("TileSetAtlasSource_8igxw")
 sources/16 = SubResource("TileSetAtlasSource_omkc3")
+sources/18 = SubResource("TileSetAtlasSource_kujfw")
