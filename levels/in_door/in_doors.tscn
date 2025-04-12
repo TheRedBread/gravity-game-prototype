@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dttcuttfprh8f"]
+
+[ext_resource type="Script" uid="uid://chqhrl2x75ynn" path="res://levels/in_door/in_doors.gd" id="1_a4iqe"]
+[ext_resource type="Texture2D" uid="uid://cv3vjfdggv3mq" path="res://levels/in_door/indoor.png" id="1_frs7u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4iqe"]
+size = Vector2(32, 48)
+
+[node name="InDoors" type="Node2D" groups=["doors"]]
+script = ExtResource("1_a4iqe")
+
+[node name="DoorsArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorsArea"]
+shape = SubResource("RectangleShape2D_a4iqe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_frs7u")
+
+[connection signal="body_entered" from="DoorsArea" to="." method="_on_doors_area_body_entered"]
+[connection signal="body_exited" from="DoorsArea" to="." method="_on_doors_area_body_exited"]

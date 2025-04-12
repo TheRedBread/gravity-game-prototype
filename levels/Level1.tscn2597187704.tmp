@@ -4,29 +4,30 @@
 [ext_resource type="TileSet" uid="uid://bord65n4suwnl" path="res://levels/Tilesets/colliding tiles/prototyping_tileset.tres" id="2_gqfrg"]
 [ext_resource type="Texture2D" uid="uid://b3shcf418i0lt" path="res://levels/Tilesets/rack.png" id="2_tsgrn"]
 [ext_resource type="Texture2D" uid="uid://jbno6g4k66bt" path="res://levels/Tilesets/backgrounds/background.png" id="3_dkril"]
-[ext_resource type="Texture2D" uid="uid://croevaln3bjx4" path="res://levels/power/power_cable.png" id="3_l12am"]
-[ext_resource type="Texture2D" uid="uid://gm8s72b56w6h" path="res://levels/Tilesets/decorations/console/panel_cables.png" id="4_1bxb8"]
+[ext_resource type="Texture2D" uid="uid://croevaln3bjx4" path="res://levels/Tilesets/power_cable.png" id="3_l12am"]
+[ext_resource type="Texture2D" uid="uid://gm8s72b56w6h" path="res://levels/Tilesets/decorations/panel_cables.png" id="4_1bxb8"]
 [ext_resource type="Texture2D" uid="uid://cfb08p11b3k0v" path="res://levels/Tilesets/backgrounds/pipes.png" id="4_lbu4x"]
-[ext_resource type="Texture2D" uid="uid://b660fs1th70iq" path="res://levels/Tilesets/decorations/pod/tube.png" id="5_6gurj"]
+[ext_resource type="Texture2D" uid="uid://b660fs1th70iq" path="res://levels/Tilesets/decorations/tube.png" id="5_6gurj"]
+[ext_resource type="Texture2D" uid="uid://ibo36fdoums8" path="res://levels/Tilesets/colliding tiles/boxes.png" id="5_vcl05"]
 [ext_resource type="Texture2D" uid="uid://drvk1tkbdqnvf" path="res://levels/Tilesets/colliding tiles/graytileset.png" id="6_gqfrg"]
 [ext_resource type="AudioStream" uid="uid://cvpv6q3c6d8rw" path="res://levels/Ambiance1.mp3" id="6_nn0v1"]
 [ext_resource type="Texture2D" uid="uid://t8jp3uej7p3q" path="res://levels/Tilesets/backgrounds/white_panels.png" id="7_dkril"]
-[ext_resource type="Texture2D" uid="uid://cr5q5ebruvenm" path="res://levels/Tilesets/decorations/console/control_panel1.png" id="7_ok7fr"]
+[ext_resource type="Texture2D" uid="uid://cr5q5ebruvenm" path="res://levels/Tilesets/decorations/control_panel1.png" id="7_ok7fr"]
 [ext_resource type="Texture2D" uid="uid://c2n2cksvtcwer" path="res://levels/Tilesets/decorations/cables.png" id="8_lbu4x"]
 [ext_resource type="Texture2D" uid="uid://boclpwk04ukrr" path="res://levels/Tilesets/decorations/signs.png" id="9_vcl05"]
-[ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/power/doors.tscn" id="10_kdcll"]
-[ext_resource type="Texture2D" uid="uid://cheiej8ctpd80" path="res://levels/Tilesets/decorations/wentylator/wentlator-Sheet.png" id="11_j4pg1"]
+[ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/doors.tscn" id="10_kdcll"]
+[ext_resource type="Texture2D" uid="uid://cheiej8ctpd80" path="res://levels/Tilesets/decorations/wentlator-Sheet.png" id="11_j4pg1"]
 [ext_resource type="Texture2D" uid="uid://b1eps77mrklim" path="res://levels/Tilesets/decorations/shelf.png" id="12_rv5to"]
-[ext_resource type="PackedScene" uid="uid://dnuckj6iaql0c" path="res://levels/Tilesets/decorations/lamp/lamp.tscn" id="13_j4pg1"]
-[ext_resource type="PackedScene" uid="uid://ccd6w2b75hf30" path="res://levels/Tilesets/decorations/claw/big_claw.tscn" id="14_nu2w0"]
-[ext_resource type="PackedScene" uid="uid://hecqwfuelcaf" path="res://levels/Tilesets/decorations/wentylator/wentylator.tscn" id="15_mq75a"]
-[ext_resource type="PackedScene" uid="uid://j6hsrc2ou8a5" path="res://levels/Tilesets/decorations/pod/pod.tscn" id="16_j4mar"]
-[ext_resource type="Texture2D" uid="uid://fa8be3lqh0es" path="res://levels/Tilesets/decorations/wentylator/wentylator_variations.png" id="17_ok7fr"]
-[ext_resource type="PackedScene" uid="uid://crgam5wyajl0l" path="res://levels/Tilesets/decorations/console/green_console.tscn" id="19_0bnej"]
-[ext_resource type="PackedScene" uid="uid://f6xubyrfspxg" path="res://levels/power/box.tscn" id="20_audcl"]
-[ext_resource type="PackedScene" uid="uid://b5ryhket3022u" path="res://levels/power/pressure_plate.tscn" id="21_ccxey"]
-[ext_resource type="PackedScene" uid="uid://dibdmjcs27m0g" path="res://levels/power/lever.tscn" id="27_wugiy"]
-[ext_resource type="PackedScene" uid="uid://dttcuttfprh8f" path="res://levels/in_door/in_doors.tscn" id="28_q7yrn"]
+[ext_resource type="PackedScene" uid="uid://dnuckj6iaql0c" path="res://levels/Tilesets/decorations/lamp.tscn" id="13_j4pg1"]
+[ext_resource type="PackedScene" uid="uid://ccd6w2b75hf30" path="res://levels/Tilesets/decorations/big_claw.tscn" id="14_nu2w0"]
+[ext_resource type="PackedScene" uid="uid://hecqwfuelcaf" path="res://levels/Tilesets/decorations/wentylator.tscn" id="15_mq75a"]
+[ext_resource type="PackedScene" uid="uid://j6hsrc2ou8a5" path="res://levels/Tilesets/decorations/pod.tscn" id="16_j4mar"]
+[ext_resource type="Texture2D" uid="uid://fa8be3lqh0es" path="res://levels/Tilesets/decorations/wentylator_variations.png" id="17_ok7fr"]
+[ext_resource type="PackedScene" uid="uid://crgam5wyajl0l" path="res://levels/Tilesets/decorations/green_console.tscn" id="19_0bnej"]
+[ext_resource type="PackedScene" uid="uid://f6xubyrfspxg" path="res://levels/box.tscn" id="20_audcl"]
+[ext_resource type="PackedScene" uid="uid://b5ryhket3022u" path="res://levels/pressure_plate.tscn" id="21_ccxey"]
+[ext_resource type="PackedScene" uid="uid://dibdmjcs27m0g" path="res://lever.tscn" id="27_wugiy"]
+[ext_resource type="PackedScene" uid="uid://dttcuttfprh8f" path="res://in_doors.tscn" id="28_q7yrn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8dxbh"]
 texture = ExtResource("2_tsgrn")
@@ -1228,10 +1229,8 @@ texture = ExtResource("4_lbu4x")
 12:0/0 = 0
 10:1/0 = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wugiy"]
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nu2w0"]
-texture = SubResource("CompressedTexture2D_wugiy")
+texture = ExtResource("5_vcl05")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 3

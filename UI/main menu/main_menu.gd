@@ -38,10 +38,10 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_options_button_pressed() -> void:
-	SceneTransition.change_scene("res://UI/settings/Settings.tscn", "Blue1")
+	SceneTransition.change_scene("res://UI/settings/Settings.tscn", "Blue1", -1)
 	AudioManager.button_click_sound()
 
 
 func _on_continue_button_pressed() -> void:
-	SceneTransition.change_scene("res://levels/Level1.tscn", "Green1")
+	SceneTransition.change_scene("res://levels/Level1.tscn", "Green1", -1)
 	AudioManager.button_click_sound()

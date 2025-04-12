@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccd6w2b75hf30"]
+
+[ext_resource type="Texture2D" uid="uid://cqug3iv1i23ee" path="res://levels/Tilesets/decorations/claw/big_claw.png" id="1_06j8t"]
+
+[node name="BigClaw" type="Node2D"]
+
+[node name="BigClawSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 32)
+texture = ExtResource("1_06j8t")

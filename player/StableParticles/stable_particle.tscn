@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bqtcqvw3g0ifs"]
 
-[ext_resource type="Script" uid="uid://cqc48dq1v2x0a" path="res://stable_particle.gd" id="1_2p78b"]
+[ext_resource type="Script" uid="uid://cqc48dq1v2x0a" path="res://player/stable_particle.gd" id="1_2p78b"]
 [ext_resource type="Texture2D" uid="uid://1oncq4syvkow" path="res://player/StableParticles/jump_woosh/staying/jump_woosh-Sheet.png" id="2_2p78b"]
 [ext_resource type="Texture2D" uid="uid://bhwa18o2gjs4j" path="res://player/StableParticles/jump_woosh/moving/jump_woosh-Sheet.png" id="3_bpk8d"]
 [ext_resource type="Texture2D" uid="uid://djc78hehcxgkm" path="res://player/StableParticles/land_woosh/land_woosh-Sheet.png" id="4_84jyo"]

@@ -49,7 +49,7 @@ func _on_resume_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	switch_pause()
-	SceneTransition.change_scene("res://UI/main menu/main_menu.tscn", "Green1")
+	SceneTransition.change_scene("res://UI/main menu/main_menu.tscn", "Green1",-1)
 	AudioManager.button_click_sound()
 
 

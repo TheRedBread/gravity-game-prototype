@@ -353,8 +353,6 @@ func handle_dashing():
 		spawn_stable_particle("dash")
 		if is_on_floor() and int(dash_timer.time_left*1000) % 5 == 0:
 			spawn_stable_particle("dash_step")
-		
-
 
 func handle_slam():
 	if Input.is_action_pressed("slide") and not is_on_floor():

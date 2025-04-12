@@ -43,6 +43,11 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/fancy_editor_sounds/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")
 
+[global_group]
+
+doors=""
+player=""
+
 [gui]
 
 theme/custom_font="uid://bvwnnnja1ur2i"

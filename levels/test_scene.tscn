@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ibo36fdoums8" path="res://levels/Tilesets/colliding tiles/boxes.png" id="5_iupbm"]
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://UI/themes/MainTheme.tres" id="6_pblda"]
 [ext_resource type="AudioStream" uid="uid://cvpv6q3c6d8rw" path="res://levels/Ambiance1.mp3" id="7_1vq8n"]
-[ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/doors.tscn" id="8_vrunm"]
+[ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/power/doors.tscn" id="8_vrunm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vrunm"]
 texture = ExtResource("3_jwdsc")
