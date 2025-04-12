@@ -48,7 +48,7 @@ const STEP_SOUND : AudioStream = preload("res://player/step.ogg")
 const LAND_SOUND : AudioStream = preload("res://player/land.ogg")
 const DASH_SOUND : AudioStream = preload("res://player/dash.mp3")
 const JUMP_AUDIO : AudioStream = preload("res://player/jump.mp3")
-const DESTROYED : AudioStream = preload("res://player/destroyed.mp3")
+const DESTROYED : AudioStream = preload("res://player/death/destroyed.mp3")
 const SPAWNPOINT_CHECKED : AudioStream = preload("res://player/spawnpoint/spawnpoint_checked.mp3")
 const GRAVITY_CHANGE : AudioStream = preload("res://player/gravity_change.mp3")
 const SWITCH_FAIL : AudioStream = preload("res://player/switch_fail.mp3")
@@ -568,9 +568,7 @@ func handle_animations():
 	player_sprite.scale.x = lerp(player_sprite.scale.x, 1 /clamp(1+abs(velocity.y)/2000, 1, 1.3), 0.15)
 	
 	eye_sprite.scale.x = lerp(eye_sprite.scale.x, 1 /clamp(1+abs(velocity.y)/2000, 1, 1.3), 0.15)
-	
-	
-	
+
 
 func handle_particles():
 	var absolute_velocity = abs(velocity.x) + abs(velocity.y)

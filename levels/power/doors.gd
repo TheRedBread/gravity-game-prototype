@@ -49,10 +49,10 @@ func _physics_process(_delta: float) -> void:
 
 func power_steered(local_door_position):
 	if (bool_xor(!power_supply.on, reversed)):
-		velocity -= door_speed 
+		velocity -= door_speed
 		
 	if (bool_xor(power_supply.on, reversed)):
-		velocity += door_speed 
+		velocity += door_speed
 	
 	
 	if local_door_position.y < 0:
