@@ -12,19 +12,26 @@ enum LightningType{
 }
 
 @export var light_type : LightningType
-@export var lamp_sprite_variation : int = 0
+@export_range(0, 4) var lamp_sprite_variation : int = 0
 @export var sparking : bool = false
 @export var brightness_scale : float = 1
 
 
 var brightness : float = 1
 var brightness_target : float = 1
+var is_visible : bool = false
 
 func _ready() -> void:
 	handle_sprite_variations()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	if !is_visible:
+		lamp_light.enabled = false
+		return
+	
+	lamp_light.enabled = true
+	
 	if light_type == LightningType.Blinking:
 		handle_blinkging()
 	elif light_type == LightningType.Off:
@@ -34,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	
 	lights.material.set_shader_parameter("OPACITY", brightness * brightness_scale)
 	
-	lamp_light.energy = brightness/1.4*brightness_scale
+	lamp_light.energy = brightness/2*brightness_scale
 	if brightness == 0:
 		lights.material.set_shader_parameter("OPACITY", 0)
 		lamp_light.energy = 0
@@ -51,5 +58,12 @@ func handle_blinkging():
 	brightness = lerpf(brightness, brightness_target, 1)
 
 func handle_sprite_variations():
-	lights.frame = lamp_sprite_variation
-	frame = lamp_sprite_variation
+	lights.frame = clamp(lamp_sprite_variation, 0, 3)
+	frame = lights.frame
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	is_visible = true
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	is_visible = false

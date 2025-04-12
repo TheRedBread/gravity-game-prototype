@@ -759,6 +759,7 @@ scale_amount_max = 2.0
 position = Vector2(-111.722, -9)
 energy = 0.8
 blend_mode = 1
+max_distance = 5000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wi17q")

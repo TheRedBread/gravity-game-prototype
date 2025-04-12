@@ -32,8 +32,8 @@ func _ready() -> void:
 	
 	door_position = position
 
-func _physics_process(delta: float) -> void:
-	position.y += velocity
+func _physics_process(_delta: float) -> void:
+	position.y = lerpf(position.y, velocity+position.y, 0.3)
 	
 	var local_door_position = door_position - position
 	
@@ -48,8 +48,6 @@ func _physics_process(delta: float) -> void:
 	
 
 func power_steered(local_door_position):
-	
-	
 	if (bool_xor(!power_supply.on, reversed)):
 		velocity -= door_speed 
 		

@@ -51,7 +51,7 @@ void fragment() {
 	final = bg + tx;
 
     COLOR = final;
-	
+
 	if (COLOR.a > 1.0) {
 		if (OPACITY == 0.){
 			COLOR.a = 0.;
