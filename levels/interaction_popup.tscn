@@ -45,7 +45,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.170755, 1),
+"transitions": PackedFloat32Array(0.120742, 1),
 "update": 0,
 "values": [Vector2(0.1, 0.1), Vector2(1, 1)]
 }
@@ -58,19 +58,19 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iylc2"]
-radius = 35.0
+radius = 39.0
 
 [node name="InteractionPopup" type="Node2D"]
 script = ExtResource("1_iylc2")
 
 [node name="InteractionButton" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_iylc2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_5x1fk")
 }
-autoplay = "grow"
 
 [node name="InteractionArea" type="Area2D" parent="."]
 collision_layer = 0

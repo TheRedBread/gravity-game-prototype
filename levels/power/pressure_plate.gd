@@ -6,7 +6,7 @@ var player_on : bool = false
 var box_on : bool = false
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	if player_on or box_on:
 		on = true
@@ -24,17 +24,17 @@ func _physics_process(delta: float) -> void:
 
 
 
-func _on_pressure_area_player_detector_body_entered(body: Node2D) -> void:
+func _on_pressure_area_player_detector_body_entered(_body: Node2D) -> void:
 	player_on = true
 
 
-func _on_pressure_area_player_detector_body_exited(body: Node2D) -> void:
+func _on_pressure_area_player_detector_body_exited(_body: Node2D) -> void:
 	player_on = false
 
 
-func _on_pressure_area_box_detector_body_entered(body: Node2D) -> void:
+func _on_pressure_area_box_detector_body_entered(_body: Node2D) -> void:
 	box_on = true
 
 
-func _on_pressure_area_box_detector_body_exited(body: Node2D) -> void:
+func _on_pressure_area_box_detector_body_exited(_body: Node2D) -> void:
 	box_on = false

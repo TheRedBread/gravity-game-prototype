@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=73 format=3 uid="uid://bord65n4suwnl"]
+[gd_resource type="TileSet" load_steps=74 format=3 uid="uid://bord65n4suwnl"]
 
 [ext_resource type="Texture2D" uid="uid://u18jdahn5hqs" path="res://levels/Tilesets/colliding tiles/greentileset_slopes_ver.png" id="1_eebbh"]
 [ext_resource type="Texture2D" uid="uid://dthx21daup7ju" path="res://levels/Tilesets/colliding tiles/greentileset.png" id="2_bntfb"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://croevaln3bjx4" path="res://levels/power/power_cable.png" id="10_omkc3"]
 [ext_resource type="Texture2D" uid="uid://cheiej8ctpd80" path="res://levels/Tilesets/decorations/wentylator/wentlator-Sheet.png" id="11_7fi1m"]
 [ext_resource type="Texture2D" uid="uid://fa8be3lqh0es" path="res://levels/Tilesets/decorations/wentylator/wentylator_variations.png" id="13_42e66"]
+[ext_resource type="PackedScene" uid="uid://b1mmur6nqhvbx" path="res://levels/hot_floor.tscn" id="18_kujfw"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tatcc"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1452,6 +1453,7 @@ texture = ExtResource("6_cmx2r")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_lti7l"]
 scenes/1/scene = ExtResource("7_42e66")
 scenes/2/scene = ExtResource("8_tdxi8")
+scenes/3/scene = ExtResource("18_kujfw")
 scenes/5/scene = ExtResource("9_bntfb")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aea7e"]

@@ -24,7 +24,7 @@ func get_option_by_string(item_to_select : String, oButton : OptionButton):
 
 ### Quit to menu
 func _on_button_pressed() -> void:
-	SceneTransition.change_scene("res://UI/main menu/main_menu.tscn", "Blue1" )
+	SceneTransition.change_scene("res://UI/main menu/main_menu.tscn", "Blue1", -1)
 	AudioManager.button_click_sound()
 
 func _on_settings_scrolling():

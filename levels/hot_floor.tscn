@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1mmur6nqhvbx"]
+
+[ext_resource type="Texture2D" uid="uid://cyggrr4dom6pg" path="res://levels/Tilesets/prototype_spikes.png" id="1_58h71"]
+
+[node name="HotFloor" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_58h71")
+hframes = 2
