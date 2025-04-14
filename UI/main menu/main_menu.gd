@@ -43,5 +43,5 @@ func _on_options_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	SceneTransition.change_scene("res://levels/Level1.tscn", "Blue1", -1)
+	SceneTransition.change_scene("res://levels/level_1.tscn", "Blue1", -1)
 	AudioManager.button_click_sound()
