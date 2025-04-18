@@ -33,6 +33,9 @@ func _ready() -> void:
 	door_position = position
 
 func _physics_process(_delta: float) -> void:
+	if door_type == DoorType.Off:
+		return
+	
 	position.y = lerpf(position.y, velocity+position.y, 0.3)
 	
 	var local_door_position = door_position - position
@@ -42,9 +45,7 @@ func _physics_process(_delta: float) -> void:
 			gravity_steered(local_door_position)
 		DoorType.Power:
 			power_steered(local_door_position)
-		DoorType.Off:
-			pass
-		
+	
 	
 
 func power_steered(local_door_position):

@@ -20,5 +20,8 @@ shape = SubResource("RectangleShape2D_a4iqe")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_frs7u")
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(2.4, 3.2)
+
 [connection signal="body_entered" from="DoorsArea" to="." method="_on_doors_area_body_entered"]
 [connection signal="body_exited" from="DoorsArea" to="." method="_on_doors_area_body_exited"]

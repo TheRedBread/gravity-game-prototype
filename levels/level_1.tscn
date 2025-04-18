@@ -2576,10 +2576,11 @@ lamp_sprite_variation = 3
 brightness_scale = 0.7
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = 2
 color = Color(0.180392, 0.172549, 0.188235, 1)
 invert_enabled = true
 invert_border = 300.0
-polygon = PackedVector2Array(424, 56, 424, 280, -784, 288, -784, 472, 576, 464, 576, 56, 1352, 56, 1344, -128, 576, -128, 576, -464, 440, -464, 441.86, -175.216, -792, -168, -792, 56)
+polygon = PackedVector2Array(440, 40, 440, 296, -760, 296, -760, 456, 552, 456, 552, 40, 1336, 40, 1336, -120, 552, -128, 552, -440, 440, -440, 440, -152, -776, -152, -776, 40)
 
 [node name="Bay2" type="Node2D" parent="."]
 

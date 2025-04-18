@@ -99,3 +99,6 @@ vframes = 2
 
 [node name="ConsoleLight" type="PointLight2D" parent="."]
 texture = SubResource("GradientTexture2D_pjcbh")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(5.6, 4)

@@ -27,3 +27,5 @@ animations = [{
 [node name="Wentilator" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ra61l")
 autoplay = "default"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]

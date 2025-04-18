@@ -38,19 +38,19 @@ vec3 blend(vec3 a, vec3 b) {
 }
 
 void fragment() {
-    vec4 tx = texture(TEXTURE, UV);
-    vec3 result = gaussian(TEXTURE, UV);
+	vec4 tx = texture(TEXTURE, UV);
+	vec3 result = gaussian(TEXTURE, UV);
 
 	vec4 bg = vec4(result, 1);
 
-    float gray = dot(bg.rgb, vec3(0.299, 0.587, 0.114));
-    bg = vec4(bg.rgb, gray);
+	float gray = dot(bg.rgb, vec3(0.299, 0.587, 0.114));
+	bg = vec4(bg.rgb, gray);
 
 	vec4 final = bg;
 
 	final = bg + tx;
 
-    COLOR = final;
+	COLOR = final;
 
 	if (COLOR.a > 1.0) {
 		if (OPACITY == 0.){
@@ -59,4 +59,5 @@ void fragment() {
 		COLOR.a = OPACITY+0.2;
 		}
 	}
+
 }

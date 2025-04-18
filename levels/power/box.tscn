@@ -13,11 +13,11 @@ radius = 8.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv4nq"]
 shader = ExtResource("3_2m05l")
 shader_parameter/BLOOM_THRESHOLD = 0.92
-shader_parameter/BLOOM_INTENSITY = 5.0
+shader_parameter/BLOOM_INTENSITY = 10.0
 shader_parameter/OPACITY = 1.0
-shader_parameter/BLUR_ITERATIONS = 5
-shader_parameter/BLUR_SIZE = 0.02
-shader_parameter/BLUR_SUBDIVISIONS = 32
+shader_parameter/BLUR_ITERATIONS = 2
+shader_parameter/BLUR_SIZE = 0.01
+shader_parameter/BLUR_SUBDIVISIONS = 12
 
 [node name="Box" type="RigidBody2D"]
 collision_layer = 16
@@ -40,3 +40,6 @@ texture = ExtResource("2_mmw0s")
 [node name="boxLight" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_nv4nq")
 texture = ExtResource("2_mmw0s")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(1.9, 2.1)

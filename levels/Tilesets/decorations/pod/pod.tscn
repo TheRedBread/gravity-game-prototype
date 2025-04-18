@@ -318,3 +318,7 @@ position = Vector2(8, -24)
 sprite_frames = SubResource("SpriteFrames_tofd3")
 autoplay = "default"
 frame_progress = 0.223987
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(8, -22)
+scale = Vector2(2, 3.6)
