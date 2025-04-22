@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnccw7urrjo5r"]
+
+[ext_resource type="Script" uid="uid://c7ybqpquxe6fs" path="res://levels/text_hider.gd" id="1_27n8n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_27n8n"]
+radius = 128.0
+
+[node name="TextHider" type="Node2D"]
+script = ExtResource("1_27n8n")
+
+[node name="areaLimiter" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areaLimiter"]
+shape = SubResource("CircleShape2D_27n8n")
+
+[connection signal="body_entered" from="areaLimiter" to="." method="_on_area_limiter_body_entered"]
+[connection signal="body_exited" from="areaLimiter" to="." method="_on_area_limiter_body_exited"]
