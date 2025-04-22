@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=76 format=3 uid="uid://bord65n4suwnl"]
+[gd_resource type="TileSet" load_steps=78 format=3 uid="uid://bord65n4suwnl"]
 
 [ext_resource type="Texture2D" uid="uid://u18jdahn5hqs" path="res://levels/Tilesets/colliding tiles/greentileset_slopes_ver.png" id="1_eebbh"]
 [ext_resource type="Texture2D" uid="uid://dthx21daup7ju" path="res://levels/Tilesets/colliding tiles/greentileset.png" id="2_bntfb"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cheiej8ctpd80" path="res://levels/Tilesets/decorations/wentylator/wentlator-Sheet.png" id="11_7fi1m"]
 [ext_resource type="Texture2D" uid="uid://dj6m5r6c1igh2" path="res://levels/Tilesets/colliding tiles/thrash.png" id="12_2m5qh"]
 [ext_resource type="Texture2D" uid="uid://fa8be3lqh0es" path="res://levels/Tilesets/decorations/wentylator/wentylator_variations.png" id="13_42e66"]
+[ext_resource type="Texture2D" uid="uid://bve8r5xcth5gp" path="res://levels/Tilesets/colliding tiles/vent.png" id="14_gcmlp"]
 [ext_resource type="PackedScene" uid="uid://b1mmur6nqhvbx" path="res://levels/hot_floor.tscn" id="18_kujfw"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tatcc"]
@@ -1608,6 +1609,11 @@ texture = ExtResource("4_cmx2r")
 0:2/0 = 0
 0:1/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpniq"]
+texture = ExtResource("14_gcmlp")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -8, 5, -8, 5, 8, -4, 8)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bwtfg"]
 texture = ExtResource("4_l6ylt")
 0:0/0 = 0
@@ -2373,3 +2379,4 @@ sources/16 = SubResource("TileSetAtlasSource_omkc3")
 sources/18 = SubResource("TileSetAtlasSource_kujfw")
 sources/17 = SubResource("TileSetAtlasSource_2m5qh")
 sources/19 = SubResource("TileSetAtlasSource_gcmlp")
+sources/20 = SubResource("TileSetAtlasSource_fpniq")
