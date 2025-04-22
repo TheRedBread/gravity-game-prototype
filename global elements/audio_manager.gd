@@ -1,12 +1,18 @@
 ## Manages Global sound effects
 extends Node
 
+# -------------- MUSIC ------------------ #
+const DISCOVERY = preload("res://music/discovery.mp3")
+const BITE = preload("res://music/bite.mp3")
+const DRIFT = preload("res://music/drift.mp3")
 
+# -------------- SOUNDS ------------------ #
 @export var click1_sound : AudioStream = preload("res://UI/sfx/click.mp3")
 @export var click2_sound : AudioStream = preload("res://UI/sfx/click2.mp3")
 
 
 func _ready() -> void:
+	#play_sound(DRIFT, 0, 0, 1, 0, "Music")
 	process_mode = PROCESS_MODE_ALWAYS
 
 

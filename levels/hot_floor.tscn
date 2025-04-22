@@ -1,9 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1mmur6nqhvbx"]
+[gd_scene load_steps=6 format=3 uid="uid://b1mmur6nqhvbx"]
 
 [ext_resource type="Texture2D" uid="uid://cyggrr4dom6pg" path="res://levels/Tilesets/prototype_spikes.png" id="1_58h71"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m07wv"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58h71"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_58h71"]
+interpolation_mode = 2
+colors = PackedColorArray(0.898, 0.345, 0.345, 0.3, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m07wv"]
+gradient = SubResource("Gradient_58h71")
 
 [node name="HotFloor" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_m07wv")
 texture = ExtResource("1_58h71")
 hframes = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_58h71")
+position = Vector2(-0.00463244, -69.8868)
+rotation = -1.57079
+scale = Vector2(0.577241, 16.0261)
+texture = SubResource("GradientTexture1D_m07wv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_58h71")
+position = Vector2(-0.0047634, -10.9291)
+rotation = -1.57079
+scale = Vector2(0.116634, 16.0261)
+texture = SubResource("GradientTexture1D_m07wv")

@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3itvie5ofa48"]
+
+[ext_resource type="Script" uid="uid://ct2p0sn65vjdu" path="res://levels/power/hydraulic press/hydraulic_press.gd" id="1_iksbh"]
+[ext_resource type="Texture2D" uid="uid://donww2p5pchld" path="res://levels/power/hydraulic press/press.png" id="1_ke5xv"]
+[ext_resource type="Texture2D" uid="uid://bnh3n6bq1oims" path="res://levels/power/hydraulic press/press_base.png" id="2_iksbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke5xv"]
+size = Vector2(44, 62)
+
+[sub_resource type="Animation" id="Animation_pl8gq"]
+resource_name = "crash"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("press:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.507365, 0.8, 1.2),
+"transitions": PackedFloat32Array(0.2, 1.2, 0.4, 0.2, 0.2),
+"update": 0,
+"values": [Vector2(0, -64), Vector2(0, 0), Vector2(0, 0), Vector2(0, -64), Vector2(0, -64)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"crash_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_184xe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("press:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_184xe"]
+_data = {
+&"RESET": SubResource("Animation_184xe"),
+&"crash": SubResource("Animation_pl8gq")
+}
+
+[node name="HydraulicPress" type="Node2D"]
+script = ExtResource("1_iksbh")
+
+[node name="pressBase" type="StaticBody2D" parent="."]
+
+[node name="pressBaseSprite" type="Sprite2D" parent="pressBase"]
+z_index = 1
+position = Vector2(0, -64)
+texture = ExtResource("2_iksbh")
+
+[node name="pressBaseCollision" type="CollisionShape2D" parent="pressBase"]
+visible = false
+position = Vector2(0, -65)
+shape = SubResource("RectangleShape2D_ke5xv")
+
+[node name="press" type="AnimatableBody2D" parent="."]
+z_index = -1
+position = Vector2(0, -64)
+collision_mask = 0
+
+[node name="press" type="Sprite2D" parent="press"]
+texture = ExtResource("1_ke5xv")
+
+[node name="pressCollision" type="CollisionPolygon2D" parent="press"]
+visible = false
+polygon = PackedVector2Array(10, -48, 10, 26, 16, 32, 22, 40, 22, 48, -22, 48, -22, 40, -16, 32, -10, 26, -10, -48)
+
+[node name="Death Area" type="Area2D" parent="press"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="DeathAreaCollisionPolygon" type="CollisionPolygon2D" parent="press/Death Area"]
+visible = false
+polygon = PackedVector2Array(8, -46, -8, -46, -8, 42, -20, 42, -20, 48, 20, 48, 20, 42, 8, 42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_184xe")
+}

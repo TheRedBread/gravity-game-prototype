@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://f6xubyrfspxg"]
+
+[ext_resource type="Script" uid="uid://dfntu85ocw11b" path="res://levels/power/box/box.gd" id="1_xlutm"]
+[ext_resource type="Texture2D" uid="uid://cn8biwj36iipr" path="res://levels/power/box/box.png" id="2_mmw0s"]
+[ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="3_2m05l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xlutm"]
+friction = 0.9
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xlutm"]
+radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nv4nq"]
+shader = ExtResource("3_2m05l")
+shader_parameter/BLOOM_THRESHOLD = 0.92
+shader_parameter/BLOOM_INTENSITY = 10.0
+shader_parameter/OPACITY = 1.0
+shader_parameter/BLUR_ITERATIONS = 2
+shader_parameter/BLUR_SIZE = 0.01
+shader_parameter/BLUR_SUBDIVISIONS = 12
+
+[node name="Box" type="RigidBody2D"]
+collision_layer = 16
+mass = 4.5
+physics_material_override = SubResource("PhysicsMaterial_xlutm")
+lock_rotation = true
+script = ExtResource("1_xlutm")
+
+[node name="BoxCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xlutm")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.345989, 0.495097, 0.760733, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="boxSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_mmw0s")
+
+[node name="boxLight" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_nv4nq")
+texture = ExtResource("2_mmw0s")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(1.9, 2.1)

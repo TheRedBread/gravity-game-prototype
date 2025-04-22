@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cr5q5ebruvenm" path="res://levels/Tilesets/decorations/console/control_panel1.png" id="7_ok7fr"]
 [ext_resource type="Texture2D" uid="uid://c2n2cksvtcwer" path="res://levels/Tilesets/decorations/cables.png" id="8_lbu4x"]
 [ext_resource type="Texture2D" uid="uid://boclpwk04ukrr" path="res://levels/Tilesets/decorations/signs.png" id="9_vcl05"]
-[ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/power/doors.tscn" id="10_kdcll"]
+[ext_resource type="PackedScene" uid="uid://cx58b4d7u32at" path="res://levels/power/doors/doors.tscn" id="10_kdcll"]
 [ext_resource type="Texture2D" uid="uid://cheiej8ctpd80" path="res://levels/Tilesets/decorations/wentylator/wentlator-Sheet.png" id="11_j4pg1"]
 [ext_resource type="Texture2D" uid="uid://b1eps77mrklim" path="res://levels/Tilesets/decorations/shelf.png" id="12_rv5to"]
 [ext_resource type="PackedScene" uid="uid://dnuckj6iaql0c" path="res://levels/Tilesets/decorations/lamp/lamp.tscn" id="13_j4pg1"]
@@ -23,9 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://j6hsrc2ou8a5" path="res://levels/Tilesets/decorations/pod/pod.tscn" id="16_j4mar"]
 [ext_resource type="Texture2D" uid="uid://fa8be3lqh0es" path="res://levels/Tilesets/decorations/wentylator/wentylator_variations.png" id="17_ok7fr"]
 [ext_resource type="PackedScene" uid="uid://crgam5wyajl0l" path="res://levels/Tilesets/decorations/console/green_console.tscn" id="19_0bnej"]
-[ext_resource type="PackedScene" uid="uid://f6xubyrfspxg" path="res://levels/power/box.tscn" id="20_audcl"]
-[ext_resource type="PackedScene" uid="uid://b5ryhket3022u" path="res://levels/power/pressure_plate.tscn" id="21_ccxey"]
-[ext_resource type="PackedScene" uid="uid://dibdmjcs27m0g" path="res://levels/power/lever.tscn" id="27_wugiy"]
+[ext_resource type="PackedScene" uid="uid://f6xubyrfspxg" path="res://levels/power/box/box.tscn" id="20_audcl"]
+[ext_resource type="PackedScene" uid="uid://b5ryhket3022u" path="res://levels/power/pressure plate/pressure_plate.tscn" id="21_ccxey"]
+[ext_resource type="PackedScene" uid="uid://dibdmjcs27m0g" path="res://levels/power/lever/lever.tscn" id="27_wugiy"]
 [ext_resource type="PackedScene" uid="uid://dttcuttfprh8f" path="res://levels/in_door/in_doors.tscn" id="28_q7yrn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4knja"]
@@ -2657,7 +2657,6 @@ rotation = 1.5708
 
 [node name="Doors2" parent="Bay2" instance=ExtResource("10_kdcll")]
 position = Vector2(-328, 0)
-door_speed = 0.005
 
 [node name="Power" parent="Bay2" instance=ExtResource("27_wugiy")]
 position = Vector2(328, -8)
