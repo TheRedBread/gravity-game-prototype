@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://c3nyva3pkqf8y"]
+[gd_scene load_steps=67 format=4 uid="uid://c3nyva3pkqf8y"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://player/player_character.tscn" id="1_ndgrd"]
 [ext_resource type="Texture2D" uid="uid://b3shcf418i0lt" path="res://levels/Tilesets/rack.png" id="2_h351q"]
@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://ci5swndp5e7ny" path="res://levels/in_door/level_change_area.tscn" id="24_he6wg"]
 [ext_resource type="PackedScene" uid="uid://c3itvie5ofa48" path="res://levels/power/hydraulic press/hydraulic_press.tscn" id="24_xrja0"]
 [ext_resource type="PackedScene" uid="uid://dibdmjcs27m0g" path="res://levels/power/lever/lever.tscn" id="26_jqt73"]
+[ext_resource type="PackedScene" uid="uid://bnccw7urrjo5r" path="res://levels/text_hider.tscn" id="27_amxoe"]
+[ext_resource type="FontFile" uid="uid://dgqjhmvhh80vg" path="res://UI/fonts/monogram/ttf/monogram.ttf" id="28_cp3aq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_itbe0"]
 light_mode = 1
@@ -2500,6 +2502,9 @@ gradient = SubResource("Gradient_00pa0")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrja0"]
 size = Vector2(104, 80)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wgvos"]
+light_mode = 1
+
 [node name="Level2" type="Node2D"]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_ndgrd")]
@@ -2727,3 +2732,31 @@ shape = SubResource("RectangleShape2D_xrja0")
 
 [node name="Lever" parent="." instance=ExtResource("26_jqt73")]
 position = Vector2(1704, -168)
+
+[node name="HotplateHider" parent="." instance=ExtResource("27_amxoe")]
+position = Vector2(-136, -144)
+
+[node name="Label" type="Label" parent="HotplateHider"]
+material = SubResource("CanvasItemMaterial_wgvos")
+offset_left = -24.0
+offset_top = -40.0
+offset_right = 96.0
+offset_bottom = -11.0
+theme_override_fonts/font = ExtResource("28_cp3aq")
+text = "Watch out!
+These plates are hot"
+horizontal_alignment = 1
+
+[node name="AirSwitchHider" parent="." instance=ExtResource("27_amxoe")]
+position = Vector2(248, -144)
+
+[node name="Label" type="Label" parent="AirSwitchHider"]
+material = SubResource("CanvasItemMaterial_wgvos")
+offset_left = 8.0
+offset_top = -24.0
+offset_right = 128.0
+offset_bottom = 5.0
+theme_override_fonts/font = ExtResource("28_cp3aq")
+text = "You can switch 
+gravity in air"
+horizontal_alignment = 1
