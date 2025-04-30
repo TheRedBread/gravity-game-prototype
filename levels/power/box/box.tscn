@@ -21,7 +21,7 @@ shader_parameter/BLUR_SUBDIVISIONS = 12
 
 [node name="Box" type="RigidBody2D"]
 collision_layer = 16
-mass = 4.5
+mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_xlutm")
 lock_rotation = true
 script = ExtResource("1_xlutm")
@@ -42,4 +42,4 @@ material = SubResource("ShaderMaterial_nv4nq")
 texture = ExtResource("2_mmw0s")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-scale = Vector2(1.9, 2.1)
+scale = Vector2(12.8, 12.8)

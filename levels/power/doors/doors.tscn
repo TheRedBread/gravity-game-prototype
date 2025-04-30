@@ -10,10 +10,8 @@ polygon = PackedVector2Array(0, 0, 16, 0, 16, 63, 15, 63, 15, 64, 1, 64, 1, 63, 
 size = Vector2(16, 63)
 
 [node name="Doors" type="AnimatableBody2D"]
-position = Vector2(0, 24)
 collision_mask = 0
 script = ExtResource("1_g5rw1")
-door_speed = 0.05
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-8, -32)
@@ -35,6 +33,3 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="crashDetector"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_75tly")
-
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-scale = Vector2(2.7, 4.9)

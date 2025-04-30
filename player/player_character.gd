@@ -102,12 +102,13 @@ func _ready() -> void:
 	current_max_speed = MAX_SPEED
 	spawn_gravity = GameManager.gravity_direction
 	spawn = position
+	
+	up_direction = Vector2(0, -GameManager.gravity_direction)
 
 
-#apply forces
+## apply forces
 func apply_friction(friction, delta):
 	velocity.x -= ((velocity.x/1.6) * friction) * delta * 60
-
 
 func apply_gravity(delta):
 	if GRAVITY*GameManager.gravity_direction*delta + velocity.y * GameManager.gravity_direction > MAX_FALLING_SPEED:
@@ -220,7 +221,6 @@ func handle_snap_change():
 		floor_snap_length = 2
 
 
-
 # ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
 	if player_controls:
@@ -252,7 +252,6 @@ func handle_movement(delta):
 		handle_state()
 		handle_sliding_reset()
 		handle_snap_change()
-	
 
 #left-right
 func move_to_direction(directionStr, delta):
@@ -304,7 +303,7 @@ func handle_jump():
 		spawn_stable_particle("jump")
 		GRAVITY = 1200
 		was_on_floor = false
-		AudioManager.play_sound(JUMP_AUDIO, -5, 0.1, 1, 0.08, "sound Effects")
+		AudioManager.play_sound(JUMP_AUDIO, 2, 0.1, 1, 0.08, "sound Effects")
 		jumping_particles.restart()
 		jumping_particles.emitting = true
 		if is_on_floor():
@@ -340,7 +339,7 @@ func dash():
 		dash_accelerate()
 		if is_on_floor():
 			velocity.y -= 0 * GameManager.gravity_direction
-	AudioManager.play_sound(DASH_SOUND, -20, 1, 1.1, 0.05, "Sound effects")
+	AudioManager.play_sound(DASH_SOUND, -10, 1, 1.1, 0.05, "Sound effects")
 
 func handle_dashing():
 	if clicked_dash and DashAble() and (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")):
@@ -369,17 +368,19 @@ func handle_abilities():
 	input_switch()
 	
 	handle_gravity_switch()
+
 func gravity_switch():
 	AudioManager.play_sound(GRAVITY_CHANGE, -5, 0.02, 1, 0.2, "Sound effects")
 	GameManager.gravity_direction *= -1
 	up_direction = Vector2(0, -GameManager.gravity_direction)
 	velocity.y += SWITCH_SPEED*GRAVITY*GameManager.gravity_direction
-	
+
 func input_switch():
 	if Input.is_action_just_pressed("switch"):
 		clicked_switch = true
 		await get_tree().create_timer(SWITCH_TIMER).timeout
 		clicked_switch = false
+
 func handle_gravity_switch():
 	
 	if is_on_floor() and not is_floor_too_steep():
@@ -560,7 +561,6 @@ func handle_player_animation():
 			sliding_particles.emitting = false
 			walk_anim()
 
-
 func handle_animations():
 	handle_player_animation()
 	handle_particles()
@@ -568,7 +568,6 @@ func handle_animations():
 	player_sprite.scale.x = lerp(player_sprite.scale.x, 1 /clamp(1+abs(velocity.y)/2000, 1, 1.3), 0.15)
 	
 	eye_sprite.scale.x = lerp(eye_sprite.scale.x, 1 /clamp(1+abs(velocity.y)/2000, 1, 1.3), 0.15)
-
 
 func handle_particles():
 	var absolute_velocity = abs(velocity.x) + abs(velocity.y)
@@ -604,12 +603,11 @@ func handle_particles():
 	sliding_particles.gravity.y = 100 * GameManager.gravity_direction
 	
 	if is_on_floor() and was_falling:
-		landing_particles.amount = int(land_force*5+1)
+		landing_particles.amount = int(clamp(land_force*5, 0, 20)+1)
 		landing_particles.initial_velocity_max = land_force*6+1
 		landing_particles.initial_velocity_min = land_force*3+1
 		landing_particles.emitting = true
 		spawn_stable_particle("land")
-
 
 func spawn_stable_particle(type):
 	var particle = STABLE_PARTICLE.instantiate()
@@ -710,10 +708,9 @@ func death_variable_reset():
 	player_sprite.visible = false
 	player_controls = false
 
-
 func die():
 	spawn_limbs()
-	AudioManager.play_sound(DESTROYED, -15, 0.01, 1, 0.5, "Sound effects")
+	AudioManager.play_sound(DESTROYED, -10, 0.01, 1, 0.5, "Sound effects")
 	death_variable_reset()
 	await get_tree().create_timer(1).timeout
 	GameManager.gravity_direction = spawn_gravity
@@ -724,7 +721,6 @@ func die():
 	eye_sprite.visible = true
 	
 	up_direction = Vector2(0, -GameManager.gravity_direction)
-	
 
 
 
@@ -743,7 +739,7 @@ func step_audio(foot : String):
 		"right":
 			step_pitch = 0.95
 	
-	AudioManager.play_sound(STEP_SOUND, -25, 1, step_pitch, 0.05, "Sound effects")
+	AudioManager.play_sound(STEP_SOUND, -15, 1, step_pitch, 0.05, "Sound effects")
 	
 	spawn_stable_particle("step")
 
@@ -760,7 +756,7 @@ func handle_land_audio():
 		was_falling = false
 
 func handle_sliding_audio():
-	slide_audio_player.volume_db = ((abs(velocity.x) + abs(velocity.y))/60)-12 
+	slide_audio_player.volume_db = ((abs(velocity.x) + abs(velocity.y))/60)-5
 	slide_audio_player.pitch_scale = ((abs(velocity.x) + abs(velocity.y))/1500)+0.5
 	
 	if player_state == PlayerState.SLIDING and not slide_audio_player.playing:
@@ -769,10 +765,8 @@ func handle_sliding_audio():
 	if not player_state == PlayerState.SLIDING or abs(velocity.x) < 5:
 		slide_audio_player.stop()
 
-
 func land_audio():
-	AudioManager.play_sound(LAND_SOUND, land_force - 25, 1, 1, 0.05, "Sound effects")
-
+	AudioManager.play_sound(LAND_SOUND,clampf(land_force*4, 1, 20) - 25, 1, 1, 0.05, "Sound effects")
 
 
 
@@ -785,19 +779,15 @@ func _physics_process(delta):
 	move_and_slide()
 	handle_box_pushing()
 
-	
-
 
 
 func _on_death_detection_body_entered(_body: Node2D) -> void:
 	print("player enters death body")
 	die()
 
-
 func _on_death_detection_area_entered(_area: Area2D) -> void:
 	print("player enters death area")
 	die()
-
 
 func _on_spawnpoint_detection_body_entered(_body: Node2D) -> void:
 	set_spawnpoint()
@@ -811,4 +801,3 @@ func _on_spawnpoint_detection_body_entered(_body: Node2D) -> void:
 		
 	
 	get_parent().add_child(checkpoint_particles)
-	

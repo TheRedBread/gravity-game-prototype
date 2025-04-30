@@ -12,7 +12,7 @@ const DRIFT = preload("res://music/drift.mp3")
 
 
 func _ready() -> void:
-	#play_sound(DRIFT, 0, 0, 1, 0, "Music")
+	play_sound(DISCOVERY, 0, 0, 1, 0, "Music")
 	process_mode = PROCESS_MODE_ALWAYS
 
 
