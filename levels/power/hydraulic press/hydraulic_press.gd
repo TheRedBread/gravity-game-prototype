@@ -1,6 +1,9 @@
 extends Node2D
 
+@onready var tack_audio_player: AudioStreamPlayer2D = $tackAudioPlayer
+@onready var stomp_audio_player: AudioStreamPlayer2D = $StompAudioPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var compress_audio_player: AudioStreamPlayer2D = $CompressAudioPlayer
 
 @export var power_supply : Power
 @export var press_speed : float = 1.0
@@ -24,6 +27,27 @@ func _physics_process(delta: float) -> void:
 		
 		start()
 	was_on = power_supply.on
+
+
+func stomp():
+	stomp_audio_player.volume_db = randf_range(-4, 4)
+	stomp_audio_player.pitch_scale = randf_range(0.8, 1.2)
+	stomp_audio_player.play()
+
+
+func compress():
+	compress_audio_player.volume_db = randf_range(-4, 4)
+	compress_audio_player.pitch_scale = randf_range(0.8, 1.2)
+	compress_audio_player.play()
+
+func tack():
+	tack_audio_player.volume_db = randf_range(-4, 4)
+	tack_audio_player.pitch_scale = randf_range(0.8, 1.2)
+	tack_audio_player.play()
+
+
+
+
 
 func crash_finished():
 	if power_supply and power_supply.on:

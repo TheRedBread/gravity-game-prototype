@@ -1,5 +1,7 @@
 extends AnimatableBody2D
 
+@onready var compress_audio_player: AudioStreamPlayer2D = $compressAudioPlayer
+
 @export var door_speed : float = 0.1
 @export var reversed : bool = false
 @export var door_type : DoorType = DoorType.Gravity
@@ -17,7 +19,7 @@ var opened : bool = false
 var direction = -1
 var velocity = 0
 var door_position
-
+var was_on : bool = false
 
 func bool_xor(a : bool, b : bool):
 	return (a or b) and not (a and b)
@@ -65,6 +67,24 @@ func power_steered(local_door_position):
 		opened = true
 		velocity = 0
 		position.y = door_position.y - 58
+	
+	
+	
+	if power_supply.on:
+		if !was_on:
+			compress_audio_player.volume_db = randf_range(0, 10)
+			compress_audio_player.pitch_scale = randf_range(0.8, 1.2)
+			compress_audio_player.play()
+			was_on = true
+		
+	else:
+		if was_on:
+			compress_audio_player.volume_db = randf_range(0, 10)
+			compress_audio_player.pitch_scale = randf_range(0.8, 1.2)
+			compress_audio_player.play()
+			was_on = false
+	
+
 
 
 func gravity_steered(local_door_position):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx58b4d7u32at"]
+[gd_scene load_steps=6 format=3 uid="uid://cx58b4d7u32at"]
 
 [ext_resource type="Script" uid="uid://bf5nksqkut8tk" path="res://levels/power/doors/doors.gd" id="1_g5rw1"]
 [ext_resource type="Texture2D" uid="uid://dyx527ch5i6dd" path="res://levels/Tilesets/colliding tiles/door_closing-Sheet.png" id="2_75tly"]
+[ext_resource type="AudioStream" uid="uid://bojth53dsl62v" path="res://levels/power/hydraulic press/compress.mp3" id="3_jihin"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8cykf"]
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 63, 15, 63, 15, 64, 1, 64, 1, 63, 0, 63)
@@ -33,3 +34,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="crashDetector"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_75tly")
+
+[node name="compressAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jihin")
