@@ -2276,7 +2276,7 @@ light_mode = 1
 [node name="Level1" type="Node2D"]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_cr8f5")]
-position = Vector2(47, 448)
+position = Vector2(48, 440)
 floor_max_angle = 0.785398
 floor_snap_length = 15.0
 ACCELERATION = 1e+06
