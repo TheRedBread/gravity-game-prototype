@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cavvejidpcinq"]
+[gd_scene load_steps=20 format=3 uid="uid://cavvejidpcinq"]
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://UI/themes/MainTheme.tres" id="1_jpwtu"]
 [ext_resource type="Script" uid="uid://bcmriycpq4wi3" path="res://UI/main menu/main_menu.gd" id="2_nbubv"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b4wdxbaenkwrq" path="res://UI/fonts/monogram/premade/Title Screen/continue3.png" id="9_87k5q"]
 [ext_resource type="Texture2D" uid="uid://br13bioqulbcx" path="res://UI/fonts/monogram/premade/Title Screen/continue.png" id="10_sbt1y"]
 [ext_resource type="Texture2D" uid="uid://bo3u5vpudo7de" path="res://UI/fonts/monogram/premade/Title Screen/NewGame2.png" id="11_4ue5b"]
-[ext_resource type="Texture2D" uid="uid://dsbftgjfa04o2" path="res://UI/fonts/monogram/premade/Title Screen/continue_disabled.png" id="11_bio1b"]
 [ext_resource type="Texture2D" uid="uid://dixdt83og7nxp" path="res://UI/fonts/monogram/premade/Title Screen/NewGame3.png" id="12_mydg0"]
 [ext_resource type="Texture2D" uid="uid://bo2j10gwuj7l6" path="res://UI/fonts/monogram/premade/Title Screen/NewGame.png" id="13_28mm1"]
 [ext_resource type="Texture2D" uid="uid://b7qacpxtorugk" path="res://UI/fonts/monogram/premade/Title Screen/Options2.png" id="14_idncf"]
@@ -108,7 +107,6 @@ focus_neighbor_bottom = NodePath("../NewGameButton")
 texture_normal = ExtResource("8_fn0ot")
 texture_pressed = ExtResource("9_87k5q")
 texture_hover = ExtResource("10_sbt1y")
-texture_disabled = ExtResource("11_bio1b")
 texture_focused = ExtResource("10_sbt1y")
 stretch_mode = 3
 
@@ -143,14 +141,6 @@ texture_pressed = ExtResource("18_q1hgj")
 texture_hover = ExtResource("19_1is3u")
 texture_focused = ExtResource("19_1is3u")
 stretch_mode = 3
-
-[node name="TimeDateSaveButton" type="Label" parent="."]
-unique_name_in_owner = true
-layout_mode = 2
-offset_left = 272.0
-offset_top = 179.0
-offset_right = 273.0
-offset_bottom = 192.0
 
 [connection signal="pressed" from="MainCenterContainer/VBoxContainer2/BoxContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MainCenterContainer/VBoxContainer2/BoxContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]

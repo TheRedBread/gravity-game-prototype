@@ -48,8 +48,10 @@ func _on_resume_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	switch_pause()
+	GameSaveSystem.save_game()
 	SceneTransition.change_scene("res://UI/main menu/main_menu.tscn", "Blue1",-1)
+	switch_pause()
+	
 	AudioManager.button_click_sound()
 
 

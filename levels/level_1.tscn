@@ -2273,7 +2273,7 @@ sources/9 = SubResource("TileSetAtlasSource_r0nt2")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pnpm1"]
 light_mode = 1
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Node2D" groups=["level"]]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_cr8f5")]
 position = Vector2(48, 440)

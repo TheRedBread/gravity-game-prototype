@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://pmt13y54ku2i"]
 
-[ext_resource type="Script" path="res://global elements/scene transition/scene_transition.gd" id="1_3kwi4"]
-[ext_resource type="Shader" path="res://global elements/scene transition/diamond_transition.gdshader" id="1_72rmr"]
+[ext_resource type="Script" uid="uid://5hm8uajiiwr1" path="res://global elements/scene transition/scene_transition.gd" id="1_3kwi4"]
+[ext_resource type="Shader" uid="uid://dj67604r3j0l5" path="res://global elements/scene transition/diamond_transition.gdshader" id="1_72rmr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_clnkt"]
 shader = ExtResource("1_72rmr")
@@ -41,6 +41,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_8641i"]
 resource_name = "fadeIn"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -60,7 +61,7 @@ tracks/1/path = NodePath("transitionShader:material:shader_parameter/progress")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -68,6 +69,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_60od4"]
 resource_name = "fadeOut"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -75,7 +77,7 @@ tracks/0/path = NodePath("transitionShader:material:shader_parameter/progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -95,9 +97,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3htsy"]
 _data = {
-"RESET": SubResource("Animation_spsgr"),
-"fadeIn": SubResource("Animation_8641i"),
-"fadeOut": SubResource("Animation_60od4")
+&"RESET": SubResource("Animation_spsgr"),
+&"fadeIn": SubResource("Animation_8641i"),
+&"fadeOut": SubResource("Animation_60od4")
 }
 
 [node name="sceneTransition" type="CanvasLayer"]
@@ -117,5 +119,5 @@ metadata/_edit_use_anchors_ = true
 
 [node name="transitionPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3htsy")
+&"": SubResource("AnimationLibrary_3htsy")
 }

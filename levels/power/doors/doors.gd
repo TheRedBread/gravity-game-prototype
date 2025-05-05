@@ -74,14 +74,14 @@ func power_steered(local_door_position):
 func compress():
 	if power_supply.on:
 		if !was_on:
-			compress_audio_player.volume_db = randf_range(0, 10)
+			compress_audio_player.volume_db = randf_range(8, 15)
 			compress_audio_player.pitch_scale = randf_range(0.8, 1.2)
 			compress_audio_player.play()
 			was_on = true
 		
 	else:
 		if was_on:
-			compress_audio_player.volume_db = randf_range(0, 10)
+			compress_audio_player.volume_db = randf_range(8, 15)
 			compress_audio_player.pitch_scale = randf_range(0.8, 1.2)
 			compress_audio_player.play()
 			was_on = false

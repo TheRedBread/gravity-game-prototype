@@ -27,8 +27,10 @@ func change_scene(target : String, colorStr : String, door : int) -> void:
 	if door >= 0:
 		for d in get_tree().get_nodes_in_group("doors"):
 			if d.door_id == door:
+				GameSaveSystem.current_door = door
 				print("teleported to doors with id: ", door)
 				get_tree().get_nodes_in_group("player")[0].position = d.position
+	
 	
 	AudioManager.play_sound(SCENE_TRANSITION_OUT, 0, 0, 1, 0, "Sound effects")
 	transition_player.play("fadeIn")

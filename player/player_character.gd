@@ -36,6 +36,8 @@ extends CharacterBody2D
 @export var GRAVITY : float = 800
 @export var BOX_PUSH_FORCE : float = 80.0
 
+@export var player_controls : bool = true
+
 #------------------------- PRELOADS ------------------------------#
 const eyes_blue = preload("res://player/sprites/gravityPlayerSprite_EyesTrue.png")
 const eyes_red = preload("res://player/sprites/gravityPlayerSprite_EyesFalse.png")
@@ -94,7 +96,7 @@ var was_falling : bool = false
 
 var player_state : PlayerState = PlayerState.IDLE
 var no_clip : bool = false
-var player_controls : bool = true
+
 
 
 func _ready() -> void:

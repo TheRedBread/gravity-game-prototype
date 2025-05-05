@@ -3,6 +3,15 @@ extends Control
 var previous_position : Vector2 = Vector2(0, 0)
 var input_focus_mode = "mouse"
 
+func _ready() -> void:
+	GameSaveSystem.load_game()
+	%ContinueButton.disabled = !FileAccess.file_exists(GameSaveSystem.SAVE_PATH)
+
+func _process(delta: float) -> void:
+	if FileAccess.file_exists(GameSaveSystem.SAVE_PATH):
+		%TimeDateSaveButton.text = GameSaveSystem.date
+
+
 ## Checks how you select buttons: mouse/arrows. 
 ## if you move mouse it switches to mouse, else switches to keyboard/controller mode 
 func focus_update():
@@ -31,17 +40,27 @@ func focus_update():
 func _input(_event: InputEvent) -> void:
 	focus_update()
 
-
 func _on_quit_button_pressed() -> void:
 	AudioManager.button_click_sound()
 	GameManager.close_game()
-
 
 func _on_options_button_pressed() -> void:
 	SceneTransition.change_scene("res://UI/settings/Settings.tscn", "Blue1", -1)
 	AudioManager.button_click_sound()
 
+func delete_save():
+	if not FileAccess.file_exists(GameSaveSystem.SAVE_PATH):
+		return
+	
+	DirAccess.remove_absolute(GameSaveSystem.SAVE_PATH)
+	print("save file deleted at: ", GameSaveSystem.SAVE_PATH)
+
 
 func _on_continue_button_pressed() -> void:
-	SceneTransition.change_scene("res://levels/level_1.tscn", "Blue1", -1)
 	AudioManager.button_click_sound()
+	GameManager.load_last_save()
+
+func _on_new_game_button_pressed() -> void:
+	delete_save()
+	SceneTransition.change_scene("res://levels/level_1.tscn", "Blue1", -1)
+	GameSaveSystem.save_game()
