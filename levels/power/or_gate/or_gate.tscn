@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv6pwa7058gw2"]
+
+[ext_resource type="Script" uid="uid://bpd08y3c16otn" path="res://levels/power/or_gate/or_gate.gd" id="1_rtr88"]
+
+[node name="OrGate" type="Node2D"]
+script = ExtResource("1_rtr88")
+metadata/_custom_type_script = "uid://cggxrmqeulsxp"

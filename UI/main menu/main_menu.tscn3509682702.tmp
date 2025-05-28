@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cavvejidpcinq"]
+[gd_scene load_steps=20 format=3 uid="uid://cavvejidpcinq"]
 
 [ext_resource type="Theme" uid="uid://m54yaiaqs6ll" path="res://UI/themes/MainTheme.tres" id="1_jpwtu"]
 [ext_resource type="Script" uid="uid://bcmriycpq4wi3" path="res://UI/main menu/main_menu.gd" id="2_nbubv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dcnqq4vg13b5g" path="res://global elements/parallax/stars/Star2.png" id="5_jxwij"]
 [ext_resource type="Texture2D" uid="uid://bp44vh5m3bfo5" path="res://global elements/parallax/stars/Star3.png" id="6_lfhod"]
 [ext_resource type="Texture2D" uid="uid://dx2u1j2k5c271" path="res://UI/main menu/Title.png" id="7_058dh"]
+[ext_resource type="Shader" uid="uid://brlvkteghwcwc" path="res://global elements/glow.gdshader" id="7_hjj2q"]
 [ext_resource type="Texture2D" uid="uid://jsmnkyw0l7f3" path="res://UI/fonts/monogram/premade/Title Screen/continue2.png" id="8_fn0ot"]
 [ext_resource type="Texture2D" uid="uid://b4wdxbaenkwrq" path="res://UI/fonts/monogram/premade/Title Screen/continue3.png" id="9_87k5q"]
 [ext_resource type="Texture2D" uid="uid://br13bioqulbcx" path="res://UI/fonts/monogram/premade/Title Screen/continue.png" id="10_sbt1y"]
@@ -15,7 +16,17 @@
 [ext_resource type="Texture2D" uid="uid://dixdt83og7nxp" path="res://UI/fonts/monogram/premade/Title Screen/NewGame3.png" id="12_mydg0"]
 [ext_resource type="Texture2D" uid="uid://bo2j10gwuj7l6" path="res://UI/fonts/monogram/premade/Title Screen/NewGame.png" id="13_28mm1"]
 [ext_resource type="Texture2D" uid="uid://dx7ytfhwytmjy" path="res://UI/main menu/quit_icon.png" id="16_bberr"]
+[ext_resource type="Texture2D" uid="uid://dhqqebadibiia" path="res://spaceship.png" id="16_oh6q1"]
 [ext_resource type="Texture2D" uid="uid://bdcrt8sxpp82v" path="res://UI/main menu/settiings_icon.png" id="21_gobr6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oh6q1"]
+shader = ExtResource("7_hjj2q")
+shader_parameter/BLOOM_THRESHOLD = 0.7
+shader_parameter/BLOOM_INTENSITY = 2.0
+shader_parameter/OPACITY = 1.0
+shader_parameter/BLUR_ITERATIONS = 8
+shader_parameter/BLUR_SIZE = 0.01
+shader_parameter/BLUR_SUBDIVISIONS = 64
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -33,6 +44,7 @@ layer = -128
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
 layer = -6
 script = ExtResource("3_u3541")
+constant_offset = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 z_index = -2
@@ -60,6 +72,21 @@ motion_mirroring = Vector2(480, 270)
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer3"]
 position = Vector2(240, 135)
 texture = ExtResource("6_lfhod")
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="CanvasLayer"]
+layer = -6
+script = ExtResource("3_u3541")
+constant_vibrate = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground2"]
+z_index = -2
+motion_scale = Vector2(0.02, 0.02)
+motion_mirroring = Vector2(480, 270)
+
+[node name="Spaceship" type="Sprite2D" parent="CanvasLayer/ParallaxBackground2/ParallaxLayer"]
+position = Vector2(116, 176)
+scale = Vector2(1.00074, 1)
+texture = ExtResource("16_oh6q1")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 z_index = -100
@@ -89,6 +116,7 @@ alignment = 1
 
 [node name="MainTitle" type="TextureRect" parent="MainCenterContainer/VBoxContainer2"]
 z_index = 10
+material = SubResource("ShaderMaterial_oh6q1")
 layout_mode = 2
 texture = ExtResource("7_058dh")
 
@@ -123,18 +151,11 @@ stretch_mode = 3
 
 [node name="TimeDateSaveButton" type="Label" parent="."]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -17.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-horizontal_alignment = 1
+layout_mode = 2
+offset_left = 274.0
+offset_top = 148.0
+offset_right = 275.0
+offset_bottom = 161.0
 
 [node name="OptionsButton" type="TextureButton" parent="."]
 unique_name_in_owner = true

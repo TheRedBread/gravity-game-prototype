@@ -2426,12 +2426,12 @@ sources/8 = SubResource("TileSetAtlasSource_m0g18")
 sources/9 = SubResource("TileSetAtlasSource_df2rw")
 sources/2 = SubResource("TileSetAtlasSource_ngvhw")
 
-[sub_resource type="Gradient" id="Gradient_xrja0"]
+[sub_resource type="Gradient" id="Gradient_wgvos"]
 offsets = PackedFloat32Array(0, 0.667722)
 colors = PackedColorArray(0, 0, 0, 0, 0.180392, 0.172549, 0.188235, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_he6wg"]
-gradient = SubResource("Gradient_xrja0")
+gradient = SubResource("Gradient_wgvos")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqt73"]
 size = Vector2(32, 320)
@@ -2630,7 +2630,8 @@ texture = SubResource("GradientTexture1D_he6wg")
 position = Vector2(1792, -848)
 collision_layer = 0
 collision_mask = 2
-door_level = "res://levels/level_1.tscn"
+door_level = "res://levels/level_3.tscn"
+door_id = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VentRoom/LevelChangeArea"]
 position = Vector2(0, -32)

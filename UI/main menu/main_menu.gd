@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if FileAccess.file_exists(GameSaveSystem.SAVE_PATH):
-		%TimeDateSaveButton.text = GameSaveSystem.date
+		%TimeDateSaveButton.text = "Last save: " + GameSaveSystem.date
 
 
 ## Checks how you select buttons: mouse/arrows. 
