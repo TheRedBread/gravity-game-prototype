@@ -30,7 +30,7 @@ shape = SubResource("CircleShape2D_6fy0f")
 [node name="lever" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_v0g6q")
 texture = ExtResource("3_0aefi")
-hframes = 2
+hframes = 3
 frame = 1
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]

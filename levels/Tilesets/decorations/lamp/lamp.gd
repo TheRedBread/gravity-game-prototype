@@ -4,6 +4,8 @@ extends Sprite2D
 @onready var lights: Sprite2D = $Lights
 @onready var sparking_particles: CPUParticles2D = $sparkingParticles
 
+@export var power_supply : Power
+
 
 enum LightningType{
 	Normal,
@@ -30,7 +32,13 @@ func _physics_process(_delta: float) -> void:
 		lamp_light.enabled = false
 		return
 	
+	
 	lamp_light.enabled = true
+	
+	if power_supply:
+		lamp_light.enabled = power_supply.on
+		
+	
 	
 	if light_type == LightningType.Blinking:
 		handle_blinkging()

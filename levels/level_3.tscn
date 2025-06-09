@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://ywstwn47rjwb"]
+[gd_scene load_steps=70 format=4 uid="uid://ywstwn47rjwb"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://player/player_character.tscn" id="1_mqvtj"]
 [ext_resource type="Texture2D" uid="uid://b3shcf418i0lt" path="res://levels/Tilesets/rack.png" id="2_8swdu"]
@@ -38,6 +38,8 @@
 [ext_resource type="PackedScene" uid="uid://dibdmjcs27m0g" path="res://levels/power/lever/lever.tscn" id="36_dvo5v"]
 [ext_resource type="PackedScene" uid="uid://bnccw7urrjo5r" path="res://levels/text_hider.tscn" id="37_c3ijv"]
 [ext_resource type="FontFile" uid="uid://dgqjhmvhh80vg" path="res://UI/fonts/monogram/ttf/monogram.ttf" id="38_b1cs7"]
+[ext_resource type="PackedScene" uid="uid://cg77n2memwy35" path="res://levels/power/and_gate/and_gate.tscn" id="39_b1cs7"]
+[ext_resource type="Script" uid="uid://dvqanqeka384y" path="res://levels/generators_state_label.gd" id="40_fxw2g"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_itbe0"]
 light_mode = 1
@@ -551,6 +553,92 @@ texture = ExtResource("12_h3b7p")
 3:3/0/terrain = 3
 3:3/0/terrains_peering_bit/left_side = 3
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b1cs7"]
+texture = ExtResource("15_16jej")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+20:0/0 = 0
+21:0/0 = 0
+22:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_6bdx5"]
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "shelf"
@@ -566,6 +654,7 @@ sources/1 = SubResource("TileSetAtlasSource_3582p")
 sources/2 = SubResource("TileSetAtlasSource_nomkf")
 sources/3 = SubResource("TileSetAtlasSource_rddwe")
 sources/4 = SubResource("TileSetAtlasSource_dvo5v")
+sources/5 = SubResource("TileSetAtlasSource_b1cs7")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qthv2"]
 texture = ExtResource("12_o87u6")
@@ -2568,7 +2657,7 @@ tile_set = ExtResource("7_8nkwk")
 
 [node name="BackgroundDecorations" type="TileMapLayer" parent="."]
 z_index = -1
-tile_map_data = PackedByteArray("AAD//97/AQAAAAEAAAD//93/AQAAAAEAAAD//9z/AQAAAAEAAAD//9v/AQAAAAEAAAARANr/AQAAAAIAAAAQANn/AQACAAIAAAAQANj/AQAAAAEAAAAQANf/AQAAAAEAAAAQANb/AQAAAAEAAAAQANX/AQAAAAAAAAAKANz/AAAAAAAAAAAKAN3/AAAAAAIAAAAKAN7/AAAAAAMAAAALANz/AAABAAAAAAALAN3/AAABAAIAAAALAN7/AAABAAMAAAAMANz/AAABAAAAAAAMAN3/AAABAAIAAAAMAN7/AAABAAMAAAANANz/AAACAAAAAAANAN3/AAACAAIAAAANAN7/AAACAAMAAADu/9X/AQAAAAMAAADr/9v/AQAAAAEAAADr/9r/AQAAAAEAAADr/9n/AQACAAAAAADx/9v/AQAAAAEAAADx/9r/AQAAAAEAAADx/9n/AQACAAAAAAD3/9v/AQAAAAEAAAD3/9n/AQACAAAAAADs/9n/AQACAAMAAADt/9n/AQACAAMAAADu/9n/AQACAAMAAADv/9n/AQACAAMAAADw/9n/AQACAAMAAADy/9n/AQACAAMAAADz/9n/AQACAAMAAAD0/9n/AQACAAMAAAD1/9n/AQACAAMAAAD2/9n/AQACAAMAAADq/9n/AQACAAMAAADp/9n/AQACAAMAAADo/9n/AQACAAMAAADn/9n/AQACAAAAAADw/93/BAACAAMAAADv/93/BAACAAMAAADu/93/BAABAAMAAADq/93/BAACAAMAAADp/93/BAACAAMAAAD2/93/BAACAAMAAAD1/93/BAACAAMAAAD0/93/BAABAAMAAADn/9r/AQAAAAEAAADn/9v/AQAAAAEAAADn/9z/AQAAAAEAAAD3/9z/AQAAAAEAAADx/9z/AQAAAAEAAADr/9z/AQAAAAEAAADn/93/BAACAAMAAADm/93/BAACAAMAAADl/93/BAACAAMAAADk/93/BAACAAMAAADh/93/BAACAAMAAADg/93/BAACAAMAAADf/93/BAACAAMAAADe/93/BAACAAMAAADb/93/BAACAAMAAADa/93/BAACAAMAAADZ/93/BAACAAMAAADY/93/BAACAAMAAADU/93/BAACAAMAAADT/93/BAACAAMAAADV/9n/AQABAAAAAADW/9n/AQACAAMAAADX/9n/AQACAAMAAADY/9n/AQACAAMAAADZ/9n/AQACAAMAAADa/9n/AQACAAMAAADb/9n/AQACAAAAAADc/9n/AQACAAMAAADd/9n/AQACAAMAAADe/9n/AQACAAMAAADf/9n/AQACAAMAAADg/9n/AQACAAMAAADh/9n/AQACAAAAAADi/9n/AQACAAMAAADj/9n/AQACAAMAAADk/9n/AQACAAMAAADl/9n/AQACAAMAAADm/9n/AQACAAMAAADV/9v/AQAAAAEAAADV/9r/AQAAAAEAAADb/9v/AQAAAAEAAADb/9r/AQAAAAEAAADh/9v/AQAAAAEAAADh/9r/AQAAAAEAAADV/9z/AQAAAAEAAADb/9z/AQAAAAEAAADh/9z/AQAAAAEAAADS/93/BAACAAMAAADR/93/BAACAAMAAADQ/93/BAACAAMAAADP/93/BAACAAMAAADO/93/BAACAAMAAADN/93/BAACAAMAAADM/93/BAACAAMAAADL/93/BAACAAMAAADK/93/BAACAAMAAADJ/93/BAACAAMAAADI/93/BAACAAMAAADH/93/BAACAAMAAADG/93/BAABAAIAAADG/9z/BAAAAAEAAADG/9v/BAAAAAEAAADG/9r/BAAAAAEAAADG/9n/BAAAAAEAAADG/9j/BAAAAAEAAADG/9f/BAADAAEAAADG/9b/BAAAAAEAAADG/9X/BAAAAAAAAADF/9f/BAACAAMAAADE/9f/BAACAAMAAADD/9f/BAACAAMAAADC/9f/BAACAAMAAADB/9f/BAACAAMAAADA/9f/BAACAAMAAAC//9f/BAACAAMAAAC+/9f/BAACAAMAAAC9/9f/BAACAAMAAAC8/9f/BAACAAMAAAC7/9f/BAACAAMAAAC6/9f/BAACAAMAAAC5/9f/BAACAAMAAAC4/9f/BAACAAMAAAC3/9f/BAACAAMAAAC2/9f/BAACAAMAAAC1/9f/BAACAAMAAAC0/9f/BAACAAMAAACz/9f/BAACAAAAAACy/9f/BAACAAMAAACx/9f/BAACAAMAAACw/9f/BAACAAMAAACv/9f/BAACAAMAAACu/9f/BAACAAMAAACt/9f/BAABAAMAAACz/9//BAAAAAIAAACz/97/BAAAAAEAAACz/93/BAAAAAEAAACz/9r/BAAAAAEAAACz/9n/BAAAAAEAAACz/9j/BAAAAAEAAAAKANn/AQACAAMAAAAJANn/AQACAAMAAAAIANn/AQACAAMAAAAHANn/AQACAAMAAAAGANn/AQACAAMAAAAFANn/AQACAAMAAAAEANn/AQACAAMAAAADANn/AQACAAMAAAACANn/AQACAAMAAAABANn/AQACAAMAAAAAANn/AQACAAMAAAD//9n/AQACAAAAAAD+/9n/AQACAAMAAAD9/9n/AQACAAMAAAD8/9n/AQACAAMAAAD7/9n/AQACAAMAAAD6/9n/AQACAAMAAAD5/9n/AQACAAMAAAD4/9n/AQACAAMAAAD3/9r/AQAAAAEAAAAPANn/AQACAAMAAAAOANn/AQACAAMAAAANANn/AQACAAMAAAAMANn/AQACAAMAAAALANn/AQACAAMAAAARANn/AQADAAAAAAD//9r/AQAAAAEAAAC0/9z/BAACAAMAAAC1/9z/BAACAAMAAAC2/9z/BAACAAMAAAC3/9z/BAACAAMAAAC4/9z/BAACAAMAAAC5/9z/BAADAAMAAACz/9v/BAAAAAEAAACz/9z/BAABAAEAAAA=")
+tile_map_data = PackedByteArray("AAD//97/AQAAAAEAAAD//93/AQAAAAEAAAD//9z/AQAAAAEAAAD//9v/AQAAAAEAAAARANr/AQAAAAIAAAAQANn/AQACAAIAAAAQANj/AQAAAAEAAAAQANf/AQAAAAEAAAAQANb/AQAAAAEAAAAQANX/AQAAAAAAAAAKANz/AAAAAAAAAAAKAN3/AAAAAAIAAAAKAN7/AAAAAAMAAAALANz/AAABAAAAAAALAN3/AAABAAIAAAALAN7/AAABAAMAAAAMANz/AAABAAAAAAAMAN3/AAABAAIAAAAMAN7/AAABAAMAAAANANz/AAACAAAAAAANAN3/AAACAAIAAAANAN7/AAACAAMAAADu/9X/AQAAAAMAAADr/9v/AQAAAAEAAADr/9r/AQAAAAEAAADr/9n/AQACAAAAAADx/9v/AQAAAAEAAADx/9r/AQAAAAEAAADx/9n/AQACAAAAAAD3/9v/AQAAAAEAAAD3/9n/AQACAAAAAADs/9n/AQACAAMAAADt/9n/AQACAAMAAADu/9n/AQACAAMAAADv/9n/AQACAAMAAADw/9n/AQACAAMAAADy/9n/AQACAAMAAADz/9n/AQACAAMAAAD0/9n/AQACAAMAAAD1/9n/AQACAAMAAAD2/9n/AQACAAMAAADq/9n/AQACAAMAAADp/9n/AQACAAMAAADo/9n/AQACAAMAAADn/9n/AQACAAAAAADw/93/BAACAAMAAADv/93/BAACAAMAAADu/93/BAABAAMAAADq/93/BAACAAMAAADp/93/BAACAAMAAAD2/93/BAACAAMAAAD1/93/BAACAAMAAAD0/93/BAABAAMAAADn/9r/AQAAAAEAAADn/9v/AQAAAAEAAADn/9z/AQAAAAEAAAD3/9z/AQAAAAEAAADx/9z/AQAAAAEAAADr/9z/AQAAAAEAAADn/93/BAACAAMAAADm/93/BAACAAMAAADl/93/BAACAAMAAADk/93/BAACAAMAAADh/93/BAACAAMAAADg/93/BAACAAMAAADf/93/BAACAAMAAADe/93/BAACAAMAAADb/93/BAACAAMAAADa/93/BAACAAMAAADZ/93/BAACAAMAAADY/93/BAACAAMAAADU/93/BAACAAMAAADT/93/BAACAAMAAADV/9n/AQABAAAAAADW/9n/AQACAAMAAADX/9n/AQACAAMAAADY/9n/AQACAAMAAADZ/9n/AQACAAMAAADa/9n/AQACAAMAAADb/9n/AQACAAAAAADc/9n/AQACAAMAAADd/9n/AQACAAMAAADe/9n/AQACAAMAAADf/9n/AQACAAMAAADg/9n/AQACAAMAAADh/9n/AQACAAAAAADi/9n/AQACAAMAAADj/9n/AQACAAMAAADk/9n/AQACAAMAAADl/9n/AQACAAMAAADm/9n/AQACAAMAAADV/9v/AQAAAAEAAADV/9r/AQAAAAEAAADb/9v/AQAAAAEAAADb/9r/AQAAAAEAAADh/9v/AQAAAAEAAADh/9r/AQAAAAEAAADV/9z/AQAAAAEAAADb/9z/AQAAAAEAAADh/9z/AQAAAAEAAADS/93/BAACAAMAAADR/93/BAACAAMAAADQ/93/BAACAAMAAADP/93/BAACAAMAAADO/93/BAACAAMAAADN/93/BAACAAMAAADM/93/BAACAAMAAADL/93/BAACAAMAAADK/93/BAACAAMAAADJ/93/BAACAAMAAADI/93/BAACAAMAAADH/93/BAACAAMAAADG/93/BAABAAIAAADG/9z/BAAAAAEAAADG/9v/BAAAAAEAAADG/9r/BAAAAAEAAADG/9n/BAAAAAEAAADG/9j/BAAAAAEAAADG/9f/BAADAAEAAADG/9b/BAAAAAEAAADG/9X/BAAAAAAAAADF/9f/BAACAAMAAADE/9f/BAACAAMAAADD/9f/BAACAAMAAADC/9f/BAACAAMAAADB/9f/BAACAAMAAADA/9f/BAACAAMAAAC//9f/BAACAAMAAAC+/9f/BAACAAMAAAC9/9f/BAACAAMAAAC8/9f/BAACAAMAAAC7/9f/BAACAAMAAAC6/9f/BAACAAMAAAC5/9f/BAACAAMAAAC4/9f/BAACAAMAAAC3/9f/BAACAAMAAAC2/9f/BAACAAMAAAC1/9f/BAACAAMAAAC0/9f/BAACAAMAAACz/9f/BAACAAAAAACy/9f/BAACAAMAAACx/9f/BAACAAMAAACw/9f/BAACAAMAAACv/9f/BAACAAMAAACu/9f/BAACAAMAAACt/9f/BAABAAMAAACz/9//BAAAAAIAAACz/97/BAAAAAEAAACz/93/BAAAAAEAAACz/9r/BAAAAAEAAACz/9n/BAAAAAEAAACz/9j/BAAAAAEAAAAKANn/AQACAAMAAAAJANn/AQACAAMAAAAIANn/AQACAAMAAAAHANn/AQACAAMAAAAGANn/AQACAAMAAAAFANn/AQACAAMAAAAEANn/AQACAAMAAAADANn/AQACAAMAAAACANn/AQACAAMAAAABANn/AQACAAMAAAAAANn/AQACAAMAAAD//9n/AQACAAAAAAD+/9n/AQACAAMAAAD9/9n/AQACAAMAAAD8/9n/AQACAAMAAAD7/9n/AQACAAMAAAD6/9n/AQACAAMAAAD5/9n/AQACAAMAAAD4/9n/AQACAAMAAAD3/9r/AQAAAAEAAAAPANn/AQACAAMAAAAOANn/AQACAAMAAAANANn/AQACAAMAAAAMANn/AQACAAMAAAALANn/AQACAAMAAAARANn/AQADAAAAAAD//9r/AQAAAAEAAAC0/9z/BAACAAMAAAC1/9z/BAACAAMAAAC2/9z/BAACAAMAAAC3/9z/BAACAAMAAAC4/9z/BAACAAMAAAC5/9z/BAADAAMAAACz/9v/BAAAAAEAAACz/9z/BAABAAEAAAAFANr/BQABAAMAAAAGANr/BQACAAMAAAAHANr/BQACAAMAAAAIANr/BQACAAMAAAAJANr/BQACAAMAAAAKANr/BQADAAMAAAA=")
 tile_set = SubResource("TileSet_6bdx5")
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -2624,7 +2713,7 @@ power_supply = NodePath("../LeftOrGate")
 position = Vector2(280, -560)
 reversed = true
 door_type = 1
-power_supply = NodePath("../RightOrGate")
+power_supply = NodePath("../../isPowerOn")
 
 [node name="LeftInButton" parent="Office" instance=ExtResource("25_xe1ru")]
 position = Vector2(-8, -552)
@@ -2647,16 +2736,18 @@ position = Vector2(-24, -600)
 power_supply1 = NodePath("../LeftInButton")
 power_supply2 = NodePath("../LeftOutButton")
 
-[node name="RightOutButton" parent="Office" instance=ExtResource("25_xe1ru")]
+[node name="RightOutButton" parent="Office" node_paths=PackedStringArray("enabling_power_supply") instance=ExtResource("25_xe1ru")]
 position = Vector2(296, -552)
-
-[node name="RightInButton" parent="Office" instance=ExtResource("25_xe1ru")]
-position = Vector2(264, -552)
+enabling_power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
 [node name="RightOrGate" parent="Office" node_paths=PackedStringArray("power_supply1", "power_supply2") instance=ExtResource("27_e28pm")]
 position = Vector2(280, -600)
 power_supply1 = NodePath("../RightInButton")
 power_supply2 = NodePath("../RightOutButton")
+
+[node name="RightInButton" parent="Office" node_paths=PackedStringArray("enabling_power_supply") instance=ExtResource("25_xe1ru")]
+position = Vector2(264, -552)
+enabling_power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
 [node name="Chair" type="Sprite2D" parent="Office"]
 position = Vector2(48, -552)
@@ -2685,23 +2776,28 @@ texture = ExtResource("32_q26s8")
 [node name="Lamp" parent="EngineRoom" instance=ExtResource("26_6anhs")]
 position = Vector2(-80, -584)
 
-[node name="Lamp2" parent="EngineRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp2" parent="EngineRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-208, -584)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
 [node name="Lamp3" parent="EngineRoom" instance=ExtResource("26_6anhs")]
 position = Vector2(-368, -584)
 
-[node name="Lamp4" parent="EngineRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp4" parent="EngineRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-464, -584)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp5" parent="EngineRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp5" parent="EngineRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-560, -584)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp6" parent="EngineRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp6" parent="EngineRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-656, -584)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp7" parent="EngineRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp7" parent="EngineRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-752, -584)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
 [node name="Engine" type="Sprite2D" parent="EngineRoom"]
 position = Vector2(-212, -552)
@@ -2748,35 +2844,38 @@ horizontal_alignment = 1
 
 [node name="CableRoom" type="Node2D" parent="."]
 
-[node name="Lamp" parent="CableRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp" parent="CableRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-944, -600)
+power_supply = NodePath("../UnitPowerLever")
 lamp_sprite_variation = 3
 
-[node name="Lamp4" parent="CableRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp4" parent="CableRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-944, -600)
+power_supply = NodePath("../UnitPowerLever")
 lamp_sprite_variation = 3
 
 [node name="Lamp2" parent="CableRoom" instance=ExtResource("26_6anhs")]
 position = Vector2(-1104, -600)
 lamp_sprite_variation = 3
 
-[node name="Lamp3" parent="CableRoom" instance=ExtResource("26_6anhs")]
+[node name="Lamp3" parent="CableRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(-1264, -600)
+power_supply = NodePath("../UnitPowerLever")
 lamp_sprite_variation = 3
 
 [node name="Doors" parent="CableRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("19_bm5fu")]
 position = Vector2(-904, -544)
 door_speed = 0.06
 door_type = 1
-power_supply = NodePath("../Lever")
+power_supply = NodePath("../UnitPowerLever")
 
 [node name="Doors2" parent="CableRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("19_bm5fu")]
 position = Vector2(-840, -544)
 door_speed = 0.06
 door_type = 1
-power_supply = NodePath("../Lever")
+power_supply = NodePath("../UnitPowerLever")
 
-[node name="Lever" parent="CableRoom" instance=ExtResource("36_dvo5v")]
+[node name="UnitPowerLever" parent="CableRoom" instance=ExtResource("36_dvo5v")]
 position = Vector2(-1128, -568)
 
 [node name="TextHider" parent="CableRoom" instance=ExtResource("37_c3ijv")]
@@ -2796,23 +2895,29 @@ horizontal_alignment = 1
 
 [node name="Slide" type="Node2D" parent="."]
 
-[node name="Lamp" parent="Slide" instance=ExtResource("26_6anhs")]
+[node name="Lamp" parent="Slide" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(400, -600)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp2" parent="Slide" instance=ExtResource("26_6anhs")]
+[node name="Lamp2" parent="Slide" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(592, -568)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp3" parent="Slide" instance=ExtResource("26_6anhs")]
+[node name="Lamp3" parent="Slide" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(784, -472)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp4" parent="Slide" instance=ExtResource("26_6anhs")]
+[node name="Lamp4" parent="Slide" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(976, -376)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp5" parent="Slide" instance=ExtResource("26_6anhs")]
+[node name="Lamp5" parent="Slide" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(1168, -312)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
-[node name="Lamp6" parent="Slide" instance=ExtResource("26_6anhs")]
+[node name="Lamp6" parent="Slide" node_paths=PackedStringArray("power_supply") instance=ExtResource("26_6anhs")]
 position = Vector2(1392, -312)
+power_supply = NodePath("../../CableRoom/UnitPowerLever")
 
 [node name="TextHider" parent="Slide" instance=ExtResource("37_c3ijv")]
 position = Vector2(480, -544)
@@ -2828,3 +2933,21 @@ theme_override_colors/font_color = Color(0.352941, 0.772549, 0.807843, 1)
 theme_override_fonts/font = ExtResource("38_b1cs7")
 text = "Use Ctrl to slide"
 horizontal_alignment = 1
+
+[node name="isPowerOn" parent="." node_paths=PackedStringArray("power_supply1", "power_supply2") instance=ExtResource("39_b1cs7")]
+position = Vector2(132, -636)
+power_supply1 = NodePath("../Office/RightOrGate")
+power_supply2 = NodePath("../CableRoom/UnitPowerLever")
+
+[node name="GeneratorsStateLabel" type="Label" parent="." node_paths=PackedStringArray("power_supply")]
+material = SubResource("CanvasItemMaterial_c3ijv")
+offset_left = 74.0
+offset_top = -608.0
+offset_right = 182.0
+offset_bottom = -592.0
+theme_override_colors/font_color = Color(0.352941, 0.772549, 0.807843, 1)
+theme_override_fonts/font = ExtResource("38_b1cs7")
+text = "Generators off"
+horizontal_alignment = 1
+script = ExtResource("40_fxw2g")
+power_supply = NodePath("../CableRoom/UnitPowerLever")

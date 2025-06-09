@@ -18,5 +18,4 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		print("couldn't load scene: ", door_level)
 	
-	print("aaaaa")
 	get_tree().get_nodes_in_group("player")[0].player_controls = false
