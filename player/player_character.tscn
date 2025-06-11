@@ -16,8 +16,8 @@
 size = Vector2(9.92014, 22)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2j5l"]
-radius = 3.96806
-height = 20.0
+radius = 4.96007
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_i5e0n"]
 resource_name = "Idle"
@@ -768,6 +768,12 @@ environment = SubResource("Environment_wi17q")
 libraries = {
 &"": SubResource("AnimationLibrary_l18q3")
 }
+
+[node name="ControlsDelayTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.6
+one_shot = true
+autostart = true
 
 [connection signal="body_entered" from="SpawnpointDetection" to="." method="_on_spawnpoint_detection_body_entered"]
 [connection signal="area_entered" from="DeathDetection" to="." method="_on_death_detection_area_entered"]

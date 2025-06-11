@@ -63,10 +63,10 @@ func power_steered(local_door_position):
 		velocity = 0
 		position.y = door_position.y - 0
 	
-	if local_door_position.y > 58:
+	if local_door_position.y > 68:
 		opened = true
 		velocity = 0
-		position.y = door_position.y - 58
+		position.y = door_position.y - 68
 	
 	
 	compress()

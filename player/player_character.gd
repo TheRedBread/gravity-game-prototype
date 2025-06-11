@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var player_sprite: Sprite2D = $playerSprite
 @onready var player_collision: CollisionShape2D = $PlayerCollision
@@ -225,6 +226,7 @@ func handle_snap_change():
 
 # ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
+	print(%ControlsDelayTimer.time_left)
 	if player_controls:
 		if player_state == PlayerState.FLYING:
 			$PlayerCollision.disabled = true
@@ -246,6 +248,7 @@ func handle_movement(delta):
 			handle_slam()
 			handle_dashing()
 			handle_abilities()
+			
 			handle_reset()
 			if not is_on_floor():
 				apply_gravity(delta)
@@ -369,7 +372,8 @@ func handle_slam():
 func handle_abilities():
 	input_switch()
 	
-	handle_gravity_switch()
+	if %ControlsDelayTimer.time_left <= 0:
+		handle_gravity_switch()
 
 func gravity_switch():
 	AudioManager.play_sound(GRAVITY_CHANGE, -5, 0.02, 1, 0.2, "Sound effects")

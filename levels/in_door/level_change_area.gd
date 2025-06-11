@@ -4,8 +4,7 @@ extends Area2D
 @export var door_level : String
 @export_range(0, 8, 1) var door_id = 0
 @export var door_target_id : int = 0
-
-
+@export var gravity_direction_target : int = 0
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -18,4 +17,9 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		print("couldn't load scene: ", door_level)
 	
-	get_tree().get_nodes_in_group("player")[0].player_controls = false
+	var player : Player = get_tree().get_nodes_in_group("player")[0]
+	player.player_controls = false
+	
+	if gravity_direction_target != 0:
+		GameManager.gravity_direction = gravity_direction_target
+		player.up_direction = Vector2(0, -GameManager.gravity_direction)

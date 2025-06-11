@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=4 uid="uid://ywstwn47rjwb"]
+[gd_scene load_steps=71 format=4 uid="uid://ywstwn47rjwb"]
 
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://player/player_character.tscn" id="1_mqvtj"]
 [ext_resource type="Texture2D" uid="uid://b3shcf418i0lt" path="res://levels/Tilesets/rack.png" id="2_8swdu"]
@@ -2632,10 +2632,13 @@ size = Vector2(32, 320)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c3ijv"]
 light_mode = 1
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fxw2g"]
+light_mode = 1
+
 [node name="Level3" type="Node2D" groups=["level"]]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_mqvtj")]
-position = Vector2(144, -528)
+position = Vector2(144, -530)
 floor_max_angle = 0.785398
 floor_snap_length = 15.0
 ACCELERATION = 1e+06
@@ -2643,7 +2646,7 @@ ACCELERATION = 1e+06
 [node name="unshaded" type="TileMapLayer" parent="."]
 z_index = 1
 material = SubResource("CanvasItemMaterial_itbe0")
-tile_map_data = PackedByteArray("AADH/9f/AgAAAAcAAADI/9f/AgAAAAcAAADJ/9f/AgAAAAcAAADK/9f/AgAAAAcAAADL/9f/AgAAAAcAAADL/9b/AgAAAAUAAADK/9b/AgAAAAUAAADJ/9b/AgAAAAUAAADI/9b/AgAAAAUAAADH/9b/AgAAAAUAAADL/9X/AgAAAAEAAADK/9X/AgAAAAEAAADJ/9X/AgAAAAEAAADI/9X/AgAAAAEAAADH/9X/AgAAAAEAAADJ/9H/AgAAAAcAACDK/9H/AgAAAAcAACDJ/9L/AgAAAAUAACDK/9L/AgAAAAUAACDK/9P/AgAAAAEAACDJ/9P/AgAAAAEAACA=")
+tile_map_data = PackedByteArray("AADH/9f/AgAAAAcAAADI/9f/AgAAAAcAAADJ/9f/AgAAAAcAAADK/9f/AgAAAAcAAADL/9f/AgAAAAcAAADL/9b/AgAAAAUAAADK/9b/AgAAAAUAAADJ/9b/AgAAAAUAAADI/9b/AgAAAAUAAADH/9b/AgAAAAUAAADK/9X/AgAAAAEAAADJ/9X/AgAAAAEAAADJ/9H/AgAAAAcAACDK/9H/AgAAAAcAACDJ/9L/AgAAAAUAACDK/9L/AgAAAAUAACDK/9P/AgAAAAEAACDJ/9P/AgAAAAEAACA=")
 tile_set = SubResource("TileSet_s67ts")
 
 [node name="Beforeground" type="TileMapLayer" parent="."]
@@ -2698,6 +2701,7 @@ collision_layer = 0
 collision_mask = 2
 door_level = "res://levels/level_2.tscn"
 door_target_id = 1
+gravity_direction_target = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Office/LevelChangeArea"]
 position = Vector2(0, -32)
@@ -2940,7 +2944,7 @@ power_supply1 = NodePath("../Office/RightOrGate")
 power_supply2 = NodePath("../CableRoom/UnitPowerLever")
 
 [node name="GeneratorsStateLabel" type="Label" parent="." node_paths=PackedStringArray("power_supply")]
-material = SubResource("CanvasItemMaterial_c3ijv")
+material = SubResource("CanvasItemMaterial_fxw2g")
 offset_left = 74.0
 offset_top = -608.0
 offset_right = 182.0
