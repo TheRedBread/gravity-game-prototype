@@ -17,6 +17,11 @@ func _ready() -> void:
 	fps_option_button.get_popup().transparent = true
 	resolution_option_button.get_popup().transparent = true
 	screen_mode_option_button.get_popup().transparent = true
+	
+	fps_option_button.get_popup().canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	resolution_option_button.get_popup().canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	screen_mode_option_button.get_popup().canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	
 
 
 func update_resolution_button():
@@ -41,6 +46,8 @@ func display_video_settings():
 	fps_option_button.select(settings.get_option_by_string(str(SettingsApplier.user_prefs.max_fps), fps_option_button))
 	resolution_option_button.select(settings.get_option_by_string(SettingsApplier.user_prefs.resolution, resolution_option_button))
 	screen_mode_option_button.select(settings.get_option_by_string(SettingsApplier.user_prefs.screen_mode, screen_mode_option_button))
+	
+	
 
 ################### Video Settings #############
 func _on_fps_option_button_item_selected(index: int) -> void:

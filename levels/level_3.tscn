@@ -2869,13 +2869,11 @@ lamp_sprite_variation = 3
 
 [node name="Doors" parent="CableRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("19_bm5fu")]
 position = Vector2(-904, -544)
-door_speed = 0.06
 door_type = 1
 power_supply = NodePath("../UnitPowerLever")
 
 [node name="Doors2" parent="CableRoom" node_paths=PackedStringArray("power_supply") instance=ExtResource("19_bm5fu")]
 position = Vector2(-840, -544)
-door_speed = 0.06
 door_type = 1
 power_supply = NodePath("../UnitPowerLever")
 
