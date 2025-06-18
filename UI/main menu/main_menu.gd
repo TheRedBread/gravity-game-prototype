@@ -6,6 +6,9 @@ var input_focus_mode = "mouse"
 func _ready() -> void:
 	GameSaveSystem.load_game()
 	%ContinueButton.disabled = !FileAccess.file_exists(GameSaveSystem.SAVE_PATH)
+	
+	MusicManager.play_music(MusicManager.DISCOVERY)
+	
 
 func _process(delta: float) -> void:
 	if FileAccess.file_exists(GameSaveSystem.SAVE_PATH):

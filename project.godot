@@ -26,6 +26,7 @@ SettingsApplier="*res://global elements/settings_applier.gd"
 AudioManager="*res://global elements/audio_manager.gd"
 SceneTransition="*res://global elements/scene transition/scene_transition.tscn"
 GameManager="*res://global elements/game_manager.gd"
+MusicManager="*res://music/music_manager.tscn"
 
 [display]
 

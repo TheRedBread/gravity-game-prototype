@@ -18,11 +18,16 @@ func change_scene(target : String, colorStr : String, door : int) -> void:
 	
 	transition_player.speed_scale = 1
 	
+	
+	
 	transition_player.play("fadeOut")
 	AudioManager.play_sound(SCENE_TRANSITION_IN, 0, 0, 1, 0, "Sound effects")
 	await transition_player.animation_finished
 	get_tree().change_scene_to_file(target)
+	print("Changed scene to: ", target) 
 	await get_tree().create_timer(0.1).timeout
+	
+
 	
 	if door >= 0:
 		for d in get_tree().get_nodes_in_group("doors"):

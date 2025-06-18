@@ -1,8 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://s4ih775jn65d"]
+[gd_scene load_steps=6 format=3 uid="uid://s4ih775jn65d"]
 
 [ext_resource type="Script" uid="uid://cw0lmfs0ypruh" path="res://music/music_manager.gd" id="1_74tc1"]
 
+[sub_resource type="Animation" id="Animation_pqths"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="Animation" id="Animation_74tc1"]
+resource_name = "fade_in"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.05, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wi8mw"]
+resource_name = "fade_out"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(4, 2),
+"update": 0,
+"values": [0.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_msj2g"]
+_data = {
+&"RESET": SubResource("Animation_pqths"),
+&"fade_in": SubResource("Animation_74tc1"),
+&"fade_out": SubResource("Animation_wi8mw")
+}
+
 [node name="MusicManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_74tc1")
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
+
+[node name="FadeMusic" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_msj2g")
+}

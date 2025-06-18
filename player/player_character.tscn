@@ -760,7 +760,6 @@ texture = ExtResource("5_w3pip")
 offset = Vector2(0, -4)
 hframes = 8
 vframes = 6
-frame = 32
 
 [node name="playerStarsParallax" type="ParallaxBackground" parent="."]
 layer = -2

@@ -16,7 +16,7 @@ class_name Player
 # -------------- Physics variables and player stats -------------- #
 @export var ACCELERATION : float = 10000
 @export var MAX_SPEED : float = 150
-@export var MAX_FALLING_SPEED : float = 1500
+@export var MAX_FALLING_SPEED : float = 800
 @export var JUMP_STRENGHT : float = 0.22
 @export var DASH_STRENGHT : float = 150
 @export var GROUND_FRICTION : float = 0.30
@@ -34,7 +34,7 @@ class_name Player
 @export var COYOTE_TIME : float = 0.15
 @export var SWITCH_TIMER : float = 0.1
 @export var SWITCH_SPEED : float = 0.2
-@export var GRAVITY : float = 800
+@export var GRAVITY : float = 600
 @export var BOX_PUSH_FORCE : float = 80.0
 
 @export var player_controls : bool = true

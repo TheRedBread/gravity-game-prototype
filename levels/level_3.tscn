@@ -1,5 +1,6 @@
-[gd_scene load_steps=71 format=4 uid="uid://ywstwn47rjwb"]
+[gd_scene load_steps=72 format=4 uid="uid://ywstwn47rjwb"]
 
+[ext_resource type="Script" uid="uid://bf6vvlkaudq27" path="res://levels/level_3.gd" id="1_bm5fu"]
 [ext_resource type="PackedScene" uid="uid://cnpisc0ppc6qp" path="res://player/player_character.tscn" id="1_mqvtj"]
 [ext_resource type="Texture2D" uid="uid://b3shcf418i0lt" path="res://levels/Tilesets/rack.png" id="2_8swdu"]
 [ext_resource type="Texture2D" uid="uid://croevaln3bjx4" path="res://levels/power/power_cable.png" id="3_xe1ru"]
@@ -2636,6 +2637,7 @@ light_mode = 1
 light_mode = 1
 
 [node name="Level3" type="Node2D" groups=["level"]]
+script = ExtResource("1_bm5fu")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_mqvtj")]
 position = Vector2(144, -530)
