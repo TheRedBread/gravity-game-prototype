@@ -226,7 +226,6 @@ func handle_snap_change():
 
 # ----------------- MOVEMENT -------------------- #
 func handle_movement(delta):
-	print(%ControlsDelayTimer.time_left)
 	if player_controls:
 		if player_state == PlayerState.FLYING:
 			$PlayerCollision.disabled = true

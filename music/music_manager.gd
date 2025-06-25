@@ -26,7 +26,8 @@ func play_music(music : AudioStream):
 	MSP.stream = music
 	MSP.play()
 
-func fade_change_music(music : AudioStream):
+func fade_change_music(music : AudioStream, speed : float):
+	fade_music.speed_scale = speed
 	fade_music.play("fade_out")
 	await fade_music.animation_finished
 	play_music(music)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjedbseqvx372"]
+
+[ext_resource type="Script" uid="uid://dly65v144bq03" path="res://music/area_change_music.gd" id="1_ju6jk"]
+
+[node name="AreaChangeMusic" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ju6jk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

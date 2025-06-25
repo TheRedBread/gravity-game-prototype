@@ -1,7 +1,7 @@
 ## Used to apply settings from file or directly from settings menu
 extends Node
 
-const DEFAULT_RESOLUTION : String = "1920x1080"
+const DEFAULT_RESOLUTION : String = "1280x720"
 
 var user_prefs : UserSettings = UserSettings.load_or_create()
 
