@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7fet38i4hqim"
-path="res://.godot/imported/Mug.png-db552ff3af5a4542e1bede33f0d730f7.ctex"
+uid="uid://ecmcm0b2yguk"
+path="res://.godot/imported/plate holder.png-e055c8c56f2ddb899ef552fa3b84eb3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Tilesets/decorations/Mug.png"
-dest_files=["res://.godot/imported/Mug.png-db552ff3af5a4542e1bede33f0d730f7.ctex"]
+source_file="res://levels/Tilesets/decorations/cafet/plate holder.png"
+dest_files=["res://.godot/imported/plate holder.png-e055c8c56f2ddb899ef552fa3b84eb3e.ctex"]
 
 [params]
 
